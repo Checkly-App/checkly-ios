@@ -8,7 +8,6 @@
 import SwiftUI
 import FirebaseAuth
 
-
 struct LoginView: View {
     // MARK: - Variables
     @StateObject var authentication = Authentication()
@@ -95,6 +94,7 @@ struct LoginView: View {
             }
         }
         
+        
     }
     
 }
@@ -145,6 +145,7 @@ struct EmailInputView: View {
         .foregroundColor(email.isEmpty ?
                          Color(UIColor(named: "LightGray")!) :
                             Color(UIColor(named: "Blue")!))
+        .animation(.default)
     }
 }
 
@@ -162,7 +163,10 @@ struct PasswordInputView: View {
                 TextField("Password", text: $password)
             }
             Button {
+                withAnimation{
                 isVisible.toggle()
+                }
+        
             } label: {
                 Image(systemName: isVisible ? "eye.fill" : "eye.slash.fill")
             }
@@ -174,6 +178,7 @@ struct PasswordInputView: View {
         .foregroundColor(password.isEmpty ?
                          Color(UIColor(named: "LightGray")!)
                          : Color(UIColor(named: "Blue")!))
+        .animation(.default)
     }
 }
 

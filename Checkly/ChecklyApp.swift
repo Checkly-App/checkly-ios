@@ -12,7 +12,6 @@ import Firebase
 struct ChecklyApp: App {
     @AppStorage("isLoggedIn") var isLoggedIn = false
 
-    
     init() {
         FirebaseApp.configure()
     }
