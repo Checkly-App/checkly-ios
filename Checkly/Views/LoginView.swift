@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 
+
 struct LoginView: View {
     // MARK: - Variables
     @StateObject var authentication = Authentication()
@@ -16,28 +17,15 @@ struct LoginView: View {
     @AppStorage("isLoggedIn") var isLoggedIn = false
     
     var body: some View{
-        ZStack {
-            VStack(spacing: 32.0){
-                VStack(){
-                    Text("Welcome")
-                        .font(.system(size: 32))
-                        .foregroundColor(Color(UIColor(named: "DeepBlue")!))
-                    Text("Back!")
-                        .font(.system(size: 36, weight: .bold))
-                        .foregroundColor(Color(UIColor(named: "Navy")!))
-                }
+        ZStack{
+            BackgroundCheckView()
+            VStack(spacing: 40.0){
+                TitleView()
+                    .padding(.vertical, 40.0)
                 EmailInputView(email: $session.credentials.email)
                 VStack (alignment: .trailing){
                     PasswordInputView(password: $session.credentials.password, isVisible: $isVisible)
-                    Button{
-                        // Reset password
-                    } label: {
-                        Text("Forgot password?")
-                            .fontWeight(.bold)
-                            .font(.caption)
-                            .foregroundColor(Color(UIColor(named: "Blue")!))
-                    }
-                    .padding(.vertical, 10.0)
+                    ForgetPasswordView()
                 }
                 // MARK: - Login Button
                 Button{
@@ -124,6 +112,7 @@ struct LoadingView: View {
         }
     }
 }
+
 // MARK: - Divider View
 struct DividerView: View{
     var body: some View {
@@ -139,6 +128,7 @@ struct DividerView: View{
         }
     }
 }
+
 // MARK: - Email Input View
 struct EmailInputView: View {
     @Binding var email: String
@@ -157,6 +147,7 @@ struct EmailInputView: View {
                             Color(UIColor(named: "Blue")!))
     }
 }
+
 // MARK: - Password Input View
 struct PasswordInputView: View {
     @Binding var password: String
@@ -186,11 +177,66 @@ struct PasswordInputView: View {
     }
 }
 
+// MARK: - Title View
+struct TitleView: View {
+    var body: some View {
+        HStack {
+            VStack (alignment: .leading, spacing: 25.0) {
+                VStack(alignment: .leading, spacing: 5.0){
+                    Text("Welcome")
+                        .font(.system(size: 36.0))
+                        .foregroundColor(Color(UIColor(named: "DeepBlue")!))
+                    Text("Back !")
+                        .font(.system(size: 40.0, weight: .bold))
+                        .foregroundColor(Color(UIColor(named: "Navy")!))
+                }
+                Text("Login to your account and access your orginization's services")
+                    .font(.body)
+                    .foregroundColor(Color(UIColor(named: "DeepBlue")!))
+            }
+            Spacer()
+        }
+    }
+}
+
+// MARK: - Check View
+struct BackgroundCheckView: View {
+    var body: some View {
+        VStack {
+            Image("Intersect")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .ignoresSafeArea()
+            Spacer()
+        }
+    }
+}
+
+// MARK: - Forget Password View
+struct ForgetPasswordView: View {
+    var body: some View {
+        Button{
+            // Reset password
+        } label: {
+            Text("Forgot password?")
+                .fontWeight(.bold)
+                .font(.caption)
+                .foregroundColor(Color(UIColor(named: "Blue")!))
+        }
+        .padding(.vertical, 10.0)
+    }
+}
+
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
     }
 }
+
+
+
+
+
 
 
 
