@@ -9,18 +9,17 @@ import SwiftUI
 import FirebaseAuth
 
 struct ContentView: View {
+    @StateObject private var session: Session = Session()
     @EnvironmentObject var authentication: Authentication
-    
+    @AppStorage("isLoggedIn") var isLoggedIn = true
+
     var body: some View {
         NavigationView{
             VStack{
                 Text("Logged in")
                 Button{
-                    do {
-                        try Auth.auth().signOut()
-                        authentication.updateValidation(success: false)
-                    } catch let signOutError as NSError {
-                        print("Error signing out: %@", signOutError)
+                    session.signOutUser { success in
+                        isLoggedIn = !success
                     }
                 } label: {
                     Text("sign out")

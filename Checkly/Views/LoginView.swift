@@ -10,49 +10,25 @@ import FirebaseAuth
 
 struct LoginView: View {
     // MARK: - Variables
-    @StateObject private var loginModel: LoginModel = LoginModel()
-    @EnvironmentObject var authentication: Authentication
-    @State var isPasswordVisible : Bool = false
+    @StateObject var authentication = Authentication()
+    @StateObject private var session: Session = Session()
+    @State private var isVisible: Bool = false
+    @AppStorage("isLoggedIn") var isLoggedIn = false
     
     var body: some View{
         ZStack {
             VStack(spacing: 32.0){
-                // MARK: - Email Input
-                HStack{
-                    Image(systemName: "envelope.fill")
-                    TextField("Email", text: $loginModel.credentials.email)
-                        .keyboardType(.emailAddress)
-                        .autocapitalization(.none)
+                VStack(){
+                    Text("Welcome")
+                        .font(.system(size: 32))
+                        .foregroundColor(Color(UIColor(named: "DeepBlue")!))
+                    Text("Back!")
+                        .font(.system(size: 36, weight: .bold))
+                        .foregroundColor(Color(UIColor(named: "Navy")!))
                 }
-                .overlay(Rectangle()
-                            .frame(height: 1.5)
-                            .padding(.top, 35.0))
-                .foregroundColor(loginModel.credentials.email.isEmpty ?
-                                 Color(UIColor(named: "LightGray")!) :
-                                    Color(UIColor(named: "Blue")!))
-                // MARK: - Password Input
+                EmailInputView(email: $session.credentials.email)
                 VStack (alignment: .trailing){
-                    HStack{
-                        Image(systemName: "lock.fill")
-                        if !isPasswordVisible {
-                            SecureField("Password", text: $loginModel.credentials.password)
-                        }
-                        else {
-                            TextField("Password", text: $loginModel.credentials.password)
-                        }
-                        Button {
-                            isPasswordVisible.toggle()
-                        } label: {
-                            Image(systemName: isPasswordVisible ? "eye.fill" : "eye.slash.fill")
-                        }
-                        
-                    }
-                    .overlay(Rectangle()
-                                .frame(height: 1.5)
-                                .padding(.top, 35.0))
-                    .foregroundColor(loginModel.credentials.password.isEmpty ?
-                                     Color(UIColor(named: "LightGray")!) :
-                                        Color(UIColor(named: "Blue")!))
+                    PasswordInputView(password: $session.credentials.password, isVisible: $isVisible)
                     Button{
                         // Reset password
                     } label: {
@@ -66,46 +42,36 @@ struct LoginView: View {
                 // MARK: - Login Button
                 Button{
                     // Login user normally through email and password and updatet auth
-                    loginModel.loginUser { success in
-                        authentication.updateValidation(success: success)
+                    session.loginUser { success in
+                        isLoggedIn = success
                     }
                 } label: {
                     Text("Login")
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                 }
-                .frame(width: 150.0, height: 45.0)
+                .frame(width: 200.0, height: 45.0)
                 .background(
                     LinearGradient(gradient: Gradient(colors: [
                         Color(UIColor(named: "Blue")!),
                         Color(UIColor(named: "Green")!)]),
                                    startPoint: .leading, endPoint: .trailing))
-                .cornerRadius(15.0)
-                
-                ZStack{
-                    Divider()
-                        .background(Color(UIColor(named: "Gray")!))
-                        .padding(.horizontal, 25.0)
-                    Text("or")
-                        .fontWeight(.light)
-                        .foregroundColor(Color(UIColor(named: "Gray")!))
-                        .padding(.horizontal, 15.0)
-                        .background(.white)
-                }
+                .cornerRadius(30.0)
                 // MARK: - FaceID Button
                 // Check if the user's phone supports face or touch id
                 if authentication.biometricType() != .none{
+                    DividerView()
                     Button {
                         // Login using biometrics
                         authentication.requestBiometricUnlock { (result:Result<Credentials, Authentication.AuthenticationError>) in
                             switch result {
                             case .success(let credentials):
-                                loginModel.credentials = credentials
-                                loginModel.loginUser { success in
-                                    authentication.updateValidation(success: success)
+                                session.credentials = credentials
+                                session.loginUser { success in
+                                    isLoggedIn = success
                                 }
                             case .failure(let error):
-                                loginModel.error = error
+                                session.error = error
                             }
                         }
                     } label: {
@@ -113,41 +79,37 @@ struct LoginView: View {
                             RoundedRectangle(cornerRadius: 20.0)
                                 .fill(.white)
                                 .frame(width: 65.0, height: 65.0)
-                                .shadow(color: Color(UIColor(named: "Shadow")!), radius: 10, x: 0.5, y: 2)
-                            Image(systemName: "faceid")
-                                .resizable()
-                                .frame(width: 28.0, height: 28.0)
-                                .foregroundColor(Color(UIColor(named: "Gray")!))
+                                .shadow(color: Color(UIColor(named: "Shadow")!), radius: 5, x: 0.5, y: 2)
+                            Image(systemName: authentication.biometricType() == .face ? "faceid" : "touchid")
+                                .font(.system(size: 32.0, weight: .light))
+                                .foregroundColor(Color(UIColor(named: "Navy")!))
                         }
                         .padding()
                     }
                 }
-                
             }
-            .disabled(loginModel.showProgressView)
+            .disabled(session.showProgressView)
             .padding()
-            .alert(item: $loginModel.error) { error in
-                if error == .credentialsNotSaved {
+            .alert(item: $session.error) { error in
+                switch error {
+                case .credentialsNotSaved:
                     return Alert(title: Text("Credentials Not Saved"),
                                  message: Text(error.localizedDescription),
                                  primaryButton: .default(Text("OK"), action: {
-                        loginModel.storeCredentialsNext = true
-                    }),
-                                 secondaryButton: .cancel())
-                } else {
-                    return Alert(title: Text("Invalid Login"), message: Text(error.localizedDescription))
+                        session.storeCredentialsNext = true
+                    }), secondaryButton: .cancel())
+                default : return Alert(title: Text("Invalid Login"), message: Text(error.localizedDescription))
                 }
-                
             }
             .padding()
-            
-            if loginModel.showProgressView {
+            if session.showProgressView {
                 LoadingView()
             }
         }
+        
     }
+    
 }
-
 // MARK: - Loading View
 struct LoadingView: View {
     var body: some View {
@@ -162,12 +124,76 @@ struct LoadingView: View {
         }
     }
 }
+// MARK: - Divider View
+struct DividerView: View{
+    var body: some View {
+        ZStack{
+            Divider()
+                .background(Color(UIColor(named: "Gray")!))
+                .padding(.horizontal, 25.0)
+            Text("or")
+                .fontWeight(.light)
+                .foregroundColor(Color(UIColor(named: "Gray")!))
+                .padding(.horizontal, 15.0)
+                .background(.white)
+        }
+    }
+}
+// MARK: - Email Input View
+struct EmailInputView: View {
+    @Binding var email: String
+    var body: some View {
+        HStack{
+            Image(systemName: "envelope.fill")
+            TextField("Email", text: $email)
+                .keyboardType(.emailAddress)
+                .autocapitalization(.none)
+        }
+        .overlay(Rectangle()
+                    .frame(height: 1.5)
+                    .padding(.top, 35.0))
+        .foregroundColor(email.isEmpty ?
+                         Color(UIColor(named: "LightGray")!) :
+                            Color(UIColor(named: "Blue")!))
+    }
+}
+// MARK: - Password Input View
+struct PasswordInputView: View {
+    @Binding var password: String
+    @Binding var isVisible: Bool
+    var body: some View {
+        HStack{
+            Image(systemName: "lock.fill")
+            if !isVisible {
+                SecureField("Password", text: $password)
+            }
+            else {
+                TextField("Password", text: $password)
+            }
+            Button {
+                isVisible.toggle()
+            } label: {
+                Image(systemName: isVisible ? "eye.fill" : "eye.slash.fill")
+            }
+            
+        }
+        .overlay(Rectangle()
+                    .frame(height: 1.5)
+                    .padding(.top, 35.0))
+        .foregroundColor(password.isEmpty ?
+                         Color(UIColor(named: "LightGray")!)
+                         : Color(UIColor(named: "Blue")!))
+    }
+}
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
-            .environmentObject(Authentication())
     }
 }
+
+
+
+
 
 

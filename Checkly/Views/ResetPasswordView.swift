@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FaceIDView: View {
+struct ResetPasswordView: View {
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [
@@ -65,6 +65,6 @@ struct FaceIDView: View {
 
 struct FaceIDView_Previews: PreviewProvider {
     static var previews: some View {
-        FaceIDView()
+        ResetPasswordView()
     }
 }

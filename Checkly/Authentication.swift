@@ -9,7 +9,7 @@ import SwiftUI
 import LocalAuthentication
 
 class Authentication: ObservableObject {
-    @Published var isValidated = false
+    @Published var isLoggedIn = false
     @Published var isAuthorized = false
     
     enum BiometricType{
@@ -21,8 +21,9 @@ class Authentication: ObservableObject {
     enum AuthenticationError: Error, LocalizedError, Identifiable{
         case invalidCredentials
         case deniedAccess
-        case biometricError
         case credentialsNotSaved
+        case noFaceIdEnrolled
+        case noFingerprintEnrolled
         
         var id: String {
             self.localizedDescription
@@ -31,21 +32,23 @@ class Authentication: ObservableObject {
         var errorDescription: String?{
             switch self {
             case .invalidCredentials:
-                return NSLocalizedString("Email or Password are incorrect", comment: "")
+                return NSLocalizedString("Email or password are incorrect. Please try again.", comment: "")
             case .deniedAccess:
-                return NSLocalizedString("You have denied access to face id. this can be changed in the settings", comment: "")
-            case .biometricError:
-                return NSLocalizedString("Face id does not match", comment: "")
+                return NSLocalizedString("You have denied access. Please go to the settings app and locate this application and turn Face ID on.", comment: "")
+            case .noFaceIdEnrolled:
+                return NSLocalizedString("You have not registered any Face Ids yet", comment: "")
+            case .noFingerprintEnrolled:
+                return NSLocalizedString("You have not registered any fingerprints yet.", comment: "")
             case .credentialsNotSaved:
-                return NSLocalizedString("Your credentials have not been saved, would you like to save them?", comment: "")
+                return NSLocalizedString("Your credentials have not been saved. Do you want to save them after the next successful login?", comment: "")
             }
             
         }
     }
     
-    func updateValidation(success: Bool){
+    func updateLogInState(success: Bool){
         withAnimation {
-            isValidated = success
+            isLoggedIn = success
         }
     }
     
@@ -81,8 +84,14 @@ class Authentication: ObservableObject {
             switch error.code {
             case -6:
                 completion(.failure(.deniedAccess))
+            case -7:
+                if context.biometryType == .faceID {
+                    completion(.failure(.noFaceIdEnrolled))
+                } else {
+                    completion(.failure(.noFingerprintEnrolled))
+                }
             default:
-                completion(.failure(.biometricError))
+                completion(.failure(.deniedAccess))
             }
             return
         }
@@ -91,9 +100,8 @@ class Authentication: ObservableObject {
             if context.biometryType != .none {
                 context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Need to access credentials.") { success, error in
                     DispatchQueue.main.async {
-                        if error != nil {
-                            completion(.failure(.biometricError))
-                        } else {
+                        if error != nil  {
+                        } else{
                             completion(.success(credentials))
                         }
                     }
