@@ -20,6 +20,8 @@
 		7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91927A987DD008E3553 /* LoginModel.swift */; };
 		71D09A5C27A9A02A00DA2D1D /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 71D09A5B27A9A02A00DA2D1D /* SwiftKeychainWrapper */; };
 		71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */; };
+		F5BD9AED27AB52BE0005AEBE /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD9AEC27AB52BE0005AEBE /* MenuView.swift */; };
+		F5BD9AEF27AB56840005AEBE /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD9AEE27AB56830005AEBE /* UserProfile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		7149E91727A985BC008E3553 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		7149E91927A987DD008E3553 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
+		F5BD9AEC27AB52BE0005AEBE /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		F5BD9AEE27AB56830005AEBE /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,8 @@
 			isa = PBXGroup;
 			children = (
 				7149E91327A977D6008E3553 /* ContentView.swift */,
+				F5BD9AEE27AB56830005AEBE /* UserProfile.swift */,
+				F5BD9AEC27AB52BE0005AEBE /* MenuView.swift */,
 				7149E8FC27A8720A008E3553 /* LoginView.swift */,
 			);
 			path = Views;
@@ -196,12 +202,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7149E8FD27A8720A008E3553 /* LoginView.swift in Sources */,
+				F5BD9AED27AB52BE0005AEBE /* MenuView.swift in Sources */,
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
 				7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */,
 				7149E91227A96FCA008E3553 /* Credentials.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,
+				F5BD9AEF27AB56840005AEBE /* UserProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
