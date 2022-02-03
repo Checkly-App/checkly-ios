@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct MenuView: View {
+    @State private var showingSheet = false
     var body: some View {
+       
+
         NavigationView {
             VStack(alignment: .leading ){
                 VStack{
@@ -19,7 +22,9 @@ struct MenuView: View {
                     Text(" ").fontWeight(.medium).foregroundColor(.gray).font(.headline).multilineTextAlignment(.leading).padding(.top,0.9)
                 }.padding(.top,90)
                 
-                NavigationLink(destination: ContentView()) {
+                NavigationLink(destination: //ContentView()
+                               UserProfile()
+                ) {
                     HStack{
                         Image(systemName: "house")
                             .foregroundColor(.gray)
@@ -44,7 +49,10 @@ struct MenuView: View {
                         .foregroundColor(.gray)
                         .imageScale(.large).font(.system(size: 20.0))
                     Text("Log out").foregroundColor(.gray).font(.headline)
-                }.padding(.top,30)
+                }.padding(.top,30).onTapGesture( perform:             {showingSheet.toggle()}
+).fullScreenCover(isPresented: $showingSheet) {
+                    UserProfile()
+                }
                 Spacer()
             }
             .padding().frame(maxWidth:.infinity, alignment:.leading).background( LinearGradient(gradient: Gradient(colors: [Color(red: 207/255, green: 242/255, blue: 242/255), Color(red: 210/255, green: 236/255, blue: 249/255)]), startPoint: .top, endPoint: .bottom)).ignoresSafeArea(.all)
