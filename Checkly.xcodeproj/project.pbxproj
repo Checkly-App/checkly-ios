@@ -28,7 +28,6 @@
 		71C62C8527AD5AC300C573E7 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C62C8427AD5AC300C573E7 /* TitleView.swift */; };
 		71D09A5C27A9A02A00DA2D1D /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 71D09A5B27A9A02A00DA2D1D /* SwiftKeychainWrapper */; };
 		71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */; };
-		71D09A6227A9C94A00DA2D1D /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A6127A9C94A00DA2D1D /* ViewExtension.swift */; };
 		71D09A6427A9DADD00DA2D1D /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,7 +46,6 @@
 		71C62C8227AD598900C573E7 /* InputsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsView.swift; sourceTree = "<group>"; };
 		71C62C8427AD5AC300C573E7 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
-		71D09A6127A9C94A00DA2D1D /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,7 +140,6 @@
 		71D09A5F27A9A0CC00DA2D1D /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				71D09A6127A9C94A00DA2D1D /* ViewExtension.swift */,
 				71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */,
 			);
 			path = Services;
@@ -241,7 +238,6 @@
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
 				71C62C8327AD598900C573E7 /* InputsView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
-				71D09A6227A9C94A00DA2D1D /* ViewExtension.swift in Sources */,
 				71D09A6427A9DADD00DA2D1D /* ResetPasswordView.swift in Sources */,
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,
 				71C62C8527AD5AC300C573E7 /* TitleView.swift in Sources */,

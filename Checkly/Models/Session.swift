@@ -46,6 +46,16 @@ class Session: ObservableObject {
             
         }
     }
+    
+    func resettUserPassword(completion: @escaping (Bool) -> Void){
+        Auth.auth().sendPasswordReset(withEmail: credentials.email) { [self] authError in
+            if authError != nil  {
+                error = .resetPassword
+                completion(false)
+            }
+            completion(true)
+        }
+    }
 }
 
 

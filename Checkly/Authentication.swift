@@ -20,6 +20,7 @@ class Authentication: ObservableObject {
     
     enum AuthenticationError: Error, LocalizedError, Identifiable{
         case invalidCredentials
+        case resetPassword
         case deniedAccess
         case credentialsNotSaved
         case noFaceIdEnrolled
@@ -41,6 +42,8 @@ class Authentication: ObservableObject {
                 return NSLocalizedString("You have not registered any fingerprints yet.", comment: "")
             case .credentialsNotSaved:
                 return NSLocalizedString("Your credentials have not been saved. Do you want to save them after the next successful login?", comment: "")
+            case .resetPassword:
+                return NSLocalizedString("Your email does not match our records. Please try again or contact your orginization.", comment: "")
             }
             
         }

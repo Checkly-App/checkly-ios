@@ -13,7 +13,7 @@ struct TitleView: View {
     var description: String
 
     var body: some View {
-        HStack {
+        HStack(alignment: .top) {
             VStack (alignment: .leading, spacing: 25.0) {
                 VStack(alignment: .leading, spacing: 5.0){
                     Text(title)
@@ -26,6 +26,7 @@ struct TitleView: View {
                 Text(description)
                     .font(.body)
                     .foregroundColor(Color(UIColor(named: "DeepBlue")!))
+                    .fixedSize(horizontal: false, vertical: true)
             }
             Spacer()
         }

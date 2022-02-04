@@ -9,17 +9,19 @@ import SwiftUI
 
 struct ResetPasswordView: View {
     @StateObject private var session: Session = Session()
+    @State private var emailSuccess: Bool = false
     
     var body: some View {
-        ZStack{
+        ZStack(alignment: .top){
             BackgroundCheckView()
-            VStack(spacing: 40.0){
-                TitleView(title: "Welcom", subTitle: "Back !", description: "Login to your account and access your orginization's services")                    .padding(.vertical, 40.0)
+            VStack(spacing: 40){
+    
+                TitleView(title: "Password", subTitle: "Reset", description: "Enter your orgizatnion's associated email address and we will send you the instructions!")
                 EmailInputView(email: $session.credentials.email)
-                
-                // MARK: - Reset Button
                 Button{
-                    
+                    session.resettUserPassword { success in
+                        emailSuccess = success
+                    }
                 } label: {
                     Text("Reset")
                         .fontWeight(.bold)
@@ -32,6 +34,10 @@ struct ResetPasswordView: View {
                         Color(UIColor(named: "Green")!)]),
                                    startPoint: .leading, endPoint: .trailing))
                 .cornerRadius(30.0)
+                .alert("Success", isPresented: $emailSuccess){
+                    Button("Got it!", role: .cancel){}
+                }
+                Spacer()
             }
             .disabled(session.showProgressView)
             .padding()
@@ -44,7 +50,10 @@ struct ResetPasswordView: View {
                 LoadingView()
             }
         }
-        
+        .navigationBarTitle("", displayMode: .inline)
+        .alert(item: $session.error) { error in
+            return Alert(title: Text("Invalid Reset"), message: Text(error.localizedDescription))
+        }
         
     }
 }

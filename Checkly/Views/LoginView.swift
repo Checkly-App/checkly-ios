@@ -13,6 +13,7 @@ struct LoginView: View {
     @StateObject var authentication = Authentication()
     @StateObject private var session: Session = Session()
     @State private var isVisible: Bool = false
+    @State private var navigateToReset: Bool = false
     @AppStorage("isLoggedIn") var isLoggedIn = false
     
     var body: some View{
@@ -20,12 +21,19 @@ struct LoginView: View {
             ZStack{
                 BackgroundCheckView()
                 VStack(spacing: 40.0){
-                    TitleView(title: "Welcom", subTitle: "Back !", description: "Login to your account and access your orginization's services")
+                    TitleView(title: "Welcome", subTitle: "Back !", description: "Login to your account and access your orginization's services")
                         .padding(.vertical, 40.0)
                     EmailInputView(email: $session.credentials.email)
                     VStack (alignment: .trailing){
                         PasswordInputView(password: $session.credentials.password, isVisible: $isVisible)
-                        ForgetPasswordView()
+                        NavigationLink(destination: ResetPasswordView()){
+                            Text("Forgot password?")
+                                .fontWeight(.bold)
+                                .font(.caption)
+                                .foregroundColor(Color(UIColor(named: "Blue")!))
+                                .padding(.vertical, 10.0)
+                        }
+                       
                     }
                     // MARK: - Login Button
                     Button{
@@ -74,6 +82,7 @@ struct LoginView: View {
                             }
                             .padding()
                         }
+                        Spacer()
                     }
                 }
                 .disabled(session.showProgressView)
@@ -96,7 +105,6 @@ struct LoginView: View {
             }
         }
     }
-    
 }
 
 // MARK: - Divider View
@@ -128,20 +136,6 @@ struct BackgroundCheckView: View {
     }
 }
 
-// MARK: - Forget Password View
-struct ForgetPasswordView: View {
-    var body: some View {
-        Button{
-            // Reset password
-        } label: {
-            Text("Forgot password?")
-                .fontWeight(.bold)
-                .font(.caption)
-                .foregroundColor(Color(UIColor(named: "Blue")!))
-        }
-        .padding(.vertical, 10.0)
-    }
-}
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
