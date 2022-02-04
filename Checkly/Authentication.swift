@@ -9,7 +9,6 @@ import SwiftUI
 import LocalAuthentication
 
 class Authentication: ObservableObject {
-    @Published var isLoggedIn = false
     @Published var isAuthorized = false
     
     enum BiometricType{
@@ -25,6 +24,7 @@ class Authentication: ObservableObject {
         case credentialsNotSaved
         case noFaceIdEnrolled
         case noFingerprintEnrolled
+        case invalidPassword
         
         var id: String {
             self.localizedDescription
@@ -33,28 +33,24 @@ class Authentication: ObservableObject {
         var errorDescription: String?{
             switch self {
             case .invalidCredentials:
-                return NSLocalizedString("Email or password are incorrect. Please try again.", comment: "")
+                return NSLocalizedString("Email or password are incorrect. Try again.", comment: "")
             case .deniedAccess:
-                return NSLocalizedString("You have denied access. Please go to the settings app and locate this application and turn Face ID on.", comment: "")
+                return NSLocalizedString("You have denied access. Please go to the settings app and locate this application and turn biometrics authentication on.", comment: "")
             case .noFaceIdEnrolled:
-                return NSLocalizedString("You have not registered any Face Ids yet", comment: "")
+                return NSLocalizedString("In order to use Face ID, make sure to activate it first through the settings.", comment: "")
             case .noFingerprintEnrolled:
-                return NSLocalizedString("You have not registered any fingerprints yet.", comment: "")
+                return NSLocalizedString("In order to use Touch ID, make sure to activate it first through the settings.", comment: "")
             case .credentialsNotSaved:
-                return NSLocalizedString("Your credentials have not been saved. Do you want to save them after the next successful login?", comment: "")
+                return NSLocalizedString("Your credentials have not been saved or have been changed. Do you want to save them after the next successful login?", comment: "")
             case .resetPassword:
-                return NSLocalizedString("Your email does not match our records. Please try again or contact your orginization.", comment: "")
+                return NSLocalizedString("Your email does not match our records. Please try again or contact your organization.", comment: "")
+            case .invalidPassword:
+                return NSLocalizedString("Make sure you have not changed credentials", comment: "")
             }
             
         }
     }
-    
-    func updateLogInState(success: Bool){
-        withAnimation {
-            isLoggedIn = success
-        }
-    }
-    
+    // MARK: - Function that checks the device bimoetric type and returns it
     func biometricType()-> BiometricType{
         let context = LAContext()
         let _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
@@ -72,6 +68,11 @@ class Authentication: ObservableObject {
         
     }
     
+    // MARK: - Function that fetches users credentials
+    // If the users credentials were not registered it will return a 'credentialsNotSaved' error
+    // If the user denied access it will return a 'deniedAccess' error
+    // If the user had not enrolled it will return a 'noFaceIdEnrolled' or 'noFingerprintEnrolled' error
+    // Otherwise the function returns the user's credentials
     func requestBiometricUnlock(completion: @escaping (Result<Credentials, AuthenticationError>) -> Void) {
         let credentials = KeychainStorage.getCredentials()
         guard let credentials = credentials else {

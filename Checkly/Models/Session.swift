@@ -17,17 +17,24 @@ class Session: ObservableObject {
     func loginUser(completion: @escaping (Bool) -> Void){
         showProgressView = true
         Auth.auth().signIn(withEmail: credentials.email, password: credentials.password) { [self] result, authError in
-            showProgressView = false
-            
             if authError != nil  {
-                error = .invalidCredentials
+                let authError = AuthErrorCode(rawValue: authError!._code)
+                switch authError {
+                case .wrongPassword:
+                    error = .invalidPassword // The user has resetted their password
+                default:
+                    error = .invalidCredentials
+                }
+                showProgressView = false
                 completion(false)
+                
             } else {
                 if storeCredentialsNext{
                     if KeychainStorage.saveCredentials(credentials){
                         storeCredentialsNext = false
                     }
                 }
+                showProgressView = false
                 completion(true)
             }
         }

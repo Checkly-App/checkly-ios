@@ -17,6 +17,8 @@ struct ResetPasswordView: View {
             VStack(spacing: 40){
     
                 TitleView(title: "Password", subTitle: "Reset", description: "Enter your orgizatnion's associated email address and we will send you the instructions!")
+                    .padding(.vertical, 20.0)
+
                 EmailInputView(email: $session.credentials.email)
                 Button{
                     session.resettUserPassword { success in

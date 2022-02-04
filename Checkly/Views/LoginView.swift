@@ -14,6 +14,7 @@ struct LoginView: View {
     @StateObject private var session: Session = Session()
     @State private var isVisible: Bool = false
     @State private var navigateToReset: Bool = false
+    @State private var faceIDPressed: Bool = false
     @AppStorage("isLoggedIn") var isLoggedIn = false
     
     var body: some View{
@@ -33,7 +34,7 @@ struct LoginView: View {
                                 .foregroundColor(Color(UIColor(named: "Blue")!))
                                 .padding(.vertical, 10.0)
                         }
-                       
+                        
                     }
                     // MARK: - Login Button
                     Button{
@@ -58,6 +59,7 @@ struct LoginView: View {
                     if authentication.biometricType() != .none{
                         DividerView()
                         Button {
+                            faceIDPressed = true
                             // Login using biometrics
                             authentication.requestBiometricUnlock { (result:Result<Credentials, Authentication.AuthenticationError>) in
                                 switch result {
@@ -89,6 +91,17 @@ struct LoginView: View {
                 .padding()
                 .alert(item: $session.error) { error in
                     switch error {
+                    case .invalidPassword:
+                        if faceIDPressed {
+                            return Alert(title: Text("Credentials Changed"),
+                                         message: Text("Your credentials have been changed recently, login normally and we will save and update your credentials to login through biometrics!"),
+                                         primaryButton: .default(Text("OK"), action: {
+                                session.storeCredentialsNext = true
+                            }), secondaryButton: .cancel())
+                        }
+                        else {
+                            return Alert(title: Text("Invalid Login"), message: Text(error.localizedDescription))
+                        }
                     case .credentialsNotSaved:
                         return Alert(title: Text("Credentials Not Saved"),
                                      message: Text(error.localizedDescription),

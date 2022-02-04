@@ -10,7 +10,7 @@ import Firebase
 
 @main
 struct ChecklyApp: App {
-    @AppStorage("isLoggedIn") var isLoggedIn = false
+    @AppStorage("isLoggedIn") var isLoggedIn = false // To maintain the users sessions
 
     init() {
         FirebaseApp.configure()
@@ -19,7 +19,7 @@ struct ChecklyApp: App {
     var body: some Scene {
         WindowGroup {
             if isLoggedIn {
-                ContentView()
+                ContentView() // Home view
             } else {
                 LoginView()
             }
