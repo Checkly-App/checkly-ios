@@ -45,7 +45,7 @@ class Authentication: ObservableObject {
             case .resetPassword:
                 return NSLocalizedString("Your email does not match our records. Please try again or contact your organization.", comment: "")
             case .invalidPassword:
-                return NSLocalizedString("Make sure you have not changed credentials", comment: "")
+                return NSLocalizedString("Email or password are incorrect. Try again.", comment: "")
             }
             
         }

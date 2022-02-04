@@ -21,21 +21,21 @@ struct ResetPasswordView: View {
 
                 EmailInputView(email: $session.credentials.email)
                 Button{
-                    session.resettUserPassword { success in
+                    session.resetUserPassword { success in
                         emailSuccess = success
                     }
                 } label: {
                     Text("Reset")
                         .fontWeight(.bold)
                         .foregroundColor(.white)
+                        .frame(width: 200.0, height: 45.0)
+                        .background(
+                            LinearGradient(gradient: Gradient(colors: [
+                                Color(UIColor(named: "Blue")!),
+                                Color(UIColor(named: "Green")!)]),
+                                           startPoint: .leading, endPoint: .trailing))
+                        .cornerRadius(30.0)
                 }
-                .frame(width: 200.0, height: 45.0)
-                .background(
-                    LinearGradient(gradient: Gradient(colors: [
-                        Color(UIColor(named: "Blue")!),
-                        Color(UIColor(named: "Green")!)]),
-                                   startPoint: .leading, endPoint: .trailing))
-                .cornerRadius(30.0)
                 .alert("Success", isPresented: $emailSuccess){
                     Button("Got it!", role: .cancel){}
                 }

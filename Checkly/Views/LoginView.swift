@@ -22,9 +22,10 @@ struct LoginView: View {
             ZStack{
                 BackgroundCheckView()
                 VStack(spacing: 40.0){
-                    TitleView(title: "Welcome", subTitle: "Back !", description: "Login to your account and access your orginization's services")
-                        .padding(.vertical, 40.0)
+                    TitleView(title: "Welcome", subTitle: "Back !", description: "Login to your account and access your organization's services")
+                        .padding(.top, 60.0)
                     EmailInputView(email: $session.credentials.email)
+                        .padding(.top, 20.0)
                     VStack (alignment: .trailing){
                         PasswordInputView(password: $session.credentials.password, isVisible: $isVisible)
                         NavigationLink(destination: ResetPasswordView()){
@@ -38,7 +39,8 @@ struct LoginView: View {
                     }
                     // MARK: - Login Button
                     Button{
-                        // Login user normally through email and password and updatet auth
+                        faceIDPressed = false
+                        // Login user normally through email and password and update auth
                         session.loginUser { success in
                             isLoggedIn = success
                         }
@@ -46,14 +48,15 @@ struct LoginView: View {
                         Text("Login")
                             .fontWeight(.bold)
                             .foregroundColor(.white)
+                            .frame(width: 200.0, height: 45.0)
+                            .background(
+                                LinearGradient(gradient: Gradient(colors: [
+                                    Color(UIColor(named: "Blue")!),
+                                    Color(UIColor(named: "Green")!)]),
+                                               startPoint: .leading, endPoint: .trailing))
+                            .cornerRadius(30.0)
                     }
-                    .frame(width: 200.0, height: 45.0)
-                    .background(
-                        LinearGradient(gradient: Gradient(colors: [
-                            Color(UIColor(named: "Blue")!),
-                            Color(UIColor(named: "Green")!)]),
-                                       startPoint: .leading, endPoint: .trailing))
-                    .cornerRadius(30.0)
+ 
                     // MARK: - FaceID Button
                     // Check if the user's phone supports face or touch id
                     if authentication.biometricType() != .none{
@@ -84,7 +87,6 @@ struct LoginView: View {
                             }
                             .padding()
                         }
-                        Spacer()
                     }
                 }
                 .disabled(session.showProgressView)
@@ -100,7 +102,7 @@ struct LoginView: View {
                             }), secondaryButton: .cancel())
                         }
                         else {
-                            return Alert(title: Text("Invalid Login"), message: Text(error.localizedDescription))
+                            return Alert(title: Text("Authentication Failed"), message: Text(error.localizedDescription))
                         }
                     case .credentialsNotSaved:
                         return Alert(title: Text("Credentials Not Saved"),
@@ -108,7 +110,7 @@ struct LoginView: View {
                                      primaryButton: .default(Text("OK"), action: {
                             session.storeCredentialsNext = true
                         }), secondaryButton: .cancel())
-                    default : return Alert(title: Text("Invalid Login"), message: Text(error.localizedDescription))
+                    default : return Alert(title: Text("Authentication Failed"), message: Text(error.localizedDescription))
                     }
                 }
                 .padding()
@@ -116,6 +118,9 @@ struct LoginView: View {
                     LoadingView()
                 }
             }
+            .navigationBarTitle("Login", displayMode: .large)
+            .navigationBarHidden(true)
+            
         }
     }
 }
