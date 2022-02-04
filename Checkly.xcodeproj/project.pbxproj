@@ -23,6 +23,9 @@
 		71C62C7A27AC286900C573E7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 71C62C7927AC286900C573E7 /* FirebaseFirestore */; };
 		71C62C7C27AC286900C573E7 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 71C62C7B27AC286900C573E7 /* FirebaseFirestoreCombine-Community */; };
 		71C62C7E27AC286900C573E7 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 71C62C7D27AC286900C573E7 /* FirebaseFirestoreSwift-Beta */; };
+		71C62C8127AD58F400C573E7 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C62C8027AD58F300C573E7 /* LoadingView.swift */; };
+		71C62C8327AD598900C573E7 /* InputsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C62C8227AD598900C573E7 /* InputsView.swift */; };
+		71C62C8527AD5AC300C573E7 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C62C8427AD5AC300C573E7 /* TitleView.swift */; };
 		71D09A5C27A9A02A00DA2D1D /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 71D09A5B27A9A02A00DA2D1D /* SwiftKeychainWrapper */; };
 		71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */; };
 		71D09A6227A9C94A00DA2D1D /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A6127A9C94A00DA2D1D /* ViewExtension.swift */; };
@@ -40,6 +43,9 @@
 		7149E91327A977D6008E3553 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7149E91727A985BC008E3553 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		7149E91927A987DD008E3553 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		71C62C8027AD58F300C573E7 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = SOURCE_ROOT; };
+		71C62C8227AD598900C573E7 /* InputsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsView.swift; sourceTree = "<group>"; };
+		71C62C8427AD5AC300C573E7 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
 		71D09A6127A9C94A00DA2D1D /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
@@ -106,6 +112,7 @@
 		7149E90F27A96F71008E3553 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				71C62C7F27AD585A00C573E7 /* Components */,
 				7149E91327A977D6008E3553 /* ContentView.swift */,
 				7149E8FC27A8720A008E3553 /* LoginView.swift */,
 				71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */,
@@ -120,6 +127,16 @@
 				7149E91927A987DD008E3553 /* Session.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		71C62C7F27AD585A00C573E7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				71C62C8027AD58F300C573E7 /* LoadingView.swift */,
+				71C62C8227AD598900C573E7 /* InputsView.swift */,
+				71C62C8427AD5AC300C573E7 /* TitleView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		71D09A5F27A9A0CC00DA2D1D /* Services */ = {
@@ -219,12 +236,15 @@
 				7149E8FD27A8720A008E3553 /* LoginView.swift in Sources */,
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
 				7149E91A27A987DE008E3553 /* Session.swift in Sources */,
+				71C62C8127AD58F400C573E7 /* LoadingView.swift in Sources */,
 				7149E91227A96FCA008E3553 /* Credentials.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
+				71C62C8327AD598900C573E7 /* InputsView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
 				71D09A6227A9C94A00DA2D1D /* ViewExtension.swift in Sources */,
 				71D09A6427A9DADD00DA2D1D /* ResetPasswordView.swift in Sources */,
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,
+				71C62C8527AD5AC300C573E7 /* TitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

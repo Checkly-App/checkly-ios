@@ -8,60 +8,46 @@
 import SwiftUI
 
 struct ResetPasswordView: View {
+    @StateObject private var session: Session = Session()
+    
     var body: some View {
-        ZStack {
-            LinearGradient(gradient: Gradient(colors: [
-                Color(UIColor(named: "Blue")!),
-                Color(UIColor(named: "DarkBlue")!),
-                Color(UIColor(named: "DarkBlue")!)]), startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
-            VStack (spacing: 30.0){
-                Text("Login Via Face ID")
-                    .font(.title)
-                    .fontWeight(.bold)
-                Text("login to Checkly with your face id, for a quick and secure login")
-                    .font(.body)
-                    .multilineTextAlignment(.center)
-                ZStack{
-                    RoundedRectangle(cornerRadius: 5.0)
-                        .fill(Color(UIColor(named: "Loading")!))
-                        .frame(width: 180.0, height: 180.0)
-                        .opacity(0.5)
-                    VStack (spacing: 15.0){
-                        Text( Image(systemName: "faceid"))
-                            .font(.system(size: 75.0, weight: .thin))
-                        
-                        Text("Face ID")
-                            .font(.body)
-                            .foregroundColor(.black)
-                    }
-                }
-                .padding()
-                Text("login to Checkly with your face id, for a quick and secure login")
-                    .font(.body)
-                    .multilineTextAlignment(.center)
+        ZStack{
+            BackgroundCheckView()
+            VStack(spacing: 40.0){
+                TitleView(title: "Welcom", subTitle: "Back !", description: "Login to your account and access your orginization's services")                    .padding(.vertical, 40.0)
+                EmailInputView(email: $session.credentials.email)
+                
+                // MARK: - Reset Button
                 Button{
                     
                 } label: {
-                    Text("Login")
+                    Text("Reset")
                         .fontWeight(.bold)
-                        .foregroundColor(Color(UIColor(named: "Blue")!))
+                        .foregroundColor(.white)
                 }
-                .frame(width: 150.0, height: 45.0)
-                .background(.white)
-                .cornerRadius(15.0)
-                
+                .frame(width: 200.0, height: 45.0)
+                .background(
+                    LinearGradient(gradient: Gradient(colors: [
+                        Color(UIColor(named: "Blue")!),
+                        Color(UIColor(named: "Green")!)]),
+                                   startPoint: .leading, endPoint: .trailing))
+                .cornerRadius(30.0)
+            }
+            .disabled(session.showProgressView)
+            .padding()
+            .alert(item: $session.error) { error in
+                return Alert(title: Text("Invalid Credentials"), message: Text(error.localizedDescription))
                 
             }
-            .foregroundColor(.white)
-            .padding(25.0)
-            
+            .padding()
+            if session.showProgressView {
+                LoadingView()
+            }
         }
+        
+        
     }
-    
 }
-
-
 
 struct FaceIDView_Previews: PreviewProvider {
     static var previews: some View {
