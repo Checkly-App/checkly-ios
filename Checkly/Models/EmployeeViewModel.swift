@@ -10,16 +10,25 @@
 import Foundation
 import Firebase
 import FirebaseDatabase
+import FirebaseStorage
+
 
 class EmployeeViewModel: ObservableObject {
     @Published var Employeeinfolist = [Employeeinfo]()
+    
     @Published var Employeeinfolist1 = ""
     @Published var email = ""
     @Published var position = ""
     @Published var department = ""
     @Published var address = ""
     @Published var gender = ""
-    @Published var phonemum = ""
+    @Published var phonemum = ""{
+        didSet {
+            if phonemum.count > 10 && oldValue.count <= 10 {
+                phonemum = oldValue
+            }
+        }
+    }
     @Published var nationalID = ""
     @Published var employeeID = ""
     @Published var birth = ""
@@ -34,6 +43,16 @@ class EmployeeViewModel: ObservableObject {
 
 
     private var ref = Database.database().reference()
+    
+    
+    
+    func UpdateData() {
+       
+        self.ref.child("Employee").child("Emp1").updateChildValues(["Name": self.Employeeinfolist1, "phoneNumber": self.phonemum ])
+                                                                  
+       
+
+        }
     
     func fetchData() {
        
@@ -58,10 +77,11 @@ class EmployeeViewModel: ObservableObject {
 
 
 
-           ref.child("Employee").observe(.value) { snapshot in
+        ref.child("Employee").observe(.value) { snapshot in
                print("enter")
 
                 for contact in snapshot.children{
+                    
                   print("enter1")
                     let obj = contact as! DataSnapshot
                     dep = obj.childSnapshot(forPath: "Department").value as? String
@@ -92,9 +112,13 @@ class EmployeeViewModel: ObservableObject {
             print("hi")
 
         }
+              
         
 
            }
+        
+        
+       
         
     }
             
