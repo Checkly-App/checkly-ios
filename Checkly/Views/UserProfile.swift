@@ -56,29 +56,7 @@ EditProfileView()                }
                         .foregroundColor(.white)
                     .imageScale(.large).font(.system(size: 100.0)).padding(.top,13)}
             }.padding(.trailing,1)
-    .task {
-                
-        Storage.storage().reference().child("Emp1").getData(maxSize: 15*1024*1024){
-                        (imageDate,err) in
-                        if let err = err {
-                            print("error\(err.localizedDescription)")
-                        } else {
-                            if let imageData = imageDate{
-                                self.userimage = UIImage(data: imageData)
-                            }
-                            
-                        
-                        else {
-                        
-                                print("no error")
-                            
-                        }
-                        }
-                    
-                    }
-
-                
-            }
+    
             Text(viewModel.Employeeinfolist1).fontWeight(.semibold).foregroundColor(Color(hue: 1.0, saturation: 0.015, brightness: 0.345)).padding(.top,0)
             Text("\(viewModel.position)")
                 .fontWeight(.regular).foregroundColor(.gray).padding(.top,0.2)
@@ -137,7 +115,29 @@ Spacer()
             Spacer() }.frame( maxWidth: .infinity,  maxHeight: .infinity).background( LinearGradient(gradient: Gradient(colors: [Color(red: 207/255, green: 242/255, blue: 242/255), Color(red: 210/255, green: 236/255, blue: 249/255)]), startPoint: .top, endPoint: .bottom)).task {
                 self.viewModel.fetchData()
 
-            }
+            }.task {
+                
+                Storage.storage().reference().child("Emp1").getData(maxSize: 15*1024*1024){
+                                (imageDate,err) in
+                                if let err = err {
+                                    print("error\(err.localizedDescription)")
+                                } else {
+                                    if let imageData = imageDate{
+                                        self.userimage = UIImage(data: imageData)
+                                    }
+                                    
+                                
+                                else {
+                                
+                                        print("no error")
+                                    
+                                }
+                                }
+                            
+                            }
+
+                        
+                    }
 
                 //read()
                 
