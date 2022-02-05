@@ -35,7 +35,6 @@ struct LoginView: View {
                                 .foregroundColor(Color(UIColor(named: "Blue")!))
                                 .padding(.vertical, 10.0)
                         }
-                        
                     }
                     // MARK: - Login Button
                     Button{
@@ -56,7 +55,6 @@ struct LoginView: View {
                                                startPoint: .leading, endPoint: .trailing))
                             .cornerRadius(30.0)
                     }
- 
                     // MARK: - FaceID Button
                     // Check if the user's phone supports face or touch id
                     if authentication.biometricType() != .none{
@@ -113,7 +111,6 @@ struct LoginView: View {
                     default : return Alert(title: Text("Authentication Failed"), message: Text(error.localizedDescription))
                     }
                 }
-                .padding()
                 if session.showProgressView {
                     LoadingView()
                 }

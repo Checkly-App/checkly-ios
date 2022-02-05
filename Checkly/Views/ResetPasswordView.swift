@@ -6,24 +6,21 @@
 //
 
 import SwiftUI
+import AlertToast
+import SPAlert
 
 struct ResetPasswordView: View {
     @StateObject private var session: Session = Session()
-    @State private var emailSuccess: Bool = false
     
     var body: some View {
-        ZStack(alignment: .top){
+        ZStack(){
             BackgroundCheckView()
             VStack(spacing: 40){
-    
-                TitleView(title: "Password", subTitle: "Reset", description: "Enter your orgizatnion's associated email address and we will send you the instructions!")
+                TitleView(title: "Password", subTitle: "Reset", description: "Enter your organization's associated email address and we will send you the instructions!")
                     .padding(.vertical, 20.0)
-
                 EmailInputView(email: $session.credentials.email)
                 Button{
-                    session.resetUserPassword { success in
-                        emailSuccess = success
-                    }
+                    session.resetUserPassword { _ in }
                 } label: {
                     Text("Reset")
                         .fontWeight(.bold)
@@ -36,26 +33,29 @@ struct ResetPasswordView: View {
                                            startPoint: .leading, endPoint: .trailing))
                         .cornerRadius(30.0)
                 }
-                .alert("Success", isPresented: $emailSuccess){
-                    Button("Got it!", role: .cancel){}
-                }
                 Spacer()
             }
             .disabled(session.showProgressView)
             .padding()
-            .alert(item: $session.error) { error in
-                return Alert(title: Text("Invalid Credentials"), message: Text(error.localizedDescription))
-                
-            }
             .padding()
             if session.showProgressView {
                 LoadingView()
             }
+            if session.showErrorView {
+                FeedbackView(imageName: "xmark", title: "Oops", message: session.error!.localizedDescription)
+                    .onTapGesture {
+                        session.toggleError()
+                    }
+            }
+            else if session.showSuccessView {
+                FeedbackView(imageName: "checkmark", title: "Success", message: "Check your inbox for a reset message")
+                    .onTapGesture {
+                        session.toggleSuccess()
+                    }
+            }
         }
         .navigationBarTitle("", displayMode: .inline)
-        .alert(item: $session.error) { error in
-            return Alert(title: Text("Invalid Reset"), message: Text(error.localizedDescription))
-        }
+        
         
     }
 }
