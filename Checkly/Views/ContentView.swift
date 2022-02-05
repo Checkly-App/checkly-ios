@@ -17,6 +17,7 @@ struct mainview: View {
     Button(action: {
        // self.isOpen.toggle()
         withAnimation {
+            
                       self.showMenu = true
                    }
 
@@ -42,15 +43,25 @@ struct ContentView: View {
                                 showMenu = false                        }
                         }
                     }
+        let closetap = TapGesture().onEnded{
+            
+          
+                withAnimation {
+                    showMenu = false                        }
+            }
+        
+      
+                    
+
         
        return GeometryReader{ gemotry in
             ZStack(alignment: .leading) {
                 mainview(showMenu: self.$showMenu).frame(width: gemotry.size.width, height: gemotry.size.height).offset(x: self.showMenu ? gemotry.size.width/2 : 0)
                     .disabled(self.showMenu ? true : false)
-            }.gesture(drag)
+            }.gesture(closetap).gesture(drag)
             if self.showMenu {
                 MenuView()
-                    .frame(width: gemotry.size.width/2)    .transition(.move(edge: .leading))
+                    .frame(width: gemotry.size.width/1.9)    .transition(.move(edge: .leading))
 
                 }
             
@@ -60,6 +71,32 @@ struct ContentView: View {
     }
 }
 
+//struct ContentView: View {
+//    @State var isOpen = false
+//    var body: some View {
+//
+//
+//        ZStack{
+//            if !isOpen {
+//        Button(action: {
+//            self.isOpen.toggle()
+//        }) {
+//            HStack {
+//                Image(systemName: "filemenu.and.selection")
+//                      .foregroundStyle(.teal, .gray)
+//                      .font(.system(size: 42.0))
+//            }
+//        }.position(x: 100, y: 100)
+//                Text("welcome")
+//        }
+//            sidemenu(width: UIScreen.main.bounds.width/2.5, menuopen: isOpen, togglemenu: toglemenu)
+//        }.edgesIgnoringSafeArea(.all)
+//
+//    }
+//    func toglemenu() {
+//        isOpen.toggle()
+//    }
+//}
 
 
 struct ContentView_Previews: PreviewProvider {

@@ -22,13 +22,7 @@ class EmployeeViewModel: ObservableObject {
     @Published var department = ""
     @Published var address = ""
     @Published var gender = ""
-    @Published var phonemum = ""{
-        didSet {
-            if phonemum.count > 10 && oldValue.count <= 10 {
-                phonemum = oldValue
-            }
-        }
-    }
+    @Published var phonemum = ""
     @Published var nationalID = ""
     @Published var employeeID = ""
     @Published var birth = ""
