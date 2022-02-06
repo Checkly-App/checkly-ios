@@ -46,7 +46,7 @@ dismiss()                    } label: {
                                        if let image = self.inputImage{
                                            Image(uiImage: image).resizable().scaledToFill().frame(width: 170, height: 190).clipShape(Circle())
                                        }else {if let image = self.userimage{
-                                           Image(uiImage: image).resizable().scaledToFill().frame(width: 170, height: 190).padding().shadow(radius: 32).clipShape(Circle())
+                                           Image(uiImage: image).resizable().scaledToFill().frame(width: 220, height: 190).padding().clipShape(Circle())
                                        }else{
                                            Image(systemName: "person.circle.fill")
                                            .imageScale(.large).foregroundColor(Color.gray).font(.system(size: 140.0)).padding(.top,0)}}
@@ -146,7 +146,7 @@ dismiss()                    } label: {
                                     .foregroundColor(Color.gray)
                     Text(viewModel.nationalID).padding(.leading,25).foregroundColor(.gray).padding(.top,10)
                     Rectangle()
-                        .frame(height: 1.0, alignment: .bottom).padding(.leading,20).padding(.trailing,25).padding(.bottom,60)
+                        .frame(height: 1.0, alignment: .bottom).padding(.leading,20).padding(.trailing,25)
                                     
                                     .foregroundColor(Color.gray)
                    
@@ -175,7 +175,7 @@ dismiss()                    } label: {
                                 .foregroundColor(Color.white)
                         }
                     }
-                    .padding(17).padding(.leading,1)
+                            .padding()
                     .foregroundColor(.white)
                     .background(LinearGradient(gradient: Gradient(colors: [Color(red: 107/255, green: 200/255, blue: 244/255), Color(red: 104/255, green: 215/255, blue: 231/255)]), startPoint: .top, endPoint: .bottom))
                 .cornerRadius(.infinity)

@@ -137,7 +137,24 @@ Spacer()
                             }
 
                         
-                    }
+            }.onAppear(perform: {
+                Storage.storage().reference().child("Emp1").getData(maxSize: 15*1024*1024){
+                                (imageDate,err) in
+                                if let err = err {
+                                    print("error\(err.localizedDescription)")
+                                } else {
+                                    if let imageData = imageDate{
+                                        self.userimage = UIImage(data: imageData)
+                                    }
+                                    
+                                
+                                else {
+                                
+                                        print("no error")
+                                    
+                                }
+                                }}
+            })
 
                 //read()
                 
