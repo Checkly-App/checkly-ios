@@ -28,6 +28,10 @@ struct mainview: View {
                   .font(.system(size: 42.0))
         }
     }.position(x: 100, y: 100)
+        
+        
+        
+        ////Noura code Home 
             Text("welcome")
     
     }}
