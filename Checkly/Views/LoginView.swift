@@ -113,13 +113,14 @@ struct LoginView: View {
                     default : return Alert(title: Text("Authentication Failed"), message: Text(error.localizedDescription))
                     }
                 }
+                
                 if session.showProgressView {
                     LoadingView()
                 }
             }
+            .background(Color(UIColor(.white)))
             .navigationBarTitle("Login", displayMode: .large)
             .navigationBarHidden(true)
-            .background(Color(UIColor(.white)))
         }
     }
 }
@@ -146,7 +147,7 @@ struct BackgroundCheckView: View {
     
     var body: some View {
         VStack {
-            Image(colorScheme == .light ? "backgroundLight" : "backgroundDark" )
+            Image("backgroundLight")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .ignoresSafeArea()

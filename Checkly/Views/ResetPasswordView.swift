@@ -4,13 +4,18 @@
 //
 //  Created by 🐈‍⬛ on 02/02/2022.
 //
+//            if session.showSuccessView {
+//                FeedbackView(imageName: "checkmark", title: "Success", message: "Check your inbox for a reset message")
+//                    .onTapGesture {
+//                        session.toggleSuccess()
+//                    }
+//            }
 
 import SwiftUI
-import AlertToast
-import SPAlert
 
 struct ResetPasswordView: View {
     @StateObject private var session: Session = Session()
+    @State private var resetPressed: Bool = false
     
     var body: some View {
         ZStack(){
@@ -20,7 +25,9 @@ struct ResetPasswordView: View {
                     .padding(.vertical, 20.0)
                 EmailInputView(email: $session.credentials.email)
                 Button{
-                    session.resetUserPassword { _ in }
+                    session.resetUserPassword { success in
+                        resetPressed = success
+                    }
                 } label: {
                     Text("Reset")
                         .fontWeight(.bold)
@@ -38,26 +45,24 @@ struct ResetPasswordView: View {
             .disabled(session.showProgressView)
             .padding()
             .padding()
+            
             if session.showProgressView {
                 LoadingView()
             }
-            if session.showErrorView {
-                FeedbackView(imageName: "xmark", title: "Oops", message: session.error!.localizedDescription)
-                    .onTapGesture {
-                        session.toggleError()
-                    }
-            }
-            else if session.showSuccessView {
+            
+            if session.showSuccessView {
                 FeedbackView(imageName: "checkmark", title: "Success", message: "Check your inbox for a reset message")
-                    .onTapGesture {
-                        session.toggleSuccess()
-                    }
+                    .onTapGesture { session.toggleSuccess() }
             }
+            
+            if session.showErrorView {
+                FeedbackView(imageName: "xmark", title: "Reset Failed", message: session.error!.localizedDescription)
+                    .onTapGesture { session.toggleError() }
+            }
+            
         }
+        .background(Color(UIColor(.white)))
         .navigationBarTitle("", displayMode: .inline)
-        
-        
-        
     }
 }
 

@@ -29,11 +29,9 @@ class Session: ObservableObject {
     }
     
     func loginUser(completion: @escaping (Bool) -> Void){
-        
         toggleProgress()
         
         Auth.auth().signIn(withEmail: credentials.email, password: credentials.password) { [self] result, authError in
-            
             toggleProgress()
             
             if authError != nil  {
@@ -76,6 +74,7 @@ class Session: ObservableObject {
             toggleProgress()
             if authError != nil  {
                 error = .resetPassword
+                print(error?.localizedDescription)
                 toggleError()
                 completion(false)
             }
