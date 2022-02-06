@@ -12,6 +12,7 @@ struct ContentView: View {
     @StateObject private var session: Session = Session()
     @EnvironmentObject var authentication: Authentication
     @AppStorage("isLoggedIn") var isLoggedIn = true
+    @State private var isPresented = false
 
     var body: some View {
         NavigationView{
@@ -23,6 +24,13 @@ struct ContentView: View {
                     }
                 } label: {
                     Text("sign out")
+                }
+                NavigationLink(destination: ChangePasswordView()){
+                    Text("Change password")
+                        .fontWeight(.bold)
+                        .font(.caption)
+                        .foregroundColor(Color(UIColor(named: "Blue")!))
+                        .padding(.vertical, 10.0)
                 }
             }
         }
