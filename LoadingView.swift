@@ -10,7 +10,7 @@ import SwiftUI
 struct LoadingView: View {
     var body: some View {
         ZStack {
-            VisualEffect(effect: UIBlurEffect(style: .regular))
+            VisualEffect(effect: UIBlurEffect(style: .light))
                 .frame(width: 100, height: 100)
                 .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
             ProgressView()

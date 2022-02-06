@@ -13,7 +13,7 @@ struct FeedbackView: View {
     var message: String
     var body: some View {
         ZStack {
-            VisualEffect(effect: UIBlurEffect(style: .regular))
+            VisualEffect(effect: UIBlurEffect(style: .light))
                 .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
             VStack (spacing: 15){
                 Image(systemName: imageName)
