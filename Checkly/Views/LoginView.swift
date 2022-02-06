@@ -36,6 +36,7 @@ struct LoginView: View {
                                 .padding(.vertical, 10.0)
                         }
                     }
+
                     // MARK: - Login Button
                     Button{
                         faceIDPressed = false
@@ -89,6 +90,7 @@ struct LoginView: View {
                 }
                 .disabled(session.showProgressView)
                 .padding()
+                .padding()
                 .alert(item: $session.error) { error in
                     switch error {
                     case .invalidPassword:
@@ -117,7 +119,7 @@ struct LoginView: View {
             }
             .navigationBarTitle("Login", displayMode: .large)
             .navigationBarHidden(true)
-            
+            .background(Color(UIColor(.white)))
         }
     }
 }
@@ -127,22 +129,24 @@ struct DividerView: View{
     var body: some View {
         ZStack{
             Divider()
-                .background(Color(UIColor(named: "Gray")!))
+                .background(Color(UIColor(named: "LightGray")!))
                 .padding(.horizontal, 25.0)
             Text("or")
                 .fontWeight(.light)
-                .foregroundColor(Color(UIColor(named: "Gray")!))
+                .foregroundColor(Color(UIColor(named: "LightGray")!))
                 .padding(.horizontal, 15.0)
-                .background(.white)
+                .background(Color(UIColor(.white)))
         }
     }
 }
 
 // MARK: - Check View
 struct BackgroundCheckView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    
     var body: some View {
         VStack {
-            Image("Intersect")
+            Image(colorScheme == .light ? "backgroundLight" : "backgroundDark" )
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .ignoresSafeArea()
