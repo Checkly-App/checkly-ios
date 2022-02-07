@@ -29,6 +29,7 @@
 		A3B8D85827B11A5600752F63 /* CalendarTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85727B11A5600752F63 /* CalendarTimeline.swift */; };
 		A3B8D85A27B11A8900752F63 /* CalendarViewRouterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85927B11A8900752F63 /* CalendarViewRouterHelper.swift */; };
 		A3B8D85C27B13D9F00752F63 /* DateValueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85B27B13D9F00752F63 /* DateValueModel.swift */; };
+		A3C9709D27B184930041058A /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = A3C9709C27B184930041058A /* FirebaseDatabase */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3C9709D27B184930041058A /* FirebaseDatabase in Frameworks */,
 				7149E90A27A87452008E3553 /* FirebaseAnalytics in Frameworks */,
 				A3B8D84A27B1171A00752F63 /* FirebaseFirestore in Frameworks */,
 				7149E90C27A87452008E3553 /* FirebaseAuth in Frameworks */,
@@ -186,6 +188,7 @@
 				7149E90B27A87452008E3553 /* FirebaseAuth */,
 				71D09A5B27A9A02A00DA2D1D /* SwiftKeychainWrapper */,
 				A3B8D84927B1171A00752F63 /* FirebaseFirestore */,
+				A3C9709C27B184930041058A /* FirebaseDatabase */,
 			);
 			productName = Checkly;
 			productReference = 7149E8F727A8720A008E3553 /* Checkly.app */;
@@ -505,6 +508,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7149E90827A87451008E3553 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		A3C9709C27B184930041058A /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7149E90827A87451008E3553 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

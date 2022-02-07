@@ -95,7 +95,7 @@ struct CalendarTimeline: View {
              if let meetings = meetingViewModel.filteredMeetings {
                  
                  if meetings.isEmpty {
-                     Text("No Meetings Found!")
+                     Text("No Tasks Found!")
                          .font(.system(size: 16))
                          .fontWeight(.light)
                          .offset(y:100)
@@ -139,7 +139,6 @@ struct CalendarTimeline: View {
                      .hLeading()
                      // to display time in 12-hour format
                      Text(meeting.dateTime.formatted(date: .omitted, time: .shortened))
- //                    Text(meeting.time)
                  }
              }
              .hLeading()
@@ -158,7 +157,7 @@ struct CalendarTimeline: View {
      func HeaderView() -> some View {
              HStack(){
                      Button(action: {
-                         print("Go to Calendar Grid")
+                         // Go to Calendar Grid
                          viewRouter.currentPage = .CalendarGrid
                      }, label: {
                          Image(systemName: "calendar.circle")
@@ -168,7 +167,7 @@ struct CalendarTimeline: View {
                      })
                  
                      Button(action: {
-                         print("In Calendar Timeline")
+                        // In Calendar Timeline
                      }, label: {
                          Image(systemName: "list.bullet.circle.fill")
                              .resizable()
@@ -181,7 +180,6 @@ struct CalendarTimeline: View {
              .padding()
              .padding(.top, getSafeArea().top)
              .background(Color.white)
-             
      }
  }
 

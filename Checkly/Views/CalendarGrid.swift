@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CalendarGrid: View {
+    
     @StateObject var meetingViewModel : MeetingViewModel = MeetingViewModel()
     @Binding var currentDate: Date
     // month update on arrow button click
@@ -114,12 +115,13 @@ struct CalendarGrid: View {
                     
                     if let meeting = meetingViewModel.meetings.first(where: { meeting in
                         return isSameDay(date1: meeting.dateTime, date2: currentDate)
-//                        return isSameDay(date1: meeting.date, date2: currentDate)
                     }) {
                         ForEach(self.meetingViewModel.filteredMeetingsArray(date:currentDate)!){ meeting in
                                 MeetingCardView(meeting: meeting) }
                     } else {
                         Text("No Tasks Found!")
+                            .font(.system(size: 16))
+                            .fontWeight(.light)
                     }
                 }
                 .padding()
@@ -144,7 +146,6 @@ struct CalendarGrid: View {
                 if let meeting = meetingViewModel.meetings.first(where: { meeting in
                     
                     return isSameDay(date1: meeting.dateTime, date2: value.date)
-//                    return isSameDay(date1: meeting.date, date2: value.date)
                 }){
                     Text("\(value.day)")
                         .font(.title3.bold())
@@ -186,7 +187,6 @@ struct CalendarGrid: View {
                     .hLeading()
                     // to display time in 12-hour format
                     Text(meeting.dateTime.formatted(date: .omitted, time: .shortened))
-//                    Text(meeting.time)
                 }
             }
             .hLeading()
