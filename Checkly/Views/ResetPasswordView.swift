@@ -4,12 +4,7 @@
 //
 //  Created by 🐈‍⬛ on 02/02/2022.
 //
-//            if session.showSuccessView {
-//                FeedbackView(imageName: "checkmark", title: "Success", message: "Check your inbox for a reset message")
-//                    .onTapGesture {
-//                        session.toggleSuccess()
-//                    }
-//            }
+
 
 import SwiftUI
 
@@ -20,7 +15,7 @@ struct ResetPasswordView: View {
     var body: some View {
         ZStack(){
             BackgroundCheckView()
-            VStack(spacing: 40){
+            VStack(spacing: 20){
                 TitleView(title: "Password", subTitle: "Reset", description: "Enter your organization's associated email address and we will send you the instructions!")
                     .padding(.vertical, 20.0)
                 EmailInputView(email: $session.credentials.email)
@@ -40,6 +35,7 @@ struct ResetPasswordView: View {
                                            startPoint: .leading, endPoint: .trailing))
                         .cornerRadius(30.0)
                 }
+                .padding(.top, 20.0)
                 Spacer()
             }
             .disabled(session.showProgressView)

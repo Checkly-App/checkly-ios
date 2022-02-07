@@ -21,7 +21,7 @@ struct LoginView: View {
         NavigationView {
             ZStack{
                 BackgroundCheckView()
-                VStack(spacing: 40.0){
+                VStack(spacing: 20.0){
                     TitleView(title: "Welcome", subTitle: "Back !", description: "Login to your account and access your organization's services")
                         .padding(.top, 60.0)
                     EmailInputView(email: $session.credentials.email)
@@ -33,7 +33,7 @@ struct LoginView: View {
                                 .fontWeight(.bold)
                                 .font(.caption)
                                 .foregroundColor(Color(UIColor(named: "Blue")!))
-                                .padding(.vertical, 10.0)
+                                .padding(.vertical, 2)
                         }
                     }
 
@@ -56,6 +56,8 @@ struct LoginView: View {
                                                startPoint: .leading, endPoint: .trailing))
                             .cornerRadius(30.0)
                     }
+                    .padding(.top, 20.0)
+
                     // MARK: - FaceID Button
                     // Check if the user's phone supports face or touch id
                     if authentication.biometricType() != .none{
