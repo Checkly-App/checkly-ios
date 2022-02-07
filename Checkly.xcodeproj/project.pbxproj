@@ -35,6 +35,7 @@
 		F5BD9B1A27AD92880005AEBE /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD9B1927AD92870005AEBE /* ImagePickerView.swift */; };
 		F5BD9B1C27ADD4F70005AEBE /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD9B1B27ADD4F60005AEBE /* ChangePasswordView.swift */; };
 		F5BD9B1E27AE7F500005AEBE /* EditprofileV.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD9B1D27AE7F4E0005AEBE /* EditprofileV.swift */; };
+		F5D400D227B1AD390033570F /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D400D127B1AD380033570F /* UserProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		F5BD9B1927AD92870005AEBE /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		F5BD9B1B27ADD4F60005AEBE /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		F5BD9B1D27AE7F4E0005AEBE /* EditprofileV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditprofileV.swift; sourceTree = "<group>"; };
+		F5D400D127B1AD380033570F /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				F5BD9B1D27AE7F4E0005AEBE /* EditprofileV.swift */,
 				F51B3AB227AEA1CB002D382F /* UIedit.swift */,
 				F5BD9AEE27AB56830005AEBE /* UserProfile.swift */,
+				F5D400D127B1AD380033570F /* UserProfileView.swift */,
 				F5BD9B1B27ADD4F60005AEBE /* ChangePasswordView.swift */,
 				F5BD9B1727AD3BFC0005AEBE /* EditProfileView.swift */,
 				F5BD9B1927AD92870005AEBE /* ImagePickerView.swift */,
@@ -250,6 +253,7 @@
 				7149E91227A96FCA008E3553 /* Credentials.swift in Sources */,
 				F5BD9B1827AD3BFC0005AEBE /* EditProfileView.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
+				F5D400D227B1AD390033570F /* UserProfileView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
 				F51B3AB327AEA1CD002D382F /* UIedit.swift in Sources */,
 				F5BD9B1A27AD92880005AEBE /* ImagePickerView.swift in Sources */,

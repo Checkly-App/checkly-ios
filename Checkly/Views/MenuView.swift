@@ -45,6 +45,8 @@ struct MenuView: View {
 ).fullScreenCover(isPresented: $showingSheetpass) {
                     ChangePasswordView()
                 }
+//                Spacer(minLength: 0)
+
                 VStack(alignment:.leading){
                     Divider()
                 HStack{
@@ -56,7 +58,7 @@ struct MenuView: View {
 ).fullScreenCover(isPresented: $showingSheet) {
                     UserProfile()
                 }
-                }.padding(.top,550)
+                }
             
                 Spacer()
             }
