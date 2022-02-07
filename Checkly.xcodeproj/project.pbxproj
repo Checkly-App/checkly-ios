@@ -20,6 +20,15 @@
 		7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91927A987DD008E3553 /* LoginModel.swift */; };
 		71D09A5C27A9A02A00DA2D1D /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 71D09A5B27A9A02A00DA2D1D /* SwiftKeychainWrapper */; };
 		71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */; };
+		A3B8D84A27B1171A00752F63 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A3B8D84927B1171A00752F63 /* FirebaseFirestore */; };
+		A3B8D84D27B117E500752F63 /* MeetingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D84C27B117E400752F63 /* MeetingModel.swift */; };
+		A3B8D84F27B1182200752F63 /* MeetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D84E27B1182200752F63 /* MeetingViewModel.swift */; };
+		A3B8D85227B119FB00752F63 /* CalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85127B119FB00752F63 /* CalendarHelper.swift */; };
+		A3B8D85427B11A2B00752F63 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85327B11A2B00752F63 /* Calendar.swift */; };
+		A3B8D85627B11A4200752F63 /* CalendarGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85527B11A4200752F63 /* CalendarGrid.swift */; };
+		A3B8D85827B11A5600752F63 /* CalendarTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85727B11A5600752F63 /* CalendarTimeline.swift */; };
+		A3B8D85A27B11A8900752F63 /* CalendarViewRouterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85927B11A8900752F63 /* CalendarViewRouterHelper.swift */; };
+		A3B8D85C27B13D9F00752F63 /* DateValueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85B27B13D9F00752F63 /* DateValueModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +43,14 @@
 		7149E91727A985BC008E3553 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		7149E91927A987DD008E3553 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
+		A3B8D84C27B117E400752F63 /* MeetingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingModel.swift; sourceTree = "<group>"; };
+		A3B8D84E27B1182200752F63 /* MeetingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewModel.swift; sourceTree = "<group>"; };
+		A3B8D85127B119FB00752F63 /* CalendarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
+		A3B8D85327B11A2B00752F63 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		A3B8D85527B11A4200752F63 /* CalendarGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarGrid.swift; sourceTree = "<group>"; };
+		A3B8D85727B11A5600752F63 /* CalendarTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTimeline.swift; sourceTree = "<group>"; };
+		A3B8D85927B11A8900752F63 /* CalendarViewRouterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewRouterHelper.swift; sourceTree = "<group>"; };
+		A3B8D85B27B13D9F00752F63 /* DateValueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValueModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7149E90A27A87452008E3553 /* FirebaseAnalytics in Frameworks */,
+				A3B8D84A27B1171A00752F63 /* FirebaseFirestore in Frameworks */,
 				7149E90C27A87452008E3553 /* FirebaseAuth in Frameworks */,
 				71D09A5C27A9A02A00DA2D1D /* SwiftKeychainWrapper in Frameworks */,
 			);
@@ -55,6 +73,7 @@
 			children = (
 				7149E8F927A8720A008E3553 /* Checkly */,
 				7149E8F827A8720A008E3553 /* Products */,
+				A3B8D84827B1171A00752F63 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,8 +89,10 @@
 			isa = PBXGroup;
 			children = (
 				71D09A5F27A9A0CC00DA2D1D /* Services */,
+				A3B8D84B27B1178600752F63 /* ViewModel */,
 				7149E91027A96F92008E3553 /* Models */,
 				7149E90F27A96F71008E3553 /* Views */,
+				A3B8D85027B1199E00752F63 /* Helpers */,
 				7149E8FA27A8720A008E3553 /* ChecklyApp.swift */,
 				7149E91727A985BC008E3553 /* Authentication.swift */,
 				7149E90D27A8747B008E3553 /* GoogleService-Info.plist */,
@@ -94,6 +115,9 @@
 			children = (
 				7149E91327A977D6008E3553 /* ContentView.swift */,
 				7149E8FC27A8720A008E3553 /* LoginView.swift */,
+				A3B8D85327B11A2B00752F63 /* Calendar.swift */,
+				A3B8D85527B11A4200752F63 /* CalendarGrid.swift */,
+				A3B8D85727B11A5600752F63 /* CalendarTimeline.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -103,6 +127,8 @@
 			children = (
 				7149E91127A96FCA008E3553 /* Credentials.swift */,
 				7149E91927A987DD008E3553 /* LoginModel.swift */,
+				A3B8D84C27B117E400752F63 /* MeetingModel.swift */,
+				A3B8D85B27B13D9F00752F63 /* DateValueModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -113,6 +139,30 @@
 				71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		A3B8D84827B1171A00752F63 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A3B8D84B27B1178600752F63 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A3B8D84E27B1182200752F63 /* MeetingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A3B8D85027B1199E00752F63 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A3B8D85127B119FB00752F63 /* CalendarHelper.swift */,
+				A3B8D85927B11A8900752F63 /* CalendarViewRouterHelper.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,6 +185,7 @@
 				7149E90927A87452008E3553 /* FirebaseAnalytics */,
 				7149E90B27A87452008E3553 /* FirebaseAuth */,
 				71D09A5B27A9A02A00DA2D1D /* SwiftKeychainWrapper */,
+				A3B8D84927B1171A00752F63 /* FirebaseFirestore */,
 			);
 			productName = Checkly;
 			productReference = 7149E8F727A8720A008E3553 /* Checkly.app */;
@@ -195,13 +246,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3B8D85427B11A2B00752F63 /* Calendar.swift in Sources */,
 				7149E8FD27A8720A008E3553 /* LoginView.swift in Sources */,
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
+				A3B8D84F27B1182200752F63 /* MeetingViewModel.swift in Sources */,
 				7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */,
 				7149E91227A96FCA008E3553 /* Credentials.swift in Sources */,
+				A3B8D85227B119FB00752F63 /* CalendarHelper.swift in Sources */,
+				A3B8D85827B11A5600752F63 /* CalendarTimeline.swift in Sources */,
+				A3B8D85C27B13D9F00752F63 /* DateValueModel.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
+				A3B8D85627B11A4200752F63 /* CalendarGrid.swift in Sources */,
+				A3B8D85A27B11A8900752F63 /* CalendarViewRouterHelper.swift in Sources */,
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,
+				A3B8D84D27B117E500752F63 /* MeetingModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +391,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Checkly/Preview Content\"";
-				DEVELOPMENT_TEAM = 9VU9NLXSDT;
+				DEVELOPMENT_TEAM = KLG5737U6K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow FaceID to access user credentials";
@@ -346,7 +405,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dalalbinhumaid.Checkly;
+				PRODUCT_BUNDLE_IDENTIFIER = aleen.checkly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -362,7 +421,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Checkly/Preview Content\"";
-				DEVELOPMENT_TEAM = 9VU9NLXSDT;
+				DEVELOPMENT_TEAM = KLG5737U6K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow FaceID to access user credentials";
@@ -376,7 +435,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dalalbinhumaid.Checkly;
+				PRODUCT_BUNDLE_IDENTIFIER = aleen.checkly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -441,6 +500,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 71D09A5A27A9A02900DA2D1D /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
 			productName = SwiftKeychainWrapper;
+		};
+		A3B8D84927B1171A00752F63 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7149E90827A87451008E3553 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
