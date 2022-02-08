@@ -27,8 +27,10 @@ struct UserProfileView: View {
     @State var toggleNotification = true
     @State var toggleLocation = true
 
-    var songs: [String] = ["Terms And Conditions", "Privacy Policy", "Edit Profile","Change Password"]
-    var songs1: [String] = ["Turn Off Notification", "Disable Location"]
+    var listName: [String] = ["Terms And Conditions", "Privacy Policy", "Edit Profile","Change Password"]
+    var listIcon: [String] = ["Terms", "privacy-1", "Editprofile","clock"]
+    
+    var listDestnation=[AnyView(ChangePasswordView()),AnyView(ChangePasswordView()),AnyView(ChangePasswordView()),AnyView(ChangePasswordView())] //This helped
 
 
     var body: some View {
@@ -59,47 +61,53 @@ struct UserProfileView: View {
                     .foregroundColor(Color.cyan)
                 Spacer()
                 
-            }.padding().padding()
+            }.padding()
             VStack{
-
-                ForEach(songs, id: \.self) { song in
-                    NavigationLink(destination: ChangePasswordView()) {
+               
+                ForEach(0..<listName.count)
+                { listItem in
+                    NavigationLink(destination: listDestnation[listItem]) {
                         
                     
                 HStack{
-                    Image(systemName: "bell.fill").foregroundColor(.gray)
-                    Text(song)
+                    Image( listIcon[listItem]).foregroundColor(.gray)
+                    Text(listName[listItem])
                         .font(.headline)
-                        .fontWeight(.regular).foregroundColor(.black)
+                        .fontWeight(.medium).foregroundColor(.black)
 Spacer()
-                    Button {
-                               print("Image tapped!")
-                           } label: {
+                    
                                Image(systemName: "chevron.right").foregroundColor(.black)
-                           }                }.padding() }
+                    
+                                          }.padding() }
                     
                 }
                 Divider().padding()
                
                 HStack{
                     
-                               Image(systemName: "bell.fill").foregroundColor(.gray)
+//                    Image(systemName: "bell.fill").foregroundColor(.gray)
+                   
+                        
+                        Image("Notfication")
+                    
+                        
                            
-                    Text("Turn Off Notification")
+                    Text("Turn off Notification")
                         .font(.body)
-                        .fontWeight(.regular)
-Spacer()
+                        .fontWeight(.medium)
+                       
                     Toggle(isOn: $toggleNotification) {
                         
                     }.tint(.cyan)
-               }.padding()
+                }
+                .padding(.horizontal, 9)
                 HStack{
                   
-                               Image(systemName: "location.north.fill").foregroundColor(.gray)
+                               Image("Location-1").foregroundColor(.gray)
                            
                     Text("Disable Location")
                         .font(.body)
-                        .fontWeight(.regular)
+                        .fontWeight(.medium)
 Spacer()
                     Toggle(isOn: $toggleLocation) {
                         
@@ -111,7 +119,7 @@ Spacer()
         }.navigationBarTitle("Profile").navigationBarTitleDisplayMode(.inline).background(Color(red: 236, green: 236, blue: 236)
 )
 
-        }.task {
+            }.task {
             viewModel.fetchData()
         }.task{
             

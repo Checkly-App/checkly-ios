@@ -11,72 +11,25 @@ struct UIedit1: View {
     @State private var username: String = ""
     var body: some View {
         VStack{
-            VStack {
-                TextField("Enter the new password", text:$username)
-                    .padding(.leading,20).padding(.trailing,20).padding(.top,0).foregroundColor(.cyan)
-                Rectangle()
-                    .frame(height: 1.0, alignment: .bottom).padding(.leading,20).padding(.trailing,25)
-                                
-                                .foregroundColor(Color.cyan)
-                TextField("Enter the new password", text:$username)
-                    .padding(.leading,20).padding(.trailing,20).padding(.top,10).foregroundColor(.cyan)
-                
-                Rectangle()
-                    .frame(height: 1.0, alignment: .bottom).padding(.leading,20).padding(.trailing,25)
-                                
-                                .foregroundColor(Color.cyan)
-               
-            }
-       
-            VStack(alignment: .leading){
-                Text("tr7").padding(.leading,25).foregroundColor(.gray)
-                Rectangle()
-                    .frame(height: 1.0, alignment: .bottom).padding(.leading,20).padding(.trailing,25)
-                                
-                                .foregroundColor(Color.gray)
-                Text("tr7").padding(.leading,25).foregroundColor(.gray)
-                Rectangle()
-                    .frame(height: 1.0, alignment: .bottom).padding(.leading,20).padding(.trailing,25)
-                                
-                                .foregroundColor(Color.gray)
-                Text("tr7").padding(.leading,25).foregroundColor(.gray)
-                Rectangle()
-                    .frame(height: 1.0, alignment: .bottom).padding(.leading,20).padding(.trailing,25)
-                                
-                                .foregroundColor(Color.gray)
-                Text("tr7").padding(.leading,25).foregroundColor(.gray)
-                Rectangle()
-                    .frame(height: 1.0, alignment: .bottom).padding(.leading,20).padding(.trailing,25)
-                                
-                                .foregroundColor(Color.gray)
-               
-            }
-            VStack(alignment: .leading){
-                Text("tr7").padding(.leading,25).foregroundColor(.gray)
-                Rectangle()
-                    .frame(height: 1.0, alignment: .bottom).padding(.leading,20).padding(.trailing,25)
-                                
-                                .foregroundColor(Color.gray)
-                Text("tr7").padding(.leading,25).foregroundColor(.gray)
-                Rectangle()
-                    .frame(height: 1.0, alignment: .bottom).padding(.leading,20).padding(.trailing,25)
-                                
-                                .foregroundColor(Color.gray)
-                Text("tr7").padding(.leading,25).foregroundColor(.gray)
-                Rectangle()
-                    .frame(height: 1.0, alignment: .bottom).padding(.leading,20).padding(.trailing,25)
-                                
-                                .foregroundColor(Color.gray)
-                Text("tr7").padding(.leading,25).foregroundColor(.gray)
-                Rectangle()
-                    .frame(height: 1.0, alignment: .bottom).padding(.leading,20).padding(.trailing,25)
-                                
-                                .foregroundColor(Color.gray)
-               
-            }
-            Spacer()
+            VStack(alignment: .leading) {
+                Text("Username")
+                    .font(.callout)
+                    .foregroundColor(Color.gray)
+                    .bold()
+                TextField("Enter username...", text: $username)
+                    .textFieldStyle(RoundedBorderTextFieldStyle()).foregroundColor(.cyan).disabled(true)
+            }.padding()
+            VStack(alignment: .leading) {
+                Text("Username")
+                    .font(.callout)
+                    .foregroundColor(Color.gray)
+                    .bold()
+                TextField("Enter username...", text: $username)
+                    .textFieldStyle(RoundedBorderTextFieldStyle()).foregroundColor(.cyan)
+            }.padding()
             
         }
+         
     }}
 
 struct UIedit: View {

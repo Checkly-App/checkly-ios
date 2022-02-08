@@ -45,6 +45,13 @@ struct ChangePasswordView: View {
                             .foregroundColor(Color.white)
                     }
                 }
+                    VStack(alignment: .leading) {
+                        Text("Username")
+                            .font(.callout)
+                            .bold()
+                        TextField("Enter username...", text: $username)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    }.padding()
                 .padding(17).padding(.leading,1)
                 .foregroundColor(.white)
                 .background(LinearGradient(gradient: Gradient(colors: [Color(red: 107/255, green: 200/255, blue: 244/255), Color(red: 104/255, green: 215/255, blue: 231/255)]), startPoint: .top, endPoint: .bottom))
