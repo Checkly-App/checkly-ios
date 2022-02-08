@@ -19,25 +19,43 @@ struct CalendarGrid: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false){
             VStack(spacing: 5) {
-                            HStack(){
+                HStack(spacing: 25){
                                 Button(action: {
                                     print("Already in Calendar Grid")
                                 }, label: {
-                                    Image(systemName: "calendar.circle.fill")
+                                    Image(systemName: "calendar")
                                         .resizable()
-                                        .foregroundColor(Color("BlueA"))
-                                        .frame(width: 35, height: 35)
+                                        .foregroundColor(Color(.gray))
+                                        .frame(width: 20, height: 20)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 25)
+                                                .fill(Color("BlueA").opacity(0.3))
+                                                .frame(width: 40, height: 35)
+                                        )
                                 })
                                 Button(action: {
                                     print("Go to Timeline")
                                     viewRouter.currentPage = .CalendarTimeline
                                 }, label: {
-                                    Image(systemName: "list.bullet.circle")
+                                    Image(systemName: "list.bullet")
                                         .resizable()
-                                        .foregroundColor(Color("BlueA"))
-                                        .frame(width: 35, height: 35)
+                                        .foregroundColor(Color(.gray))
+                                        .frame(width: 18, height: 18)
                                 })
-                            }.padding(15)
+                                Spacer()
+                                Button(action: {
+                                    // Generate Meeting
+                                }, label: {
+                                    Image(systemName: "plus")
+                                        .resizable()
+                                        .foregroundColor(Color(.gray))
+                                        .frame(width: 20, height: 20)
+                                }).padding([.trailing], 6)
+                              
+                }.padding([.leading],19)
+                .padding([.trailing ,.bottom],10)
+                .padding([.top],15)
+                    .hLeading()
                 // Days
                 let days: [String] = ["S", "M", "T", "W", "T", "F", "S"]
                 

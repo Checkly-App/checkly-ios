@@ -155,28 +155,41 @@ struct CalendarTimeline: View {
      
      // buliding the header view
      func HeaderView() -> some View {
-             HStack(){
+         HStack(spacing: 25){
                      Button(action: {
-                         // Go to Calendar Grid
+                       // Go to Calendar Grid
                          viewRouter.currentPage = .CalendarGrid
                      }, label: {
-                         Image(systemName: "calendar.circle")
+                         Image(systemName: "calendar")
                              .resizable()
-                             .foregroundColor(Color("BlueA"))
-                             .frame(width: 35, height: 35)
+                             .foregroundColor(Color(.gray))
+                             .frame(width: 20, height: 20)
                      })
                  
                      Button(action: {
                         // In Calendar Timeline
                      }, label: {
-                         Image(systemName: "list.bullet.circle.fill")
+                         Image(systemName: "list.bullet")
                              .resizable()
-                             .foregroundColor(Color("BlueA"))
-                             .frame(width: 35, height: 35)
+                             .foregroundColor(Color(.gray))
+                             .frame(width: 18, height: 18)
+                             .overlay(
+                                 RoundedRectangle(cornerRadius: 25)
+                                     .fill(Color("BlueA").opacity(0.3))
+                                     .frame(width: 40, height: 35)
+                             )
                      })
-                 
+                     Spacer()
+                     Button(action: {
+                         // Generate Meeting
+                     }, label: {
+                         Image(systemName: "plus")
+                             .resizable()
+                             .foregroundColor(Color(.gray))
+                             .frame(width: 20, height: 20)
+                     })
                  }
-             .hCenter()
+             .hLeading()
              .padding()
              .padding(.top, getSafeArea().top)
              .background(Color.white)
