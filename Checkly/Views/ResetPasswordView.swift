@@ -13,9 +13,9 @@ struct ResetPasswordView: View {
     @State private var resetPressed: Bool = false
     
     var body: some View {
-        ZStack(){
-            VStack(spacing: 20){
-                TitleView(title: "Reset ", description: "your password by entering your organization's associated email address and we will send you the instructions!")
+        ZStack{
+            VStack(spacing: 40.0){
+                TitleView(title: "Reset ", description: "your password by entering your organization's associated email address")
                     .padding(.vertical, 20.0)
                 EmailInputView(email: $session.credentials.email)
                 Button{

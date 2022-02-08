@@ -20,20 +20,23 @@ struct LoginView: View {
     var body: some View{
         NavigationView {
             ZStack {
-                VStack(spacing: 10.0) {
+                VStack(spacing: 40.0) {
                     TitleView(title: "Sign in", description: "to your account and access your organization's services")
-                    EmailInputView(email: $session.credentials.email)
-                        .padding(.top, 20.0)
-                    VStack (alignment: .trailing){
-                        PasswordInputView(password: $session.credentials.password, isVisible: $isVisible)
-                        NavigationLink(destination: ResetPasswordView()){
-                            Text("Forgot password?")
-                                .fontWeight(.bold)
-                                .font(.caption)
-                                .foregroundColor(Color(UIColor(named: "Blue")!))
-                                .padding(.vertical, 2)
+                        .padding(.top, 60.0)
+                    VStack(spacing: 12.5){
+                        EmailInputView(email: $session.credentials.email)
+                        VStack (alignment: .trailing){
+                            PasswordInputView(password: $session.credentials.password, isVisible: $isVisible)
+                            NavigationLink(destination: ResetPasswordView()){
+                                Text("Forgot password?")
+                                    .fontWeight(.bold)
+                                    .font(.caption)
+                                    .foregroundColor(Color(UIColor(named: "Blue")!))
+                                    .padding(.vertical, 2)
+                            }
                         }
                     }
+
                     // MARK: - Login Button
                     Button{
                         faceIDPressed = false
@@ -117,6 +120,16 @@ struct LoginView: View {
                 
                 if session.showProgressView {
                     LoadingView()
+                }
+                
+                if session.showSuccessView {
+                    FeedbackView(imageName: "checkmark", title: "Success", message: "Check your inbox for a reset message")
+                        .onTapGesture { session.toggleSuccess() }
+                }
+                
+                if session.showErrorView {
+                    FeedbackView(imageName: "xmark", title: "Reset Failed", message: session.error!.localizedDescription)
+                        .onTapGesture { session.toggleError() }
                 }
             }
             .background(Color(UIColor(.white)))
