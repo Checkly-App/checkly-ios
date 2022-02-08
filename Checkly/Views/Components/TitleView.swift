@@ -9,26 +9,21 @@ import SwiftUI
 
 struct TitleView: View {
     var title: String
-    var subTitle: String
     var description: String
-
+    
     var body: some View {
         HStack(alignment: .top) {
-            VStack (alignment: .leading, spacing: 25.0) {
-                VStack(alignment: .leading, spacing: 5.0){
-                    Text(title)
-                        .font(.system(size: 36.0))
-                        .foregroundColor(Color(UIColor(named: "DeepBlue")!))
-                    Text(subTitle)
-                        .font(.system(size: 40.0, weight: .bold))
-                        .foregroundColor(Color(UIColor(named: "Navy")!))
-                }
+            VStack (alignment: .center, spacing: 15.0) {
+                Text(title)
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color(UIColor(named: "Navy")!))
                 Text(description)
                     .font(.body)
-                    .foregroundColor(Color(UIColor(named: "DeepBlue")!))
+                    .foregroundColor(Color(UIColor(named: "Navy")!))
+                    .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
             }
-            Spacer()
         }
     }
 }

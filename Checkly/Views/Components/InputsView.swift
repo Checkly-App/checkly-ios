@@ -15,14 +15,14 @@ struct EmailInputView: View {
             Text("Email")
                 .font(.system(size: 14, weight: .medium))
                 .foregroundColor(Color(UIColor(named: "LightGray")!))
-            TextField("", text: $email)
+            TextField("type your email", text: $email)
                 .keyboardType(.emailAddress)
                 .autocapitalization(.none)
                 .padding(10)
                 .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
                             .stroke(email.isEmpty ?
                                     Color(UIColor(named: "LightGray")!) :
-                                        Color(UIColor(named: "Blue")!) , lineWidth: 0.75))
+                                        Color(UIColor(named: "Blue")!) , lineWidth: 0.5))
                 .foregroundColor(email.isEmpty ?
                                  Color(UIColor(named: "LightGray")!) :
                                     Color(UIColor(named: "Blue")!))
@@ -43,10 +43,10 @@ struct PasswordInputView: View {
                 .foregroundColor(Color(UIColor(named: "LightGray")!))
             HStack{
                 if !isVisible {
-                    SecureField("", text: $password)
+                    SecureField("type your password", text: $password)
                 }
                 else {
-                    TextField("", text: $password)
+                    TextField("type your password", text: $password)
                 }
                 Button {
                     withAnimation{
@@ -62,7 +62,7 @@ struct PasswordInputView: View {
             .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
                         .stroke(password.isEmpty ?
                                 Color(UIColor(named: "LightGray")!) :
-                                    Color(UIColor(named: "Blue")!) , lineWidth: 0.75))
+                                    Color(UIColor(named: "Blue")!) , lineWidth: 0.5))
             .foregroundColor(password.isEmpty ?
                              Color(UIColor(named: "LightGray")!) :
                                 Color(UIColor(named: "Blue")!))

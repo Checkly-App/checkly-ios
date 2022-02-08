@@ -14,9 +14,8 @@ struct ResetPasswordView: View {
     
     var body: some View {
         ZStack(){
-            BackgroundCheckView()
             VStack(spacing: 20){
-                TitleView(title: "Password", subTitle: "Reset", description: "Enter your organization's associated email address and we will send you the instructions!")
+                TitleView(title: "Reset ", description: "your password by entering your organization's associated email address and we will send you the instructions!")
                     .padding(.vertical, 20.0)
                 EmailInputView(email: $session.credentials.email)
                 Button{
@@ -27,13 +26,14 @@ struct ResetPasswordView: View {
                     Text("Reset")
                         .fontWeight(.bold)
                         .foregroundColor(.white)
-                        .frame(width: 200.0, height: 45.0)
+                        .frame(maxWidth: .infinity)
+                        .padding(10)
                         .background(
                             LinearGradient(gradient: Gradient(colors: [
                                 Color(UIColor(named: "Blue")!),
-                                Color(UIColor(named: "Green")!)]),
+                                Color(UIColor(named: "LightTeal")!)]),
                                            startPoint: .leading, endPoint: .trailing))
-                        .cornerRadius(30.0)
+                        .cornerRadius(10.0)
                 }
                 .padding(.top, 20.0)
                 Spacer()

@@ -19,11 +19,9 @@ struct LoginView: View {
     
     var body: some View{
         NavigationView {
-            ZStack{
-                BackgroundCheckView()
-                VStack(spacing: 20.0){
-                    TitleView(title: "Welcome", subTitle: "Back !", description: "Login to your account and access your organization's services")
-                        .padding(.top, 60.0)
+            ZStack {
+                VStack(spacing: 10.0) {
+                    TitleView(title: "Sign in", description: "to your account and access your organization's services")
                     EmailInputView(email: $session.credentials.email)
                         .padding(.top, 20.0)
                     VStack (alignment: .trailing){
@@ -36,7 +34,6 @@ struct LoginView: View {
                                 .padding(.vertical, 2)
                         }
                     }
-
                     // MARK: - Login Button
                     Button{
                         faceIDPressed = false
@@ -48,20 +45,22 @@ struct LoginView: View {
                         Text("Login")
                             .fontWeight(.bold)
                             .foregroundColor(.white)
-                            .frame(width: 200.0, height: 45.0)
+                            .frame(maxWidth: .infinity)
+                            .padding(10)
                             .background(
                                 LinearGradient(gradient: Gradient(colors: [
                                     Color(UIColor(named: "Blue")!),
-                                    Color(UIColor(named: "Green")!)]),
+                                    Color(UIColor(named: "LightTeal")!)]),
                                                startPoint: .leading, endPoint: .trailing))
-                            .cornerRadius(30.0)
+                            .cornerRadius(10.0)
                     }
                     .padding(.top, 20.0)
-
+                    
                     // MARK: - FaceID Button
                     // Check if the user's phone supports face or touch id
                     if authentication.biometricType() != .none{
                         DividerView()
+                            .padding(.top, 45.0)
                         Button {
                             faceIDPressed = true
                             // Login using biometrics
@@ -78,17 +77,17 @@ struct LoginView: View {
                             }
                         } label: {
                             ZStack{
-                                RoundedRectangle(cornerRadius: 20.0)
+                                RoundedRectangle(cornerRadius: 10.0, style: .continuous)
                                     .fill(.white)
-                                    .frame(width: 65.0, height: 65.0)
+                                    .frame(width: 50.0, height: 50.0)
                                     .shadow(color: Color(UIColor(named: "Shadow")!), radius: 5, x: 0.5, y: 2)
                                 Image(systemName: authentication.biometricType() == .face ? "faceid" : "touchid")
-                                    .font(.system(size: 32.0, weight: .light))
+                                    .font(.system(size: 28.0, weight: .light))
                                     .foregroundColor(Color(UIColor(named: "Navy")!))
                             }
-                            .padding()
                         }
                     }
+                    Spacer()
                 }
                 .disabled(session.showProgressView)
                 .padding()
@@ -121,9 +120,10 @@ struct LoginView: View {
                 }
             }
             .background(Color(UIColor(.white)))
-            .navigationBarTitle("Login", displayMode: .large)
+            .navigationBarTitle("Login", displayMode: .inline)
             .navigationBarHidden(true)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
@@ -134,30 +134,14 @@ struct DividerView: View{
             Divider()
                 .background(Color(UIColor(named: "LightGray")!))
                 .padding(.horizontal, 25.0)
-            Text("or")
-                .fontWeight(.light)
+            Text("or sign in with")
+                .font(.system(size: 14))
                 .foregroundColor(Color(UIColor(named: "LightGray")!))
                 .padding(.horizontal, 15.0)
                 .background(Color(UIColor(.white)))
         }
     }
 }
-
-// MARK: - Check View
-struct BackgroundCheckView: View {
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
-    var body: some View {
-        VStack {
-            Image("backgroundLight")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .ignoresSafeArea()
-            Spacer()
-        }
-    }
-}
-
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {

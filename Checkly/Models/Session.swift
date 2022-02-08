@@ -74,7 +74,6 @@ class Session: ObservableObject {
             toggleProgress()
             if authError != nil  {
                 error = .resetPassword
-                print(error?.localizedDescription)
                 toggleError()
                 completion(false)
             }
