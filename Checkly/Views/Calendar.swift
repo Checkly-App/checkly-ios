@@ -10,7 +10,7 @@ import SwiftUI
 struct Calendar: View {
     
     @StateObject var viewRouter: CalendarViewRouterHelper
-    @State var currentDate: Date = Date()
+    @State private var currentDate: Date = Date()
     
     var body: some View {
         switch viewRouter.currentPage {

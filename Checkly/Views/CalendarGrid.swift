@@ -12,7 +12,7 @@ struct CalendarGrid: View {
     @StateObject var meetingViewModel : MeetingViewModel = MeetingViewModel()
     @Binding var currentDate: Date
     // month update on arrow button click
-    @State var currentMonth: Int = 0
+    @State private var currentMonth: Int = 0
     // to switch between screens
     @StateObject var viewRouter: CalendarViewRouterHelper
     
