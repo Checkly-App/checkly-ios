@@ -36,12 +36,20 @@ class Session: ObservableObject {
             
             if authError != nil  {
                 let authError = AuthErrorCode(rawValue: authError!._code)
+                
                 switch authError {
+                case .invalidCredential:
+                    error = .invalidCredentials
                 case .wrongPassword:
                     error = .invalidPassword // The user has resetted their password
                 default:
                     error = .invalidCredentials
                 }
+                
+                if credentials.password.isEmpty || credentials.email.isEmpty {
+                    error = .emptyCredentials
+                }
+                
                 toggleError()
                 completion(false)
             } else {

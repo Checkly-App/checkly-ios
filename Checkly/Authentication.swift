@@ -25,6 +25,7 @@ class Authentication: ObservableObject {
         case noFaceIdEnrolled
         case noFingerprintEnrolled
         case invalidPassword
+        case emptyCredentials
         
         var id: String {
             self.localizedDescription
@@ -41,11 +42,13 @@ class Authentication: ObservableObject {
             case .noFingerprintEnrolled:
                 return NSLocalizedString("In order to use Touch ID, make sure to activate it first through the settings.", comment: "")
             case .credentialsNotSaved:
-                return NSLocalizedString("Your credentials have not been saved or have been changed. Do you want to save them after the next successful login?", comment: "")
+                return NSLocalizedString("Your credentials have not been saved or have been changed. We will save them after the next successful login!", comment: "")
             case .resetPassword:
                 return NSLocalizedString("Your email does not match our records. Please try again or contact your organization.", comment: "")
             case .invalidPassword:
                 return NSLocalizedString("Email or password are incorrect. Try again.", comment: "")
+            case .emptyCredentials:
+                return NSLocalizedString("Credentials should not be empty", comment: "")
             }
             
         }

@@ -17,7 +17,7 @@ struct LoginView: View {
     @State private var faceIDPressed: Bool = false
     @AppStorage("isLoggedIn") var isLoggedIn = false
     
-    var body: some View{
+    var body: some View {
         NavigationView {
             ZStack {
                 VStack(spacing: 40.0) {
@@ -36,7 +36,7 @@ struct LoginView: View {
                             }
                         }
                     }
-
+                    
                     // MARK: - Login Button
                     Button{
                         faceIDPressed = false
@@ -89,8 +89,9 @@ struct LoginView: View {
                                     .foregroundColor(Color(UIColor(named: "Navy")!))
                             }
                         }
+                        
+                        Spacer()
                     }
-                    Spacer()
                 }
                 .disabled(session.showProgressView)
                 .padding()
@@ -122,18 +123,22 @@ struct LoginView: View {
                     LoadingView()
                 }
                 
-                if session.showSuccessView {
-                    FeedbackView(imageName: "checkmark", title: "Success", message: "Check your inbox for a reset message")
-                        .onTapGesture { session.toggleSuccess() }
-                }
+                //                if session.showErrorView {
+                //                    if faceIDPressed && (session.error == .invalidPassword || session.error == .credentialsNotSaved){
+                //                        FeedbackView(imageName: "xmark", title: "Authentication Failed", message: "Your credentials have changed. We will update them after the next successful login!")
+                //                            .onTapGesture {
+                //                                session.toggleError()
+                //                                session.storeCredentialsNext = true
+                //                            }
+                //                    }
+                //                    else {
+                //                        FeedbackView(imageName: "xmark", title: "Authentication Failed", message: session.error!.localizedDescription)
+                //                            .onTapGesture { session.toggleError() }
+                //                    }
+                //                }
                 
-                if session.showErrorView {
-                    FeedbackView(imageName: "xmark", title: "Reset Failed", message: session.error!.localizedDescription)
-                        .onTapGesture { session.toggleError() }
-                }
             }
             .background(Color(UIColor(.white)))
-            .navigationBarTitle("Login", displayMode: .inline)
             .navigationBarHidden(true)
         }
         .navigationViewStyle(StackNavigationViewStyle())

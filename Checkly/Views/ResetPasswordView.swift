@@ -19,8 +19,8 @@ struct ResetPasswordView: View {
                     .padding(.vertical, 20.0)
                 EmailInputView(email: $session.credentials.email)
                 Button{
-                    session.resetUserPassword { success in
-                        resetPressed = success
+                    session.resetUserPassword { _ in
+                        resetPressed = true
                     }
                 } label: {
                     Text("Reset")
@@ -41,20 +41,32 @@ struct ResetPasswordView: View {
             .disabled(session.showProgressView)
             .padding()
             .padding()
+            .alert(isPresented: $resetPressed) {
+                if session.showErrorView{
+                    return Alert(title: Text("Authentication Failed"),
+                                 message: Text(session.error!.localizedDescription),
+                                 dismissButton: .default(Text("Ok"), action: {session.toggleError()}))
+                }
+                else {
+                    return Alert(title: Text("Success"),
+                                 message: Text("Check your inbox for a reset message"),
+                                 dismissButton: .default(Text("Ok"), action: {session.toggleSuccess()}))
+                }
+            }
             
             if session.showProgressView {
                 LoadingView()
             }
             
-            if session.showSuccessView {
-                FeedbackView(imageName: "checkmark", title: "Success", message: "Check your inbox for a reset message")
-                    .onTapGesture { session.toggleSuccess() }
-            }
-            
-            if session.showErrorView {
-                FeedbackView(imageName: "xmark", title: "Reset Failed", message: session.error!.localizedDescription)
-                    .onTapGesture { session.toggleError() }
-            }
+            //            if session.showSuccessView {
+            //                FeedbackView(imageName: "checkmark", title: "Success", message: "Check your inbox for a reset message")
+            //                    .onTapGesture { session.toggleSuccess() }
+            //            }
+            //
+            //            if session.showErrorView {
+            //                FeedbackView(imageName: "xmark", title: "Reset Failed", message: session.error!.localizedDescription)
+            //                    .onTapGesture { session.toggleError() }
+            //            }
             
         }
         .background(Color(UIColor(.white)))
