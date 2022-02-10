@@ -16,7 +16,7 @@ import FirebaseStorage
 struct UserProfileView: View {
     
     @Environment(\.dismiss) var dismiss
-    @State private var showingSheet = true
+    @State private var showingSheet = false
 
     @State var user = ""
      var name = ""
@@ -93,14 +93,13 @@ Spacer()
                         
                            
                     Text("Turn off Notification")
-                        .font(.body)
+                        .font(.callout)
                         .fontWeight(.medium)
                        
                     Toggle(isOn: $toggleNotification) {
                         
                     }.tint(.cyan)
-                }
-                .padding(.horizontal, 9)
+                }.padding()
                 HStack{
                   
                                Image("Location-1").foregroundColor(.gray)
@@ -119,7 +118,8 @@ Spacer()
         }.navigationBarTitle("Profile").navigationBarTitleDisplayMode(.inline).background(Color(red: 236, green: 236, blue: 236)
 )
 
-            }.task {
+            }.overlay(showingSheet ? LoadingView(): nil).task {
+                showingSheet = true
             viewModel.fetchData()
         }.task{
             
@@ -139,9 +139,10 @@ Spacer()
                                 
                             }
                             }
-                        
+                showingSheet = false
                         }
-        }
+            
+                    }
         }
     }
 }

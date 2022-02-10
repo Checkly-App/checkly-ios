@@ -6,75 +6,122 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseDatabase
+import FirebaseStorage
 
-struct UIedit1: View {
-    @State private var username: String = ""
-    var body: some View {
-        VStack{
-            VStack(alignment: .leading) {
-                Text("Username")
-                    .font(.callout)
-                    .foregroundColor(Color.gray)
-                    .bold()
-                TextField("Enter username...", text: $username)
-                    .textFieldStyle(RoundedBorderTextFieldStyle()).foregroundColor(.cyan).disabled(true)
-            }.padding()
-            VStack(alignment: .leading) {
-                Text("Username")
-                    .font(.callout)
-                    .foregroundColor(Color.gray)
-                    .bold()
-                TextField("Enter username...", text: $username)
-                    .textFieldStyle(RoundedBorderTextFieldStyle()).foregroundColor(.cyan)
-            }.padding()
-            
-        }
-         
-    }}
 
-struct UIedit: View {
-    var body: some View {
-        VStack{
-            Button {
-                        print("Image tapped!")
-                    } label: {
-                        Image(systemName:"chevron.left").foregroundColor(.cyan)
-                    }.padding(.trailing,350).padding()
-            
-            
-            Text("Edit Profile ").font(.largeTitle).fontWeight(.light).foregroundColor(Color.gray).padding(.top,20).padding(.trailing,200)
-            Button {
-                        print("Image tapped!")
-                    } label: {
-                        Image(systemName:"person.circle.fill")
-                        .imageScale(.large).foregroundColor(Color.cyan).font(.system(size: 100.0)).padding(.top,1)}.foregroundColor(.cyan).shadow(radius: 12)
-            
-            UIedit1()
-            Button(action: {
-                
-            }) {
-                HStack {
-//                                  Image(systemName: "gift")
-                    Text("Update Profile")
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.white)
-                }
-            }
-            .padding(17).padding(.leading,1)
-            .foregroundColor(.white)
-            .background(LinearGradient(gradient: Gradient(colors: [Color(red: 107/255, green: 200/255, blue: 244/255), Color(red: 104/255, green: 215/255, blue: 231/255)]), startPoint: .top, endPoint: .bottom))
-            .cornerRadius(.infinity)
+struct UIedit1: View {//
+        @Environment(\.dismiss) var dismiss
+        @State private var showingSheet = true
 
+        @State var user = ""
+         var name = ""
+        @State private var userimage: UIImage?
+
+
+        @ObservedObject private var viewModel = EmployeeViewModel()
+        @State var toggleNotification = true
+        @State var toggleLocation = true
+
+        var listName: [String] = ["Terms And Conditions", "Privacy Policy", "Edit Profile","Change Password"]
+        var listIcon: [String] = ["Terms", "privacy-1", "Editprofile","clock"]
         
-            
-    
-            Spacer()
-        }
-    }
+        var listDestnation=[AnyView(ChangePasswordView()),AnyView(ChangePasswordView()),AnyView(ChangePasswordView()),AnyView(ChangePasswordView())] //This helped
+
+
+        var body: some View {
+
+            NavigationView{
+             
+
+                VStack{
+                    List{
+
+                    ForEach(0..<listName.count)
+                    { listItem in
+
+                        NavigationLink(destination: listDestnation[listItem]) {
+                            
+                        
+                    HStack{
+                        Image( listIcon[listItem]).foregroundColor(.gray)
+                        Text(listName[listItem])
+                            .font(.headline)
+                            .fontWeight(.medium).foregroundColor(.black)
+                        
+                    }.padding() }
+                        
+                    }
+                    
+                    
+                   
+                    HStack{
+              
+                       
+                            
+                            Image("Notfication")
+                        
+                            
+                               
+                        Text("Turn off Notification")
+                            .font(.footnote)
+                            .fontWeight(.medium)
+                           
+                        Toggle(isOn: $toggleNotification) {
+                            
+                        }.tint(.cyan)
+                    }.padding()
+                    HStack{
+                      
+                                   Image("Location-1").foregroundColor(.gray)
+                               
+                        Text("Disable Location")
+                            .font(.body)
+                            .fontWeight(.medium)
+    Spacer()
+                        Toggle(isOn: $toggleLocation) {
+                            
+                        }.tint(.cyan)
+                   }.padding()
+                    Spacer()
+
+                }
+                }
+                
+                }.task
+    {
+                viewModel.fetchData()
+            }.task{
+                
+                Storage.storage().reference().child("Emp1").getData(maxSize: 15*1024*1024){
+                                (imageDate,err) in
+                                if let err = err {
+                                    print("error\(err.localizedDescription)")
+                                } else {
+                                    if let imageData = imageDate{
+                                        self.userimage = UIImage(data: imageData)
+                                    }
+                                    
+                                
+                                else {
+                                
+                                        print("no error")
+                                    
+                                }
+                                }
+                            
+                            }
+            }
+            }
 }
+  
+    
+
+   
+
 
 struct UIedit_Previews: PreviewProvider {
     static var previews: some View {
-        UIedit()
-    }
+UIedit1()    }
 }
