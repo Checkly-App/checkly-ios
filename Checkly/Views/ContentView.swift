@@ -10,7 +10,6 @@ import FirebaseAuth
 
 struct ContentView: View {
     @StateObject private var session: Session = Session()
-    @EnvironmentObject var authentication: Authentication
     @AppStorage("isLoggedIn") var isLoggedIn = true
 
     var body: some View {
@@ -25,6 +24,10 @@ struct ContentView: View {
                     Text("sign out")
                 }
             }
+        }
+        .onAppear(){
+            NotificationManager.instance.requestAuthorization()
+            NotificationManager.instance.meetingNotificationListener(uid: Auth.auth().currentUser!.uid)
         }
     }
 }

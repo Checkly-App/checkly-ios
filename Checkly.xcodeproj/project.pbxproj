@@ -16,8 +16,10 @@
 		7149E91427A977D7008E3553 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91327A977D6008E3553 /* ContentView.swift */; };
 		7149E91827A985BC008E3553 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91727A985BC008E3553 /* Authentication.swift */; };
 		7149E91A27A987DE008E3553 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91927A987DD008E3553 /* Session.swift */; };
-		71A5EBEF27ADE512009F68B9 /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = 71A5EBEE27ADE512009F68B9 /* SPAlert */; };
-		71A5EBF227ADECA6009F68B9 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 71A5EBF127ADECA6009F68B9 /* AlertToast */; };
+		7152C6A327B6AF7B00E2CEAD /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6A227B6AF7B00E2CEAD /* ViewExtension.swift */; };
+		7152C6A527B6B66300E2CEAD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6A427B6B66300E2CEAD /* NotificationManager.swift */; };
+		7152C6A727B6BDEE00E2CEAD /* MeetingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6A627B6BDED00E2CEAD /* MeetingModel.swift */; };
+		7152C6A927B6BE2500E2CEAD /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6A827B6BE2500E2CEAD /* DateModel.swift */; };
 		71A5EBF427AEA052009F68B9 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A5EBF327AEA052009F68B9 /* FeedbackView.swift */; };
 		71C62C7227AC286900C573E7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71C62C7127AC286900C573E7 /* FirebaseAuth */; };
 		71C62C7427AC286900C573E7 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 71C62C7327AC286900C573E7 /* FirebaseAuthCombine-Community */; };
@@ -45,6 +47,10 @@
 		7149E91327A977D6008E3553 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7149E91727A985BC008E3553 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		7149E91927A987DD008E3553 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		7152C6A227B6AF7B00E2CEAD /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		7152C6A427B6B66300E2CEAD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		7152C6A627B6BDED00E2CEAD /* MeetingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingModel.swift; sourceTree = "<group>"; };
+		7152C6A827B6BE2500E2CEAD /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
 		71A5EBF327AEA052009F68B9 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		71C62C8027AD58F300C573E7 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = SOURCE_ROOT; };
 		71C62C8227AD598900C573E7 /* InputsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsView.swift; sourceTree = "<group>"; };
@@ -58,10 +64,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71A5EBEF27ADE512009F68B9 /* SPAlert in Frameworks */,
 				71C62C7827AC286900C573E7 /* FirebaseDatabaseSwift-Beta in Frameworks */,
 				71D09A5C27A9A02A00DA2D1D /* SwiftKeychainWrapper in Frameworks */,
-				71A5EBF227ADECA6009F68B9 /* AlertToast in Frameworks */,
 				71C62C7427AC286900C573E7 /* FirebaseAuthCombine-Community in Frameworks */,
 				71C62C7627AC286900C573E7 /* FirebaseDatabase in Frameworks */,
 				71C62C7227AC286900C573E7 /* FirebaseAuth in Frameworks */,
@@ -93,6 +97,7 @@
 		7149E8F927A8720A008E3553 /* Checkly */ = {
 			isa = PBXGroup;
 			children = (
+				7152C6A127B6AEE300E2CEAD /* Extensions */,
 				71D09A5F27A9A0CC00DA2D1D /* Services */,
 				7149E91027A96F92008E3553 /* Models */,
 				7149E90F27A96F71008E3553 /* Views */,
@@ -129,8 +134,18 @@
 			children = (
 				7149E91127A96FCA008E3553 /* Credentials.swift */,
 				7149E91927A987DD008E3553 /* Session.swift */,
+				7152C6A627B6BDED00E2CEAD /* MeetingModel.swift */,
+				7152C6A827B6BE2500E2CEAD /* DateModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		7152C6A127B6AEE300E2CEAD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7152C6A227B6AF7B00E2CEAD /* ViewExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		71C62C7F27AD585A00C573E7 /* Components */ = {
@@ -148,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */,
+				7152C6A427B6B66300E2CEAD /* NotificationManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -177,8 +193,6 @@
 				71C62C7927AC286900C573E7 /* FirebaseFirestore */,
 				71C62C7B27AC286900C573E7 /* FirebaseFirestoreCombine-Community */,
 				71C62C7D27AC286900C573E7 /* FirebaseFirestoreSwift-Beta */,
-				71A5EBEE27ADE512009F68B9 /* SPAlert */,
-				71A5EBF127ADECA6009F68B9 /* AlertToast */,
 			);
 			productName = Checkly;
 			productReference = 7149E8F727A8720A008E3553 /* Checkly.app */;
@@ -211,8 +225,6 @@
 			packageReferences = (
 				71D09A5A27A9A02900DA2D1D /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				71C62C7027AC286900C573E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				71A5EBED27ADE511009F68B9 /* XCRemoteSwiftPackageReference "SPAlert" */,
-				71A5EBF027ADECA5009F68B9 /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = 7149E8F827A8720A008E3553 /* Products */;
 			projectDirPath = "";
@@ -245,14 +257,18 @@
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
 				7149E91A27A987DE008E3553 /* Session.swift in Sources */,
 				71C62C8127AD58F400C573E7 /* LoadingView.swift in Sources */,
+				7152C6A527B6B66300E2CEAD /* NotificationManager.swift in Sources */,
 				7149E91227A96FCA008E3553 /* Credentials.swift in Sources */,
 				71A5EBF427AEA052009F68B9 /* FeedbackView.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
 				71C62C8327AD598900C573E7 /* InputsView.swift in Sources */,
+				7152C6A927B6BE2500E2CEAD /* DateModel.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
 				71D09A6427A9DADD00DA2D1D /* ResetPasswordView.swift in Sources */,
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,
 				71C62C8527AD5AC300C573E7 /* TitleView.swift in Sources */,
+				7152C6A327B6AF7B00E2CEAD /* ViewExtension.swift in Sources */,
+				7152C6A727B6BDEE00E2CEAD /* MeetingModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,22 +477,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		71A5EBED27ADE511009F68B9 /* XCRemoteSwiftPackageReference "SPAlert" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ivanvorobei/SPAlert";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-		71A5EBF027ADECA5009F68B9 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elai950/AlertToast.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		71C62C7027AC286900C573E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -496,16 +496,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		71A5EBEE27ADE512009F68B9 /* SPAlert */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 71A5EBED27ADE511009F68B9 /* XCRemoteSwiftPackageReference "SPAlert" */;
-			productName = SPAlert;
-		};
-		71A5EBF127ADECA6009F68B9 /* AlertToast */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 71A5EBF027ADECA5009F68B9 /* XCRemoteSwiftPackageReference "AlertToast" */;
-			productName = AlertToast;
-		};
 		71C62C7127AC286900C573E7 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 71C62C7027AC286900C573E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
