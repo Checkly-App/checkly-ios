@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 import FirebaseDatabase
 import FirebaseStorage
+import FirebaseAuth
 
 struct EditProfileView: View {
     @Environment(\.dismiss) var dismiss
@@ -18,10 +19,18 @@ struct EditProfileView: View {
 
        @State private var showingAlert = false
        @State private var presentAlert = false
-  
+    @State var password = ""
+      @State var passwordAgain = ""
+      @State var error = ""
+      @State var title = ""
+      @State var passeroor = ""
+
+      @State var passAgainerror = ""
 
 
     @State private var isVisible = false
+    @State private var isVisible0 = false
+
     @State private var Ephone = false
     @State private var Ename = false
 
@@ -141,10 +150,10 @@ struct EditProfileView: View {
                                 .foregroundColor(Color(UIColor(named: "LightGray")!))
                             HStack{
                                 if !isVisible {
-                                    SecureField("type your password", text: $username)
+                                    SecureField("type your new password", text: $password)
                                 }
                                 else {
-                                    TextField("type your password", text: $username)
+                                    TextField("type your new password", text: $password)
                                 }
                                 Button {
                                     withAnimation{
@@ -158,52 +167,77 @@ struct EditProfileView: View {
                             }
                             .padding(10)
                             .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
-                                        .stroke(username.isEmpty ?
+                                        .stroke(password.isEmpty ?
                                                 Color(UIColor(named: "LightGray")!) :
                                                     Color(UIColor(named: "Blue")!) , lineWidth: 0.5))
-                            .foregroundColor(username.isEmpty ?
+                            .foregroundColor(password.isEmpty ?
                                              Color(UIColor(named: "LightGray")!) :
                                                 Color(UIColor(named: "Blue")!))
-                            Text("error")
+                            Text(passeroor)
                                 .font(.callout)
                                 .fontWeight(.light)
-                                .foregroundColor(Color("Blue"))
+                                .foregroundColor(Color("Blue")).onChange(of: password) { newValue in
+                                    if password == ""{
+                                     passeroor = ""
+                                 }
+                                  else if (password.count <= 6)  {
+                                       passeroor = "the length must be at least 7"
+                                   }                         else{
+                                       passeroor = ""
+                                   }
+                                  
+                               }
                         }
                         .padding(.horizontal)
                         .animation(.default)
                         VStack(alignment: .leading) {
-                            Text("Password")
+                            Text("Confirme Password")
                                 .font(.system(size: 14, weight: .medium))
                                 .foregroundColor(Color(UIColor(named: "LightGray")!))
                             HStack{
-                                if !isVisible {
-                                    SecureField("type your password", text: $username)
+                                if !isVisible0 {
+                                    SecureField("type the confirme password", text: $passwordAgain)
                                 }
                                 else {
-                                    TextField("type your password", text: $username)
+                                    TextField("type the confirme password", text: $passwordAgain)
                                 }
                                 Button {
                                     withAnimation{
-                                        isVisible.toggle()
+                                        isVisible0.toggle()
                                     }
                                     
                                 } label: {
-                                    Image(systemName: isVisible ? "eye.fill" : "eye.slash.fill")
+                                    Image(systemName: isVisible0 ? "eye.fill" : "eye.slash.fill")
                                 }
                                 
                             }
                             .padding(10)
                             .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
-                                        .stroke(username.isEmpty ?
+                                        .stroke(passwordAgain.isEmpty ?
                                                 Color(UIColor(named: "LightGray")!) :
                                                     Color(UIColor(named: "Blue")!) , lineWidth: 0.5))
-                            .foregroundColor(username.isEmpty ?
+                            .foregroundColor(passwordAgain.isEmpty ?
                                              Color(UIColor(named: "LightGray")!) :
                                                 Color(UIColor(named: "Blue")!))
-                            Text("error")
+                            Text(passAgainerror)
                                 .font(.callout)
                                 .fontWeight(.light)
-                                .foregroundColor(Color("Blue"))
+                                .foregroundColor(Color("Blue")).onChange(of: passwordAgain) { newValue in
+                                    if passwordAgain == ""{
+                                        passAgainerror = ""
+                                    }
+                                    else if (passwordAgain.count <= 6)  {
+                                        passAgainerror = "The length must be at least 7"
+                                    }else{
+                                        passAgainerror = ""
+                                    }
+                                    if passwordAgain != password{
+                                        passAgainerror = "Not match with the password"
+                                    }else{
+                                        passAgainerror = ""
+                                    }
+                                  
+                                }
                         }
                         .padding(.horizontal)
                         .animation(.default)
@@ -373,6 +407,12 @@ struct EditProfileView: View {
                                            }
                     
                     else{
+                        if !password.isEmpty || !passwordAgain.isEmpty{
+                        Auth.auth().currentUser?.updatePassword(to: password) { error in
+                                             // ...
+                                               print(error?.localizedDescription as Any)
+                                           
+                        }}
                         viewModel.UpdateData()
             if let thisimage = self.inputImage{
                 imageUpload(image: thisimage)
@@ -472,6 +512,20 @@ struct EditProfileView: View {
                    return false
                 }
              }
+        if password != passwordAgain{
+                    error0 = "The paswwords and the confirme password must be same"
+                    return false
+                }
+              
+                if (password.count != 0 && password.count <= 6)  {
+                    error0 = "the leangth of password musr be at least 7 "
+
+                    return false
+                }
+                if (passwordAgain.count != 0 && passwordAgain.count <= 6) {
+                    error0 = "the leangth of password musr be at least 7 "
+                    return false
+                }
           
            return test
         }

@@ -17,6 +17,7 @@ struct UserProfileView: View {
     
     @Environment(\.dismiss) var dismiss
     @State private var showingSheet = false
+    private var ref = Database.database().reference()
 
     @State var user = ""
      var name = ""
@@ -122,7 +123,7 @@ Spacer()
                 showingSheet = true
             viewModel.fetchData()
         }.task{
-            
+//            ref.child("Employee").observe(.value) { snapshot in
             Storage.storage().reference().child("Emp1").getData(maxSize: 15*1024*1024){
                             (imageDate,err) in
                             if let err = err {
@@ -142,7 +143,8 @@ Spacer()
                 showingSheet = false
                         }
             
-                    }
+                    
+        }
         }
     }
 }
