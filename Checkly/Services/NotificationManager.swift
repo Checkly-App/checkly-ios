@@ -26,9 +26,8 @@ class NotificationManager {
         }
     }
     
-    // MARK: - trigger a meeting when the user has a meeting
+    // MARK: - listen for added meetings
     func meetingNotificationListener(uid: String) {
-        print("\(uid)")
         let ref = Database.database().reference()
         let meetingsQueue = DispatchQueue.init(label: "meetingsQueue")
         
@@ -50,13 +49,45 @@ class NotificationManager {
                 
                 /// trigger a notification only if the current user was invited. i.e.,  is in the attendees list
                 if attendeesList.contains(uid) {
-                    createMeetingNotification(meeting: meeting)
+                    print("create notification")
+                    createMeetingNotification(meeting: meeting, attendee_id: uid)
                 }
             })
         }
     }
     
-    func createMeetingNotification(meeting: Meeting){
+    // MARK: - create a meeting notification
+    func createMeetingNotification(meeting: Meeting, attendee_id: String){
+        let center = UNUserNotificationCenter.current()
+        let content = UNMutableNotificationContent()
+        content.title = "Meeting Invitation"
+        // TODO: content.title = "from \(fetchHostName() at meeting.dateTime)"
+        content.body = "You are invited to \(meeting.title)"
+        content.sound = .default
+        content.badge = 1
+//        content.categoryIdentifier = "INVITE_ACTION"
+//        content.userInfo = ["attendee_id": attendee_id, "host_id": meeting.host, "meeting_id": meeting.id]
+        
+//        let acceptAction = UNNotificationAction(identifier: "ACCEPT_ACTION",
+//                                                title: "Accept",
+//                                                options: UNNotificationActionOptions.init(rawValue: 0))
+//        let rejectAction = UNNotificationAction(identifier: "REJECT_ACTION",
+//                                                title: "Reject",
+//                                                options: UNNotificationActionOptions.init(rawValue: 0))
+//        let actionCategory = UNNotificationCategory(identifier: "INVITE_ACTION",
+//                                                    actions: [acceptAction, rejectAction],
+//                                                    intentIdentifiers: [],
+//                                                    hiddenPreviewsBodyPlaceholder: "",
+//                                                    options: .customDismissAction)
+        
+        let notification_id = UUID().uuidString
+        let request = UNNotificationRequest(identifier: notification_id, content: content, trigger: nil)
+        center.add(request) { error in
+            if error == nil{
+                print("notification triggered")
+            }
+        }
+        
         
     }
 }

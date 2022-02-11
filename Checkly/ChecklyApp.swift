@@ -11,7 +11,8 @@ import Firebase
 @main
 struct ChecklyApp: App {
     @AppStorage("isLoggedIn") var isLoggedIn = false // To maintain the users sessions
-
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     init() {
         FirebaseApp.configure()
     }

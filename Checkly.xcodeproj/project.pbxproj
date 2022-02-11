@@ -20,6 +20,7 @@
 		7152C6A527B6B66300E2CEAD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6A427B6B66300E2CEAD /* NotificationManager.swift */; };
 		7152C6A727B6BDEE00E2CEAD /* MeetingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6A627B6BDED00E2CEAD /* MeetingModel.swift */; };
 		7152C6A927B6BE2500E2CEAD /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6A827B6BE2500E2CEAD /* DateModel.swift */; };
+		7152C6AB27B6CF5100E2CEAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6AA27B6CF5100E2CEAD /* AppDelegate.swift */; };
 		71A5EBF427AEA052009F68B9 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A5EBF327AEA052009F68B9 /* FeedbackView.swift */; };
 		71C62C7227AC286900C573E7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71C62C7127AC286900C573E7 /* FirebaseAuth */; };
 		71C62C7427AC286900C573E7 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 71C62C7327AC286900C573E7 /* FirebaseAuthCombine-Community */; };
@@ -51,6 +52,7 @@
 		7152C6A427B6B66300E2CEAD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		7152C6A627B6BDED00E2CEAD /* MeetingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingModel.swift; sourceTree = "<group>"; };
 		7152C6A827B6BE2500E2CEAD /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
+		7152C6AA27B6CF5100E2CEAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71A5EBF327AEA052009F68B9 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		71C62C8027AD58F300C573E7 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = SOURCE_ROOT; };
 		71C62C8227AD598900C573E7 /* InputsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsView.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				7149E91027A96F92008E3553 /* Models */,
 				7149E90F27A96F71008E3553 /* Views */,
 				7149E8FA27A8720A008E3553 /* ChecklyApp.swift */,
+				7152C6AA27B6CF5100E2CEAD /* AppDelegate.swift */,
 				7149E91727A985BC008E3553 /* Authentication.swift */,
 				7149E90D27A8747B008E3553 /* GoogleService-Info.plist */,
 				7149E8FE27A87213008E3553 /* Assets.xcassets */,
@@ -268,6 +271,7 @@
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,
 				71C62C8527AD5AC300C573E7 /* TitleView.swift in Sources */,
 				7152C6A327B6AF7B00E2CEAD /* ViewExtension.swift in Sources */,
+				7152C6AB27B6CF5100E2CEAD /* AppDelegate.swift in Sources */,
 				7152C6A727B6BDEE00E2CEAD /* MeetingModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
