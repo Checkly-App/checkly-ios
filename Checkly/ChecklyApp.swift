@@ -20,6 +20,7 @@ struct ChecklyApp: App {
         WindowGroup {
             if isLoggedIn {
                 ContentView() // Home view
+                
             } else {
                 LoginView()
             }

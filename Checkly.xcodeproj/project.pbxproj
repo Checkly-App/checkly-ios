@@ -32,6 +32,11 @@
 		71D09A5C27A9A02A00DA2D1D /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 71D09A5B27A9A02A00DA2D1D /* SwiftKeychainWrapper */; };
 		71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */; };
 		71D09A6427A9DADD00DA2D1D /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */; };
+		F55E524127B6773B00288187 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F55E524027B6773B00288187 /* FirebaseStorage */; };
+		F55E524327B678EE00288187 /* EmployeeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55E524227B678EE00288187 /* EmployeeViewModel.swift */; };
+		F55E524727B679E800288187 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55E524627B679E800288187 /* ImagePicker.swift */; };
+		F55E524927B67A8000288187 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55E524827B67A8000288187 /* UserProfileView.swift */; };
+		F55E524B27B67AC700288187 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55E524A27B67AC700288187 /* EditProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +56,10 @@
 		71C62C8427AD5AC300C573E7 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
 		71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		F55E524227B678EE00288187 /* EmployeeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeViewModel.swift; sourceTree = "<group>"; };
+		F55E524627B679E800288187 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		F55E524827B67A8000288187 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		F55E524A27B67AC700288187 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +75,7 @@
 				71C62C7627AC286900C573E7 /* FirebaseDatabase in Frameworks */,
 				71C62C7227AC286900C573E7 /* FirebaseAuth in Frameworks */,
 				71C62C7E27AC286900C573E7 /* FirebaseFirestoreSwift-Beta in Frameworks */,
+				F55E524127B6773B00288187 /* FirebaseStorage in Frameworks */,
 				71C62C7A27AC286900C573E7 /* FirebaseFirestore in Frameworks */,
 				71C62C7C27AC286900C573E7 /* FirebaseFirestoreCombine-Community in Frameworks */,
 			);
@@ -79,6 +89,7 @@
 			children = (
 				7149E8F927A8720A008E3553 /* Checkly */,
 				7149E8F827A8720A008E3553 /* Products */,
+				F55E523F27B6773B00288187 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -120,6 +131,8 @@
 				7149E91327A977D6008E3553 /* ContentView.swift */,
 				7149E8FC27A8720A008E3553 /* LoginView.swift */,
 				71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */,
+				F55E524827B67A8000288187 /* UserProfileView.swift */,
+				F55E524A27B67AC700288187 /* EditProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -129,6 +142,8 @@
 			children = (
 				7149E91127A96FCA008E3553 /* Credentials.swift */,
 				7149E91927A987DD008E3553 /* Session.swift */,
+				F55E524227B678EE00288187 /* EmployeeViewModel.swift */,
+				F55E524627B679E800288187 /* ImagePicker.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -150,6 +165,13 @@
 				71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		F55E523F27B6773B00288187 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,6 +201,7 @@
 				71C62C7D27AC286900C573E7 /* FirebaseFirestoreSwift-Beta */,
 				71A5EBEE27ADE512009F68B9 /* SPAlert */,
 				71A5EBF127ADECA6009F68B9 /* AlertToast */,
+				F55E524027B6773B00288187 /* FirebaseStorage */,
 			);
 			productName = Checkly;
 			productReference = 7149E8F727A8720A008E3553 /* Checkly.app */;
@@ -243,12 +266,16 @@
 			files = (
 				7149E8FD27A8720A008E3553 /* LoginView.swift in Sources */,
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
+				F55E524B27B67AC700288187 /* EditProfileView.swift in Sources */,
 				7149E91A27A987DE008E3553 /* Session.swift in Sources */,
+				F55E524727B679E800288187 /* ImagePicker.swift in Sources */,
 				71C62C8127AD58F400C573E7 /* LoadingView.swift in Sources */,
 				7149E91227A96FCA008E3553 /* Credentials.swift in Sources */,
+				F55E524327B678EE00288187 /* EmployeeViewModel.swift in Sources */,
 				71A5EBF427AEA052009F68B9 /* FeedbackView.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
 				71C62C8327AD598900C573E7 /* InputsView.swift in Sources */,
+				F55E524927B67A8000288187 /* UserProfileView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
 				71D09A6427A9DADD00DA2D1D /* ResetPasswordView.swift in Sources */,
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,
@@ -545,6 +572,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 71D09A5A27A9A02900DA2D1D /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
 			productName = SwiftKeychainWrapper;
+		};
+		F55E524027B6773B00288187 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71C62C7027AC286900C573E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

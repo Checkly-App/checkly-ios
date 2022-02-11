@@ -24,6 +24,10 @@ struct ContentView: View {
                 } label: {
                     Text("sign out")
                 }
+            
+            NavigationLink( destination: UserProfileView()){
+                Text("Profile")
+            }
             }
         }
     }
