@@ -12,7 +12,7 @@ struct ContentView: View {
     @StateObject private var session: Session = Session()
     @EnvironmentObject var authentication: Authentication
     @AppStorage("isLoggedIn") var isLoggedIn = true
-
+@State var profile = false
     var body: some View {
         NavigationView{
             VStack{
@@ -24,10 +24,19 @@ struct ContentView: View {
                 } label: {
                     Text("sign out")
                 }
+                
+                Button{
+                    profile.toggle()
+                    }
+                 label: {
+                    Text("Profile")
+                }.fullScreenCover(isPresented: $profile) {
+                    UserProfileView()
+                }
             
-            NavigationLink( destination: UserProfileView()){
-                Text("Profile")
-            }
+//            NavigationLink( destination: UserProfileView()){
+//                Text("Profile")
+//            }
             }
         }
     }

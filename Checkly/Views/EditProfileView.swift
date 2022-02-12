@@ -33,7 +33,7 @@ struct EditProfileView: View {
 
     @State private var Ephone = false
     @State private var Ename = false
-
+    @State private var showingSheet = false
     @State  var selected = 1
 
 
@@ -442,7 +442,19 @@ struct EditProfileView: View {
                 }.padding().padding(.leading).padding(.leading).padding(.leading).padding(.leading).padding(.leading).padding(.leading).padding(.leading).padding(.leading).padding(.leading)
 
                 Spacer()
-            }.navigationBarTitle("Edit Profile").navigationBarTitleDisplayMode(.inline).task{
+            }.navigationBarTitle("Edit Profile").navigationBarTitleDisplayMode(.inline).toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                               dismiss()
+                           } label: {
+                               HStack{
+                    Image(systemName: "chevron.left")
+                                   Text("Back").foregroundColor(Color("Blue"))
+                               }
+
+                           }
+                }
+            }.task{
                 
                 Storage.storage().reference().child("Emp1").getData(maxSize: 15*1024*1024){
                                 (imageDate,err) in
@@ -459,14 +471,18 @@ struct EditProfileView: View {
                                         print("no error")
                                     
                                 }
+                                    
                                 }
-                   // showingSheet = false
+                   showingSheet = false
                             }
                 
                         }
         }.task{
+            showingSheet = true
+
             self.viewModel.fetchData()
         }
+       .overlay(showingSheet ? LoadingView(): nil)
         
         
     }

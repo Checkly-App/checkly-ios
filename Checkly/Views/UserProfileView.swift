@@ -27,6 +27,10 @@ struct UserProfileView: View {
     @ObservedObject private var viewModel = EmployeeViewModel()
     @State var toggleNotification = true
     @State var toggleLocation = true
+    @State var ispresent1 = false
+    @State var ispresent2 = false
+    @State var ispresent3 = false
+
 
     var listName: [String] = ["Terms And Conditions", "Privacy Policy", "Edit Profile","Change Password"]
     var listIcon: [String] = ["Terms", "privacy-1", "Editprofile","clock"]
@@ -65,23 +69,56 @@ struct UserProfileView: View {
             }.padding()
             VStack{
                
-                ForEach(0..<listName.count)
-                { listItem in
-                    NavigationLink(destination: listDestnation[listItem]) {
-                        
+        
                     
                 HStack{
-                    Image( listIcon[listItem]).foregroundColor(.gray)
-                    Text(listName[listItem])
+                    Button {
+                       ispresent1 = true
+                    } label: {
+                    Image("Terms").foregroundColor(.gray)
+                    Text("Terms And Conditions")
                         .font(.headline)
                         .fontWeight(.medium).foregroundColor(.black)
 Spacer()
                     
                                Image(systemName: "chevron.right").foregroundColor(.black)
                     
-                                          }.padding() }
+                    }   }.padding().fullScreenCover(isPresented: $ispresent1) {
+                        EditProfileView()
+                    }
+                HStack{
+                    Button {
+                       ispresent2 = true
+                    } label: {
+                    Image("privacy-1").foregroundColor(.gray)
+                    Text("Terms And Conditions")
+                        .font(.headline)
+                        .fontWeight(.medium).foregroundColor(.black)
+Spacer()
                     
-                }
+                               Image(systemName: "chevron.right").foregroundColor(.black)
+                    
+                    }   }.padding().fullScreenCover(isPresented: $ispresent2) {
+                        EditProfileView()
+                    }
+                HStack{
+                    Button {
+                       ispresent3 = true
+                    } label: {
+                    Image("Editprofile").foregroundColor(.gray)
+                    Text("Edit profile")
+                        .font(.headline)
+                        .fontWeight(.medium).foregroundColor(.black)
+Spacer()
+                    
+                               Image(systemName: "chevron.right").foregroundColor(.black)
+                    
+                    }   }.padding().fullScreenCover(isPresented: $ispresent3) {
+                        EditProfileView()
+                    }
+                
+                    
+                
                 Divider().padding()
                
                 HStack{
@@ -116,7 +153,19 @@ Spacer()
                 Spacer()
 
             }.background(.white).cornerRadius(20).shadow(radius: 9).padding()
-        }.navigationBarTitle("Profile").navigationBarTitleDisplayMode(.inline).background(Color(red: 236, green: 236, blue: 236)
+        }.navigationBarTitle("Profile").toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                           dismiss()
+                       } label: {
+                           HStack{
+                Image(systemName: "chevron.left")
+                               Text("Back").foregroundColor(Color("Blue"))
+                           }
+
+                       }
+            }
+        }.navigationBarTitleDisplayMode(.inline).background(Color(red: 236, green: 236, blue: 236)
 )
 
             }.overlay(showingSheet ? LoadingView(): nil).task {
