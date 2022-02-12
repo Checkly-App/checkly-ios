@@ -43,11 +43,14 @@ struct UserProfileView: View {
             ScrollView{
         VStack{
             VStack(spacing:8){
-                if let image = self.userimage{
+             
+               if let image = self.userimage{
                     Image(uiImage: image).resizable().scaledToFill().frame(width: 137, height: 137)            .clipShape(Circle())
 
                     
-                }else{
+                }
+                
+                else{
                 Image("ProfileImage").resizable()
                         .frame(width: 137.0, height: 137.0)
                     
@@ -171,8 +174,38 @@ Spacer()
             }.overlay(showingSheet ? LoadingView(): nil).task {
                 showingSheet = true
             viewModel.fetchData()
-        }.task{
+            }.task {
+                if viewModel.Ischange {
+                    // EMP1 which mean the id of the user
+                    //15*1024 ... the size of the pic
+                    // usr image is state
+                    //    @State private var userimage: UIImage?
+
+                Storage.storage().reference().child("Emp1").getData(maxSize: 15*1024*1024){
+                                (imageDate,err) in
+                                if let err = err {
+                                    print("error\(err.localizedDescription)")
+                                } else {
+                                    if let imageData = imageDate{
+                                        self.userimage = UIImage(data: imageData)
+                                    }
+                                    
+                                
+                                else {
+                                
+                                        print("no error")
+                                    
+                                }
+                                }
+                    showingSheet = false
+                    viewModel.Ischange.toggle()
+                            }
+                }
+                
+                
+            }.task{
 //            ref.child("Employee").observe(.value) { snapshot in
+          
             Storage.storage().reference().child("Emp1").getData(maxSize: 15*1024*1024){
                             (imageDate,err) in
                             if let err = err {
@@ -192,7 +225,32 @@ Spacer()
                 showingSheet = false
                         }
             
+            
                     
+            }.task {
+
+                          ref.child("Employee").observe(.value) { snapshot in
+                              showingSheet = true
+                Storage.storage().reference().child("Emp1").getData(maxSize: 15*1024*1024){
+                                (imageDate,err) in
+                                if let err = err {
+                                    print("error\(err.localizedDescription)")
+                                } else {
+                                    if let imageData = imageDate{
+                                        self.userimage = UIImage(data: imageData)
+                                    }
+                                    
+                                
+                                else {
+                                
+                                        print("no error")
+                                    
+                                }
+                                }
+                    showingSheet = false
+                            }
+                
+            }
         }
         }
     }

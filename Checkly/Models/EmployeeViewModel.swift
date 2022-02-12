@@ -12,7 +12,7 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 import FirebaseStorage
-
+import SwiftUI
 
 class EmployeeViewModel: ObservableObject {
   //  @Published var Employeeinfolist = [Employeeinfo]()
@@ -25,6 +25,9 @@ class EmployeeViewModel: ObservableObject {
     @Published var gender = ""
     @Published var gender1 = false
     @Published var gender2 = false
+    @Published var Ischange = false
+    @Published  var userimage: UIImage?
+
 
 
     @Published var phonemum = ""

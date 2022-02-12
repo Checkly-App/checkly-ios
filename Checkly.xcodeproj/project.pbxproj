@@ -37,6 +37,7 @@
 		F55E524727B679E800288187 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55E524627B679E800288187 /* ImagePicker.swift */; };
 		F55E524927B67A8000288187 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55E524827B67A8000288187 /* UserProfileView.swift */; };
 		F55E524B27B67AC700288187 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55E524A27B67AC700288187 /* EditProfileView.swift */; };
+		F5715FAC27B82B5F001FADE6 /* GenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5715FAB27B82B5F001FADE6 /* GenderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		F55E524627B679E800288187 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F55E524827B67A8000288187 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		F55E524A27B67AC700288187 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		F5715FAB27B82B5F001FADE6 /* GenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */,
 				F55E524827B67A8000288187 /* UserProfileView.swift */,
 				F55E524A27B67AC700288187 /* EditProfileView.swift */,
+				F5715FAB27B82B5F001FADE6 /* GenderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5715FAC27B82B5F001FADE6 /* GenderView.swift in Sources */,
 				7149E8FD27A8720A008E3553 /* LoginView.swift in Sources */,
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
 				F55E524B27B67AC700288187 /* EditProfileView.swift in Sources */,

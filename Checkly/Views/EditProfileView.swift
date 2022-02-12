@@ -26,6 +26,7 @@ struct EditProfileView: View {
       @State var passeroor = ""
 
       @State var passAgainerror = ""
+   @State   var ref = Database.database().reference()
 
 
     @State private var isVisible = false
@@ -316,7 +317,7 @@ struct EditProfileView: View {
                                      .disabled(true)
                                          .keyboardType(.emailAddress)
                                          .autocapitalization(.none)
-                                         .padding(10).background(.gray.opacity(0.25))
+                                         .padding(10).background(.gray.opacity(0.25)).foregroundColor(.gray)
                                          
 
                          }
@@ -329,18 +330,36 @@ struct EditProfileView: View {
                              HStack{
                                  HStack{
                                  Circle()
-                                         .fill(viewModel.gender1 ? Color(UIColor(named: "LightGray")!).opacity(0.90):Color(UIColor(named: "LightGray")!).opacity(0.25))
-            .frame(width: 18, height: 18)
-              Text("Male")
-                                 }
-                                 HStack{
+                                         .fill(viewModel.gender1 ?  Color.gray.opacity(1) : Color.gray.opacity(0.25) )
+                                     .frame(width:20, height: 20)
+                                 Text("Male ")
+                             }.overlay(RoundedRectangle(cornerRadius: 5)
+                                         .fill(Color.gray.opacity(0.3))
+                                         .frame(width: 130, height: 55).foregroundColor(.black).border(.black, width: 0.5).cornerRadius(5)).padding()
+                             HStack{
                                  Circle()
-                                     .fill(viewModel.gender2 ? Color(UIColor(named: "LightGray")!).opacity(0.80):Color(UIColor(named: "LightGray")!).opacity(0.25))
-                                     .frame(width: 18, height: 18)
+                                     .fill(viewModel.gender2 ?  Color.gray.opacity(1) : Color.gray.opacity(0.25) )
+                                     .frame(width:20, height: 20)
                                  Text("Female")
-                                 }
-                                 
-                             }
+                             }.overlay(RoundedRectangle(cornerRadius: 5)
+                                         .fill(Color.gray.opacity(0.3))
+                                         .frame(width: 130, height: 55).border(.black, width: 0.5).cornerRadius(5)).padding(.leading).padding(.leading).padding(.leading)
+                             }.padding(.leading)
+//                             HStack{
+//                                 HStack{
+//                                 Circle()
+//                                         .fill(viewModel.gender1 ? Color(UIColor(named: "LightGray")!).opacity(0.90):Color(UIColor(named: "LightGray")!).opacity(0.25))
+//            .frame(width: 18, height: 18)
+//              Text("Male")
+//                                 }
+//                                 HStack{
+//                                 Circle()
+//                                     .fill(viewModel.gender2 ? Color(UIColor(named: "LightGray")!).opacity(0.80):Color(UIColor(named: "LightGray")!).opacity(0.25))
+//                                     .frame(width: 18, height: 18)
+//                                 Text("Female")
+//                                 }
+//
+//                             }
                          }
                          .padding(.leading)
 
@@ -416,8 +435,11 @@ struct EditProfileView: View {
                         viewModel.UpdateData()
             if let thisimage = self.inputImage{
                 imageUpload(image: thisimage)
-                                                                     //  Upladimg(image:thisimage)
-                                                                   }else{
+                let randomDouble = Double.random(in: 1...100)
+
+        self.ref.child("Employee").child("111111111").updateChildValues(["ChangeImage": randomDouble ])
+                                     //  Upladimg(image:thisimage)
+                viewModel.Ischange = true                            }else{
                                                                        print("Can not")
                                                                    }
                                                                    dismiss()
@@ -451,9 +473,37 @@ struct EditProfileView: View {
                     Image(systemName: "chevron.left")
                                    Text("Back").foregroundColor(Color("Blue"))
                                }
-
                            }
                 }
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        Button("Update") {
+                            if !Validation(){
+                        presentAlert = true
+                                                     
+                                                   }
+                            
+                            else{
+                                if !password.isEmpty || !passwordAgain.isEmpty{
+                                Auth.auth().currentUser?.updatePassword(to: password) { error in
+                                                     // ...
+                                                       print(error?.localizedDescription as Any)
+                                                   
+                                }}
+                                viewModel.UpdateData()
+                    if let thisimage = self.inputImage{
+                        imageUpload(image: thisimage)
+                        let randomDouble = Double.random(in: 1...100)
+
+                self.ref.child("Employee").child("111111111").updateChildValues(["ChangeImage": randomDouble ])
+                                             //  Upladimg(image:thisimage)
+                        viewModel.Ischange = true                            }else{
+                                                                               print("Can not")
+                                                                           }
+                                                                           dismiss()
+                                                   
+                                                       }                        }
+                        
+                    }
             }.task{
                 
                 Storage.storage().reference().child("Emp1").getData(maxSize: 15*1024*1024){
