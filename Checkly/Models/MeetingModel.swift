@@ -14,9 +14,8 @@ struct Meeting: Identifiable {
     var title: String
     var dateTime: Date
     var type: String
-    // location is a newly added attr
     var location: String
-    var attendees: String
+    var attendees: [String: String]
     var agenda: String
     
 }

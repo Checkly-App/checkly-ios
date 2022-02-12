@@ -35,8 +35,7 @@ class NotificationManager {
             ref.child("Meetings").observe(.childAdded, with: { [self] snapshot in
                 let meetingNode = snapshot.value as! [String: Any]
                 let agenda = meetingNode["agenda"] as! String
-                let attendees = meetingNode["attendees"] as! String
-//                let attendees = meetingNode["attendees"] as! [DataSnapshot]
+                let attendees = meetingNode["attendees"] as! [String: String]
                 let datetime = meetingNode["datetime"] as! Int
                 let host = meetingNode["host"] as! String
                 let location = meetingNode["location"] as! String
@@ -44,19 +43,15 @@ class NotificationManager {
                 let title = meetingNode["title"] as! String
                 let type = meetingNode["type"] as! String
                 
-                
                 let meeting = Meeting(id: meeting_id, host: host, title: title, dateTime: .init(timeIntervalSince1970: TimeInterval(datetime)), type: type, location: location, attendees: attendees, agenda: agenda)
-                let attendeesList = attendees.components(separatedBy: ", ")
-                
-//                for atendant in attendees {
-                
-//                    if ...
-//                }
                 
                 /// trigger a notification only if the current user was invited. i.e.,  is in the attendees list
-                if attendeesList.contains(uid) {
-                    print("create notification")
-                    createMeetingNotification(meeting: meeting, attendee_id: uid)
+                for attendee in attendees {
+                    if uid == attendee.key && attendee.value == "Sent"{
+                        print("create notification")
+                        ref.child("Meetings").child("meeting_\(meeting.id)").child("attendees").updateChildValues(["\(uid)":"Notified"])
+                        createMeetingNotification(meeting: meeting, attendee_id: uid)
+                    }
                 }
             })
         }
