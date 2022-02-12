@@ -17,6 +17,7 @@ struct CalendarGrid: View {
     @StateObject var viewRouter: CalendarViewRouterHelper
     
     var body: some View {
+        NavigationView{
         ScrollView(.vertical, showsIndicators: false){
             VStack(spacing: 5) {
                 HStack(spacing: 25){
@@ -135,7 +136,10 @@ struct CalendarGrid: View {
                         return isSameDay(date1: meeting.dateTime, date2: currentDate)
                     }) {
                         ForEach(self.meetingViewModel.filteredMeetingsArray(date:currentDate)!){ meeting in
-                                MeetingCardView(meeting: meeting) }
+                            NavigationLink(destination: MeetingDetails(meeting: meeting)){
+                                MeetingCardView(meeting: meeting)
+                            }.buttonStyle(PlainButtonStyle())
+                        }
                     } else {
                         Text("No Tasks Found!")
                             .font(.system(size: 16))
@@ -153,6 +157,9 @@ struct CalendarGrid: View {
                 currentDate = getCurrentMonth()
             }
         }
+        .navigationBarHidden(true)
+        .navigationBarTitle(Text("Calendar"))
+      }
     }// body
     
     @ViewBuilder

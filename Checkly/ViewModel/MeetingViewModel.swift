@@ -49,11 +49,12 @@ class MeetingViewModel: ObservableObject{
         
                 print(mt)
                 // MARK: need to be modified later on to get all the meetings that the user have created, or have been invited to...
-                if(mt.host == "8UoUAkIZvnP5KSWHydWliuZmOKt2"){
+                // 8UoUAkIZvnP5KSWHydWliuZmOKt2
+                if(mt.host == "1111"){
                     self.meetings.append(mt)
                 }
-                for attendant in attendees {
-                    if "8UoUAkIZvnP5KSWHydWliuZmOKt2" == attendant.key {
+                for attendant in mt.attendees {
+                    if "1111" == attendant.key {
                         if "Accepted" == attendant.value{
                             self.meetings.append(mt)
                         }
