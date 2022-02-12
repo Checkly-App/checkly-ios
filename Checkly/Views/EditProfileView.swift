@@ -16,6 +16,7 @@ struct EditProfileView: View {
        @State private var showingImagePicker = false
        @State private var inputImage: UIImage?
        @State private var userimage: UIImage?
+    let userid = Auth.auth().currentUser!.uid
 
        @State private var showingAlert = false
        @State private var presentAlert = false
@@ -491,16 +492,27 @@ struct EditProfileView: View {
                                 }}
                                 viewModel.UpdateData()
                     if let thisimage = self.inputImage{
+                        
                         imageUpload(image: thisimage)
-                        let randomDouble = Double.random(in: 1...100)
-
-                self.ref.child("Employee").child("111111111").updateChildValues(["ChangeImage": randomDouble ])
-                                             //  Upladimg(image:thisimage)
-                        viewModel.Ischange = true                            }else{
+                       showingSheet = true
+                                     
+                        
+                    }else{
+                        
                                                                                print("Can not")
                                                                            }
-                                                                           dismiss()
-                                                   
+                                if showingSheet{
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                                let randomDouble = Double.random(in: 1...100)
+
+             self.ref.child("Employee").child("111111111").updateChildValues(["ChangeImage": randomDouble ])
+                                    showingSheet = false
+                                    dismiss()
+                                }
+                                }
+                                else {
+                                    dismiss()}
+
                                                        }                        }
                         
                     }
@@ -528,6 +540,9 @@ struct EditProfileView: View {
                 
                         }
         }.task{
+            print("edit")
+
+            print(userid)
             showingSheet = true
 
             self.viewModel.fetchData()

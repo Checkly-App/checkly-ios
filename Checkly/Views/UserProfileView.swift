@@ -9,12 +9,13 @@ import SwiftUI
 import Firebase
 import FirebaseDatabase
 import FirebaseStorage
-
+import FirebaseAuth
 
 
 
 struct UserProfileView: View {
-    
+    let userid = Auth.auth().currentUser!.uid
+
     @Environment(\.dismiss) var dismiss
     @State private var showingSheet = false
     private var ref = Database.database().reference()
@@ -94,7 +95,7 @@ Spacer()
                        ispresent2 = true
                     } label: {
                     Image("privacy-1").foregroundColor(.gray)
-                    Text("Terms And Conditions")
+                    Text("Privacy Policy")
                         .font(.headline)
                         .fontWeight(.medium).foregroundColor(.black)
 Spacer()
@@ -172,37 +173,11 @@ Spacer()
 )
 
             }.overlay(showingSheet ? LoadingView(): nil).task {
+                print("profile")
+
+                print(userid)
                 showingSheet = true
             viewModel.fetchData()
-            }.task {
-                if viewModel.Ischange {
-                    // EMP1 which mean the id of the user
-                    //15*1024 ... the size of the pic
-                    // usr image is state
-                    //    @State private var userimage: UIImage?
-
-                Storage.storage().reference().child("Emp1").getData(maxSize: 15*1024*1024){
-                                (imageDate,err) in
-                                if let err = err {
-                                    print("error\(err.localizedDescription)")
-                                } else {
-                                    if let imageData = imageDate{
-                                        self.userimage = UIImage(data: imageData)
-                                    }
-                                    
-                                
-                                else {
-                                
-                                        print("no error")
-                                    
-                                }
-                                }
-                    showingSheet = false
-                    viewModel.Ischange.toggle()
-                            }
-                }
-                
-                
             }.task{
 //            ref.child("Employee").observe(.value) { snapshot in
           
@@ -251,7 +226,26 @@ Spacer()
                             }
                 
             }
-        }
+            }.refreshable {
+                Storage.storage().reference().child("Emp1").getData(maxSize: 15*1024*1024){
+                                (imageDate,err) in
+                                if let err = err {
+                                    print("error\(err.localizedDescription)")
+                                } else {
+                                    if let imageData = imageDate{
+                                        self.userimage = UIImage(data: imageData)
+                                    }
+                                    
+                                
+                                else {
+                                
+                                        print("no error")
+                                    
+                                }
+                                }
+                    showingSheet = false
+                            }
+            }
         }
     }
 }

@@ -13,10 +13,12 @@ import Firebase
 import FirebaseDatabase
 import FirebaseStorage
 import SwiftUI
+import FirebaseAuth
 
 class EmployeeViewModel: ObservableObject {
   //  @Published var Employeeinfolist = [Employeeinfo]()
-    
+    let userid = Auth.auth().currentUser!.uid
+
     @Published var Employeeinfolist1 = ""
     @Published var email = ""
     @Published var position = ""
@@ -59,7 +61,9 @@ class EmployeeViewModel: ObservableObject {
         }
     
     func fetchData() {
-       
+        print("other")
+
+       print(userid)
            // let db = Firestore.firestore()
    // let ref = Database.database().reference()
             print("in1)")
