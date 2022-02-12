@@ -36,7 +36,7 @@ class MeetingViewModel: ObservableObject{
             ref.child("Meetings").observe(.childAdded) { snapshot in
                 let meeting = snapshot.value as! [String: Any]
                 let agenda = meeting["agenda"] as! String
-                let attendees = meeting["attendees"] as! String
+                let attendees = meeting["attendees"] as! [String:String]
                 let datetime = meeting["datetime"] as! Int
                 let host = meeting["host"] as! String
                 let location = meeting["location"] as! String
@@ -49,8 +49,15 @@ class MeetingViewModel: ObservableObject{
         
                 print(mt)
                 // MARK: need to be modified later on to get all the meetings that the user have created, or have been invited to...
-                if(mt.host == "1111"){
+                if(mt.host == "8UoUAkIZvnP5KSWHydWliuZmOKt2"){
                     self.meetings.append(mt)
+                }
+                for attendant in attendees {
+                    if "8UoUAkIZvnP5KSWHydWliuZmOKt2" == attendant.key {
+                        if "Accepted" == attendant.value{
+                            self.meetings.append(mt)
+                        }
+                    }
                 }
                 
                 let calendar = NSCalendar.current
@@ -153,60 +160,3 @@ class MeetingViewModel: ObservableObject{
     
 }
 
-// FIRESTORE
-//    func getMeetings(){
-//
-//
-//        // FIRESTORE
-//        let db = Firestore.firestore()
-//        db.collection("meetings").getDocuments { snapshot, error in
-//
-//            // check for errors
-//            if error == nil {
-//                // no errors
-//                if let snapshot = snapshot {
-//                    // get all docs (should check whether the current user match the host id or available in the attendees array)
-//
-//                    DispatchQueue.main.async {
-//                        self.meetings = snapshot.documents.map { d in
-//                            // create meeting object for each doc returned
-//                            return Meeting(id: d.documentID,
-//                                           meeting_id: d["meeting_id"] as? String ?? "",
-//                                           host: d["host"] as? String ?? "",
-//                                           title: d["title"] as? String ?? "",
-//                                           dateTime: (d["dateTime"] as? Timestamp)?.dateValue() ?? Date(),
-//                                           type: d["type"] as? String ?? "",
-//                                           location: d["location"] as? String ?? "",
-//                                           attendees: d["attendees"] as? String ?? "",
-//                                           agenda: d["agenda"] as? String ?? "")
-//
-//                        }
-//                        print("inside fetching")
-//                        // filter meeting
-//                        let calendar = Calendar.current
-//
-//                        let filtered = self.meetings.filter {
-//                            return calendar.isDate($0.dateTime, inSameDayAs: self.currentDate)
-//                        }
-//
-//                            .sorted { meeting1, meeting2 in
-////                                return meeting1.dateTime > meeting2.dateTime
-//                                return meeting1.dateTime < meeting2.dateTime
-//                            }
-//
-//                        DispatchQueue.main.async {
-//                            withAnimation {
-//                                self.filteredMeetings = filtered
-//                             }
-//                            }
-//                    }
-//                }
-//
-//            } else {
-//                // handle errors
-//                print("error")
-//            }
-//
-//        }
-//
-//    }
