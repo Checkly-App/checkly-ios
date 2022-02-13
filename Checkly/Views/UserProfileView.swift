@@ -59,7 +59,7 @@ struct UserProfileView: View {
                 Text(viewModel.Employeeinfolist1)
                     .font(.title)
                     .fontWeight(.semibold)
-                Text(viewModel.department)
+                Text("\(viewModel.department) Department")
                     .font(.subheadline)
                     .fontWeight(.semibold)
                
@@ -181,7 +181,7 @@ Spacer()
             }.task{
 //            ref.child("Employee").observe(.value) { snapshot in
           
-            Storage.storage().reference().child("Emp1").getData(maxSize: 15*1024*1024){
+            Storage.storage().reference().child(userid).getData(maxSize: 15*1024*1024){
                             (imageDate,err) in
                             if let err = err {
                                 print("error\(err.localizedDescription)")
@@ -206,7 +206,7 @@ Spacer()
 
                           ref.child("Employee").observe(.value) { snapshot in
                               showingSheet = true
-                Storage.storage().reference().child("Emp1").getData(maxSize: 15*1024*1024){
+                Storage.storage().reference().child(userid).getData(maxSize: 15*1024*1024){
                                 (imageDate,err) in
                                 if let err = err {
                                     print("error\(err.localizedDescription)")
@@ -227,7 +227,7 @@ Spacer()
                 
             }
             }.refreshable {
-                Storage.storage().reference().child("Emp1").getData(maxSize: 15*1024*1024){
+                Storage.storage().reference().child(userid).getData(maxSize: 15*1024*1024){
                                 (imageDate,err) in
                                 if let err = err {
                                     print("error\(err.localizedDescription)")

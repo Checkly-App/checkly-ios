@@ -315,12 +315,29 @@ struct EditProfileView: View {
                                  .font(.system(size: 14, weight: .medium))
                                  .foregroundColor(Color(UIColor(named: "LightGray")!))
                              TextField("type your email", text: $viewModel.birth)
-                                     .disabled(true)
-                                         .keyboardType(.emailAddress)
-                                         .autocapitalization(.none)
-                                         .padding(10).background(.gray.opacity(0.25)).foregroundColor(.gray)
+                                 .disabled(true)
+                                     .keyboardType(.emailAddress)
+                                     .autocapitalization(.none)
+                                     .padding(10).background(.gray.opacity(0.25))
+                                     .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
+                                                 .stroke(.gray, lineWidth: 0.5))
+                                     .foregroundColor(.gray)
                                          
 
+                         }
+                         .animation(.default).padding(.horizontal)
+                         VStack(alignment: .leading) {
+                             Text("Address")
+                                 .font(.system(size: 14, weight: .medium))
+                                 .foregroundColor(Color(UIColor(named: "LightGray")!))
+                             TextField("type your ID", text: $viewModel.address)
+                                 .disabled(true)
+                                     .keyboardType(.emailAddress)
+                                     .autocapitalization(.none)
+                                     .padding(10).background(.gray.opacity(0.25))
+                                     .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
+                                                 .stroke(.gray, lineWidth: 0.5))
+                                     .foregroundColor(.gray)
                          }
                          .animation(.default).padding(.horizontal)
                          
@@ -438,7 +455,7 @@ struct EditProfileView: View {
                 imageUpload(image: thisimage)
                 let randomDouble = Double.random(in: 1...100)
 
-        self.ref.child("Employee").child("111111111").updateChildValues(["ChangeImage": randomDouble ])
+        self.ref.child("Employee").child(userid).updateChildValues(["ChangeImage": randomDouble ])
                                      //  Upladimg(image:thisimage)
                 viewModel.Ischange = true                            }else{
                                                                        print("Can not")
@@ -505,7 +522,7 @@ struct EditProfileView: View {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 3){
                                 let randomDouble = Double.random(in: 1...100)
 
-             self.ref.child("Employee").child("111111111").updateChildValues(["ChangeImage": randomDouble ])
+             self.ref.child("Employee").child(userid).updateChildValues(["ChangeImage": randomDouble ])
                                     showingSheet = false
                                     dismiss()
                                 }
@@ -518,7 +535,7 @@ struct EditProfileView: View {
                     }
             }.task{
                 
-                Storage.storage().reference().child("Emp1").getData(maxSize: 15*1024*1024){
+                Storage.storage().reference().child(userid).getData(maxSize: 15*1024*1024){
                                 (imageDate,err) in
                                 if let err = err {
                                     print("error\(err.localizedDescription)")
@@ -554,7 +571,7 @@ struct EditProfileView: View {
     func imageUpload(image:UIImage){
                if let imageDate = image.jpegData(compressionQuality: 1){
                    let storage = Storage.storage()
-                   storage.reference().child("Emp1").putData(imageDate, metadata: nil){
+                   storage.reference().child(userid).putData(imageDate, metadata: nil){
                        (_,err) in
                        if let err = err {
                            print("error\(err.localizedDescription)")

@@ -36,7 +36,7 @@ class EmployeeViewModel: ObservableObject {
     @Published var nationalID = ""
     @Published var employeeID = ""
     @Published var birth = ""
-    @Published var userId = "111111111"
+    //@Published var userId = "111111111"
 
 
 
@@ -54,7 +54,7 @@ class EmployeeViewModel: ObservableObject {
     
     func UpdateData() {
        
-        self.ref.child("Employee").child("111111111").updateChildValues(["Name": self.Employeeinfolist1, "phoneNumber": self.phonemum ])
+        self.ref.child("Employee").child(userid).updateChildValues(["Name": self.Employeeinfolist1, "phoneNumber": self.phonemum ])
                                                                   
        
 
@@ -94,7 +94,7 @@ class EmployeeViewModel: ObservableObject {
                   print("enter1")
 
                     let obj = contact as! DataSnapshot
-                    if obj.key == "111111111"{
+                    if obj.key == self.userid {
 
                     dep = obj.childSnapshot(forPath: "Department").value as? String
                     email = obj.childSnapshot(forPath: "Email").value as? String
