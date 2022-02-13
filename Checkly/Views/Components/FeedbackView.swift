@@ -11,6 +11,7 @@ struct FeedbackView: View {
     var imageName: String
     var title: String
     var message: String
+    
     var body: some View {
         ZStack {
             VisualEffect(effect: UIBlurEffect(style: .light))

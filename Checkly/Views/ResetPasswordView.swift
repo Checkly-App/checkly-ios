@@ -7,13 +7,14 @@
 
 
 import SwiftUI
+import PopupView
 
 struct ResetPasswordView: View {
     @StateObject private var session: Session = Session()
     @State private var resetPressed: Bool = false
     
     var body: some View {
-        ZStack{
+        ZStack {
             VStack(spacing: 40.0){
                 TitleView(title: "Reset ", description: "your password by entering your organization's associated email address")
                     .padding(.vertical, 20.0)
@@ -41,33 +42,20 @@ struct ResetPasswordView: View {
             .disabled(session.showProgressView)
             .padding()
             .padding()
-            .alert(isPresented: $resetPressed) {
-                if session.showErrorView{
-                    return Alert(title: Text("Authentication Failed"),
-                                 message: Text(session.error!.localizedDescription),
-                                 dismissButton: .default(Text("Ok"), action: {session.toggleError()}))
-                }
-                else {
-                    return Alert(title: Text("Success"),
-                                 message: Text("Check your inbox for a reset message"),
-                                 dismissButton: .default(Text("Ok"), action: {session.toggleSuccess()}))
-                }
-            }
             
             if session.showProgressView {
                 LoadingView()
             }
-            
-            //            if session.showSuccessView {
-            //                FeedbackView(imageName: "checkmark", title: "Success", message: "Check your inbox for a reset message")
-            //                    .onTapGesture { session.toggleSuccess() }
-            //            }
-            //
-            //            if session.showErrorView {
-            //                FeedbackView(imageName: "xmark", title: "Reset Failed", message: session.error!.localizedDescription)
-            //                    .onTapGesture { session.toggleError() }
-            //            }
-            
+        }
+        .popup(isPresented: $session.showErrorView, closeOnTapOutside: true) {
+            FeedbackView(imageName: "xmark",
+                         title: "Reset Failed",
+                         message: session.error!.localizedDescription)
+        }
+        .popup(isPresented: $session.showSuccessView, closeOnTapOutside: true) {
+            FeedbackView(imageName: "checkmark",
+                         title: "Success",
+                         message: "Check your inbox for a reset message")
         }
         .background(Color(UIColor(.white)))
         .navigationBarTitle("", displayMode: .inline)
