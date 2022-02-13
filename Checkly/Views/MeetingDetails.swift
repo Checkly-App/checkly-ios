@@ -12,7 +12,37 @@ struct MeetingDetails: View {
     var meeting: Meeting
     
     var body: some View {
-        Text(meeting.title)
+        ZStack{
+            Image("meeting-Details-Background-v2")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+            VStack(){
+                Text(meeting.title)
+                    .font(.system(size: 32, weight: .bold))
+                    .fontWeight(.semibold)
+                    .multilineTextAlignment(.leading)
+                    .hLeading()
+                    .padding([.leading], 10)
+                    .padding([.bottom], 27)
+                ZStack {
+                    RoundedRectangle(cornerRadius: 25)
+                        .fill(Color(.white))
+                        .frame(height: 630)
+                    VStack {
+                        //host name
+                        Text(meeting.type)
+                        Text(meeting.dateTime.formatted(date: .omitted, time: .shortened))
+                        Text(meeting.dateTime.formatted(date: .abbreviated, time: .omitted))
+                        Text(meeting.location)
+                        Text(meeting.agenda)
+                        // attendees names
+                    }
+                }
+            }
+            .frame(maxHeight: .infinity, alignment: .bottom)
+            .edgesIgnoringSafeArea(.bottom)
+            
+        }
     }
 }
 

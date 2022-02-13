@@ -16,6 +16,8 @@ struct CalendarGrid: View {
     // to switch between screens
     @StateObject var viewRouter: CalendarViewRouterHelper
     
+    var todaysDate = Date()
+    
     var body: some View {
         NavigationView{
         ScrollView(.vertical, showsIndicators: false){
@@ -180,11 +182,20 @@ struct CalendarGrid: View {
                         .fill(Color("BlueA"))
                         .frame(width: 8, height: 8)
                 }
-                else{
-                    Text("\(value.day)")
+                else {
+                     if isSameDay(date1: todaysDate, date2: value.date){
+                        Text("\(value.day)")
+                            .font(.title3.bold())
+                            .foregroundColor(Color("BlueA"))
+                            .frame(maxWidth: .infinity)
+                        Spacer()
+                    }
+                    else {
+                         Text("\(value.day)")
                         .font(.title3.bold())
                         .frame(maxWidth: .infinity)
                     Spacer()
+                    }
                 }
             }
         }
