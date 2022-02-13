@@ -204,7 +204,7 @@ Spacer()
                     
             }.task {
 
-                          ref.child("Employee").observe(.value) { snapshot in
+                ref.child("Employee").child(userid).child("ChangeImage").observe(.value) { snapshot in
                               showingSheet = true
                 Storage.storage().reference().child(userid).getData(maxSize: 15*1024*1024){
                                 (imageDate,err) in
@@ -226,25 +226,6 @@ Spacer()
                             }
                 
             }
-            }.refreshable {
-                Storage.storage().reference().child(userid).getData(maxSize: 15*1024*1024){
-                                (imageDate,err) in
-                                if let err = err {
-                                    print("error\(err.localizedDescription)")
-                                } else {
-                                    if let imageData = imageDate{
-                                        self.userimage = UIImage(data: imageData)
-                                    }
-                                    
-                                
-                                else {
-                                
-                                        print("no error")
-                                    
-                                }
-                                }
-                    showingSheet = false
-                            }
             }
         }
     }
