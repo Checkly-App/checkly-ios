@@ -132,6 +132,7 @@ struct CalendarTimeline: View {
                      VStack(alignment: .leading, spacing: 12){
                          Text(meeting.title)
                              .font(.title3.bold())
+                             .multilineTextAlignment(.leading)
                          Text(meeting.type)
                              .font(.callout)
                              .foregroundStyle(.secondary)
@@ -142,7 +143,7 @@ struct CalendarTimeline: View {
                  }
              }
              .hLeading()
-             .padding(10)
+             .padding([.top,.bottom, .trailing], 10)
          }
          .hLeading()
          .background(

@@ -11,6 +11,8 @@ import FirebaseDatabase
 class MeetingViewModel: ObservableObject{
    
     @Published var meetings = [Meeting]()
+    
+    @Published var selectedMeeting: Meeting?
 
     // current week days
     @Published var currentWeek: [Date] = []

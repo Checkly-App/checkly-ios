@@ -6,160 +6,248 @@
 //
 
 import SwiftUI
+import OmniaModalView
 
 struct CalendarGrid: View {
     
-    @StateObject var meetingViewModel : MeetingViewModel = MeetingViewModel()
+    @ObservedObject var meetingViewModel : MeetingViewModel = MeetingViewModel()
     @Binding var currentDate: Date
     // month update on arrow button click
     @State private var currentMonth: Int = 0
     // to switch between screens
     @StateObject var viewRouter: CalendarViewRouterHelper
+    // for half modal sheet
+    @State private (set) var isShown: Bool = false
+    @State private (set) var backgroundColor = LinearGradient(gradient: Gradient(colors: [Color.white, Color.white]), startPoint: .leading, endPoint: .trailing)
     
     var todaysDate = Date()
     
     var body: some View {
         NavigationView{
-        ScrollView(.vertical, showsIndicators: false){
-            VStack(spacing: 5) {
-                HStack(spacing: 25){
-                                Button(action: {
-                                    print("Already in Calendar Grid")
-                                }, label: {
-                                    Image(systemName: "calendar")
-                                        .resizable()
-                                        .foregroundColor(Color(.gray))
-                                        .frame(width: 20, height: 20)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 25)
-                                                .fill(Color("BlueA").opacity(0.3))
-                                                .frame(width: 40, height: 35)
-                                        )
-                                })
-                                Button(action: {
-                                    print("Go to Timeline")
-                                    viewRouter.currentPage = .CalendarTimeline
-                                }, label: {
-                                    Image(systemName: "list.bullet")
-                                        .resizable()
-                                        .foregroundColor(Color(.gray))
-                                        .frame(width: 18, height: 18)
-                                })
-                                Spacer()
-                                Button(action: {
-                                    // Generate Meeting
-                                }, label: {
-                                    Image(systemName: "plus")
-                                        .resizable()
-                                        .foregroundColor(Color(.gray))
-                                        .frame(width: 20, height: 20)
-                                }).padding([.trailing], 6)
-                              
-                }.padding([.leading],19)
-                .padding([.trailing ,.bottom],10)
-                .padding([.top],15)
-                    .hLeading()
-                // Days
-                let days: [String] = ["S", "M", "T", "W", "T", "F", "S"]
-                
-                HStack(spacing: 20) {
-                    // go to prev month
-                    Button {
-                        withAnimation{
-                            currentMonth -= 1
-                        }
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .font(.title2.bold())
-                            .foregroundColor(Color("BlueA"))
-                    }
-                    Spacer(minLength: 0)
-                    // Display Year number and month name
-                    VStack(alignment: .center, spacing: 10) {
-                        // year
-                        Text(getMonthAndYear()[1])
-                            .font(.caption)
-                            .fontWeight(.semibold)
-                        // month
-                        Text(getMonthAndYear()[0])
-                            .font(.title.bold())
-                    }
-                    Spacer(minLength: 0)
-                   
-                    // go to next month
-                    Button {
-                        withAnimation{
-                            currentMonth += 1
-                        }
-                    } label: {
-                        Image(systemName: "chevron.right")
-                            .font(.title2.bold())
-                            .foregroundColor(Color("BlueA"))
-                    }
-                }
-                .padding()
-                // Display day names
-                HStack(spacing: 0) {
-                    ForEach(days,id: \.self) { day in
-                        Text(day)
-                            .font(.callout)
-                            .fontWeight(.semibold)
-                            .frame(maxWidth: .infinity)
-                    }
-                }
-                // Dates (Numbers)
-                let columns = Array(repeating: GridItem(.flexible()), count: 7)
-                
-                LazyVGrid(columns: columns, spacing: 15) {
+            ZStack {
+                ScrollView(.vertical, showsIndicators: false){
+                VStack(spacing: 5) {
+                    HStack(spacing: 25){
+                                    Button(action: {
+                                        print("Already in Calendar Grid")
+                                    }, label: {
+                                        Image(systemName: "calendar")
+                                            .resizable()
+                                            .foregroundColor(Color(.gray))
+                                            .frame(width: 20, height: 20)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 25)
+                                                    .fill(Color("BlueA").opacity(0.3))
+                                                    .frame(width: 40, height: 35)
+                                            )
+                                    })
+                                    Button(action: {
+                                        print("Go to Timeline")
+                                        viewRouter.currentPage = .CalendarTimeline
+                                    }, label: {
+                                        Image(systemName: "list.bullet")
+                                            .resizable()
+                                            .foregroundColor(Color(.gray))
+                                            .frame(width: 18, height: 18)
+                                    })
+                                    Spacer()
+                                    Button(action: {
+                                        // Generate Meeting
+                                    }, label: {
+                                        Image(systemName: "plus")
+                                            .resizable()
+                                            .foregroundColor(Color(.gray))
+                                            .frame(width: 20, height: 20)
+                                    }).padding([.trailing], 6)
+                                  
+                    }.padding([.leading],19)
+                    .padding([.trailing ,.bottom],10)
+                    .padding([.top],55)
+                        .hLeading()
+                    // Days
+                    let days: [String] = ["S", "M", "T", "W", "T", "F", "S"]
                     
-                    ForEach(extractDate()) { value in
-                        
-                        CardView(value: value)
-                            .background(
-                                Capsule()
-                                    // light blue Color(red: 0.824, green: 0.925, blue: 0.976)
-                                    .fill(Color("BlueB"))
-                                    .padding(.horizontal, 8)
-                                    .opacity(isSameDay(date1: value.date , date2: currentDate) ? 1 : 0)
-                            )
-                            .onTapGesture {
-                                currentDate = value.date
+                    HStack(spacing: 20) {
+                        // go to prev month
+                        Button {
+                            withAnimation{
+                                currentMonth -= 1
                             }
-                    }
-                }
-                // Display tasks
-                VStack(spacing: 15){
-                    Text("Today's Tasks")
-                        .font(.title2.bold())
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.vertical,20)
-                    
-                    if let meeting = meetingViewModel.meetings.first(where: { meeting in
-                        return isSameDay(date1: meeting.dateTime, date2: currentDate)
-                    }) {
-                        ForEach(self.meetingViewModel.filteredMeetingsArray(date:currentDate)!){ meeting in
-                            NavigationLink(destination: MeetingDetails(meeting: meeting)){
-                                MeetingCardView(meeting: meeting)
-                            }.buttonStyle(PlainButtonStyle())
+                        } label: {
+                            Image(systemName: "chevron.left")
+                                .font(.title2.bold())
+                                .foregroundColor(Color("BlueA"))
                         }
-                    } else {
-                        Text("No Tasks Found!")
-                            .font(.system(size: 16))
-                            .fontWeight(.light)
+                        Spacer(minLength: 0)
+                        // Display Year number and month name
+                        VStack(alignment: .center, spacing: 10) {
+                            // year
+                            Text(getMonthAndYear()[1])
+                                .font(.caption)
+                                .fontWeight(.semibold)
+                            // month
+                            Text(getMonthAndYear()[0])
+                                .font(.title.bold())
+                        }
+                        Spacer(minLength: 0)
+                       
+                        // go to next month
+                        Button {
+                            withAnimation{
+                                currentMonth += 1
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right")
+                                .font(.title2.bold())
+                                .foregroundColor(Color("BlueA"))
+                        }
+                    }
+                    .padding()
+                    // Display day names
+                    HStack(spacing: 0) {
+                        ForEach(days,id: \.self) { day in
+                            Text(day)
+                                .font(.callout)
+                                .fontWeight(.semibold)
+                                .frame(maxWidth: .infinity)
+                        }
+                    }
+                    // Dates (Numbers)
+                    let columns = Array(repeating: GridItem(.flexible()), count: 7)
+                    
+                    LazyVGrid(columns: columns, spacing: 15) {
+                        
+                        ForEach(extractDate()) { value in
+                            
+                            CardView(value: value)
+                                .background(
+                                    Capsule()
+                                        // light blue Color(red: 0.824, green: 0.925, blue: 0.976)
+                                        .fill(Color("BlueB"))
+                                        .padding(.horizontal, 8)
+                                        .opacity(isSameDay(date1: value.date , date2: currentDate) ? 1 : 0)
+                                )
+                                .onTapGesture {
+                                    currentDate = value.date
+                                }
+                        }
+                    }
+                    // Display tasks
+                    VStack(spacing: 15){
+                        Text("Today's Tasks")
+                            .font(.title2.bold())
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical,20)
+                        
+                        if let meeting = meetingViewModel.meetings.first(where: { meeting in
+                            return isSameDay(date1: meeting.dateTime, date2: currentDate)
+                        }) {
+                            ForEach(self.meetingViewModel.filteredMeetingsArray(date:currentDate)!){ meeting in
+                                Button {
+                                    isShown.toggle()
+                                    meetingViewModel.selectedMeeting = meeting
+                                } label: {
+                                    MeetingCardView(meeting: meeting)
+                                }.foregroundColor(.black)
+                            }
+                        } else {
+                            Text("No Tasks Found!")
+                                .font(.system(size: 16))
+                                .fontWeight(.light)
+                        }
+                    }
+                    .padding()
+                    // update meeting
+                    .onChange(of: meetingViewModel.currentDate){ newValue in
+                        meetingViewModel.filterTodayMeetings()
                     }
                 }
-                .padding()
-                // update meeting
-                .onChange(of: meetingViewModel.currentDate){ newValue in
-                    meetingViewModel.filterTodayMeetings()
+                .onChange(of: currentMonth) { newValue in
+                    // update month
+                    currentDate = getCurrentMonth()
                 }
             }
-            .onChange(of: currentMonth) { newValue in
-                // update month
-                currentDate = getCurrentMonth()
+                // Meeting Details
+                OmniaModalView(isShown: $isShown, backgroundColor: backgroundColor, modalHeight: 600) {
+                   
+                    VStack(spacing: 20) {
+                        HStack {
+                            Text(meetingViewModel.selectedMeeting?.title ?? "")
+                                .font(.system(size: 25, weight: .bold))
+                                .fontWeight(.semibold)
+                                .hLeading()
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 25)
+                                    .fill(meetingViewModel.selectedMeeting?.type ?? "" == "Online" ? Color("BlueA").opacity(0.2) : Color("Purple").opacity(0.2))
+                                    .frame(width: 75, height: 38)
+                                Text(meetingViewModel.selectedMeeting?.type ?? "")
+                                    .font(.system(size: 17, weight: .semibold))
+                                    .foregroundColor(meetingViewModel.selectedMeeting?.type ?? "" == "Online" ? Color("BlueA"): Color("Purple"))
+                            }
+                        }
+                        .padding([.leading], 5)
+    //                    .padding([.top], -90)
+                        // MARK: Host name
+                        
+                        // MARK: Attendees images
+                        
+                        HStack(spacing: 13) {
+                            Image( systemName: "clock")
+                                .resizable()
+                                .foregroundColor(Color(.gray))
+                                .frame(width: 20, height: 20)
+    //                            .padding([.trailing],5)
+                            Text(meetingViewModel.selectedMeeting?.dateTime.formatted(date: .omitted, time: .shortened) ?? "")
+                                .font(.system(size: 19, weight: .semibold))
+                                .foregroundColor(.gray)
+                        }
+                        .hLeading()
+                        .padding([.leading, .top], 5)
+                        
+                        HStack(spacing: 13) {
+                            Image( systemName: "calendar")
+                                .resizable()
+                                .foregroundColor(Color(.gray))
+                                .frame(width: 20, height: 20)
+                            Text(meetingViewModel.selectedMeeting?.dateTime.formatted(date: .abbreviated, time: .omitted) ?? "")
+                                .font(.system(size: 19, weight: .semibold))
+                                .foregroundColor(.gray)
+                        }
+                        .hLeading()
+                        .padding([.leading, .top], 5)
+                        
+                        HStack(spacing: 13) {
+                            Image( systemName: "mappin.and.ellipse")
+                                .resizable()
+                                .foregroundColor(Color(.gray))
+                                .frame(width: 19, height: 21)
+                            Text(meetingViewModel.selectedMeeting?.location ?? "")
+                                .font(.system(size: 19, weight: .semibold))
+                                .foregroundColor(.gray)
+                        }
+                        .hLeading()
+                        .padding([.leading, .top], 5)
+                        
+                        // Fix multiline image issue
+                        HStack(spacing: 13) {
+                            Image( systemName: "text.alignleft")
+                                .resizable()
+                                .foregroundColor(Color(.gray))
+                                .frame(width: 19, height: 19)
+                            Text(meetingViewModel.selectedMeeting?.agenda ?? "")
+                                .font(.system(size: 19, weight: .semibold))
+                                .foregroundColor(.gray)
+                                .multilineTextAlignment(.leading)
+                        }
+                        .hLeading()
+                        .padding([.leading, .top], 5)
+                    }
+                    
+                }.onDisappear{
+                    meetingViewModel.selectedMeeting = nil
+                }
             }
-        }
-        .navigationBarHidden(true)
+            .navigationBarHidden(true)
         .navigationBarTitle(Text("Calendar"))
       }
     }// body
@@ -228,6 +316,7 @@ struct CalendarGrid: View {
                     VStack(alignment: .leading, spacing: 12){
                         Text(meeting.title)
                             .font(.title3.bold())
+                            .multilineTextAlignment(.leading)
                         Text(meeting.type)
                             .font(.callout)
                             .foregroundStyle(.secondary)
@@ -238,7 +327,7 @@ struct CalendarGrid: View {
                 }
             }
             .hLeading()
-            .padding(10)
+            .padding([.top,.bottom, .trailing], 10)
         }
         .hLeading()
         .background(
@@ -303,9 +392,10 @@ struct CalendarGrid: View {
 
 struct CalendarGrid_Previews: PreviewProvider {
     // view it on simulator or real device because you won't be able to interact
-    @State static var currentDate: Date = Date()
+//    @State static var currentDate: Date = Date()
+    
     static var previews: some View {
-        CalendarGrid(currentDate: $currentDate, viewRouter: CalendarViewRouterHelper())
+        Calendar(viewRouter: CalendarViewRouterHelper())
     }
 }
 

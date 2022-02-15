@@ -13,9 +13,7 @@ struct MeetingDetails: View {
     
     var body: some View {
         ZStack{
-            Image("meeting-Details-Background-v2")
-                .resizable()
-                .edgesIgnoringSafeArea(.all)
+            
             VStack(){
                 Text(meeting.title)
                     .font(.system(size: 32, weight: .bold))
@@ -26,7 +24,7 @@ struct MeetingDetails: View {
                     .padding([.bottom], 27)
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)
-                        .fill(Color(.white))
+                        .fill(Color(.gray))
                         .frame(height: 630)
                     VStack {
                         //host name

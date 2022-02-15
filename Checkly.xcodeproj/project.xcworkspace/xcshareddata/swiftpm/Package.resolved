@@ -92,6 +92,15 @@
         }
       },
       {
+        "package": "OmniaModalView",
+        "repositoryURL": "https://github.com/TariqAlmazyad/OmniaModalView.git",
+        "state": {
+          "branch": "main",
+          "revision": "9cbe3937f764482f8f941694e5bd4a3c971b51f2",
+          "version": null
+        }
+      },
+      {
         "package": "Promises",
         "repositoryURL": "https://github.com/google/promises.git",
         "state": {
