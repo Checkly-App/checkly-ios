@@ -25,6 +25,8 @@ class EmployeeViewModel: ObservableObject {
     @Published var department = ""
     @Published var address = ""
     @Published var gender = ""
+    @Published var tokens = ""
+
     @Published var gender1 = false
     @Published var gender2 = false
     @Published var Ischange = false
@@ -68,7 +70,9 @@ class EmployeeViewModel: ObservableObject {
    // let ref = Database.database().reference()
             print("in1)")
         var user_id: String!
+        var depid: String!
         var dep: String!
+
         var email: String!
         var phone: String!
         var position: String!
@@ -77,7 +81,9 @@ class EmployeeViewModel: ObservableObject {
         var dateb: String!
         var gender0: String!
         var add: String!
+        var toke: String!
 
+        
 
 
 
@@ -96,7 +102,7 @@ class EmployeeViewModel: ObservableObject {
                     let obj = contact as! DataSnapshot
                     if obj.key == self.userid {
 
-                    dep = obj.childSnapshot(forPath: "Department").value as? String
+                    depid = obj.childSnapshot(forPath: "Department").value as? String
                     email = obj.childSnapshot(forPath: "Email").value as? String
                     user_id = obj.childSnapshot(forPath: "Name").value as? String
                     add = obj.childSnapshot(forPath: "address").value as? String
@@ -106,13 +112,15 @@ class EmployeeViewModel: ObservableObject {
                     natid = obj.childSnapshot(forPath: "nationalID").value as? String
                     phone = obj.childSnapshot(forPath: "phoneNumber").value as? String
                     position = obj.childSnapshot(forPath: "position").value as? String
+                        toke = obj.childSnapshot(forPath: "tokens").value as? String
+
 
 
 //                    print(user_id!)
 //                    let emp = Employeeinfo(name: user_id)
 //                    self.Employeeinfolist.append(emp)
                     self.Employeeinfolist1 = user_id
-                    self.department = dep
+                   // self.department = dep
                     self.email = email
                     self.position = position
                     self.address = add
@@ -121,7 +129,7 @@ class EmployeeViewModel: ObservableObject {
                     self.employeeID = empid
                     self.birth = dateb
                     self.phonemum = phone
-                       
+                    self.tokens = toke
                         if gender0 == "Female"{
                             self.gender2 = true
                             self.gender1 = false
@@ -134,9 +142,22 @@ class EmployeeViewModel: ObservableObject {
             print("hi")
                 }
         }
+            
+            self.ref.child("Department").observe(.value) { snapshot in
+                   print("enter")
+
+                    for contact in snapshot.children{
+                  
+
+                      print("enter1")
+
+                        let obj = contact as! DataSnapshot
+                        if obj.key == depid {
+
+                        dep = obj.childSnapshot(forPath: "name").value as? String
               
         
-
+                            self.department = dep
            }
         
         
@@ -147,3 +168,8 @@ class EmployeeViewModel: ObservableObject {
         
     
 }
+        }
+    }
+}
+    
+

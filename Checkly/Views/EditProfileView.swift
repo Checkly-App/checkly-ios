@@ -43,6 +43,7 @@ struct EditProfileView: View {
        @State private var username: String = ""
        @State private var error0: String = ""
        @State private var errorname: String = ""
+    
 
        @State private var errorphone: String = ""
     var body: some View {
@@ -521,10 +522,10 @@ struct EditProfileView: View {
                                                                                print("Can not")
                                                                            }
                                 if showingSheet{
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 4){
                                 let randomDouble = Double.random(in: 1...100)
 
-             self.ref.child("Employee").child(userid).updateChildValues(["ChangeImage": randomDouble ])
+            self.ref.child("Employee").child(userid).updateChildValues(["ChangeImage": randomDouble ])
                                     showingSheet = false
                                     dismiss()
                                 }
@@ -580,6 +581,15 @@ struct EditProfileView: View {
                        }else{
                            print("no error")
                        }
+                       
+                   }
+                   storage.reference().child(userid).downloadURL{url,err in
+                       if let err = err {
+                           print(err.localizedDescription)
+                       }
+                       print(url?.absoluteString)
+                       self.ref.child("Employee").child(userid).updateChildValues(["tokens": url?.absoluteString ])
+                       
                        
                    }
                }

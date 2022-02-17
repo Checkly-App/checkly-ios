@@ -31,6 +31,7 @@ struct UserProfileView: View {
     @State var ispresent1 = false
     @State var ispresent2 = false
     @State var ispresent3 = false
+    @State  var imageURL: String = ""
 
 
     var listName: [String] = ["Terms And Conditions", "Privacy Policy", "Edit Profile","Change Password"]
@@ -59,7 +60,7 @@ struct UserProfileView: View {
                 Text(viewModel.Employeeinfolist1)
                     .font(.title)
                     .fontWeight(.semibold)
-                Text("\(viewModel.department) Department")
+                Text(viewModel.department)
                     .font(.subheadline)
                     .fontWeight(.semibold)
                
@@ -127,7 +128,7 @@ Spacer()
                
                 HStack{
                     
-//                    Image(systemName: "bell.fill").foregroundColor(.gray)
+
                    
                         
                         Image("Notfication")
@@ -196,6 +197,15 @@ Spacer()
                                     print("no error")
                                 
                             }
+                                Storage.storage().reference().child(userid).downloadURL{url,err in
+                                    if let err = err {
+                                        print(err.localizedDescription)
+                                    }
+                                    print(url?.absoluteString)
+                                    imageURL = url!.absoluteString
+                                    
+                                    
+                                }
                             }
                 showingSheet = false
                         }
