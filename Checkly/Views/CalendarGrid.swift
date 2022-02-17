@@ -143,7 +143,9 @@ struct CalendarGrid: View {
                             ForEach(self.meetingViewModel.filteredMeetingsArray(date:currentDate)!){ meeting in
                                 Button {
                                     meetingViewModel.selectedMeeting = meeting
-                                    bottomSheetPosition = .middle
+                                    withAnimation{
+                                        bottomSheetPosition = .middle
+                                    }
                                 } label: {
                                     MeetingCardView(meeting: meeting)
                                 }.foregroundColor(.black)
@@ -169,10 +171,12 @@ struct CalendarGrid: View {
                 .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [BottomSheet.Options.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray)], content: {
                     VStack(spacing: 20) {
                         HStack(alignment: .top) {
+                            // meeting title
                             Text(meetingViewModel.selectedMeeting?.title ?? "")
                                 .font(.system(size: 25, weight: .bold))
                                 .fontWeight(.semibold)
                                 .hLeading()
+                            // meeting type
                             ZStack{
                                 RoundedRectangle(cornerRadius: 25)
                                     .fill(meetingViewModel.selectedMeeting?.type ?? "" == "Online" ? Color("BlueA").opacity(0.2) : Color("Purple").opacity(0.2))
@@ -184,36 +188,43 @@ struct CalendarGrid: View {
                                     .padding(.trailing, 10)
                                 }
                                 .padding([.leading], 15)
-                                // MARK: Host name
-
-                                // MARK: Attendees images
+                        // Host name
+                        Text("By: \(meetingViewModel.getHostName(hostID: meetingViewModel.selectedMeeting?.host ?? "None"))")
+                             .font(.system(size: 16, weight: .semibold))
+                             .foregroundColor(.gray)
+                             .hLeading()
+                             .padding([.leading], 15)
+                        // MARK: Attendees images
                         Divider()
+                        // meeting time
                         HStack(spacing: 13) {
                             Image( systemName: "clock")
                                 .resizable()
-                                .foregroundColor(Color(.gray))
                                 .frame(width: 20, height: 20)
                             Text(meetingViewModel.selectedMeeting?.dateTime.formatted(date: .omitted, time: .shortened) ?? "")
                                 .font(.system(size: 19, weight: .semibold))
-                                .foregroundColor(.gray)
+                                
                         }
+                        .foregroundColor(.gray)
                         .hLeading()
                         .padding([.leading], 15)
                         .padding([.top], 5)
-
+                        
+                        // meeting date
                         HStack(spacing: 13) {
                             Image( systemName: "calendar")
                                 .resizable()
-                                .foregroundColor(Color(.gray))
                                 .frame(width: 20, height: 20)
                             Text(meetingViewModel.selectedMeeting?.dateTime.formatted(date: .abbreviated, time: .omitted) ?? "")
                                 .font(.system(size: 19, weight: .semibold))
-                                .foregroundColor(.gray)
+                                
                             }
+                            .foregroundColor(.gray)
                             .hLeading()
                             .padding([.leading], 15)
                             .padding([.top], 5)
-
+                        
+                        // meeting location
                         HStack(spacing: 13) {
                             Image( systemName: "mappin.and.ellipse")
                                 .resizable()
@@ -231,17 +242,18 @@ struct CalendarGrid: View {
                                 .hLeading()
                                 .padding([.leading], 15)
                                 .padding([.top], 5)
+                        
                         // Fix multiline image issue
+                        // meeting agenda
                         HStack(spacing: 13) {
                             Image( systemName: "text.alignleft")
                                 .resizable()
-                                .foregroundColor(Color(.gray))
                                 .frame(width: 19, height: 19)
                             Text(meetingViewModel.selectedMeeting?.agenda ?? "")
                                 .font(.system(size: 19, weight: .semibold))
-                                .foregroundColor(.gray)
                                 .multilineTextAlignment(.leading)
                             }
+                            .foregroundColor(.gray)
                             .hLeading()
                             .padding([.leading], 15)
                             .padding([.top], 5)

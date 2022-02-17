@@ -13,6 +13,8 @@ class MeetingViewModel: ObservableObject{
     @Published var meetings = [Meeting]()
     
     @Published var selectedMeeting: Meeting?
+    
+    @Published var hostsList = [host]()
 
     // current week days
     @Published var currentWeek: [Date] = []
@@ -27,6 +29,7 @@ class MeetingViewModel: ObservableObject{
     init(){
         fetchCurrentWeek()
         getMeetings()
+        fillHostsList()
     }
     
     // REALTIME
@@ -51,12 +54,11 @@ class MeetingViewModel: ObservableObject{
         
                 print(mt)
                 // MARK: need to be modified later on to get all the meetings that the user have created, or have been invited to...
-                // 8UoUAkIZvnP5KSWHydWliuZmOKt2
-                if(mt.host == "1111"){
+                if(mt.host == "e0a6ozh4A0QVOXY0tyiMSFyfL163"){
                     self.meetings.append(mt)
                 }
                 for attendant in mt.attendees {
-                    if "1111" == attendant.key {
+                    if "e0a6ozh4A0QVOXY0tyiMSFyfL163" == attendant.key {
                         if "Accepted" == attendant.value{
                             self.meetings.append(mt)
                         }
@@ -78,6 +80,31 @@ class MeetingViewModel: ObservableObject{
                     }
             }
         }
+    }
+    
+    func fillHostsList(){
+        
+        let ref = Database.database().reference()
+            ref.child("Employee").observe(.value) { snapshot in
+                for employee in snapshot.children{
+                    let obj = employee as! DataSnapshot
+                    let uID = obj.key
+                    let name = obj.childSnapshot(forPath:  "Name").value as! String
+                    let hostName = host(id: uID, name: name)
+                    self.hostsList.append(hostName)
+                }
+            }
+    }
+    
+    func getHostName(hostID: String) -> String {
+        
+        var hostName = ""
+        for host in hostsList{
+            if host.id == hostID {
+                hostName = host.name
+            }
+        }
+        return hostName
     }
     
     func filterTodayMeetings(){
@@ -163,3 +190,7 @@ class MeetingViewModel: ObservableObject{
     
 }
 
+struct host: Identifiable{
+    var id: String
+    var name: String
+}
