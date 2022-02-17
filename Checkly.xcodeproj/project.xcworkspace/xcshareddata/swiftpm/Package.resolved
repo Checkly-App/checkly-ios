@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "BottomSheet",
+        "repositoryURL": "https://github.com/LucasMucGH/BottomSheet",
+        "state": {
+          "branch": "main",
+          "revision": "e72f137d71ba311e9e3f39b75ed4c0c2c97c8a98",
+          "version": null
+        }
+      },
+      {
         "package": "Firebase",
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {
@@ -89,15 +98,6 @@
           "branch": null,
           "revision": "7ee9ef9f627d85cbe1b8c4f49a3ed26eed216c77",
           "version": "2.30908.0"
-        }
-      },
-      {
-        "package": "OmniaModalView",
-        "repositoryURL": "https://github.com/TariqAlmazyad/OmniaModalView.git",
-        "state": {
-          "branch": "main",
-          "revision": "9cbe3937f764482f8f941694e5bd4a3c971b51f2",
-          "version": null
         }
       },
       {

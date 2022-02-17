@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import OmniaModalView
+import BottomSheet
 
 struct CalendarGrid: View {
     
@@ -17,14 +17,12 @@ struct CalendarGrid: View {
     // to switch between screens
     @StateObject var viewRouter: CalendarViewRouterHelper
     // for half modal sheet
-    @State private (set) var isShown: Bool = false
-    @State private (set) var backgroundColor = LinearGradient(gradient: Gradient(colors: [Color.white, Color.white]), startPoint: .leading, endPoint: .trailing)
+    @State private var bottomSheetPosition: BottomSheetPosition = .hidden
     
     var todaysDate = Date()
     
     var body: some View {
         NavigationView{
-            ZStack {
                 ScrollView(.vertical, showsIndicators: false){
                 VStack(spacing: 5) {
                     HStack(spacing: 25){
@@ -62,7 +60,7 @@ struct CalendarGrid: View {
                                   
                     }.padding([.leading],19)
                     .padding([.trailing ,.bottom],10)
-                    .padding([.top],55)
+                    .padding([.top],15)
                         .hLeading()
                     // Days
                     let days: [String] = ["S", "M", "T", "W", "T", "F", "S"]
@@ -144,8 +142,8 @@ struct CalendarGrid: View {
                         }) {
                             ForEach(self.meetingViewModel.filteredMeetingsArray(date:currentDate)!){ meeting in
                                 Button {
-                                    isShown.toggle()
                                     meetingViewModel.selectedMeeting = meeting
+                                    bottomSheetPosition = .middle
                                 } label: {
                                     MeetingCardView(meeting: meeting)
                                 }.foregroundColor(.black)
@@ -168,10 +166,9 @@ struct CalendarGrid: View {
                 }
             }
                 // Meeting Details
-                OmniaModalView(isShown: $isShown, backgroundColor: backgroundColor, modalHeight: 600) {
-                   
+                .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [BottomSheet.Options.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray)], content: {
                     VStack(spacing: 20) {
-                        HStack {
+                        HStack(alignment: .top) {
                             Text(meetingViewModel.selectedMeeting?.title ?? "")
                                 .font(.system(size: 25, weight: .bold))
                                 .fontWeight(.semibold)
@@ -179,31 +176,31 @@ struct CalendarGrid: View {
                             ZStack{
                                 RoundedRectangle(cornerRadius: 25)
                                     .fill(meetingViewModel.selectedMeeting?.type ?? "" == "Online" ? Color("BlueA").opacity(0.2) : Color("Purple").opacity(0.2))
-                                    .frame(width: 75, height: 38)
+                                            .frame(width: 75, height: 38)
                                 Text(meetingViewModel.selectedMeeting?.type ?? "")
                                     .font(.system(size: 17, weight: .semibold))
                                     .foregroundColor(meetingViewModel.selectedMeeting?.type ?? "" == "Online" ? Color("BlueA"): Color("Purple"))
-                            }
-                        }
-                        .padding([.leading], 5)
-    //                    .padding([.top], -90)
-                        // MARK: Host name
-                        
-                        // MARK: Attendees images
-                        
+                                    }
+                                    .padding(.trailing, 10)
+                                }
+                                .padding([.leading], 15)
+                                // MARK: Host name
+
+                                // MARK: Attendees images
+                        Divider()
                         HStack(spacing: 13) {
                             Image( systemName: "clock")
                                 .resizable()
                                 .foregroundColor(Color(.gray))
                                 .frame(width: 20, height: 20)
-    //                            .padding([.trailing],5)
                             Text(meetingViewModel.selectedMeeting?.dateTime.formatted(date: .omitted, time: .shortened) ?? "")
                                 .font(.system(size: 19, weight: .semibold))
                                 .foregroundColor(.gray)
                         }
                         .hLeading()
-                        .padding([.leading, .top], 5)
-                        
+                        .padding([.leading], 15)
+                        .padding([.top], 5)
+
                         HStack(spacing: 13) {
                             Image( systemName: "calendar")
                                 .resizable()
@@ -212,22 +209,28 @@ struct CalendarGrid: View {
                             Text(meetingViewModel.selectedMeeting?.dateTime.formatted(date: .abbreviated, time: .omitted) ?? "")
                                 .font(.system(size: 19, weight: .semibold))
                                 .foregroundColor(.gray)
-                        }
-                        .hLeading()
-                        .padding([.leading, .top], 5)
-                        
+                            }
+                            .hLeading()
+                            .padding([.leading], 15)
+                            .padding([.top], 5)
+
                         HStack(spacing: 13) {
                             Image( systemName: "mappin.and.ellipse")
                                 .resizable()
                                 .foregroundColor(Color(.gray))
                                 .frame(width: 19, height: 21)
-                            Text(meetingViewModel.selectedMeeting?.location ?? "")
-                                .font(.system(size: 19, weight: .semibold))
-                                .foregroundColor(.gray)
-                        }
-                        .hLeading()
-                        .padding([.leading, .top], 5)
-                        
+                            if meetingViewModel.selectedMeeting?.type ?? "" == "Online" {
+                                Link("\(meetingViewModel.selectedMeeting?.location ?? "")",destination: URL(string: "\(meetingViewModel.selectedMeeting?.location ?? "")")!)
+                                            .font(.system(size: 19, weight: .semibold))
+                            } else {
+                                Text(meetingViewModel.selectedMeeting?.location ?? "")
+                                    .font(.system(size: 19, weight: .semibold))
+                                    .foregroundColor(.gray)
+                                    }
+                                }
+                                .hLeading()
+                                .padding([.leading], 15)
+                                .padding([.top], 5)
                         // Fix multiline image issue
                         HStack(spacing: 13) {
                             Image( systemName: "text.alignleft")
@@ -238,15 +241,13 @@ struct CalendarGrid: View {
                                 .font(.system(size: 19, weight: .semibold))
                                 .foregroundColor(.gray)
                                 .multilineTextAlignment(.leading)
-                        }
-                        .hLeading()
-                        .padding([.leading, .top], 5)
+                            }
+                            .hLeading()
+                            .padding([.leading], 15)
+                            .padding([.top], 5)
+
                     }
-                    
-                }.onDisappear{
-                    meetingViewModel.selectedMeeting = nil
-                }
-            }
+                })
             .navigationBarHidden(true)
         .navigationBarTitle(Text("Calendar"))
       }
