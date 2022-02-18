@@ -366,21 +366,7 @@ struct EditProfileView: View {
                                          .fill(Color.gray.opacity(0.3))
                                          .frame(width: 130, height: 55).border(.black, width: 0.5).cornerRadius(5)).padding(.leading).padding(.leading).padding(.leading)
                              }.padding(.leading)
-//                             HStack{
-//                                 HStack{
-//                                 Circle()
-//                                         .fill(viewModel.gender1 ? Color(UIColor(named: "LightGray")!).opacity(0.90):Color(UIColor(named: "LightGray")!).opacity(0.25))
-//            .frame(width: 18, height: 18)
-//              Text("Male")
-//                                 }
-//                                 HStack{
-//                                 Circle()
-//                                     .fill(viewModel.gender2 ? Color(UIColor(named: "LightGray")!).opacity(0.80):Color(UIColor(named: "LightGray")!).opacity(0.25))
-//                                     .frame(width: 18, height: 18)
-//                                 Text("Female")
-//                                 }
-//
-//                             }
+
                          }
                          .padding(.leading)
 
@@ -455,17 +441,27 @@ struct EditProfileView: View {
                         }}
                         viewModel.UpdateData()
             if let thisimage = self.inputImage{
+                
                 imageUpload(image: thisimage)
-                let randomDouble = Double.random(in: 1...100)
+               showingSheet = true
+                             
+                
+            }else{
+                                                                                           }
+                        if showingSheet{
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 4){
+                        let randomDouble = Double.random(in: 1...100)
 
-        self.ref.child("Employee").child(userid).updateChildValues(["ChangeImage": randomDouble ])
-                                     //  Upladimg(image:thisimage)
-                viewModel.Ischange = true                            }else{
-                                                                       print("Can not")
-                                                                   }
-                                                                   dismiss()
-                                           
-                                               }}                  label: {
+    self.ref.child("Employee").child(userid).updateChildValues(["ChangeImage": randomDouble ])
+                            showingSheet = false
+                            dismiss()
+                        }
+                        }
+                        else {
+                            dismiss()}
+                    }
+                    }
+                    label: {
                     HStack{
                         Text("Update")
                             .foregroundColor(Color("Blue"))
@@ -482,7 +478,7 @@ struct EditProfileView: View {
                     Text(error0)
                 })
                 }
-                }.padding().padding(.leading).padding(.leading).padding(.leading).padding(.leading).padding(.leading).padding(.leading).padding(.leading).padding(.leading).padding(.leading)
+                }.padding().padding(.leading).padding(.leading).padding(.leading)
 
                 Spacer()
             }.navigationBarTitle("Edit Profile").navigationBarTitleDisplayMode(.inline).toolbar {
@@ -518,9 +514,7 @@ struct EditProfileView: View {
                                      
                         
                     }else{
-                        
-                                                                               print("Can not")
-                                                                           }
+                                                                                                   }
                                 if showingSheet{
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 4){
                                 let randomDouble = Double.random(in: 1...100)
@@ -560,9 +554,6 @@ struct EditProfileView: View {
                 
                         }
         }.task{
-            print("edit")
-
-            print(userid)
             showingSheet = true
 
             self.viewModel.fetchData()
@@ -571,6 +562,7 @@ struct EditProfileView: View {
         
         
     }
+    // for upload image
     func imageUpload(image:UIImage){
                if let imageDate = image.jpegData(compressionQuality: 1){
                    let storage = Storage.storage()
@@ -594,6 +586,7 @@ struct EditProfileView: View {
                    }
                }
            }
+    // function validation
     func Validation() -> Bool {
            let test = true
             //var leangth = viewModel.phonemum.

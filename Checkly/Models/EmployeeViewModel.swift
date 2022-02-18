@@ -63,12 +63,7 @@ class EmployeeViewModel: ObservableObject {
         }
     
     func fetchData() {
-        print("other")
 
-       print(userid)
-           // let db = Firestore.firestore()
-   // let ref = Database.database().reference()
-            print("in1)")
         var user_id: String!
         var depid: String!
         var dep: String!
@@ -92,12 +87,10 @@ class EmployeeViewModel: ObservableObject {
 
 
         ref.child("Employee").observe(.value) { snapshot in
-               print("enter")
 
                 for contact in snapshot.children{
               
 
-                  print("enter1")
 
                     let obj = contact as! DataSnapshot
                     if obj.key == self.userid {
@@ -116,11 +109,8 @@ class EmployeeViewModel: ObservableObject {
 
 
 
-//                    print(user_id!)
-//                    let emp = Employeeinfo(name: user_id)
-//                    self.Employeeinfolist.append(emp)
+
                     self.Employeeinfolist1 = user_id
-                   // self.department = dep
                     self.email = email
                     self.position = position
                     self.address = add
@@ -139,17 +129,14 @@ class EmployeeViewModel: ObservableObject {
                             self.gender1 = true
                             self.gender2 = false
                         }
-            print("hi")
                 }
         }
             
             self.ref.child("Department").observe(.value) { snapshot in
-                   print("enter")
 
                     for contact in snapshot.children{
                   
 
-                      print("enter1")
 
                         let obj = contact as! DataSnapshot
                         if obj.key == depid {

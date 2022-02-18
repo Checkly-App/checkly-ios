@@ -28,22 +28,24 @@ struct UserProfileView: View {
     @ObservedObject private var viewModel = EmployeeViewModel()
     @State var toggleNotification = true
     @State var toggleLocation = true
+    // for eatch view
     @State var ispresent1 = false
     @State var ispresent2 = false
     @State var ispresent3 = false
     @State  var imageURL: String = ""
 
-
-    var listName: [String] = ["Terms And Conditions", "Privacy Policy", "Edit Profile","Change Password"]
-    var listIcon: [String] = ["Terms", "privacy-1", "Editprofile","clock"]
-    
-    var listDestnation=[AnyView(EditProfileView()),AnyView(EditProfileView()),AnyView(EditProfileView()),AnyView(EditProfileView())] //This helped
+//just we need if we use navihation link
+//    var listName: [String] = ["Terms And Conditions", "Privacy Policy", "Edit Profile","Change Password"]
+//    var listIcon: [String] = ["Terms", "privacy-1", "Editprofile","clock"]
+//
+//    var listDestnation=[AnyView(EditProfileView()),AnyView(EditProfileView()),AnyView(EditProfileView()),AnyView(EditProfileView())] //This helped
 
 
     var body: some View {
         NavigationView{
             ScrollView{
         VStack{
+            //first section
             VStack(spacing:8){
              
                if let image = self.userimage{
@@ -74,7 +76,7 @@ struct UserProfileView: View {
             }.padding()
             VStack{
                
-        
+        // section 2
                     
                 HStack{
                     Button {
@@ -128,6 +130,7 @@ Spacer()
                
                 HStack{
                     
+                    // section 3
 
                    
                         
@@ -180,8 +183,8 @@ Spacer()
                 showingSheet = true
             viewModel.fetchData()
             }.task{
-//            ref.child("Employee").observe(.value) { snapshot in
-          
+                // fetch image before ediiting
+
             Storage.storage().reference().child(userid).getData(maxSize: 15*1024*1024){
                             (imageDate,err) in
                             if let err = err {
@@ -213,7 +216,7 @@ Spacer()
             
                     
             }.task {
-
+// fetch image after ediiting
                 ref.child("Employee").child(userid).child("ChangeImage").observe(.value) { snapshot in
                               showingSheet = true
                 Storage.storage().reference().child(userid).getData(maxSize: 15*1024*1024){
