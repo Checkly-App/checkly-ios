@@ -7,6 +7,8 @@
 
 import SwiftUI
 import BottomSheet
+import FirebaseStorage
+import SDWebImageSwiftUI
 
 struct CalendarGrid: View {
     
@@ -18,6 +20,8 @@ struct CalendarGrid: View {
     @StateObject var viewRouter: CalendarViewRouterHelper
     // for half modal sheet
     @State private var bottomSheetPosition: BottomSheetPosition = .hidden
+    // for images
+    @State private var imageURL = URL(string: "")
     
     var todaysDate = Date()
     
@@ -171,6 +175,10 @@ struct CalendarGrid: View {
                 .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [BottomSheet.Options.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray)], content: {
                     VStack(spacing: 20) {
                         HStack(alignment: .top) {
+                            Circle()
+                                .fill(meetingViewModel.selectedMeeting?.type ?? "" == "Online" ? Color("BlueA") : Color("Purple"))
+                                .frame(width: 10, height: 10)
+                                .padding(.top, 10)
                             // meeting title
                             Text(meetingViewModel.selectedMeeting?.title ?? "")
                                 .font(.system(size: 25, weight: .bold))
@@ -195,6 +203,16 @@ struct CalendarGrid: View {
                              .hLeading()
                              .padding([.leading], 15)
                         // MARK: Attendees images
+                        HStack(spacing: -10){
+                            WebImage(url: imageURL)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 50, height: 50)
+                                .clipShape(Circle())
+                                .onAppear(perform: loadImageFromFirebase)
+                        }
+                        .hLeading()
+                        .padding([.leading], 15)
                         Divider()
                         // meeting time
                         HStack(spacing: 13) {
@@ -349,6 +367,18 @@ struct CalendarGrid: View {
         )
         .frame(width: 360)
         .cornerRadius(5)
+    }
+    
+    func loadImageFromFirebase() {
+           let storage = Storage.storage().reference(forURL: "https://firebasestorage.googleapis.com:443/v0/b/checkly-292d2.appspot.com/o/VsWRopBPLQYNMXlL5u5mkcGETze2?alt=media&token=e2095547-b88c-41ce-ab53-8b6f04e0c8d8")
+           storage.downloadURL { (url, error) in
+               if error != nil {
+                   print((error?.localizedDescription)!)
+                   return
+               }
+               print("Download success")
+               self.imageURL = url!
+           }
     }
     
     // checking dates
