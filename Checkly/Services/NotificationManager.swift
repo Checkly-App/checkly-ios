@@ -29,9 +29,10 @@ class NotificationManager {
     // MARK: - listen for added meetings
     func meetingNotificationListener(uid: String) {
         let ref = Database.database().reference()
-        let meetingsQueue = DispatchQueue.init(label: "meetingsQueue")
+        let meetingsQueue = DispatchQueue.init(label: "com.checkly.meetings-notifications")
         
-        _ = meetingsQueue.sync {
+        meetingsQueue.sync{
+            print("start")
             ref.child("Meetings").observe(.childAdded, with: { [self] snapshot in
                 let meetingNode = snapshot.value as! [String: Any]
                 let agenda = meetingNode["agenda"] as! String
@@ -54,6 +55,7 @@ class NotificationManager {
                     }
                 }
             })
+            print("end")
         }
     }
     
@@ -82,7 +84,7 @@ class NotificationManager {
                                                     options: .customDismissAction)
         
         center.setNotificationCategories([actionCategory])
-
+        
         let notification_id = UUID().uuidString
         let request = UNNotificationRequest(identifier: notification_id, content: content, trigger: nil)
         center.add(request) { error in
@@ -90,7 +92,7 @@ class NotificationManager {
                 print("notification triggered")
             }
         }
-        
-        
     }
+    
+    
 }

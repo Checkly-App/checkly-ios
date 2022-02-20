@@ -11,7 +11,13 @@ import FirebaseAuth
 struct ContentView: View {
     @StateObject private var session: Session = Session()
     @AppStorage("isLoggedIn") var isLoggedIn = true
+    var uid = Auth.auth().currentUser!.uid
 
+    init(){
+        NotificationManager.instance.requestAuthorization()
+        NotificationManager.instance.meetingNotificationListener(uid: Auth.auth().currentUser!.uid)
+    }
+    
     var body: some View {
         NavigationView{
             VStack{
@@ -24,10 +30,6 @@ struct ContentView: View {
                     Text("sign out")
                 }
             }
-        }
-        .onAppear(){
-            NotificationManager.instance.requestAuthorization()
-            NotificationManager.instance.meetingNotificationListener(uid: Auth.auth().currentUser!.uid)
         }
     }
 }

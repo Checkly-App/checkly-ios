@@ -60,6 +60,7 @@
 		71C62C8427AD5AC300C573E7 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
 		71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		71FE1D2927C2B6810067166D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +102,7 @@
 		7149E8F927A8720A008E3553 /* Checkly */ = {
 			isa = PBXGroup;
 			children = (
+				71FE1D2927C2B6810067166D /* Info.plist */,
 				7152C6A127B6AEE300E2CEAD /* Extensions */,
 				71D09A5F27A9A0CC00DA2D1D /* Services */,
 				7149E91027A96F92008E3553 /* Models */,
@@ -410,6 +412,7 @@
 				DEVELOPMENT_TEAM = 9VU9NLXSDT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Checkly/Info.plist;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow FaceID to access user credentials";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -441,6 +444,7 @@
 				DEVELOPMENT_TEAM = 9VU9NLXSDT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Checkly/Info.plist;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow FaceID to access user credentials";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
