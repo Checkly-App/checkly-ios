@@ -494,6 +494,42 @@ struct EditProfileView: View {
                 }
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         Button("Update") {
+//                            if !Validation(){
+//                        presentAlert = true
+//
+//                                                   }
+//
+//                            else{
+//                                if !password.isEmpty || !passwordAgain.isEmpty{
+//                                Auth.auth().currentUser?.updatePassword(to: password) { error in
+//                                                     // ...
+//                                                       print(error?.localizedDescription as Any)
+//
+//                                }}
+//                                viewModel.UpdateData()
+//                    if let thisimage = self.inputImage{
+//
+//                        imageUpload(image: thisimage)
+//                       showingSheet = true
+//
+//
+//                    }else{
+//                                                                                                   }
+//                                if showingSheet{
+//                                DispatchQueue.main.asyncAfter(deadline: .now() + 4){
+//                                let randomDouble = Double.random(in: 1...100)
+//
+//            self.ref.child("Employee").child(userid).updateChildValues(["ChangeImage": randomDouble ])
+//                                    showingSheet = false
+//                                    dismiss()
+//                                }
+//                                }
+//                                else {
+//                                    dismiss()}
+//
+//                                                       }                        }
+                            
+//
                             if !Validation(){
                         presentAlert = true
                                                      
@@ -526,10 +562,12 @@ struct EditProfileView: View {
                                 }
                                 else {
                                     dismiss()}
-
-                                                       }                        }
+                            }
+                            
+                        }
+                  }
+                            
                         
-                    }
             }.task{
                 
                 Storage.storage().reference().child(userid).getData(maxSize: 15*1024*1024){
@@ -572,18 +610,20 @@ struct EditProfileView: View {
                            print("error\(err.localizedDescription)")
                        }else{
                            print("no error")
+                           storage.reference().child(userid).downloadURL{url,err in
+                               if let err = err {
+                                   print(err.localizedDescription)
+                               }
+                               if (url != nil){
+                               print(url?.absoluteString)
+                               self.ref.child("Employee").child(userid).updateChildValues(["tokens": url?.absoluteString ])
+                               
+                           }
+                           }
                        }
                        
                    }
-                   storage.reference().child(userid).downloadURL{url,err in
-                       if let err = err {
-                           print(err.localizedDescription)
-                       }
-                       print(url?.absoluteString)
-                       self.ref.child("Employee").child(userid).updateChildValues(["tokens": url?.absoluteString ])
-                       
-                       
-                   }
+                   
                }
            }
     // function validation
