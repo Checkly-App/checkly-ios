@@ -9,7 +9,6 @@ import SwiftUI
 import LocalAuthentication
 
 class Authentication: ObservableObject {
-    @Published var isAuthorized = false
     
     enum BiometricType{
         case none
@@ -72,10 +71,10 @@ class Authentication: ObservableObject {
     }
     
     // MARK: - Function that fetches users credentials
-    // If the users credentials were not registered it will return a 'credentialsNotSaved' error
-    // If the user denied access it will return a 'deniedAccess' error
-    // If the user had not enrolled it will return a 'noFaceIdEnrolled' or 'noFingerprintEnrolled' error
-    // Otherwise the function returns the user's credentials
+    /// If the users credentials were not registered it will return a 'credentialsNotSaved' error
+    /// If the user denied access it will return a 'deniedAccess' error
+    /// If the user had not enrolled it will return a 'noFaceIdEnrolled' or 'noFingerprintEnrolled' error
+    /// Otherwise the function returns the user's credentials
     func requestBiometricUnlock(completion: @escaping (Result<Credentials, AuthenticationError>) -> Void) {
         let credentials = KeychainStorage.getCredentials()
         guard let credentials = credentials else {
