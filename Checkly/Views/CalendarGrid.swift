@@ -171,7 +171,7 @@ struct CalendarGrid: View {
                     currentDate = getCurrentMonth()
                 }
             }
-                // Meeting Details
+                // MARK: Meeting Details
                 .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [BottomSheet.Options.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray)], content: {
                     VStack(spacing: 20) {
                         HStack(alignment: .top) {
@@ -179,11 +179,13 @@ struct CalendarGrid: View {
                                 .fill(meetingViewModel.selectedMeeting?.type ?? "" == "Online" ? Color("BlueA") : Color("Purple"))
                                 .frame(width: 10, height: 10)
                                 .padding(.top, 10)
+                            
                             // meeting title
                             Text(meetingViewModel.selectedMeeting?.title ?? "")
                                 .font(.system(size: 25, weight: .bold))
                                 .fontWeight(.semibold)
                                 .hLeading()
+                            
                             // meeting type
                             ZStack{
                                 RoundedRectangle(cornerRadius: 25)
@@ -196,24 +198,42 @@ struct CalendarGrid: View {
                                     .padding(.trailing, 10)
                                 }
                                 .padding([.leading], 15)
+                        
                         // Host name
                         Text("By: \(meetingViewModel.getHostName(hostID: meetingViewModel.selectedMeeting?.host ?? "None"))")
                              .font(.system(size: 16, weight: .semibold))
                              .foregroundColor(.gray)
                              .hLeading()
                              .padding([.leading], 15)
-                        // MARK: Attendees images
+                        
+                        // Attendees images
                         HStack(spacing: -10){
-                            WebImage(url: imageURL)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 50, height: 50)
-                                .clipShape(Circle())
-                                .onAppear(perform: loadImageFromFirebase)
+                            if meetingViewModel.meetingAttendeesArray(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", dateTime: Date(), type: "none", location: "none", attendees: ["11" : "none"], agenda: "none")).count != 0 {
+                                ForEach(meetingViewModel.meetingAttendeesArray(meeting: (meetingViewModel.selectedMeeting)!)){ attendee in
+                                    if URL(string: attendee.imgToken) == URL(string: "null"){
+                                        Image(systemName: "person.crop.circle.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .foregroundColor(.gray)
+                                            .frame(width: 50, height: 50)
+                                            .clipShape(Circle())
+                                    } else {
+                                        WebImage(url: URL(string: attendee.imgToken))
+                                            .resizable()
+                                            .indicator(Indicator.progress)
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 50, height: 50)
+                                            .clipShape(Circle())
+                                            .onAppear(perform: {loadImageFromFirebase(imgurl: attendee.imgToken)})
+                                    }
+                                }
+                            }
+
                         }
                         .hLeading()
                         .padding([.leading], 15)
                         Divider()
+                        
                         // meeting time
                         HStack(spacing: 13) {
                             Image( systemName: "clock")
@@ -260,8 +280,7 @@ struct CalendarGrid: View {
                                 .hLeading()
                                 .padding([.leading], 15)
                                 .padding([.top], 5)
-                        
-                        // Fix multiline image issue
+                    
                         // meeting agenda
                         HStack(spacing: 13) {
                             Image( systemName: "text.alignleft")
@@ -369,8 +388,8 @@ struct CalendarGrid: View {
         .cornerRadius(5)
     }
     
-    func loadImageFromFirebase() {
-           let storage = Storage.storage().reference(forURL: "https://firebasestorage.googleapis.com:443/v0/b/checkly-292d2.appspot.com/o/VsWRopBPLQYNMXlL5u5mkcGETze2?alt=media&token=e2095547-b88c-41ce-ab53-8b6f04e0c8d8")
+    func loadImageFromFirebase(imgurl: String) {
+           let storage = Storage.storage().reference(forURL: imgurl)
            storage.downloadURL { (url, error) in
                if error != nil {
                    print((error?.localizedDescription)!)

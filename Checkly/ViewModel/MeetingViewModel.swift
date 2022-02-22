@@ -14,7 +14,7 @@ class MeetingViewModel: ObservableObject{
     
     @Published var selectedMeeting: Meeting?
     
-    @Published var hostsList = [host]()
+    @Published var employeesList = [emp]()
 
     // current week days
     @Published var currentWeek: [Date] = []
@@ -29,7 +29,7 @@ class MeetingViewModel: ObservableObject{
     init(){
         fetchCurrentWeek()
         getMeetings()
-        fillHostsList()
+        fillEmployeesList()
     }
     
     // REALTIME
@@ -82,7 +82,7 @@ class MeetingViewModel: ObservableObject{
         }
     }
     
-    func fillHostsList(){
+    func fillEmployeesList(){
         
         let ref = Database.database().reference()
             ref.child("Employee").observe(.value) { snapshot in
@@ -90,8 +90,10 @@ class MeetingViewModel: ObservableObject{
                     let obj = employee as! DataSnapshot
                     let uID = obj.key
                     let name = obj.childSnapshot(forPath:  "Name").value as! String
-                    let hostName = host(id: uID, name: name)
-                    self.hostsList.append(hostName)
+                    let imgToken = obj.childSnapshot(forPath: "tokens").value as! String
+                    let employee = emp(id: uID, name: name, imgToken: imgToken)
+                    print(employee)
+                    self.employeesList.append(employee)
                 }
             }
     }
@@ -99,7 +101,7 @@ class MeetingViewModel: ObservableObject{
     func getHostName(hostID: String) -> String {
         
         var hostName = ""
-        for host in hostsList{
+        for host in employeesList{
             if host.id == hostID {
                 hostName = host.name
             }
@@ -146,6 +148,27 @@ class MeetingViewModel: ObservableObject{
         return filtered
     }
     
+    func meetingAttendeesArray(meeting: Meeting) -> [emp] {
+        
+        var attendeesArray = [emp]()
+        
+        if meeting.attendees.count != 0 {
+            for attendant in meeting.attendees{
+                if attendant.value == "Accepted" {
+                    for employee in employeesList {
+                        if attendant.key == employee.id {
+                            let employee = emp(id: employee.id, name: employee.name, imgToken: employee.imgToken)
+                            attendeesArray.append(employee)
+                        }
+                    }
+                }
+            }
+        } else {
+            attendeesArray = []
+        }
+        return attendeesArray
+    }
+    
     // Fetch current week days from Sun to Sat
     func fetchCurrentWeek(){
         
@@ -190,7 +213,8 @@ class MeetingViewModel: ObservableObject{
     
 }
 
-struct host: Identifiable{
+struct emp: Identifiable{
     var id: String
     var name: String
+    var imgToken: String
 }
