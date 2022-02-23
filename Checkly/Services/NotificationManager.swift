@@ -70,7 +70,7 @@ class NotificationManager {
         let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
         content.title = "Meeting Invitation"
-        content.body =  "You are invited to \(meeting.title). at \(meeting.date.formatted(date: .complete, time: .omitted))"
+        content.body =  "You are invited to \(meeting.title). At \(meeting.date.formatted(date: .complete, time: .omitted))"
         content.sound = .default
         content.badge = 1
         content.categoryIdentifier = "INVITE_ACTION"

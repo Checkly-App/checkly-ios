@@ -28,11 +28,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         switch response.actionIdentifier{
         case "ACCEPT_ACTION":
-            print("accepted")
             ref.child("Meetings").child("\(meeting_id!)").child("attendees").updateChildValues(["\(attendee_id!)":"accepted"])
             break
         case "REJECT_ACTION":
-            print("rejected")
            ref.child("Meetings").child("\(meeting_id!)").child("attendees").updateChildValues(["\(attendee_id!)":"rejected"])
             break
         default:
