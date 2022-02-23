@@ -37,20 +37,26 @@ class NotificationManager {
                 let meetingNode = snapshot.value as! [String: Any]
                 let agenda = meetingNode["agenda"] as! String
                 let attendees = meetingNode["attendees"] as! [String: String]
-                let datetime = meetingNode["datetime"] as! Int
+                let date = meetingNode["date"] as! Int
+                let end_time = meetingNode["end_time"] as! String
                 let host = meetingNode["host"] as! String
+                let latitude = meetingNode["latitude"] as! String
                 let location = meetingNode["location"] as! String
-                let meeting_id = meetingNode["meeting_id"] as! String
+                let longitude = meetingNode["longitude"] as! String
+                let start_time = meetingNode["start_time"] as! String
                 let title = meetingNode["title"] as! String
                 let type = meetingNode["type"] as! String
+                let meeting_id = snapshot.key
+
                 
-                let meeting = Meeting(id: meeting_id, host: host, title: title, dateTime: .init(timeIntervalSince1970: TimeInterval(datetime)), type: type, location: location, attendees: attendees, agenda: agenda)
+                
+                let meeting = Meeting(id: meeting_id, host: host, title: title, date: .init(timeIntervalSince1970: TimeInterval(date)), type: type, location: location, attendees: attendees, agenda: agenda, end_time: end_time, start_time: start_time, latitude: latitude, longitude: longitude)
                 
                 /// trigger a notification only if the current user was invited. i.e.,  is in the attendees list
                 for attendee in attendees {
-                    if uid == attendee.key && attendee.value == "Sent"{
+                    if uid == attendee.key && attendee.value == "sent"{
                         print("create notification")
-                        ref.child("Meetings").child("meeting_\(meeting.id)").child("attendees").updateChildValues(["\(uid)":"Notified"])
+                        ref.child("Meetings").child("\(meeting.id)").child("attendees").updateChildValues(["\(uid)":"notified"])
                         createMeetingNotification(meeting: meeting, attendee_id: uid)
                     }
                 }
@@ -64,7 +70,7 @@ class NotificationManager {
         let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
         content.title = "Meeting Invitation"
-        content.body =  "You are invited to \(meeting.title). at \(meeting.dateTime.formatted(date: .complete, time: .shortened))"
+        content.body =  "You are invited to \(meeting.title). at \(meeting.date.formatted(date: .complete, time: .omitted))"
         content.sound = .default
         content.badge = 1
         content.categoryIdentifier = "INVITE_ACTION"

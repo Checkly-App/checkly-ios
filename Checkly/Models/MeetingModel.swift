@@ -8,14 +8,16 @@
 import Foundation
 
 struct Meeting: Identifiable {
-    
     var id: String
     var host: String
     var title: String
-    var dateTime: Date
+    var date: Date
     var type: String
     var location: String
     var attendees: [String: String]
     var agenda: String
-    
+    var end_time: String
+    var start_time: String
+    var latitude: String
+    var longitude: String
 }

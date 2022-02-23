@@ -29,11 +29,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         switch response.actionIdentifier{
         case "ACCEPT_ACTION":
             print("accepted")
-            ref.child("Meetings").child("meeting_\(meeting_id!)").child("attendees").updateChildValues(["\(attendee_id!)":"Accepted"])
+            ref.child("Meetings").child("\(meeting_id!)").child("attendees").updateChildValues(["\(attendee_id!)":"accepted"])
             break
         case "REJECT_ACTION":
             print("rejected")
-           ref.child("Meetings").child("meeting_\(meeting_id!)").child("attendees").updateChildValues(["\(attendee_id!)":"Rejected"])
+           ref.child("Meetings").child("\(meeting_id!)").child("attendees").updateChildValues(["\(attendee_id!)":"rejected"])
             break
         default:
             print("Dissmissed or Cleared Notification")
