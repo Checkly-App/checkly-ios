@@ -12,6 +12,8 @@ import PopupView
 struct ResetPasswordView: View {
     @StateObject private var session: Session = Session()
     @State private var resetPressed: Bool = false
+    @State var error: Bool = false
+    @State var success: Bool = false
     
     var body: some View {
         ZStack {
@@ -19,9 +21,13 @@ struct ResetPasswordView: View {
                 TitleView(title: "Reset ", description: "your password by entering your organization's associated email address")
                     .padding(.vertical, 20.0)
                 EmailInputView(email: $session.credentials.email)
+                    .alert(isPresented: $success) {
+                        return Alert(title: Text("Success"), message: Text("Check your inbox for a reset message"))
+                    }
                 Button{
-                    session.resetUserPassword { _ in
-                        resetPressed = true
+                    session.resetUserPassword { success in
+                        self.success = success
+                        error = !success
                     }
                 } label: {
                     Text("Reset")
@@ -37,25 +43,17 @@ struct ResetPasswordView: View {
                         .cornerRadius(10.0)
                 }
                 .padding(.top, 20.0)
+                .alert(isPresented: $error) {
+                    return Alert(title: Text("Reset Failed"), message: Text(session.error!.localizedDescription))
+                }
                 Spacer()
             }
             .disabled(session.showProgressView)
             .padding()
             .padding()
-            
             if session.showProgressView {
                 LoadingView()
             }
-        }
-        .popup(isPresented: $session.showErrorView, closeOnTapOutside: true) {
-            FeedbackView(imageName: "xmark",
-                         title: "Reset Failed",
-                         message: session.error!.localizedDescription)
-        }
-        .popup(isPresented: $session.showSuccessView, closeOnTapOutside: true) {
-            FeedbackView(imageName: "checkmark",
-                         title: "Success",
-                         message: "Check your inbox for a reset message")
         }
         .background(Color(UIColor(.white)))
         .navigationBarTitle("", displayMode: .inline)

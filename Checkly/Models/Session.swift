@@ -11,21 +11,11 @@ import FirebaseAuth
 class Session: ObservableObject {
     @Published var credentials = Credentials()
     @Published var showProgressView = false
-    @Published var showErrorView = false
-    @Published var showSuccessView = false
     @Published var error: Authentication.AuthenticationError?
     @Published var storeCredentialsNext = false
     
     func toggleProgress(){
         withAnimation { showProgressView.toggle() }
-    }
-    
-    func toggleError(){
-        withAnimation { showErrorView.toggle() }
-    }
-    
-    func toggleSuccess(){
-        withAnimation { showSuccessView.toggle() }
     }
     
     func loginUser(completion: @escaping (Bool) -> Void){
@@ -50,7 +40,6 @@ class Session: ObservableObject {
                     error = .emptyCredentials
                 }
                 
-                toggleError()
                 completion(false)
             } else {
                 if storeCredentialsNext{
@@ -58,7 +47,6 @@ class Session: ObservableObject {
                         storeCredentialsNext = false
                     }
                 }
-                toggleSuccess()
                 completion(true)
             }
         }
@@ -82,11 +70,9 @@ class Session: ObservableObject {
             toggleProgress()
             if authError != nil  {
                 error = .resetPassword
-                toggleError()
                 completion(false)
             }
             else {
-                toggleSuccess()
                 completion(true)
             }
         }

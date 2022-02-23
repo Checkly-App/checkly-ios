@@ -77,7 +77,6 @@ struct LoginView: View {
                                     }
                                 case .failure(let error):
                                     session.error = error
-                                    session.toggleError()
                                 }
                             }
                         } label: {
@@ -98,81 +97,35 @@ struct LoginView: View {
                 .disabled(session.showProgressView)
                 .padding()
                 .padding()
-                
-                
-                
-                //                .alert(item: $session.error) { error in
-                //                    switch error {
-                //                    case .invalidPassword:
-                //                        if faceIDPressed {
-                //                            return Alert(title: Text("Credentials Changed"),
-                //                                         message: Text("Your credentials have been changed recently, login normally and we will save and update your credentials to login through biometrics!"),
-                //                                         primaryButton: .default(Text("OK"), action: {
-                //                                session.storeCredentialsNext = true
-                //                            }), secondaryButton: .cancel())
-                //                        }
-                //                        else {
-                //                            return Alert(title: Text("Authentication Failed"), message: Text(error.localizedDescription))
-                //                        }
-                //                    case .credentialsNotSaved:
-                //                        return Alert(title: Text("Credentials Not Saved"),
-                //                                     message: Text(error.localizedDescription),
-                //                                     primaryButton: .default(Text("OK"), action: {
-                //                            session.storeCredentialsNext = true
-                //                        }), secondaryButton: .cancel())
-                //                    default : return Alert(title: Text("Authentication Failed"), message: Text(error.localizedDescription))
-                //                    }
-                //                }
+                .alert(item: $session.error) { error in
+                    switch error {
+                    case .invalidPassword:
+                        if faceIDPressed {
+                            return Alert(title: Text("Credentials Changed"),
+                                         message: Text("Your credentials have been changed recently, login normally and we will save and update your credentials to login through biometrics!"),
+                                         primaryButton: .default(Text("OK"), action: {
+                                session.storeCredentialsNext = true
+                            }), secondaryButton: .cancel())
+                        }
+                        else {
+                            return Alert(title: Text("Authentication Failed"), message: Text(error.localizedDescription))
+                        }
+                    case .credentialsNotSaved:
+                        return Alert(title: Text("Credentials Not Saved"),
+                                     message: Text(error.localizedDescription),
+                                     primaryButton: .default(Text("OK"), action: {
+                            session.storeCredentialsNext = true
+                        }), secondaryButton: .cancel())
+                    default : return Alert(title: Text("Authentication Failed"), message: Text(error.localizedDescription))
+                    }
+                }
                 
                 if session.showProgressView {
                     LoadingView()
                 }
-                
-                //                if session.showErrorView {
-                //                    if faceIDPressed && (session.error == .invalidPassword || session.error == .credentialsNotSaved){
-                //                        FeedbackView(imageName: "xmark", title: "Authentication Failed", message: "Your credentials have changed. We will update them after the next successful login!")
-                //                            .onTapGesture {
-                //                                session.toggleError()
-                //                                session.storeCredentialsNext = true
-                //                            }
-                //                    }
-                //                    else {
-                //                        FeedbackView(imageName: "xmark", title: "Authentication Failed", message: session.error!.localizedDescription)
-                //                            .onTapGesture { session.toggleError() }
-                //                    }
-                //                }
-                
             }
             .background(Color(UIColor(.white)))
             .navigationBarHidden(true)
-            .popup(isPresented: $session.showErrorView, closeOnTapOutside: true, dismissCallback: {
-                if faceIDPressed && session.error == .invalidPassword{
-                    session.storeCredentialsNext = true
-                } else if session.error == .credentialsNotSaved {
-                    session.storeCredentialsNext = true
-                }}) {
-                    let error = session.error
-                    switch error {
-                    case .invalidPassword:
-                        if faceIDPressed {
-                            FeedbackView(imageName: "xmark",
-                                         title: "Credentials Changed",
-                                         message: "Your credentials have been changed recently. We will update your credentials upon the next successful login!")
-                        }
-                        else {
-                            FeedbackView(imageName: "xmark",
-                                         title: "Authentication Failed",
-                                         message: error!.localizedDescription)
-                        }
-                    case .credentialsNotSaved:
-                        FeedbackView(imageName: "xmark",
-                                     title: "Credentials Changed",
-                                     message: error!.localizedDescription)
-                    default:  FeedbackView(imageName: "xmark",
-                                           title: "Authentication Failed",
-                                           message: error!.localizedDescription)
-                    }
-                }
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
