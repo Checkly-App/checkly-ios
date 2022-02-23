@@ -100,7 +100,7 @@ struct messagesView: View {
                         Spacer()
                     }.foregroundColor(.white)
                         .padding(.vertical)
-                        .background(Color(hexStringToUIColor(hex: "2CAFEE")))
+                        .background(LinearGradient(gradient: Gradient(colors: [Color(hexStringToUIColor(hex: "58BCEC")), Color(hexStringToUIColor(hex: "439FF3"))]), startPoint: .leading, endPoint: .trailing))
                         .cornerRadius(32)
                         .padding(.horizontal)
                         .shadow(radius: 15)
