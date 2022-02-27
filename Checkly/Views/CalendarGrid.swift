@@ -22,6 +22,8 @@ struct CalendarGrid: View {
     @State private var bottomSheetPosition: BottomSheetPosition = .hidden
     // for images
     @State private var imageURL = URL(string: "")
+    // for attendees sheet
+    @State private var showingSheet = false
     
     var todaysDate = Date()
     
@@ -211,20 +213,29 @@ struct CalendarGrid: View {
                             if meetingViewModel.meetingAttendeesArray(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", date: Date(), type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", end_time: "9:45 AM", start_time: "9:00 AM", latitude: "unavailable", longitude: "unavailable")).count != 0 {
                                 ForEach(meetingViewModel.meetingAttendeesArray(meeting: (meetingViewModel.selectedMeeting)!)){ attendee in
                                     if URL(string: attendee.imgToken) == URL(string: "null"){
-                                        Image(systemName: "person.crop.circle.fill")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .foregroundColor(.gray)
-                                            .frame(width: 50, height: 50)
-                                            .clipShape(Circle())
+                                        Button(action: {
+                                                  showingSheet.toggle()
+                                              }) {
+                                                  Image(systemName: "person.crop.circle.fill")
+                                                      .resizable()
+                                                      .aspectRatio(contentMode: .fill)
+                                                      .foregroundColor(.gray)
+                                                      .frame(width: 50, height: 50)
+                                                      .clipShape(Circle())
+                                                  
+                                              }
                                     } else {
-                                        WebImage(url: URL(string: attendee.imgToken))
-                                            .resizable()
-                                            .indicator(Indicator.activity)
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: 50, height: 50)
-                                            .clipShape(Circle())
-                                            .onAppear(perform: {loadImageFromFirebase(imgurl: attendee.imgToken)})
+                                        Button(action: {
+                                                  showingSheet.toggle()
+                                              }) {
+                                                  WebImage(url: URL(string: attendee.imgToken))
+                                                      .resizable()
+                                                      .indicator(Indicator.activity)
+                                                      .aspectRatio(contentMode: .fill)
+                                                      .frame(width: 50, height: 50)
+                                                      .clipShape(Circle())
+                                                      .onAppear(perform: {loadImageFromFirebase(imgurl: attendee.imgToken)})
+                                              }
                                     }
                                 }
                             }
@@ -239,7 +250,7 @@ struct CalendarGrid: View {
                             Image( systemName: "clock")
                                 .resizable()
                                 .frame(width: 20, height: 20)
-                            Text(meetingViewModel.selectedMeeting?.date.formatted(date: .omitted, time: .shortened) ?? "")
+                            Text("\(meetingViewModel.selectedMeeting?.start_time ?? "") - \(meetingViewModel.selectedMeeting?.end_time ?? "")")
                                 .font(.system(size: 19, weight: .semibold))
                                 
                         }
@@ -297,6 +308,45 @@ struct CalendarGrid: View {
 
                     }
                 })
+            // MARK: Attendees List
+            .sheet(isPresented: $showingSheet) {
+                Rectangle()
+                    .fill(.gray)
+                    .frame(width: 50, height: 5)
+                    .cornerRadius(35)
+                    .padding(.top, 10)
+                NavigationView {
+                    List(meetingViewModel.meetingAttendeesArray(meeting: (meetingViewModel.selectedMeeting)!)){ attendee in
+                        HStack{
+                            // attendee image
+                            if URL(string: attendee.imgToken) == URL(string: "null"){
+                                Image(systemName: "person.crop.circle.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .foregroundColor(.gray)
+                                    .frame(width: 50, height: 50)
+                                    .clipShape(Circle())
+                            } else {
+                                WebImage(url: URL(string: attendee.imgToken))
+                                    .resizable()
+                                    .indicator(Indicator.activity)
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 50, height: 50)
+                                    .clipShape(Circle())
+                                    .onAppear(perform: {loadImageFromFirebase(imgurl: attendee.imgToken)})
+                            }
+                            VStack{
+                                // attendee name
+                                Text(attendee.name)
+                                    .font(.system(size: 20, weight: .medium))
+                            }
+                        }
+                    }
+                    .listStyle(.plain)
+                    .navigationBarTitle("Attendees")
+                    
+                }
+            }
             .navigationBarHidden(true)
         .navigationBarTitle(Text("Calendar"))
       }
