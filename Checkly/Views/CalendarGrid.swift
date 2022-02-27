@@ -142,7 +142,7 @@ struct CalendarGrid: View {
                             .padding(.vertical,20)
                         
                         if let meeting = meetingViewModel.meetings.first(where: { meeting in
-                            return isSameDay(date1: meeting.dateTime, date2: currentDate)
+                            return isSameDay(date1: meeting.date, date2: currentDate)
                         }) {
                             ForEach(self.meetingViewModel.filteredMeetingsArray(date:currentDate)!){ meeting in
                                 Button {
@@ -208,7 +208,7 @@ struct CalendarGrid: View {
                         
                         // Attendees images
                         HStack(spacing: -10){
-                            if meetingViewModel.meetingAttendeesArray(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", dateTime: Date(), type: "none", location: "none", attendees: ["11" : "none"], agenda: "none")).count != 0 {
+                            if meetingViewModel.meetingAttendeesArray(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", date: Date(), type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", end_time: "9:45 AM", start_time: "9:00 AM", latitude: "unavailable", longitude: "unavailable")).count != 0 {
                                 ForEach(meetingViewModel.meetingAttendeesArray(meeting: (meetingViewModel.selectedMeeting)!)){ attendee in
                                     if URL(string: attendee.imgToken) == URL(string: "null"){
                                         Image(systemName: "person.crop.circle.fill")
@@ -220,7 +220,7 @@ struct CalendarGrid: View {
                                     } else {
                                         WebImage(url: URL(string: attendee.imgToken))
                                             .resizable()
-                                            .indicator(Indicator.progress)
+                                            .indicator(Indicator.activity)
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 50, height: 50)
                                             .clipShape(Circle())
@@ -239,7 +239,7 @@ struct CalendarGrid: View {
                             Image( systemName: "clock")
                                 .resizable()
                                 .frame(width: 20, height: 20)
-                            Text(meetingViewModel.selectedMeeting?.dateTime.formatted(date: .omitted, time: .shortened) ?? "")
+                            Text(meetingViewModel.selectedMeeting?.date.formatted(date: .omitted, time: .shortened) ?? "")
                                 .font(.system(size: 19, weight: .semibold))
                                 
                         }
@@ -253,7 +253,7 @@ struct CalendarGrid: View {
                             Image( systemName: "calendar")
                                 .resizable()
                                 .frame(width: 20, height: 20)
-                            Text(meetingViewModel.selectedMeeting?.dateTime.formatted(date: .abbreviated, time: .omitted) ?? "")
+                            Text(meetingViewModel.selectedMeeting?.date.formatted(date: .abbreviated, time: .omitted) ?? "")
                                 .font(.system(size: 19, weight: .semibold))
                                 
                             }
@@ -310,7 +310,7 @@ struct CalendarGrid: View {
                 
                 if let meeting = meetingViewModel.meetings.first(where: { meeting in
                     
-                    return isSameDay(date1: meeting.dateTime, date2: value.date)
+                    return isSameDay(date1: meeting.date, date2: value.date)
                 }){
                     if isSameDay(date1: todaysDate, date2: value.date){
                             Text("\(value.day)")
@@ -373,7 +373,7 @@ struct CalendarGrid: View {
                     }
                     .hLeading()
                     // to display time in 12-hour format
-                    Text(meeting.dateTime.formatted(date: .omitted, time: .shortened))
+                    Text(meeting.date.formatted(date: .omitted, time: .shortened))
                 }
             }
             .hLeading()
@@ -453,9 +453,7 @@ struct CalendarGrid: View {
 } // Calendar Date Picker struct
 
 struct CalendarGrid_Previews: PreviewProvider {
-    // view it on simulator or real device because you won't be able to interact
-//    @State static var currentDate: Date = Date()
-    
+
     static var previews: some View {
         Calendar(viewRouter: CalendarViewRouterHelper())
     }

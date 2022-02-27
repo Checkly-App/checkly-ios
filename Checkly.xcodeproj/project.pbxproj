@@ -32,7 +32,6 @@
 		A3B8D85827B11A5600752F63 /* CalendarTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85727B11A5600752F63 /* CalendarTimeline.swift */; };
 		A3B8D85A27B11A8900752F63 /* CalendarViewRouterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85927B11A8900752F63 /* CalendarViewRouterHelper.swift */; };
 		A3B8D85C27B13D9F00752F63 /* DateValueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85B27B13D9F00752F63 /* DateValueModel.swift */; };
-		A3C44ADC27B8637C005647C7 /* MeetingDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C44ADB27B8637C005647C7 /* MeetingDetails.swift */; };
 		A3C9709D27B184930041058A /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = A3C9709C27B184930041058A /* FirebaseDatabase */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +55,6 @@
 		A3B8D85727B11A5600752F63 /* CalendarTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTimeline.swift; sourceTree = "<group>"; };
 		A3B8D85927B11A8900752F63 /* CalendarViewRouterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewRouterHelper.swift; sourceTree = "<group>"; };
 		A3B8D85B27B13D9F00752F63 /* DateValueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValueModel.swift; sourceTree = "<group>"; };
-		A3C44ADB27B8637C005647C7 /* MeetingDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +126,6 @@
 				A3B8D85327B11A2B00752F63 /* Calendar.swift */,
 				A3B8D85527B11A4200752F63 /* CalendarGrid.swift */,
 				A3B8D85727B11A5600752F63 /* CalendarTimeline.swift */,
-				A3C44ADB27B8637C005647C7 /* MeetingDetails.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -277,7 +274,6 @@
 				A3B8D85627B11A4200752F63 /* CalendarGrid.swift in Sources */,
 				A3B8D85A27B11A8900752F63 /* CalendarViewRouterHelper.swift in Sources */,
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,
-				A3C44ADC27B8637C005647C7 /* MeetingDetails.swift in Sources */,
 				A3B8D84D27B117E500752F63 /* MeetingModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -139,7 +139,7 @@ struct CalendarTimeline: View {
                      }
                      .hLeading()
                      // to display time in 12-hour format
-                     Text(meeting.dateTime.formatted(date: .omitted, time: .shortened))
+                     Text(meeting.date.formatted(date: .omitted, time: .shortened))
                  }
              }
              .hLeading()

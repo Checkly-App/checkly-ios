@@ -42,24 +42,27 @@ class MeetingViewModel: ObservableObject{
                 let meeting = snapshot.value as! [String: Any]
                 let agenda = meeting["agenda"] as! String
                 let attendees = meeting["attendees"] as! [String:String]
-                let datetime = meeting["datetime"] as! Int
+                let date = meeting["date"] as! Int
+                let end_time = meeting["end_time"] as! String
                 let host = meeting["host"] as! String
+                let latitude = meeting["latitude"] as! String
                 let location = meeting["location"] as! String
-                let meeting_id = meeting["meeting_id"] as! String
+                let longitude = meeting["longitude"] as! String
+                let start_time = meeting["start_time"] as! String
                 let title = meeting["title"] as! String
                 let type = meeting["type"] as! String
+                let meeting_id = snapshot.key
         
-        
-                let mt = Meeting(id: meeting_id, host: host, title: title, dateTime: .init(timeIntervalSince1970: TimeInterval(datetime)), type: type, location: location, attendees: attendees, agenda: agenda)
+                let mt = Meeting(id: meeting_id, host: host, title: title, date: .init(timeIntervalSince1970: TimeInterval(date)), type: type, location: location, attendees: attendees, agenda: agenda, end_time: end_time, start_time: start_time, latitude: latitude, longitude: longitude)
         
                 print(mt)
-                // MARK: need to be modified later on to get all the meetings that the user have created, or have been invited to...
+                // MARK: Fetch UID from Auth
                 if(mt.host == "e0a6ozh4A0QVOXY0tyiMSFyfL163"){
                     self.meetings.append(mt)
                 }
                 for attendant in mt.attendees {
                     if "e0a6ozh4A0QVOXY0tyiMSFyfL163" == attendant.key {
-                        if "Accepted" == attendant.value{
+                        if "accepted" == attendant.value{
                             self.meetings.append(mt)
                         }
                     }
@@ -68,10 +71,10 @@ class MeetingViewModel: ObservableObject{
                 let calendar = NSCalendar.current
         
                 let filtered = self.meetings.filter {
-                    return calendar.isDate($0.dateTime, inSameDayAs: self.currentDate)
+                    return calendar.isDate($0.date, inSameDayAs: self.currentDate)
                 }
                         .sorted { meeting1, meeting2 in
-                                return meeting1.dateTime < meeting2.dateTime
+                                return meeting1.date < meeting2.date
                         }
                         DispatchQueue.main.async {
                             withAnimation {
@@ -89,8 +92,8 @@ class MeetingViewModel: ObservableObject{
                 for employee in snapshot.children{
                     let obj = employee as! DataSnapshot
                     let uID = obj.key
-                    let name = obj.childSnapshot(forPath:  "Name").value as! String
-                    let imgToken = obj.childSnapshot(forPath: "tokens").value as! String
+                    let name = obj.childSnapshot(forPath:  "name").value as! String
+                    let imgToken = obj.childSnapshot(forPath: "image_token").value as! String
                     let employee = emp(id: uID, name: name, imgToken: imgToken)
                     print(employee)
                     self.employeesList.append(employee)
@@ -117,11 +120,11 @@ class MeetingViewModel: ObservableObject{
         DispatchQueue.global(qos: .userInteractive).async {
             
         let filtered = self.meetings.filter {
-            return calendar.isDate($0.dateTime, inSameDayAs: self.currentDate)
+            return calendar.isDate($0.date, inSameDayAs: self.currentDate)
         }
         
             .sorted { meeting1, meeting2 in
-                return meeting1.dateTime < meeting2.dateTime
+                return meeting1.date < meeting2.date
             }
         
         DispatchQueue.main.async {
@@ -138,11 +141,11 @@ class MeetingViewModel: ObservableObject{
         
             
         filtered = self.meetings.filter {
-            return calendar.isDate($0.dateTime, inSameDayAs: date)
+            return calendar.isDate($0.date, inSameDayAs: date)
         }
         
             .sorted { meeting1, meeting2 in
-                return meeting1.dateTime < meeting2.dateTime
+                return meeting1.date < meeting2.date
             }
         
         return filtered
@@ -154,7 +157,7 @@ class MeetingViewModel: ObservableObject{
         
         if meeting.attendees.count != 0 {
             for attendant in meeting.attendees{
-                if attendant.value == "Accepted" {
+                if attendant.value == "accepted" {
                     for employee in employeesList {
                         if attendant.key == employee.id {
                             let employee = emp(id: employee.id, name: employee.name, imgToken: employee.imgToken)
