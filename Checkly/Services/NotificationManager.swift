@@ -31,7 +31,7 @@ class NotificationManager {
         let ref = Database.database().reference()
         let meetingsQueue = DispatchQueue.init(label: "com.checkly.meetings-notifications")
         
-        meetingsQueue.sync{
+        _ = meetingsQueue.sync{
             ref.child("Meetings").observe(.childAdded, with: { [self] snapshot in
                 let meetingNode = snapshot.value as! [String: Any]
                 let agenda = meetingNode["agenda"] as! String
@@ -58,51 +58,13 @@ class NotificationManager {
                     }
                     /// trigger a notification when they accept the invitation
                     if uid == attendee.key && attendee.value == "accepted"{
-                        scheduleMeetingReminder(date: date)
+                        scheduleMeetingReminder(title: meeting.title, date: date)
                     }
                 }
             })
         }
     }
     
-    // MARK: - 
-    func scheduleMeetingReminder(date: Int){
-        let date: Date = .init(timeIntervalSince1970: TimeInterval(date - (5 * 60))) /// subtract 5 minutes from the date
-        //        let start_time = meeting.start_time
-        let center = UNUserNotificationCenter.current()
-        /// setup the notification content
-        let content = UNMutableNotificationContent()
-        content.sound = .default
-        content.title = "Meeting Reminder"
-        content.body = "You have a meeting after 5 minutes!"
-        
-        /// convert to the correct timzone then to a date component  - this could be a simulator problem though!
-        var calendar = Calendar.current
-        calendar.timeZone = TimeZone(abbreviation: "GMT+3")!
-        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
-        
-        //        let colonIndex = start_time.firstIndex(of: ":")
-        //        let afterColonIndex = start_time.index(colonIndex!, offsetBy: 1)
-        //        let spaceIndex = start_time.firstIndex(of: " ")
-        //        let timeHour = Int(start_time[..<colonIndex!])
-        //        let timeMinute = Int(start_time[afterColonIndex..<spaceIndex!])
-        //
-        //        let dateComponent = DateComponents(year: components.year, month: components.month, day: components.day, hour: timeHour, minute: timeMinute)
-        //
-        
-        //        let notificationDate: Date = calendar.date(from: components)!
-        //        let notificationFutureDate = calendar.date(byAdding: .minute, value: -5, to: notificationDate)
-        //calendar.dateComponents([.year, .month, .day, .hour, .minute], from: notificationFutureDate!
-        
-        let uuid = UUID().uuidString
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false) /// trigger based on a specific date
-        let request = UNNotificationRequest(identifier: uuid, content: content, trigger: trigger)
-        center.add(request) { error in
-            if error == nil{
-                print("reminder notification triggered at \(components)")
-            }
-        }
-    }
     
     // MARK: - trigger a meeting invitation notification immedietly
     func createMeetingNotification(meeting: Meeting, attendee_id: String, date: Int){
@@ -113,7 +75,7 @@ class NotificationManager {
         content.body =  "You are invited to \(meeting.title). At \(meeting.date.formatted(date: .complete, time: .omitted))"
         content.sound = .default
         content.categoryIdentifier = "INVITE_ACTION"
-        content.userInfo = ["attendee_id": attendee_id, "host_id": meeting.host, "meeting_id": meeting.id, "date": date]
+        content.userInfo = ["attendee_id": attendee_id, "host_id": meeting.host, "meeting_id": meeting.id, "date": date, "title": meeting.title]
         
         /// setup the 2 actions, accept and reject
         let acceptAction = UNNotificationAction(identifier: "ACCEPT_ACTION",
@@ -135,6 +97,34 @@ class NotificationManager {
         center.add(request) { error in
             if error == nil{
                 print("invitation notification triggered")
+            }
+        }
+    }
+    
+    
+    // MARK: - trigger a notification five minutes before the meeting
+    func scheduleMeetingReminder(title: String, date: Int){
+        let date: Date = .init(timeIntervalSince1970: TimeInterval(date - (5 * 60))) /// subtract 5 minutes from the date
+        let center = UNUserNotificationCenter.current()
+        
+        /// setup the notification content
+        let content = UNMutableNotificationContent()
+        content.sound = .default
+        content.title = "Meeting Reminder"
+        content.body = "Your meeting - \(title). Is in five minutes!"
+        
+        /// convert to the correct timzone then to a date component  - this could be a simulator problem though!
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(abbreviation: "GMT+3")!
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+        
+        let uuid = UUID().uuidString
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false) /// trigger based on a specific date
+        ///
+        let request = UNNotificationRequest(identifier: uuid, content: content, trigger: trigger)
+        center.add(request) { error in
+            if error == nil{
+                print("reminder notification triggered at \(components)")
             }
         }
     }

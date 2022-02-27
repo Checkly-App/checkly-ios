@@ -26,15 +26,16 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let meeting_id = response.notification.request.content.userInfo["meeting_id"]
         let attendee_id = response.notification.request.content.userInfo["attendee_id"]
         let date = response.notification.request.content.userInfo["date"]
+        let title = response.notification.request.content.userInfo["title"]
         let ref = Database.database().reference()
         
         switch response.actionIdentifier{
         case "ACCEPT_ACTION":
             ref.child("Meetings").child("\(meeting_id!)").child("attendees").updateChildValues(["\(attendee_id!)":"accepted"])
-            NotificationManager.instance.scheduleMeetingReminder(date: date as! Int) /// schedule a notification to remind them 5 minutes before the meeting
+            NotificationManager.instance.scheduleMeetingReminder(title: title as! String, date: date as! Int) /// schedule a notification to remind them 5 minutes before the meeting
             break
         case "REJECT_ACTION":
-           ref.child("Meetings").child("\(meeting_id!)").child("attendees").updateChildValues(["\(attendee_id!)":"rejected"])
+            ref.child("Meetings").child("\(meeting_id!)").child("attendees").updateChildValues(["\(attendee_id!)":"rejected"])
             break
         default:
             print("Dissmissed or Cleared Notification")
