@@ -555,7 +555,7 @@ struct EditProfileView: View {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 4){
                                 let randomDouble = Double.random(in: 1...100)
 
-            self.ref.child("Employee").child(userid).updateChildValues(["ChangeImage": randomDouble ])
+            self.ref.child("Employee").child(userid).updateChildValues(["change_image": randomDouble ])
                                     showingSheet = false
                                     dismiss()
                                 }
@@ -616,7 +616,7 @@ struct EditProfileView: View {
                                }
                                if (url != nil){
                                print(url?.absoluteString)
-                               self.ref.child("Employee").child(userid).updateChildValues(["tokens": url?.absoluteString ])
+                               self.ref.child("Employee").child(userid).updateChildValues(["image_token": url?.absoluteString ])
                                
                            }
                            }

@@ -15,6 +15,7 @@ import FirebaseAuth
 
 struct UserProfileView: View {
     let userid = Auth.auth().currentUser!.uid
+   // @EnvironmentObject var settings: GameSettings
 
     @Environment(\.dismiss) var dismiss
     @State private var showingSheet = false
@@ -106,7 +107,8 @@ Spacer()
                                Image(systemName: "chevron.right").foregroundColor(.black)
                     
                     }   }.padding().fullScreenCover(isPresented: $ispresent2) {
-                        EditProfileView()
+                        GenerateMeetingView()
+
                     }
                 HStack{
                     Button {
@@ -217,7 +219,7 @@ Spacer()
                     
             }.task {
 // fetch image after ediiting
-                ref.child("Employee").child(userid).child("ChangeImage").observe(.value) { snapshot in
+                ref.child("Employee").child(userid).child("change_image").observe(.value) { snapshot in
                               showingSheet = true
                 Storage.storage().reference().child(userid).getData(maxSize: 15*1024*1024){
                                 (imageDate,err) in
@@ -240,9 +242,12 @@ Spacer()
                 
             }
             }
+            
         }
+
     }
 }
+
 
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {

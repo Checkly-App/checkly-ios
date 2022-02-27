@@ -32,6 +32,9 @@
 		71D09A5C27A9A02A00DA2D1D /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 71D09A5B27A9A02A00DA2D1D /* SwiftKeychainWrapper */; };
 		71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */; };
 		71D09A6427A9DADD00DA2D1D /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */; };
+		F5509B1727C95AA20099690B /* LocationMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5509B1627C95AA20099690B /* LocationMeetingView.swift */; };
+		F5509B1927C9734B0099690B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5509B1827C9734B0099690B /* LocationManager.swift */; };
+		F551EBAD27C42CF500A8FE7C /* GenerateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F551EBAC27C42CF400A8FE7C /* GenerateView.swift */; };
 		F55E524127B6773B00288187 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F55E524027B6773B00288187 /* FirebaseStorage */; };
 		F55E524327B678EE00288187 /* EmployeeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55E524227B678EE00288187 /* EmployeeViewModel.swift */; };
 		F55E524727B679E800288187 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55E524627B679E800288187 /* ImagePicker.swift */; };
@@ -42,6 +45,8 @@
 		F5715FB127BEB4AB001FADE6 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F5715FB027BEB4AB001FADE6 /* SDWebImageMapKit */; };
 		F5715FB427BEB5AB001FADE6 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F5715FB327BEB5AB001FADE6 /* SDWebImageSwiftUI */; };
 		F5715FB627BFAF2E001FADE6 /* GenerateMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5715FB527BFAF2D001FADE6 /* GenerateMeetingView.swift */; };
+		F5BA076C27C45A6500A07DD4 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BA076B27C45A6500A07DD4 /* Employee.swift */; };
+		F5F4CF1E27C4FC7E00443725 /* AttendenceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F4CF1D27C4FC7E00443725 /* AttendenceListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,12 +66,17 @@
 		71C62C8427AD5AC300C573E7 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
 		71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		F5509B1627C95AA20099690B /* LocationMeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMeetingView.swift; sourceTree = "<group>"; };
+		F5509B1827C9734B0099690B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		F551EBAC27C42CF400A8FE7C /* GenerateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateView.swift; sourceTree = "<group>"; };
 		F55E524227B678EE00288187 /* EmployeeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeViewModel.swift; sourceTree = "<group>"; };
 		F55E524627B679E800288187 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F55E524827B67A8000288187 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		F55E524A27B67AC700288187 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		F5715FAB27B82B5F001FADE6 /* GenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderView.swift; sourceTree = "<group>"; };
 		F5715FB527BFAF2D001FADE6 /* GenerateMeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateMeetingView.swift; sourceTree = "<group>"; };
+		F5BA076B27C45A6500A07DD4 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		F5F4CF1D27C4FC7E00443725 /* AttendenceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendenceListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +150,8 @@
 				71C62C7F27AD585A00C573E7 /* Components */,
 				7149E91327A977D6008E3553 /* ContentView.swift */,
 				7149E8FC27A8720A008E3553 /* LoginView.swift */,
+				F5F4CF1D27C4FC7E00443725 /* AttendenceListView.swift */,
+				F551EBAC27C42CF400A8FE7C /* GenerateView.swift */,
 				71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */,
 				F55E524827B67A8000288187 /* UserProfileView.swift */,
 				F55E524A27B67AC700288187 /* EditProfileView.swift */,
@@ -155,6 +167,8 @@
 				7149E91927A987DD008E3553 /* Session.swift */,
 				F55E524227B678EE00288187 /* EmployeeViewModel.swift */,
 				F55E524627B679E800288187 /* ImagePicker.swift */,
+				F5BA076B27C45A6500A07DD4 /* Employee.swift */,
+				F5509B1827C9734B0099690B /* LocationManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -167,6 +181,7 @@
 				71C62C8427AD5AC300C573E7 /* TitleView.swift */,
 				71A5EBF327AEA052009F68B9 /* FeedbackView.swift */,
 				F5715FB527BFAF2D001FADE6 /* GenerateMeetingView.swift */,
+				F5509B1627C95AA20099690B /* LocationMeetingView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -288,17 +303,22 @@
 				7149E91A27A987DE008E3553 /* Session.swift in Sources */,
 				F55E524727B679E800288187 /* ImagePicker.swift in Sources */,
 				71C62C8127AD58F400C573E7 /* LoadingView.swift in Sources */,
+				F5509B1927C9734B0099690B /* LocationManager.swift in Sources */,
 				7149E91227A96FCA008E3553 /* Credentials.swift in Sources */,
 				F55E524327B678EE00288187 /* EmployeeViewModel.swift in Sources */,
 				71A5EBF427AEA052009F68B9 /* FeedbackView.swift in Sources */,
+				F5F4CF1E27C4FC7E00443725 /* AttendenceListView.swift in Sources */,
+				F5509B1727C95AA20099690B /* LocationMeetingView.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
 				F5715FB627BFAF2E001FADE6 /* GenerateMeetingView.swift in Sources */,
 				71C62C8327AD598900C573E7 /* InputsView.swift in Sources */,
+				F5BA076C27C45A6500A07DD4 /* Employee.swift in Sources */,
 				F55E524927B67A8000288187 /* UserProfileView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
 				71D09A6427A9DADD00DA2D1D /* ResetPasswordView.swift in Sources */,
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,
 				71C62C8527AD5AC300C573E7 /* TitleView.swift in Sources */,
+				F551EBAD27C42CF500A8FE7C /* GenerateView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
