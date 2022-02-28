@@ -89,7 +89,7 @@ struct CardExpansionDetails: View {
     }
 }
 
-struct CardExpansion_Previews: PreviewProvider {
+struct CardExpansionDetails_Previews: PreviewProvider {
     static var previews: some View {
         CardExpansionDetails()
     }
