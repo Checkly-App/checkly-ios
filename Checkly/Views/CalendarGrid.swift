@@ -326,16 +326,19 @@ struct CalendarGrid: View {
     }
     
     func MeetingDetailsView(meeting: Meeting) -> some View {
+        
         VStack(spacing: 20) {
             HStack(alignment: .top) {
                 Circle()
                     .fill(meeting.type == "Online" ? Color("BlueA") : Color("Purple"))
                     .frame(width: 10, height: 10)
                     .padding(.top, 10)
+                // meeting title
                 Text(meeting.title)
                     .font(.system(size: 25, weight: .bold))
                     .fontWeight(.semibold)
                     .hLeading()
+                // meeting type
                 ZStack{
                     RoundedRectangle(cornerRadius: 25)
                         .fill(meeting.type == "Online" ? Color("BlueA").opacity(0.2) : Color("Purple").opacity(0.2))
@@ -346,14 +349,15 @@ struct CalendarGrid: View {
                         }
                         .padding(.trailing, 10)
                     }
+                    .padding([.top], 15)
                     .padding([.leading], 15)
-            // MARK: Host name
+            // host name
             Text("By: \(meetingViewModel.getHostName(hostID: meeting.host))")
                  .font(.system(size: 16, weight: .semibold))
                  .foregroundColor(.gray)
                  .hLeading()
                  .padding([.leading], 15)
-            // MARK: Attendees images
+            // Attendees images
             HStack(spacing: -10){
                 if meetingViewModel.meetingAttendeesArray(meeting: meeting).count != 0 {
                     ForEach(meetingViewModel.meetingAttendeesArray(meeting: meeting)){ attendee in
@@ -390,6 +394,7 @@ struct CalendarGrid: View {
             .padding([.leading], 15)
             
             Divider()
+            // meeting time
             HStack(spacing: 13) {
                 Image( systemName: "clock")
                     .resizable()
@@ -402,7 +407,7 @@ struct CalendarGrid: View {
             .hLeading()
             .padding([.leading], 15)
             .padding([.top], 5)
-
+            // meeting date
             HStack(spacing: 13) {
                 Image( systemName: "calendar")
                     .resizable()
@@ -415,7 +420,7 @@ struct CalendarGrid: View {
                 .hLeading()
                 .padding([.leading], 15)
                 .padding([.top], 5)
-
+            // meeting location
             HStack(spacing: 13) {
                 Image( systemName: "mappin.and.ellipse")
                     .resizable()
@@ -433,7 +438,7 @@ struct CalendarGrid: View {
                     .hLeading()
                     .padding([.leading], 15)
                     .padding([.top], 5)
-            // Fix multiline image issue
+            // meeting agenda
             HStack(spacing: 13) {
                 Image( systemName: "text.alignleft")
                     .resizable()
@@ -449,7 +454,7 @@ struct CalendarGrid: View {
                 .padding([.leading], 15)
                 .padding([.top], 5)
 
-         // Map view if available
+         // Display Map view if available
             if meeting.latitude != "unavailable" && meeting.longitude != "unavailable" {
                 
                 Map(coordinateRegion: $coordinateRegion, annotationItems: [AnnotatedItem(coordinate: .init(latitude: Double(meeting.latitude) ?? 0.0, longitude: Double(meeting.longitude) ?? 0.0) )]){ item in
