@@ -33,6 +33,7 @@
 		A3B8D85A27B11A8900752F63 /* CalendarViewRouterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85927B11A8900752F63 /* CalendarViewRouterHelper.swift */; };
 		A3B8D85C27B13D9F00752F63 /* DateValueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85B27B13D9F00752F63 /* DateValueModel.swift */; };
 		A3C9709D27B184930041058A /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = A3C9709C27B184930041058A /* FirebaseDatabase */; };
+		A3CE73FE27CD5593002D2517 /* AnnotatedItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CE73FD27CD5593002D2517 /* AnnotatedItemModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		A3B8D85727B11A5600752F63 /* CalendarTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTimeline.swift; sourceTree = "<group>"; };
 		A3B8D85927B11A8900752F63 /* CalendarViewRouterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewRouterHelper.swift; sourceTree = "<group>"; };
 		A3B8D85B27B13D9F00752F63 /* DateValueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValueModel.swift; sourceTree = "<group>"; };
+		A3CE73FD27CD5593002D2517 /* AnnotatedItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedItemModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				7149E91927A987DD008E3553 /* LoginModel.swift */,
 				A3B8D84C27B117E400752F63 /* MeetingModel.swift */,
 				A3B8D85B27B13D9F00752F63 /* DateValueModel.swift */,
+				A3CE73FD27CD5593002D2517 /* AnnotatedItemModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3B8D85427B11A2B00752F63 /* Calendar.swift in Sources */,
+				A3CE73FE27CD5593002D2517 /* AnnotatedItemModel.swift in Sources */,
 				7149E8FD27A8720A008E3553 /* LoginView.swift in Sources */,
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
 				A3B8D84F27B1182200752F63 /* MeetingViewModel.swift in Sources */,
