@@ -15,11 +15,13 @@
 		7149E90C27A87452008E3553 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7149E90B27A87452008E3553 /* FirebaseAuth */; };
 		7149E90E27A8747B008E3553 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7149E90D27A8747B008E3553 /* GoogleService-Info.plist */; };
 		7149E91227A96FCA008E3553 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91127A96FCA008E3553 /* Credentials.swift */; };
-		7149E91427A977D7008E3553 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91327A977D6008E3553 /* ContentView.swift */; };
+		7149E91427A977D7008E3553 /* tabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91327A977D6008E3553 /* tabView.swift */; };
 		7149E91827A985BC008E3553 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91727A985BC008E3553 /* Authentication.swift */; };
 		7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91927A987DD008E3553 /* LoginModel.swift */; };
 		71D09A5C27A9A02A00DA2D1D /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 71D09A5B27A9A02A00DA2D1D /* SwiftKeychainWrapper */; };
 		71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */; };
+		BE064A3427C7AA1700BE4970 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE064A3327C7AA1700BE4970 /* HomeView.swift */; };
+		BE1C295A27CC75260079ADFE /* CardExpansionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C295927CC75260079ADFE /* CardExpansionDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,10 +32,12 @@
 		7149E90127A87213008E3553 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7149E90D27A8747B008E3553 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7149E91127A96FCA008E3553 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
-		7149E91327A977D6008E3553 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7149E91327A977D6008E3553 /* tabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabView.swift; sourceTree = "<group>"; };
 		7149E91727A985BC008E3553 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		7149E91927A987DD008E3553 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
+		BE064A3327C7AA1700BE4970 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		BE1C295927CC75260079ADFE /* CardExpansionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardExpansionDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,13 +73,12 @@
 		7149E8F927A8720A008E3553 /* Checkly */ = {
 			isa = PBXGroup;
 			children = (
+				7149E8FA27A8720A008E3553 /* ChecklyApp.swift */,
+				7149E90D27A8747B008E3553 /* GoogleService-Info.plist */,
+				7149E8FE27A87213008E3553 /* Assets.xcassets */,
 				71D09A5F27A9A0CC00DA2D1D /* Services */,
 				7149E91027A96F92008E3553 /* Models */,
 				7149E90F27A96F71008E3553 /* Views */,
-				7149E8FA27A8720A008E3553 /* ChecklyApp.swift */,
-				7149E91727A985BC008E3553 /* Authentication.swift */,
-				7149E90D27A8747B008E3553 /* GoogleService-Info.plist */,
-				7149E8FE27A87213008E3553 /* Assets.xcassets */,
 				7149E90027A87213008E3553 /* Preview Content */,
 			);
 			path = Checkly;
@@ -92,8 +95,10 @@
 		7149E90F27A96F71008E3553 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7149E91327A977D6008E3553 /* ContentView.swift */,
+				7149E91327A977D6008E3553 /* tabView.swift */,
+				BE064A3327C7AA1700BE4970 /* HomeView.swift */,
 				7149E8FC27A8720A008E3553 /* LoginView.swift */,
+				BE1C295927CC75260079ADFE /* CardExpansionDetails.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -111,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */,
+				7149E91727A985BC008E3553 /* Authentication.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -199,9 +205,11 @@
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
 				7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */,
 				7149E91227A96FCA008E3553 /* Credentials.swift in Sources */,
-				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
+				7149E91427A977D7008E3553 /* tabView.swift in Sources */,
+				BE064A3427C7AA1700BE4970 /* HomeView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,
+				BE1C295A27CC75260079ADFE /* CardExpansionDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
