@@ -22,7 +22,7 @@ struct CardExpansionDetails: View {
                 Text("SDAIA Central Building")
                     .font(.body)
                     .foregroundColor(Color(.sRGB, red: 0.463, green: 0.463, blue: 0.463, opacity: 1))
-                Text("on time")
+                Text("On-time")
                     .frame(width: 100, height: 40)
                     .background(Color(.sRGB, red: 0.239, green: 0.824, blue: 0.733, opacity: 0.5))
                     .cornerRadius(8)
@@ -80,8 +80,10 @@ struct CardExpansionDetails: View {
             Text("Generated and projected by Checkly")
                 .foregroundColor(.gray)
                 .font(.system(size: 15))
+                .padding([.bottom],20)
             
         }
+        .ignoresSafeArea()
         .padding([.top],50)
         .background(
             LinearGradient(colors: [Color(.sRGB, red: 1, green: 1, blue: 1, opacity: 1),Color(.sRGB, red: 0.954, green: 0.954, blue: 0.954, opacity: 1)], startPoint: .top, endPoint: .bottom)

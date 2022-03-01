@@ -72,7 +72,7 @@ struct HomeView: View {
                         self.showCardSheet.toggle()
                     }
                     .sheet(isPresented: $showCardSheet) {
-                        CardExpansionDetails()
+                        CardExpansion()
                     }
                 
                 if showCardSheet {
@@ -94,6 +94,7 @@ struct HomeView: View {
                         Image(systemName: "line.horizontal.3")
                             .resizable()
                             .frame(width: 24, height: 20)
+                            .foregroundColor(Color(.sRGB, red: 0.024, green: 0.661, blue: 0.958, opacity: 1))
                         
                     }
                 }
@@ -104,9 +105,13 @@ struct HomeView: View {
                         Image(systemName: "bell")
                             .resizable()
                             .frame(width: 24, height: 24)
+                            .foregroundColor(Color(.sRGB, red: 0.024, green: 0.661, blue: 0.958, opacity: 1))
                     }
                 }
             }
+            .background(
+                LinearGradient(colors: [Color(.sRGB, red: 1, green: 1, blue: 1, opacity: 1),Color(.sRGB, red: 0.954, green: 0.954, blue: 0.954, opacity: 1)], startPoint: .top, endPoint: .bottom)
+            )
         }
     }
     
