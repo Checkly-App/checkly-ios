@@ -58,7 +58,7 @@ class NotificationManager {
                     }
                     /// trigger a notification when they accept the invitation
                     if uid == attendee.key && attendee.value == "accepted"{
-                        scheduleMeetingReminder(title: meeting.title, date: date)
+//                        scheduleMeetingReminder(title: meeting.title, date: date)
                     }
                 }
             })
@@ -117,10 +117,8 @@ class NotificationManager {
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(abbreviation: "GMT+3")!
         let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
-        
         let uuid = UUID().uuidString
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false) /// trigger based on a specific date
-        ///
         let request = UNNotificationRequest(identifier: uuid, content: content, trigger: trigger)
         center.add(request) { error in
             if error == nil{
