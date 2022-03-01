@@ -16,8 +16,6 @@
 		7149E91427A977D7008E3553 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91327A977D6008E3553 /* ContentView.swift */; };
 		7149E91827A985BC008E3553 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91727A985BC008E3553 /* Authentication.swift */; };
 		7149E91A27A987DE008E3553 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91927A987DD008E3553 /* Session.swift */; };
-		71A5EBEF27ADE512009F68B9 /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = 71A5EBEE27ADE512009F68B9 /* SPAlert */; };
-		71A5EBF227ADECA6009F68B9 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 71A5EBF127ADECA6009F68B9 /* AlertToast */; };
 		71A5EBF427AEA052009F68B9 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A5EBF327AEA052009F68B9 /* FeedbackView.swift */; };
 		71C62C7227AC286900C573E7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71C62C7127AC286900C573E7 /* FirebaseAuth */; };
 		71C62C7427AC286900C573E7 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 71C62C7327AC286900C573E7 /* FirebaseAuthCombine-Community */; };
@@ -58,10 +56,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71A5EBEF27ADE512009F68B9 /* SPAlert in Frameworks */,
 				71C62C7827AC286900C573E7 /* FirebaseDatabaseSwift-Beta in Frameworks */,
 				71D09A5C27A9A02A00DA2D1D /* SwiftKeychainWrapper in Frameworks */,
-				71A5EBF227ADECA6009F68B9 /* AlertToast in Frameworks */,
 				71C62C7427AC286900C573E7 /* FirebaseAuthCombine-Community in Frameworks */,
 				71C62C7627AC286900C573E7 /* FirebaseDatabase in Frameworks */,
 				71C62C7227AC286900C573E7 /* FirebaseAuth in Frameworks */,
@@ -97,7 +93,6 @@
 				7149E91027A96F92008E3553 /* Models */,
 				7149E90F27A96F71008E3553 /* Views */,
 				7149E8FA27A8720A008E3553 /* ChecklyApp.swift */,
-				7149E91727A985BC008E3553 /* Authentication.swift */,
 				7149E90D27A8747B008E3553 /* GoogleService-Info.plist */,
 				7149E8FE27A87213008E3553 /* Assets.xcassets */,
 				7149E90027A87213008E3553 /* Preview Content */,
@@ -147,6 +142,7 @@
 		71D09A5F27A9A0CC00DA2D1D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7149E91727A985BC008E3553 /* Authentication.swift */,
 				71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */,
 			);
 			path = Services;
@@ -177,8 +173,6 @@
 				71C62C7927AC286900C573E7 /* FirebaseFirestore */,
 				71C62C7B27AC286900C573E7 /* FirebaseFirestoreCombine-Community */,
 				71C62C7D27AC286900C573E7 /* FirebaseFirestoreSwift-Beta */,
-				71A5EBEE27ADE512009F68B9 /* SPAlert */,
-				71A5EBF127ADECA6009F68B9 /* AlertToast */,
 			);
 			productName = Checkly;
 			productReference = 7149E8F727A8720A008E3553 /* Checkly.app */;
@@ -211,8 +205,6 @@
 			packageReferences = (
 				71D09A5A27A9A02900DA2D1D /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				71C62C7027AC286900C573E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				71A5EBED27ADE511009F68B9 /* XCRemoteSwiftPackageReference "SPAlert" */,
-				71A5EBF027ADECA5009F68B9 /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = 7149E8F827A8720A008E3553 /* Products */;
 			projectDirPath = "";
@@ -461,22 +453,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		71A5EBED27ADE511009F68B9 /* XCRemoteSwiftPackageReference "SPAlert" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ivanvorobei/SPAlert";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-		71A5EBF027ADECA5009F68B9 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elai950/AlertToast.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		71C62C7027AC286900C573E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -496,16 +472,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		71A5EBEE27ADE512009F68B9 /* SPAlert */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 71A5EBED27ADE511009F68B9 /* XCRemoteSwiftPackageReference "SPAlert" */;
-			productName = SPAlert;
-		};
-		71A5EBF127ADECA6009F68B9 /* AlertToast */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 71A5EBF027ADECA5009F68B9 /* XCRemoteSwiftPackageReference "AlertToast" */;
-			productName = AlertToast;
-		};
 		71C62C7127AC286900C573E7 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 71C62C7027AC286900C573E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
