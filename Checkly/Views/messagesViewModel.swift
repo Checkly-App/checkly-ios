@@ -74,10 +74,10 @@ class messagesViewModel: ObservableObject {
             let obj = dataSnapshot.value as! [String:Any]
             print(obj)
             
-            let name = obj["Name"] as! String
-            let id = obj["employeeID"] as! String
-            let department = obj["Department"] as! String
-            let photoURL = obj["tokens"] as! String
+            let name = obj["name"] as! String
+            let id = obj["employee_id"] as! String
+            let department = obj["department"] as! String
+            let photoURL = obj["image_token"] as! String
 
             let emp = Employee(id: id, name: name, department: department, photoURL: photoURL)
             

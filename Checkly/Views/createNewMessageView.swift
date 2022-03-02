@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseDatabase
 import Firebase
+import SDWebImageSwiftUI
 
 class createNewMessageViewModel: ObservableObject {
     
@@ -26,10 +27,10 @@ class createNewMessageViewModel: ObservableObject {
             ref.child("Employee").observe(.childAdded) { snapshot in
                 
                 let obj = snapshot.value as! [String: Any]
-                let name = obj["Name"] as! String
-                let id = obj["employeeID"] as! String
-                let department = obj["Department"] as! String
-                let photoURL = obj["tokens"] as! String
+                let name = obj["name"] as! String
+                let id = obj["employee_id"] as! String
+                let department = obj["department"] as! String
+                let photoURL = obj["image_token"] as! String
 
                 
                 let emp = Employee(id: id, name: name, department: department, photoURL: photoURL)
@@ -61,8 +62,14 @@ struct createNewMessageView: View {
                         didSelectNewUser(user)
                     } label: {
                         HStack{
-                            Image(systemName: "person.circle.fill").foregroundColor(.gray)
-                                .font(.system(size: 30))
+                            if ( user.photoURL == "null") {
+                                Image(systemName: "person.crop.circle.fill").foregroundColor(.gray)
+                                    .font(.system(size: 45))
+                            } else {
+                            WebImage(url: URL(string: user.photoURL)).resizable().scaledToFill().frame(width: 45, height: 45).clipped().cornerRadius(64).overlay(RoundedRectangle(cornerRadius: 64).stroke(Color(hexStringToUIColor(hex: "2CAFEE")), lineWidth: 1)).shadow(radius: 5)
+                            }
+//                            Image(systemName: "person.circle.fill").foregroundColor(.gray)
+//                                .font(.system(size: 30))
                             VStack (alignment: .leading){
                                 Text(user.name).bold().foregroundColor(.black)
                                 Text(user.department).font(.caption2).foregroundColor(.gray)
