@@ -66,28 +66,40 @@ class messagesViewModel: ObservableObject {
     }
     
     func getSelectedUser(id: String, completion: @escaping (Employee)->Void){
-        let ref = Database.database().reference()
         
-        ref.child("Employee/\(id)").observe(.value, with: { dataSnapshot in
-            print("after ref")
-            print(dataSnapshot.value!)
-            let obj = dataSnapshot.value as! [String:Any]
-            print(obj)
-            
-            let name = obj["name"] as! String
-            let id = obj["employee_id"] as! String
-            let department = obj["department"] as! String
-            let photoURL = obj["image_token"] as! String
+        let ref = Database.database().reference()
+        let Queue = DispatchQueue.init(label: "Queue")
+        
+        Queue.sync {
+                let idtosearch = id
+                ref.child("Employee").queryOrdered(byChild: "employee_id").queryEqual(toValue: idtosearch).observeSingleEvent(of: .childAdded, with: { (snapshot) in
+                    print("XXXXXXXXXXXXXXXXXXXXXXX\(snapshot.key)")
+                    let newId = snapshot.key
+                    print("XXXXXXXXXXXXXXXXXXXXXXX\(newId)")
+                    
+                    print("start search")
+                    ref.child("Employee/\(newId)").observe(.value, with: { dataSnapshot in
 
-            let emp = Employee(id: id, name: name, department: department, photoURL: photoURL)
-            
-            if ( emp.id == id) {
-                print("inside if")
-                completion(emp)
-            }
-        }, withCancel: { error in
-            print(error.localizedDescription)
-        })
+                    let obj = dataSnapshot.value as! [String:Any]
+
+
+                    let name = obj["name"] as! String
+                    let id = obj["employee_id"] as! String
+                    let department = obj["department"] as! String
+                    let photoURL = obj["image_token"] as! String
+
+                    let emp = Employee(id: id, name: name, department: department, photoURL: photoURL)
+                    
+
+                        print("done with search")
+                        completion(emp)
+
+                }, withCancel: { error in
+                    print(error.localizedDescription)
+                })
+                    
+                })
+        }
     }
 }
 
