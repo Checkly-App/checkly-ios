@@ -47,6 +47,7 @@
 		DA9CF63C27CFA5D000B6ED09 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = DA9CF63B27CFA5D000B6ED09 /* FirebaseStorageCombine-Community */; };
 		DA9CF63E27CFA5D000B6ED09 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = DA9CF63D27CFA5D000B6ED09 /* FirebaseStorageSwift-Beta */; };
 		DA9CF64027CFA6BC00B6ED09 /* attendanceHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9CF63F27CFA6BB00B6ED09 /* attendanceHistoryView.swift */; };
+		DA9CF67E27CFDD8A00B6ED09 /* attendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9CF67D27CFDD8A00B6ED09 /* attendance.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		7149E91927A987DD008E3553 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
 		DA9CF63F27CFA6BB00B6ED09 /* attendanceHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = attendanceHistoryView.swift; sourceTree = "<group>"; };
+		DA9CF67D27CFDD8A00B6ED09 /* attendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = attendance.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 			children = (
 				7149E91127A96FCA008E3553 /* Credentials.swift */,
 				7149E91927A987DD008E3553 /* LoginModel.swift */,
+				DA9CF67D27CFDD8A00B6ED09 /* attendance.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7149E8FD27A8720A008E3553 /* LoginView.swift in Sources */,
+				DA9CF67E27CFDD8A00B6ED09 /* attendance.swift in Sources */,
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
 				DA9CF64027CFA6BC00B6ED09 /* attendanceHistoryView.swift in Sources */,
 				7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */,
