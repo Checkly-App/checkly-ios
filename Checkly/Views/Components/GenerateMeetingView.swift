@@ -34,7 +34,7 @@ struct GenerateMeetingView: View {
   //  @State var attendeeslist = [Employee]()
 
     @State var text = ""
-    @State var type = ""
+    @State var type = "Online"
      var ref = Database.database().reference()
     
     let userid = Auth.auth().currentUser!.uid
@@ -118,8 +118,8 @@ struct GenerateMeetingView: View {
                     DatePicker(
                           "Start time",
                           selection: $starttime,
-                          in: Date.now..., displayedComponents: [.hourAndMinute]
-                    ).labelsHidden().padding(.trailing).fixedSize().frame(maxWidth: .infinity/2,maxHeight: 44, alignment: .leading).background(.gray.opacity(0.0)).cornerRadius(7).border(.white.opacity(0.4))}
+                          in: Date.now..., displayedComponents: [.hourAndMinute ]
+                    ).labelsHidden().padding(.trailing).fixedSize().frame(maxWidth: .infinity/2,maxHeight: 44, alignment: .leading).background(.gray.opacity(0.0)).cornerRadius(7).border(.white.opacity(0.4)).environment(\.timeZone, TimeZone(abbreviation: "GMT+3")!)}
                     HStack{
                     Text("End time:")
                         .font(.system(size: 14, weight: .medium))
@@ -129,7 +129,7 @@ struct GenerateMeetingView: View {
                               "Start time",
                               selection: $endtime,
                               in: Date.now..., displayedComponents: [.hourAndMinute]
-                        ).labelsHidden().fixedSize().frame(maxWidth: .infinity/2.5,maxHeight: 44, alignment: .leading).background(.gray.opacity(0.0)).cornerRadius(7).border(.white.opacity(0.4))   .accentColor(.orange)
+                        ).labelsHidden().fixedSize().frame(maxWidth: .infinity/2.5,maxHeight: 44, alignment: .leading).background(.gray.opacity(0.0)).cornerRadius(7).border(.white.opacity(0.4))
                     }
                 }
               
@@ -301,10 +301,10 @@ struct GenerateMeetingView: View {
                    presentAlert = true
                 }
                 else {
-                    Generate() }
-               // print("the maon view")
-//print(selectrow)
-              //  print(self.settings.score)
+                    Generate()
+                    dismiss()
+                }
+          
 
             }
                 label: {
@@ -353,15 +353,19 @@ struct GenerateMeetingView: View {
        
         for attendeneslist in attendeneslist {
             
-            attendenceID[attendeneslist.id] = "Not"
+            attendenceID[attendeneslist.id] = "sent"
 
         }
-        print(attendenceID)
-        let calender = Calendar.current
+
+
+      
+        var calender = Calendar.current
+        calender.timeZone = TimeZone(abbreviation: "GMT+3")!
         let datecomp = calender.dateComponents([.day,.month,.year], from: date)
         let timecomp = calender.dateComponents([.hour,.minute,.second], from: starttime)
         var newcomponent = DateComponents()
-        newcomponent.timeZone = TimeZone(secondsFromGMT: 0)
+        newcomponent.timeZone = TimeZone(abbreviation: "GMT+3")
+        
         newcomponent.day = datecomp.day
         newcomponent.month = datecomp.month
         newcomponent.year = datecomp.year
@@ -370,19 +374,12 @@ struct GenerateMeetingView: View {
         newcomponent.second = timecomp.second
         let newintervaldate = calender.date(from: newcomponent)
         print(newintervaldate)
-            //        let testdate = date.formatted(.dateTime.month().day().year())
-        let interval = newintervaldate!.timeIntervalSinceNow
-        print(interval)
-        print(title)
-        print(location)
-        print(text)
-        print(starttime.formatted(.dateTime.hour().minute().second()))
-        starttime0 = starttime.formatted(.dateTime.hour().minute().second())
-      endtime0 = endtime.formatted(.dateTime.hour().minute().second())
-        print(endtime.formatted(.dateTime.hour().minute().second()))
-        print(type)
-//        ref.child("Meetings").childByAutoId().setValue(["title": title,"agenda": text,"host":userid,"location":location,"type":type,"date":interval,"start_time":starttime0,"end_time":endtime0,"attendees":attendenceID,"latitude":title,"longitude":title
-//                                                            ])
+      
+        let interval = Int( newintervaldate!.timeIntervalSince1970)
+       print(interval)
+
+        ref.child("Meetings").childByAutoId().setValue(["title": title,"agenda": text,"host":userid,"location":location,"type":type,"date":interval,"start_time":starttime0,"end_time":endtime0,"attendees":attendenceID,"latitude":"0","longitude":"0"
+                                                            ])
 
 
 
@@ -404,9 +401,7 @@ struct GenerateMeetingView: View {
         var minuted = starttime.formatted(.dateTime.minute())
         let AmOrPM = starttime0.suffix(2)
         
-        print(AmOrPM)
-        print(hourin)
-        print(minuted)
+        
         
         /// end time
       endtime0 = endtime.formatted(.dateTime.hour().minute())
@@ -420,32 +415,43 @@ struct GenerateMeetingView: View {
         var minutedend = endtime.formatted(.dateTime.minute())
         let AmOrPMEnd = endtime0.suffix(2)
         
-        print(AmOrPMEnd)
-        print(endhour)
-        print(minutedend)
+       
        if AmOrPMEnd == "AM" && AmOrPM == "PM"
         {
+           error0 = "Please enter a valid time"
            return false
        }
         if AmOrPMEnd == AmOrPM {
         if endhour == hourin {
           if  minutedend <= minuted{
+              error0 = "Please enter a valid time"
+
                 return false
             }
         }else
             if endhour < hourin{
+            error0 = "Please enter a valid time"
+
             return false
         }
         }
         
  
         if title == ""{
+            error0 = "All feild are required"
+
             return false }
         if location == "" {
+            error0 = "All feild are required"
+
             return false }
         if text == "" {
+            error0 = "All feild are required"
+
             return false }
         if attendeneslist.count == 0{
+            error0 = "Please add at least one attendees"
+
             return false 
         }
      

@@ -24,6 +24,8 @@ class EmployeeViewModel: ObservableObject {
     @Published var email = ""
     @Published var position = ""
     @Published var department = ""
+    @Published var departmentid = ""
+
     @Published var address = ""
     @Published var gender = ""
     @Published var tokens = ""
@@ -34,6 +36,7 @@ class EmployeeViewModel: ObservableObject {
     @Published var Ischange = false
     @Published  var userimage: UIImage?
     @Published var emplyeelist = [Employee]()
+    
 
 
 
@@ -43,6 +46,8 @@ class EmployeeViewModel: ObservableObject {
     @Published var nationalID = ""
     @Published var employeeID = ""
     @Published var birth = ""
+    @Published var comid0 = ""
+    @Published var depname = ""
     //@Published var userId = "111111111"
 
 
@@ -141,7 +146,7 @@ class EmployeeViewModel: ObservableObject {
                         if obj.key == depid {
 
                         dep = obj.childSnapshot(forPath: "name").value as? String
-                            comID = obj.childSnapshot(forPath: "comapny_id").value as? String
+                            comID = obj.childSnapshot(forPath: "company_id").value as? String
 
         
                             self.department = dep
@@ -159,11 +164,11 @@ class EmployeeViewModel: ObservableObject {
 }
         }
     }
-    func fetchcompany() -> String {
+    func fetchcompany() {
 
-        var user_id: String!
         var depid: String!
-        var comID = ""
+        var comID0: String!
+
 
 
         ref.child("Employee").observe(.value) { snapshot in
@@ -175,41 +180,43 @@ class EmployeeViewModel: ObservableObject {
                     let obj = contact as! DataSnapshot
                     if obj.key == self.userid {
 
-                    depid = obj.childSnapshot(forPath: "Department").value as? String
-      
-                        
-                   
+                    depid = obj.childSnapshot(forPath: "department").value as? String
+                        print("fetch function 1")
+                        print(depid)
+         
+                    }
                 }
-        }
+                        self.ref.child("Department").observe(.value) { snapshot in
             
-            self.ref.child("Department").observe(.value) { snapshot in
+                                for contact in snapshot.children{
+            
+            
+            
+                                    let obj = contact as! DataSnapshot
+                                    if obj.key == depid {
+                                        comID0 = ((obj.childSnapshot(forPath: "company_id").value as? String)!)
+                                        print("fetch function 2")
+                                        print(comID0)
+            
+                       }
+            
+                                 }
+            
+            
+                         }
+                }
+     
+        }
+    
 
-                    for contact in snapshot.children{
-                  
-
-
-                        let obj = contact as! DataSnapshot
-                        if obj.key == depid {
-                            comID = ((obj.childSnapshot(forPath: "comapny_id").value as? String)!)
-                            
-                         
-
-           }
-//     return comID
         
-       
-        
-    }
+      
             
         
     
-}
-        }
-        return comID
 
-    }
         
-        func fetchDatalist() {
+    func fetchDatalist() {
 
             var nameem: String!
             var depid: String!
@@ -228,15 +235,16 @@ class EmployeeViewModel: ObservableObject {
             var toke: String!
             var comID: String!
 
-            let usercompanyID = fetchcompany()
+
+
+            
 
 
 
 
 
-
-
-            ref.child("Employee").observe(.value) { snapshot in
+            DispatchQueue.main.async {
+                self.ref.child("Employee").observe(.value) { [self] snapshot in
 
                     for contact in snapshot.children{
                   
@@ -256,53 +264,139 @@ class EmployeeViewModel: ObservableObject {
                         phone = obj.childSnapshot(forPath: "phone_number").value as? String
                         position = obj.childSnapshot(forPath: "position").value as? String
                             toke = obj.childSnapshot(forPath: "image_token").value as? String
-
-                        self.ref.child("Department").observe(.value) { snapshot in
-
-                                for contact in snapshot.children{
-
-
-
-                                    let obj = contact as! DataSnapshot
-                                    if obj.key == depid {
-                                        dep = obj.childSnapshot(forPath: "name").value as? String
-                                        comID = obj.childSnapshot(forPath: "ComapnyID").value as? String
-
-
-                       }
-
-                                    if comID == nil{
-                                        comID = "not"
-                                    }
-                                    if dep == nil{
-                                        dep = "not"
-                                    }
-
-
-                }
-                        }
+                        let employee = Employee( id:userid,name:nameem,position: position,department:depid,birthdate: dateb ,tokens:toke,address:add,phone: phone,NationalID:natid ,EmplyeeId: empid ,gender: gender0,emaill:email,comid:self.comid0)
+                        self.finddep(Empl: employee)
                         
-                        if comID == nil{
-                            comID = "not"
-                        }
-                        if dep == nil{
-                            dep = "not"
-                        }
-                        
-            
-                let employee = Employee( id:userid,name:nameem,position: position,department: dep ,birthdate: dateb ,tokens:toke,address:add,phone: phone,NationalID:natid ,EmplyeeId: empid ,gender: gender0,emaill:email,comid:comID)
-                    print(employee)
-//                if employee.comid == usercompanyID {
-                    self.emplyeelist.append(employee)
+                    }}
+            }}
+    func finddep(  Empl  :  Employee ){
+        var depid: String!
+        var comIDuser: String!
+
+
+
+        ref.child("Employee").observe(.value) { snapshot in
+                for contact in snapshot.children{
+              
+
+
+                    let obj = contact as! DataSnapshot
+                    if obj.key == self.userid {
+
+                    depid = obj.childSnapshot(forPath: "department").value as? String
+                        print("fetch function 1")
+                        print(depid)
+         
                     }
                 }
-            }
         
+                        self.ref.child("Department").observe(.value) { snapshot in
             
-           
+                                for contact in snapshot.children{
             
+            
+            
+                                    let obj = contact as! DataSnapshot
+                                    if obj.key == depid {
+                                        comIDuser = ((obj.childSnapshot(forPath: "company_id").value as? String)!)
+                                        print("fetch function 2")
+                                        print(comIDuser)
+            
+                       }
+                                }
+        var emp = Empl
+    var comID: String!
+    var dep: String!
+      print("this is")
 
+                            self.ref.child("Department").observe(.value) { snapshot in
+  
+                                  for contact in snapshot.children{
+  print("enter")
+  
+  
+                                      let obj = contact as! DataSnapshot
+                                      if obj.key == emp.department {
+                                          print("correct dep")
+                                          dep = obj.childSnapshot(forPath: "name").value as? String
+                                      //    comID = obj.childSnapshot(forPath: "name").value as? String
+                                          self.depname =                                           (obj.childSnapshot(forPath: "name").value as? String)!
+                                        dep = obj.childSnapshot(forPath: "name").value as? String
+  
+                                          comID = (obj.childSnapshot(forPath: "company_id").value as? String)!
+                                          emp.department = dep
+  
+                                          emp.comid = comID
+  
+//
+                                          if emp.comid == comIDuser  && emp.id != self.userid {
+                                      self.emplyeelist.append(emp)
+                                              print(self.emplyeelist)
+                                          }
+                                     // var i = 0
+//                                      for  emplyeelist in self.emplyeelist {
+//                                            //  i = i+1
+//                                                   if emplyeelist.id != emp.id {
+//                                      self.emplyeelist.append(emp)
+//
+//                                                   }}
+                          
+                                  }
+                        }
+                                     
+                                  }
+                          
+                        }
+        }
     }
+                    
+  
+//    func finddep1(  Empl  :  Employee){
+//        var emp = Empl
+//    var comID: String!
+//    var dep: String!
+//        var user_id: String!
+//        var depid0: String!
+//        var comID0 = ""
+//
+//
+//        ref.child("Employee").observe(.value) { snapshot in
+//
+//                for contact in snapshot.children{
+//
+//
+//
+//                    let obj = contact as! DataSnapshot
+//                    if obj.key == self.userid {
+//
+//                    depid0 = obj.childSnapshot(forPath: "Department").value as? String
+//
+//
+//
+//            print(depid0)
+//            self.ref.child("Department").observe(.value) { snapshot in
+//
+//                    for contact in snapshot.children{
+//
+//
+//
+//                        let obj = contact as! DataSnapshot
+//                        if obj.key == depid0 {
+//                            comID0 = ((obj.childSnapshot(forPath: "company_id").value as? String)!)
+//                            self.finddep(Empl: Empl, comp: comID0)
+// return
+//
+//
+//    }
+//                    }
+//                }
+//        }
+//}
+//
+//        }
+//    }
+}
+    
 
     
 

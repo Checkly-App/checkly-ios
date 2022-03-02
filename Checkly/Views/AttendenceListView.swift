@@ -110,7 +110,7 @@ struct AttendenceListViewselect: View {
          dismiss()
         } label: {
             VStack{
-            Text("Add attendees")
+            Text(" Done")
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .frame(maxWidth: 250)
