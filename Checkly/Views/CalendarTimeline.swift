@@ -6,20 +6,34 @@
 //
 
 import SwiftUI
+import MapKit
+import FirebaseStorage
+import SDWebImageSwiftUI
+import BottomSheet
 
 struct CalendarTimeline: View {
     
-     @StateObject var meetingViewModel: MeetingViewModel = MeetingViewModel()
+     @ObservedObject var meetingViewModel: MeetingViewModel = MeetingViewModel()
      @Namespace var animation
      // to switch between screens
      @StateObject var viewRouter: CalendarViewRouterHelper
-     
+     // for bottom sheet
+     @State private var bottomSheetPosition: BottomSheetPosition = .hidden
+     // for images
+     @State private var imageURL = URL(string: "")
+     // for attendees sheet
+     @State private var showingSheet = false
+     // for map view
+     @State private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0,longitude: 0.0),span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
+    
      var body: some View {
          
          // horizontal scroll view to select dates
          ScrollView(.vertical, showsIndicators: false){
              
-             LazyVStack(spacing: 15, pinnedViews: [.sectionHeaders]){
+             VStack(spacing: 15){
+                 
+                 HeaderView()
                  
                  Section {
                      
@@ -78,20 +92,60 @@ struct CalendarTimeline: View {
                      
                      MeetingsView()
                      
-                 } header: {
-                     HeaderView()
                  }
              }
              .preferredColorScheme(.light)
          }
-         .ignoresSafeArea(.container, edges: .top)
+         .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [BottomSheet.Options.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray), .background(AnyView(Color.white))], content: {
+             
+             // see function below
+             MeetingDetailsView(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", date: Date(), type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", end_time: "9:45 AM", start_time: "9:00 AM", latitude: "unavailable", longitude: "unavailable"))
+
+         })
+         .sheet(isPresented: $showingSheet) {
+             Rectangle()
+                 .fill(.gray)
+                 .frame(width: 38, height: 5)
+                 .cornerRadius(35)
+                 .padding(.top, 10)
+             NavigationView {
+                 List(meetingViewModel.meetingAttendeesArray(meeting: (meetingViewModel.selectedMeeting)!)){ attendee in
+                     HStack{
+                         // attendee image
+                         if URL(string: attendee.imgToken) == URL(string: "null"){
+                             Image(systemName: "person.crop.circle.fill")
+                                 .resizable()
+                                 .aspectRatio(contentMode: .fill)
+                                 .foregroundColor(.gray)
+                                 .frame(width: 50, height: 50)
+                                 .clipShape(Circle())
+                         } else {
+                             WebImage(url: URL(string: attendee.imgToken))
+                                 .resizable()
+                                 .indicator(Indicator.activity)
+                                 .aspectRatio(contentMode: .fill)
+                                 .frame(width: 50, height: 50)
+                                 .clipShape(Circle())
+                                 .onAppear(perform: {loadImageFromFirebase(imgurl: attendee.imgToken)})
+                         }
+                         VStack{
+                             // attendee name
+                             Text(attendee.name)
+                                 .font(.system(size: 20, weight: .medium))
+                             // attendee position
+                         }
+                     }
+                 }
+                 .listStyle(.plain)
+                 .navigationBarTitle("Attendees")
+
+             }
+         }
      }
      // Meetings View
      func MeetingsView() -> some View {
          
          LazyVStack(spacing: 20){
-             
- //            let colors: [Color] = [Color("Orange"), Color("Pink"), Color("BlueA"), Color("Purple")]
              
              if let meetings = meetingViewModel.filteredMeetings {
                  
@@ -102,7 +156,16 @@ struct CalendarTimeline: View {
                          .offset(y:100)
                  } else {
                      ForEach(meetings){ meeting in
-                         MeetingCardView(meeting: meeting)
+                         Button {
+                             meetingViewModel.selectedMeeting = meeting
+                             coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: Double(meetingViewModel.selectedMeeting?.latitude ?? "0.0") ?? 0.0,longitude: Double(meetingViewModel.selectedMeeting?.longitude ?? "0.0") ?? 0.0),span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
+                             
+                             withAnimation{
+                                 bottomSheetPosition = .middle
+                             }
+                         } label: {
+                             MeetingCardView(meeting: meeting)
+                         }.foregroundColor(.black)
                      }
                  }
              } else {
@@ -193,9 +256,223 @@ struct CalendarTimeline: View {
                  }
              .hLeading()
              .padding()
-             .padding(.top, getSafeArea().top)
              .background(Color.white)
      }
+    
+    func MeetingDetailsView(meeting: Meeting) -> some View {
+        VStack(spacing: 20) {
+            HStack(alignment: .top) {
+                Circle()
+                    .fill(meeting.type == "Online" ? Color("BlueA") : Color("Purple"))
+                    .frame(width: 10, height: 10)
+                    .padding(.top, 10)
+                Text(meeting.title)
+                    .font(.system(size: 25, weight: .bold))
+                    .fontWeight(.semibold)
+                    .hLeading()
+                ZStack{
+                    RoundedRectangle(cornerRadius: 25)
+                        .fill(meeting.type == "Online" ? Color("BlueA").opacity(0.2) : Color("Purple").opacity(0.2))
+                                .frame(width: 75, height: 38)
+                    Text(meeting.type)
+                        .font(.system(size: 17, weight: .semibold))
+                        .foregroundColor(meeting.type == "Online" ? Color("BlueA"): Color("Purple"))
+                        }
+                        .padding(.trailing, 10)
+                    }
+                    .padding([.top], 15)
+                    .padding([.leading], 15)
+            // Host name
+            Text("By: \(meetingViewModel.getHostName(hostID: meeting.host))")
+                 .font(.system(size: 16, weight: .semibold))
+                 .foregroundColor(.gray)
+                 .hLeading()
+                 .padding([.leading], 15)
+            // MARK: Attendees images
+            HStack(spacing: -10){
+                if meetingViewModel.meetingAttendeesArray(meeting: meeting).count != 0 {
+                   
+                 // if attendees are less than 7 display all their images, else display 7 only
+                  if meetingViewModel.meetingAttendeesArray(meeting: meeting).count < 7 {
+                        
+                      ForEach(meetingViewModel.meetingAttendeesArray(meeting: meeting)){ attendee in
+                        if URL(string: attendee.imgToken) == URL(string: "null"){
+                            Button(action: {
+                                      showingSheet.toggle()
+                                  }) {
+                                      Image(systemName: "person.crop.circle.fill")
+                                          .resizable()
+                                          .aspectRatio(contentMode: .fill)
+                                          .foregroundColor(.gray)
+                                          .frame(width: 50, height: 50)
+                                          .clipShape(Circle())
+
+                                  }
+                        } else {
+                            Button(action: {
+                                      showingSheet.toggle()
+                                  }) {
+                                      WebImage(url: URL(string: attendee.imgToken))
+                                          .resizable()
+                                          .indicator(Indicator.activity)
+                                          .aspectRatio(contentMode: .fill)
+                                          .frame(width: 50, height: 50)
+                                          .clipShape(Circle())
+                                          .onAppear(perform: {loadImageFromFirebase(imgurl: attendee.imgToken)})
+                                  }
+                        }
+                      }
+                      
+                } else {
+                    // display only 7 images and the 8th will be (+ plus)
+                    ForEach(1...7, id: \.self){ index in
+                        
+                        // attendee does not have an image
+                        if URL(string: meetingViewModel.meetingAttendeesArray(meeting: meeting)[index].imgToken) == URL(string: "null"){
+                            Button(action: {
+                                      showingSheet.toggle()
+                                  }) {
+                                      Image(systemName: "person.crop.circle.fill")
+                                          .resizable()
+                                          .aspectRatio(contentMode: .fill)
+                                          .foregroundColor(.gray)
+                                          .frame(width: 50, height: 50)
+                                          .clipShape(Circle())
+
+                                  }
+                        }
+                        // attendee have an image
+                        else {
+                            Button(action: {
+                                      showingSheet.toggle()
+                                  }) {
+                                      WebImage(url: URL(string: meetingViewModel.meetingAttendeesArray(meeting: meeting)[index].imgToken))
+                                          .resizable()
+                                          .indicator(Indicator.activity)
+                                          .aspectRatio(contentMode: .fill)
+                                          .frame(width: 50, height: 50)
+                                          .clipShape(Circle())
+                                          .onAppear(perform: {loadImageFromFirebase(imgurl: meetingViewModel.meetingAttendeesArray(meeting: meeting)[index].imgToken)})
+                                  }
+                        }
+                    }
+                    // display + with the number of remaining attendees
+                    Button(action: {
+                              showingSheet.toggle()
+                          }) {
+                              ZStack {
+                                  Circle()
+                                      .fill(Color(red: 0.283, green: 0.283, blue: 0.283))
+                                      .frame(width: 50, height: 50)
+                                  Text("+\(meetingViewModel.meetingAttendeesArray(meeting: meeting).count - 7)")
+                                      .foregroundColor(.white)
+                                      .fontWeight(.semibold)
+                              }
+
+                          }
+                }
+
+                }
+            }
+            .hLeading()
+            .padding([.leading], 15)
+            
+            Divider()
+            HStack(spacing: 13) {
+                Image( systemName: "clock")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                Text("\(meeting.start_time) - \(meeting.end_time)")
+                    .font(.system(size: 19, weight: .semibold))
+                    
+            }
+            .foregroundColor(.gray)
+            .hLeading()
+            .padding([.leading], 15)
+            .padding([.top], 5)
+            
+            // if current user is the host of the meeting, show edit button
+            
+            HStack(spacing: 13) {
+                Image( systemName: "calendar")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                Text(meeting.date.formatted(date: .abbreviated, time: .omitted))
+                    .font(.system(size: 19, weight: .semibold))
+                    
+                }
+                .foregroundColor(.gray)
+                .hLeading()
+                .padding([.leading], 15)
+                .padding([.top], 5)
+            
+            // Fix multiline image issue
+            // Agenda
+            HStack(spacing: 13) {
+                Image( systemName: "text.alignleft")
+                    .resizable()
+                    .frame(width: 19, height: 19)
+                Text(meeting.agenda)
+                    .font(.system(size: 19, weight: .semibold))
+                    .multilineTextAlignment(.leading)
+                    .padding(.trailing, 5)
+                
+                }
+                .foregroundColor(.gray)
+                .hLeading()
+                .padding([.leading], 15)
+                .padding([.top], 5)
+            
+            // location
+            HStack(spacing: 13) {
+                Image( systemName: "mappin.and.ellipse")
+                    .resizable()
+                    .foregroundColor(Color(.gray))
+                    .frame(width: 19, height: 21)
+                if meeting.type == "Online" {
+                    Link("\(meeting.location)",destination: URL(string: "\(meeting.location)")!)
+                                .font(.system(size: 19, weight: .semibold))
+                } else {
+                    Text(meeting.location)
+                        .font(.system(size: 19, weight: .semibold))
+                        .foregroundColor(.gray)
+                        }
+                    }
+                    .hLeading()
+                    .padding([.leading], 15)
+                    .padding([.top], 5)
+         // Map view if available
+            if meeting.latitude != "unavailable" && meeting.longitude != "unavailable" {
+                
+                Map(coordinateRegion: $coordinateRegion, annotationItems: [AnnotatedItem(coordinate: .init(latitude: Double(meeting.latitude) ?? 0.0, longitude: Double(meeting.longitude) ?? 0.0) )]){ item in
+                    MapMarker(coordinate: item.coordinate, tint: .red)
+                    
+                }
+                        .frame(width: 340, height: 140, alignment: .center)
+                        .cornerRadius(10)
+            }
+
+        }
+        .frame(
+            minWidth: 0,
+            maxWidth: .infinity,
+            minHeight: 0,
+            maxHeight: .infinity,
+            alignment: .topLeading
+          )
+    }
+    
+    func loadImageFromFirebase(imgurl: String) {
+           let storage = Storage.storage().reference(forURL: imgurl)
+           storage.downloadURL { (url, error) in
+               if error != nil {
+                   print((error?.localizedDescription)!)
+                   return
+               }
+               print("Download success")
+               self.imageURL = url!
+           }
+    }
  }
 
 struct CalendarTimeline_Previews: PreviewProvider {
