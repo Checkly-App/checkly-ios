@@ -82,6 +82,7 @@ struct CalendarTimeline: View {
                      HeaderView()
                  }
              }
+             .preferredColorScheme(.light)
          }
          .ignoresSafeArea(.container, edges: .top)
      }

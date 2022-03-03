@@ -55,7 +55,7 @@ class MeetingViewModel: ObservableObject{
         
                 let mt = Meeting(id: meeting_id, host: host, title: title, date: .init(timeIntervalSince1970: TimeInterval(date)), type: type, location: location, attendees: attendees, agenda: agenda, end_time: end_time, start_time: start_time, latitude: latitude, longitude: longitude)
         
-                print(mt)
+//                print(mt)
                 // MARK: Fetch UID from Auth
                 if(mt.host == "e0a6ozh4A0QVOXY0tyiMSFyfL163"){
                     self.meetings.append(mt)
@@ -95,7 +95,7 @@ class MeetingViewModel: ObservableObject{
                     let name = obj.childSnapshot(forPath:  "name").value as! String
                     let imgToken = obj.childSnapshot(forPath: "image_token").value as! String
                     let employee = emp(id: uID, name: name, imgToken: imgToken)
-                    print(employee)
+//                    print(employee)
                     self.employeesList.append(employee)
                 }
             }

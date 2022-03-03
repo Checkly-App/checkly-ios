@@ -173,6 +173,7 @@ struct CalendarGrid: View {
                         meetingViewModel.filterTodayMeetings()
                     }
                 }
+                .preferredColorScheme(.light)
                 .onChange(of: currentMonth) { newValue in
                     // update month
                     currentDate = getCurrentMonth()
@@ -187,7 +188,7 @@ struct CalendarGrid: View {
             .sheet(isPresented: $showingSheet) {
                 Rectangle()
                     .fill(.gray)
-                    .frame(width: 50, height: 5)
+                    .frame(width: 38, height: 5)
                     .cornerRadius(35)
                     .padding(.top, 10)
                 NavigationView {
@@ -333,11 +334,13 @@ struct CalendarGrid: View {
                     .fill(meeting.type == "Online" ? Color("BlueA") : Color("Purple"))
                     .frame(width: 10, height: 10)
                     .padding(.top, 10)
+                
                 // meeting title
                 Text(meeting.title)
                     .font(.system(size: 25, weight: .bold))
                     .fontWeight(.semibold)
                     .hLeading()
+                
                 // meeting type
                 ZStack{
                     RoundedRectangle(cornerRadius: 25)
@@ -351,16 +354,22 @@ struct CalendarGrid: View {
                     }
                     .padding([.top], 15)
                     .padding([.leading], 15)
+            
             // host name
             Text("By: \(meetingViewModel.getHostName(hostID: meeting.host))")
                  .font(.system(size: 16, weight: .semibold))
                  .foregroundColor(.gray)
                  .hLeading()
                  .padding([.leading], 15)
+            
             // Attendees images
             HStack(spacing: -10){
                 if meetingViewModel.meetingAttendeesArray(meeting: meeting).count != 0 {
-                    ForEach(meetingViewModel.meetingAttendeesArray(meeting: meeting)){ attendee in
+                   
+                 // if attendees are less than 7 display all their images, else display 7 only
+                  if meetingViewModel.meetingAttendeesArray(meeting: meeting).count < 7 {
+                        
+                      ForEach(meetingViewModel.meetingAttendeesArray(meeting: meeting)){ attendee in
                         if URL(string: attendee.imgToken) == URL(string: "null"){
                             Button(action: {
                                       showingSheet.toggle()
@@ -371,7 +380,7 @@ struct CalendarGrid: View {
                                           .foregroundColor(.gray)
                                           .frame(width: 50, height: 50)
                                           .clipShape(Circle())
-                                      
+
                                   }
                         } else {
                             Button(action: {
@@ -386,7 +395,57 @@ struct CalendarGrid: View {
                                           .onAppear(perform: {loadImageFromFirebase(imgurl: attendee.imgToken)})
                                   }
                         }
+                      }
+                      
+                } else {
+                    // display only 7 images and the 8th will be (+ plus)
+                    ForEach(1...7, id: \.self){ index in
+                        
+                        // attendee does not have an image
+                        if URL(string: meetingViewModel.meetingAttendeesArray(meeting: meeting)[index].imgToken) == URL(string: "null"){
+                            Button(action: {
+                                      showingSheet.toggle()
+                                  }) {
+                                      Image(systemName: "person.crop.circle.fill")
+                                          .resizable()
+                                          .aspectRatio(contentMode: .fill)
+                                          .foregroundColor(.gray)
+                                          .frame(width: 50, height: 50)
+                                          .clipShape(Circle())
+
+                                  }
+                        }
+                        // attendee have an image
+                        else {
+                            Button(action: {
+                                      showingSheet.toggle()
+                                  }) {
+                                      WebImage(url: URL(string: meetingViewModel.meetingAttendeesArray(meeting: meeting)[index].imgToken))
+                                          .resizable()
+                                          .indicator(Indicator.activity)
+                                          .aspectRatio(contentMode: .fill)
+                                          .frame(width: 50, height: 50)
+                                          .clipShape(Circle())
+                                          .onAppear(perform: {loadImageFromFirebase(imgurl: meetingViewModel.meetingAttendeesArray(meeting: meeting)[index].imgToken)})
+                                  }
+                        }
                     }
+                    // display + with the number of remaining attendees
+                    Button(action: {
+                              showingSheet.toggle()
+                          }) {
+                              ZStack {
+                                  Circle()
+                                      .fill(Color(red: 0.283, green: 0.283, blue: 0.283))
+                                      .frame(width: 50, height: 50)
+                                  Text("+\(meetingViewModel.meetingAttendeesArray(meeting: meeting).count - 7)")
+                                      .foregroundColor(.white)
+                                      .fontWeight(.semibold)
+                              }
+
+                          }
+                }
+
                 }
 
             }
@@ -394,6 +453,7 @@ struct CalendarGrid: View {
             .padding([.leading], 15)
             
             Divider()
+            
             // meeting time
             HStack(spacing: 13) {
                 Image( systemName: "clock")
@@ -407,6 +467,7 @@ struct CalendarGrid: View {
             .hLeading()
             .padding([.leading], 15)
             .padding([.top], 5)
+            
             // meeting date
             HStack(spacing: 13) {
                 Image( systemName: "calendar")
@@ -420,6 +481,23 @@ struct CalendarGrid: View {
                 .hLeading()
                 .padding([.leading], 15)
                 .padding([.top], 5)
+        
+            // meeting agenda
+            HStack(spacing: 13) {
+                Image( systemName: "text.alignleft")
+                    .resizable()
+                    .frame(width: 19, height: 19)
+                Text(meeting.agenda)
+                    .font(.system(size: 19, weight: .semibold))
+                    .multilineTextAlignment(.leading)
+                    .padding(.trailing, 5)
+                
+                }
+                .foregroundColor(.gray)
+                .hLeading()
+                .padding([.leading], 15)
+                .padding([.top], 5)
+            
             // meeting location
             HStack(spacing: 13) {
                 Image( systemName: "mappin.and.ellipse")
@@ -438,22 +516,7 @@ struct CalendarGrid: View {
                     .hLeading()
                     .padding([.leading], 15)
                     .padding([.top], 5)
-            // meeting agenda
-            HStack(spacing: 13) {
-                Image( systemName: "text.alignleft")
-                    .resizable()
-                    .frame(width: 19, height: 19)
-                Text(meeting.agenda)
-                    .font(.system(size: 19, weight: .semibold))
-                    .multilineTextAlignment(.leading)
-                    .padding(.trailing, 5)
-                
-                }
-                .foregroundColor(.gray)
-                .hLeading()
-                .padding([.leading], 15)
-                .padding([.top], 5)
-
+            
          // Display Map view if available
             if meeting.latitude != "unavailable" && meeting.longitude != "unavailable" {
                 
