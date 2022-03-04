@@ -93,8 +93,9 @@ class MeetingViewModel: ObservableObject{
                     let obj = employee as! DataSnapshot
                     let uID = obj.key
                     let name = obj.childSnapshot(forPath:  "name").value as! String
+                    let position = obj.childSnapshot(forPath: "position").value as! String
                     let imgToken = obj.childSnapshot(forPath: "image_token").value as! String
-                    let employee = emp(id: uID, name: name, imgToken: imgToken)
+                    let employee = emp(id: uID, name: name, position: position,imgToken: imgToken)
 //                    print(employee)
                     self.employeesList.append(employee)
                 }
@@ -160,7 +161,7 @@ class MeetingViewModel: ObservableObject{
                 if attendant.value == "accepted" {
                     for employee in employeesList {
                         if attendant.key == employee.id {
-                            let employee = emp(id: employee.id, name: employee.name, imgToken: employee.imgToken)
+                            let employee = emp(id: employee.id, name: employee.name, position: employee.position ,imgToken: employee.imgToken)
                             attendeesArray.append(employee)
                         }
                     }
@@ -219,5 +220,6 @@ class MeetingViewModel: ObservableObject{
 struct emp: Identifiable{
     var id: String
     var name: String
+    var position: String
     var imgToken: String
 }
