@@ -64,77 +64,100 @@ struct CalendarGrid: View {
                                     }).padding([.trailing], 6)
                                   
                     }.padding([.leading],19)
-                    .padding([.trailing ,.bottom],10)
+                    .padding([.trailing ,.bottom],17)
                     .padding([.top],15)
-                        .hLeading()
+                    .hLeading()
+                    
                     // Days
                     let days: [String] = ["S", "M", "T", "W", "T", "F", "S"]
                     
-                    HStack(spacing: 20) {
-                        // go to prev month
-                        Button {
-                            withAnimation{
-                                currentMonth -= 1
-                            }
-                        } label: {
-                            Image(systemName: "chevron.left")
-                                .font(.title2.bold())
-                                .foregroundColor(Color("BlueA"))
-                        }
-                        Spacer(minLength: 0)
-                        // Display Year number and month name
-                        VStack(alignment: .center, spacing: 10) {
-                            // year
-                            Text(getMonthAndYear()[1])
-                                .font(.caption)
-                                .fontWeight(.semibold)
-                            // month
-                            Text(getMonthAndYear()[0])
-                                .font(.title.bold())
-                        }
-                        Spacer(minLength: 0)
-                       
-                        // go to next month
-                        Button {
-                            withAnimation{
-                                currentMonth += 1
-                            }
-                        } label: {
-                            Image(systemName: "chevron.right")
-                                .font(.title2.bold())
-                                .foregroundColor(Color("BlueA"))
-                        }
-                    }
-                    .padding()
-                    // Display day names
-                    HStack(spacing: 0) {
-                        ForEach(days,id: \.self) { day in
-                            Text(day)
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .frame(maxWidth: .infinity)
-                        }
-                    }
-                    // Dates (Numbers)
-                    let columns = Array(repeating: GridItem(.flexible()), count: 7)
-                    
-                    LazyVGrid(columns: columns, spacing: 15) {
-                        
-                        ForEach(extractDate()) { value in
-                            
-                            CardView(value: value)
-                                .background(
-                                    Capsule()
-                                        // light blue Color(red: 0.824, green: 0.925, blue: 0.976)
-                                        .fill(Color("BlueB"))
-                                        .padding(.horizontal, 8)
-                                        .opacity(isSameDay(date1: value.date , date2: currentDate) ? 1 : 0)
-                                )
-                                .onTapGesture {
-                                    currentDate = value.date
+                    ZStack {
+                        // sheet 1
+                        RoundedRectangle(cornerRadius: 25)
+                            .frame(width: 320, height: 490)
+                            .foregroundColor(.gray.opacity(0.1))
+                            .offset(x: 0, y: 20)
+                        // sheet 2
+                        RoundedRectangle(cornerRadius: 25)
+                            .frame(width: 340, height: 495)
+                            .foregroundColor(.gray.opacity(0.2))
+                            .offset(x: 0, y: 7)
+                        // sheet 3
+                        RoundedRectangle(cornerRadius: 25)
+                            .frame(width: 360, height: 485)
+                            .foregroundColor(.white)
+                            .shadow(color: .black.opacity(0.2), radius: 4, x: 0.1, y: 0.1)
+                        VStack {
+                            HStack(spacing: 20) {
+                                // go to prev month
+                                Button {
+                                    withAnimation{
+                                        currentMonth -= 1
+                                    }
+                                } label: {
+                                    Image(systemName: "chevron.left")
+                                        .font(.title2.bold())
+                                        .foregroundColor(Color("BlueA"))
                                 }
+                                Spacer(minLength: 0)
+                                // Display Year number and month name
+                                VStack(alignment: .center, spacing: 10) {
+                                    // year
+                                    Text(getMonthAndYear()[1])
+                                        .font(.caption)
+                                        .fontWeight(.semibold)
+                                    // month
+                                    Text(getMonthAndYear()[0])
+                                        .font(.title.bold())
+                                }
+                                Spacer(minLength: 0)
+                               
+                                // go to next month
+                                Button {
+                                    withAnimation{
+                                        currentMonth += 1
+                                    }
+                                } label: {
+                                    Image(systemName: "chevron.right")
+                                        .font(.title2.bold())
+                                        .foregroundColor(Color("BlueA"))
+                                }
+                            }
+                            .padding()
+                            // Display day names
+                            HStack(spacing: 0) {
+                                ForEach(days,id: \.self) { day in
+                                    Text(day)
+                                        .font(.callout)
+                                        .fontWeight(.semibold)
+                                        .frame(maxWidth: .infinity)
+                                }
+                            }
+                            // Dates (Numbers)
+                            let columns = Array(repeating: GridItem(.flexible()), count: 7)
+                            
+                            LazyVGrid(columns: columns, spacing: 12) {
+                                
+                                ForEach(extractDate()) { value in
+                                    
+                                    CardView(value: value)
+                                        .background(
+                                            Capsule()
+                                                // light blue Color(red: 0.824, green: 0.925, blue: 0.976)
+                                                .fill(Color("BlueB"))
+                                                .padding(.horizontal, 7)
+                                                .opacity(isSameDay(date1: value.date , date2: currentDate) ? 1 : 0)
+                                        )
+                                        .onTapGesture {
+                                            currentDate = value.date
+                                        }
+                                }
+                            }
                         }
+                        .padding([.leading, .trailing],32)
+                        
                     }
+                    
                     // Display tasks
                     VStack(spacing: 15){
                         Text("Today's Tasks")
@@ -204,43 +227,45 @@ struct CalendarGrid: View {
                 }){
                     if isSameDay(date1: todaysDate, date2: value.date){
                             Text("\(value.day)")
-                                .font(.title3.bold())
+                                .font(.system(size: 16, weight: .medium))
                                 .foregroundColor(Color("BlueA"))
                                 .frame(maxWidth: .infinity)
                                 Spacer()
                                 Circle()
                                     .fill(Color("BlueA"))
-                                    .frame(width: 8, height: 8)
+                                    .frame(width: 6, height: 6)
+                                    .padding(.bottom, 6)
                     }
                     else {
                         Text("\(value.day)")
-                            .font(.title3.bold())
+                            .font(.system(size: 16, weight: .medium))
                             .frame(maxWidth: .infinity)
                         Spacer()
                         Circle()
                             .fill(Color("BlueA"))
-                            .frame(width: 8, height: 8)
+                            .frame(width: 6, height: 6)
+                            .padding(.bottom, 6)
                     }
                 }
                 else {
                      if isSameDay(date1: todaysDate, date2: value.date){
                         Text("\(value.day)")
-                            .font(.title3.bold())
+                            .font(.system(size: 16, weight: .medium))
                             .foregroundColor(Color("BlueA"))
                             .frame(maxWidth: .infinity)
                         Spacer()
                     }
                     else {
                          Text("\(value.day)")
-                        .font(.title3.bold())
-                        .frame(maxWidth: .infinity)
+                            .font(.system(size: 16, weight: .medium))
+                            .frame(maxWidth: .infinity)
                     Spacer()
                     }
                 }
             }
         }
-        .padding(.vertical, 9)
-        .frame(height: 60, alignment: .top)
+        .padding(.vertical, 4)
+        .frame(height: 50, alignment: .top)
     }
     // meeting card view
     func MeetingCardView(meeting: Meeting) -> some View {
