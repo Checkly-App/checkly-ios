@@ -426,6 +426,9 @@ struct EditProfileView: View {
                     
                 }
                 VStack(alignment: .trailing){
+                    HStack{
+                        Spacer()
+                    
                 Button {
                     if !Validation(){
                 presentAlert = true
@@ -478,7 +481,9 @@ struct EditProfileView: View {
                     Text(error0)
                 })
                 }
-                }.padding().padding(.leading).padding(.leading).padding(.leading)
+                    }
+                
+                }.padding(.trailing)
 
                 Spacer()
             }.navigationBarTitle("Edit Profile").navigationBarTitleDisplayMode(.inline).toolbar {

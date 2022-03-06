@@ -11,8 +11,10 @@ import FirebaseDatabase
 import FirebaseStorage
 import FirebaseAuth
 import SDWebImageSwiftUI
+import MapKit
 
 struct GenerateMeetingView1: View {
+
     @State var sattendencelist0 =  Set<Employee>()
 
     var body: some View {
@@ -22,12 +24,17 @@ struct GenerateMeetingView1: View {
     }}
 
 struct GenerateMeetingView: View {
-  
+    @State  var locations: [Mark] = []
+
     @Environment(\.dismiss) var dismiss
     @State var title = ""
     @State var location = ""
     @State var starttime0 = ""
     @State var endtime0 = ""
+    @State var street = "n"
+    @State var city_c = ""
+    @State var country_c = ""
+    @State var Address_pic = "Select Location"
 
     @State var selectrow = Set<Employee>()
 @State var attendeneslist: [Employee] = []
@@ -58,6 +65,7 @@ struct GenerateMeetingView: View {
 
     var body: some View {
         NavigationView{
+            ScrollView {
         VStack{
             VStack(alignment: .leading) {
                 Text("Title")
@@ -126,7 +134,7 @@ struct GenerateMeetingView: View {
                     .foregroundColor(Color(UIColor(named: "LightGray")!))
                         
                         DatePicker(
-                              "Start time",
+                              "End time",
                               selection: $endtime,
                               in: Date.now..., displayedComponents: [.hourAndMinute]
                         ).labelsHidden().fixedSize().frame(maxWidth: .infinity/2.5,maxHeight: 44, alignment: .leading).background(.gray.opacity(0.0)).cornerRadius(7).border(.white.opacity(0.4))
@@ -211,23 +219,40 @@ struct GenerateMeetingView: View {
                 .padding(.horizontal)
                 if IsitONsite {
                 VStack(alignment:.leading){
-                    Text("Select locatin")
+                    Text("")
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(Color(UIColor(named: "LightGray")!))
                     HStack {
-                        
-                     
+                       
                         Button(action: {
                             viewlist1 = true
                 }) {
                             HStack {
-                              
-                                Text("Select location")
-                                    .foregroundColor(.cyan)
-                                    .font(.body)
-                                    .padding().background(.cyan.opacity(0.20)).cornerRadius(40)
-                                    
-                        }
+                                TextField("Select Address", text: $Address_pic)  .accentColor(Color.cyan)
+                                   
+                                    .autocapitalization(.none).disabled(true)
+                                    .padding(10)
+                                    .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
+                                                .stroke(Address_pic.isEmpty ?
+                                                        Color(UIColor(named: "Blue")!) :
+                                                            Color(UIColor(named: "Blue")!) , lineWidth: 0.5))
+                                    .foregroundColor(Address_pic.isEmpty ?
+                                                     Color(UIColor(named: "Blue")!) :
+                                                        Color(UIColor(named: "Blue")!))
+                            
+                           
+                            .animation(.default)
+                             
+//                                Text("Select location")
+//                                    .foregroundColor(.white)
+//                                    .font(.body)
+//                                    .padding().background(
+//                                        LinearGradient(gradient: Gradient(colors: [
+//                                            Color(UIColor(named: "Blue")!),
+//                                            Color(UIColor(named: "LightTeal")!)]),
+//                                                       startPoint: .leading, endPoint: .trailing)).cornerRadius(10)
+//
+   }
                 }
                     }
                     
@@ -295,6 +320,8 @@ struct GenerateMeetingView: View {
             
             }
             Spacer()
+            HStack {
+                Spacer()
             VStack(alignment: .trailing){
             Button {
                 if !validate(){
@@ -322,14 +349,16 @@ struct GenerateMeetingView: View {
                     AttendenceListViewselect(selectrow: $selectrow, selectatt: $Isselectattendense, attendeneslist: $attendeneslist)
                 })
                 }.sheet(isPresented: $viewlist1, content: {
-                  LocationMeetingView()
+                 // LocationMeetingView()
+                    locationselect(locations: $locations, location_add: $Address_pic)
                 })
             }.alert("Oops!..", isPresented: $presentAlert, actions: {
                 // actions
             }, message: {
                 Text(error0)
             })
-            .padding(.leading,200)
+            }
+            .padding(.leading)
         }.navigationBarTitle("Generate Meeting").toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
@@ -342,6 +371,7 @@ struct GenerateMeetingView: View {
 
                        }
             }
+        }
         }.navigationBarTitleDisplayMode(.inline)
         }
         
@@ -350,13 +380,22 @@ struct GenerateMeetingView: View {
     }
     
     func Generate(){
-       
+        var lang = 0.0
+        var long = 0.0
+
         for attendeneslist in attendeneslist {
             
             attendenceID[attendeneslist.id] = "sent"
 
         }
-
+        if IsSelectedSite {
+            if locations.count > 0 {
+                print("tdtd")
+                print(locations[0].coordinate.latitude)
+                lang = locations[0].coordinate.latitude
+                long = locations[0].coordinate.longitude
+            }
+        }
 
       
         var calender = Calendar.current
@@ -377,8 +416,15 @@ struct GenerateMeetingView: View {
       
         let interval = Int( newintervaldate!.timeIntervalSince1970)
        print(interval)
+        print("\(lang)")
+        print("\(long)")
+        print(attendenceID)
 
-        ref.child("Meetings").childByAutoId().setValue(["title": title,"agenda": text,"host":userid,"location":location,"type":type,"date":interval,"start_time":starttime0,"end_time":endtime0,"attendees":attendenceID,"latitude":"0","longitude":"0"
+
+
+        
+
+        ref.child("Meetings").childByAutoId().setValue(["title": title,"agenda": text,"host":userid,"location":location,"type":type,"date":interval,"start_time":starttime0,"end_time":endtime0,"attendees":attendenceID,"latitude":lang,"longitude":long
                                                             ])
 
 

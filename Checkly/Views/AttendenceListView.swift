@@ -110,7 +110,7 @@ struct AttendenceListViewselect: View {
          dismiss()
         } label: {
             VStack{
-            Text(" Done")
+            Text(" Save")
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .frame(maxWidth: 250)
@@ -132,7 +132,7 @@ struct AttendenceListViewselect: View {
             
         }
         
-.navigationBarTitle(" Select Attendess")
+        .navigationBarTitle(" Select Attendess")
 }
     
         

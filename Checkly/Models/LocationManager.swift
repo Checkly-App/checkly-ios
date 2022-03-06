@@ -1,12 +1,35 @@
+//import CoreLocation
+//import CoreLocationUI
 //
-//  LocationManager.swift
-//  Checkly
 //
-//  Created by  Lama Alshahrani on 24/07/1443 AH.
+//class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+//    let manager = CLLocationManager()
 //
+//    @Published var location: CLLocationCoordinate2D?
+//
+//    override init() {
+//        super.init()
+//        manager.delegate = self
+//        manager.desiredAccuracy = kCLLocationAccuracyBest
+//        manager.distanceFilter = kCLDistanceFilterNone
+//        manager.requestAlwaysAuthorization()
+//        manager.startUpdatingLocation()
+//    }
+//
+//    func requestLocation() {
+//        manager.requestLocation()
+//    }
+//
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+////        guard  let location = locations.last else {
+////            return
+////        }
+//        location = locations.first?.coordinate
+//
+//    }
+//}
 
 import Foundation
-
 import CoreLocation
 import Combine
 
@@ -52,4 +75,3 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         print(#function, location)
     }
 }
-

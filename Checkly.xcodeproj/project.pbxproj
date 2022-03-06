@@ -34,6 +34,7 @@
 		71D09A6427A9DADD00DA2D1D /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */; };
 		F5509B1727C95AA20099690B /* LocationMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5509B1627C95AA20099690B /* LocationMeetingView.swift */; };
 		F5509B1927C9734B0099690B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5509B1827C9734B0099690B /* LocationManager.swift */; };
+		F5509B1B27D133CE0099690B /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5509B1A27D133CD0099690B /* LocationView.swift */; };
 		F551EBAD27C42CF500A8FE7C /* GenerateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F551EBAC27C42CF400A8FE7C /* GenerateView.swift */; };
 		F55E524127B6773B00288187 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F55E524027B6773B00288187 /* FirebaseStorage */; };
 		F55E524327B678EE00288187 /* EmployeeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55E524227B678EE00288187 /* EmployeeViewModel.swift */; };
@@ -68,6 +69,8 @@
 		71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		F5509B1627C95AA20099690B /* LocationMeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMeetingView.swift; sourceTree = "<group>"; };
 		F5509B1827C9734B0099690B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		F5509B1A27D133CD0099690B /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		F5509B1C27D180090099690B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F551EBAC27C42CF400A8FE7C /* GenerateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateView.swift; sourceTree = "<group>"; };
 		F55E524227B678EE00288187 /* EmployeeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeViewModel.swift; sourceTree = "<group>"; };
 		F55E524627B679E800288187 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -124,6 +127,7 @@
 		7149E8F927A8720A008E3553 /* Checkly */ = {
 			isa = PBXGroup;
 			children = (
+				F5509B1C27D180090099690B /* Info.plist */,
 				71D09A5F27A9A0CC00DA2D1D /* Services */,
 				7149E91027A96F92008E3553 /* Models */,
 				7149E90F27A96F71008E3553 /* Views */,
@@ -156,6 +160,7 @@
 				F55E524827B67A8000288187 /* UserProfileView.swift */,
 				F55E524A27B67AC700288187 /* EditProfileView.swift */,
 				F5715FAB27B82B5F001FADE6 /* GenderView.swift */,
+				F5509B1A27D133CD0099690B /* LocationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -297,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5715FAC27B82B5F001FADE6 /* GenderView.swift in Sources */,
+				F5509B1B27D133CE0099690B /* LocationView.swift in Sources */,
 				7149E8FD27A8720A008E3553 /* LoginView.swift in Sources */,
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
 				F55E524B27B67AC700288187 /* EditProfileView.swift in Sources */,
@@ -452,7 +458,10 @@
 				DEVELOPMENT_TEAM = 9VU9NLXSDT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Checkly/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow FaceID to access user credentials";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -483,7 +492,10 @@
 				DEVELOPMENT_TEAM = 9VU9NLXSDT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Checkly/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow FaceID to access user credentials";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -24,13 +24,7 @@ struct locationview :UIViewRepresentable {
     @State var lon = 46.7248848
 
     @StateObject var locationManager = LocationManager()
-    var userLatitude: String {
-        return "\(locationManager.lastLocation?.coordinate.latitude ?? 0.0)"
-       }
-       
-       var userLongitude: String {
-           return "\(locationManager.lastLocation?.coordinate.longitude ?? 0.0)"
-       }
+    
     func makeCoordinator() -> locationview.cordinetor {
         return locationview.cordinetor(parent1: self)
     }
