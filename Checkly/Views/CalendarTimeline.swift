@@ -24,72 +24,85 @@ struct CalendarTimeline: View {
      @State private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0,longitude: 0.0),span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
     
      var body: some View {
-         
-         // horizontal scroll view to select dates
-         ScrollView(.vertical, showsIndicators: false){
              
-             VStack(spacing: 15){
-                 
-                 HeaderView()
-                 
-                     // MARK: Current Week View
+             VStack(spacing: -20){
+
+                 VStack {
+                     HeaderView()
+                         // MARK: Current Week View
+                         // horizontal scroll view to select dates
                      ScrollView(.horizontal, showsIndicators: false){
-                         
-                         HStack(spacing: 10){
                              
-                             ForEach(meetingViewModel.currentWeek, id: \.self){ day in
+                             HStack(spacing: 10){
                                  
-                                 VStack(spacing: 10) {
+                                 ForEach(meetingViewModel.currentWeek, id: \.self){ day in
                                      
-                                     // dd will return date as 01,02,30, ..
-                                     Text(meetingViewModel.extractDate(date: day, format: "dd"))
-                                         .font(.system(size: 14))
-                                         .fontWeight(.semibold)
+                                     VStack(spacing: 10) {
+                                         
+                                         // dd will return date as 01,02,30, ..
+                                         Text(meetingViewModel.extractDate(date: day, format: "dd"))
+                                             .font(.system(size: 14))
+                                             .fontWeight(.semibold)
+                                         
+                                         // EEE wil return day as SUN,MON, ..
+                                         Text(meetingViewModel.extractDate(date: day, format: "EEE"))
+                                             .font(.system(size: 14))
+                                             .fontWeight(.semibold)
+                                         
+                                         Circle()
+                                             .fill(Color("BlueA"))
+                                             .frame(width: 8, height: 8)
+                                             .opacity(meetingViewModel.isToday(date: day) ? 1 : 0)
+                                     }
+                                     // Capsule Shape
+                                     .foregroundStyle(meetingViewModel.isToday(date: day) ? .primary : .secondary)
+                                     .foregroundColor(meetingViewModel.isToday(date: day) ? .black : .gray)
+                                     .frame(width: 45, height: 90)
+                                     .background(
                                      
-                                     // EEE wil return day as SUN,MON, ..
-                                     Text(meetingViewModel.extractDate(date: day, format: "EEE"))
-                                         .font(.system(size: 14))
-                                         .fontWeight(.semibold)
-                                     
-                                     Circle()
-                                         .fill(Color("BlueA"))
-                                         .frame(width: 8, height: 8)
-                                         .opacity(meetingViewModel.isToday(date: day) ? 1 : 0)
-                                 }
-                                 // Capsule Shape
-                                 .foregroundStyle(meetingViewModel.isToday(date: day) ? .primary : .secondary)
-                                 .foregroundColor(meetingViewModel.isToday(date: day) ? .black : .gray)
-                                 .frame(width: 45, height: 90)
-                                 .background(
-                                 
-                                     ZStack{
-                                         if meetingViewModel.isToday(date: day){
-                                             Capsule()
-                                                 .fill(Color("BlueB"))
-                                                 .matchedGeometryEffect(id: "CURRENTDAY", in: animation)
+                                         ZStack{
+                                             if meetingViewModel.isToday(date: day){
+                                                 Capsule()
+                                                     .fill(Color("BlueB"))
+                                                     .matchedGeometryEffect(id: "CURRENTDAY", in: animation)
+                                             }
+                                         }
+                                         
+                                     )
+                                     .contentShape(Capsule())
+                                     .onTapGesture {
+                                         // update current day
+                                         withAnimation{
+                                             meetingViewModel.currentDate = day
                                          }
                                      }
                                      
-                                 )
-                                 .contentShape(Capsule())
-                                 .onTapGesture {
-                                     // update current day
-                                     withAnimation{
-                                         meetingViewModel.currentDate = day
-                                     }
                                  }
-                                 
+                         
                              }
-                     
+                             .padding(.horizontal)
                          }
-                         .padding(.horizontal)
-                     }
                      
-                     MeetingsView()
+                 }
+                 .ignoresSafeArea(.container, edges: [.top] )
+                // vertical scroll view to display meetings
+                    ScrollView(.vertical){
+                         MeetingsView()
+                             .frame(
+                                 minWidth: 0,
+                                 maxWidth: .infinity,
+                                 minHeight: 0,
+                                 maxHeight: .infinity,
+                                 alignment: .topLeading
+                               )
+                    }
+                    .background(.white)
+                    .cornerRadius(25)
+                    .ignoresSafeArea(.container, edges: [.bottom] )
                     
              }
              .preferredColorScheme(.light)
-         }
+
          .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [BottomSheet.Options.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray), .background(AnyView(Color.white))], content: {
              // see view under "Views" folder
              MeetingDetails(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", date: Date(), type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", end_time: "9:45 AM", start_time: "9:00 AM", latitude: "unavailable", longitude: "unavailable"))
@@ -99,6 +112,9 @@ struct CalendarTimeline: View {
              // see view under "Views" folder
              MeetingAttendeesListView(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", date: Date(), type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", end_time: "9:45 AM", start_time: "9:00 AM", latitude: "unavailable", longitude: "unavailable"))
          }
+         .background(
+             LinearGradient(colors: [Color(red: 0.753, green: 0.91, blue: 0.98),Color(red: 0.639, green: 0.878, blue: 0.988)], startPoint: .top, endPoint: .bottom)
+         )
      }
      // Meetings View
      func MeetingsView() -> some View {
@@ -113,6 +129,21 @@ struct CalendarTimeline: View {
                          .fontWeight(.light)
                          .offset(y:100)
                  } else {
+                     
+                     if meetings.count > 1 {
+                         Text("\(meetings.count) Meetings")
+                             .fontWeight(.medium)
+                             .hLeading()
+                             .foregroundColor(Color("BlueA"))
+                             .padding(.leading, 10)
+                     } else {
+                         Text("\(meetings.count) Meeting")
+                             .fontWeight(.medium)
+                             .hLeading()
+                             .foregroundColor(Color("BlueA"))
+                             .padding(.leading, 10)
+                     }
+                     
                      ForEach(meetings){ meeting in
                          Button {
                              meetingViewModel.selectedMeeting = meeting
@@ -180,7 +211,7 @@ struct CalendarTimeline: View {
      // building the header view
      func HeaderView() -> some View {
          HStack(spacing: 25){
-                     Button(action: {
+             Button(action: {
                        // Go to Calendar Grid
                          viewRouter.currentPage = .CalendarGrid
                      }, label: {
@@ -188,34 +219,44 @@ struct CalendarTimeline: View {
                              .resizable()
                              .foregroundColor(Color(.gray))
                              .frame(width: 20, height: 20)
-                     })
-                 
-                     Button(action: {
-                        // In Calendar Timeline
-                     }, label: {
-                         Image(systemName: "list.bullet")
-                             .resizable()
-                             .foregroundColor(Color(.gray))
-                             .frame(width: 18, height: 18)
-                             .overlay(
-                                 RoundedRectangle(cornerRadius: 25)
-                                     .fill(Color("BlueA").opacity(0.3))
-                                     .frame(width: 40, height: 35)
-                             )
-                     })
-                     Spacer()
-                     Button(action: {
-                         // Generate Meeting
-                     }, label: {
-                         Image(systemName: "plus")
-                             .resizable()
-                             .foregroundColor(Color(.gray))
-                             .frame(width: 20, height: 20)
-                     })
-                 }
-             .hLeading()
-             .padding()
-             .background(Color.white)
+                 })
+             
+             Button(action: {
+                // In Calendar Timeline
+             }, label: {
+                 Image(systemName: "list.bullet")
+                     .resizable()
+                     .foregroundColor(Color(.gray))
+                     .frame(width: 18, height: 18)
+                     .overlay(
+                         RoundedRectangle(cornerRadius: 25)
+                             .fill(.white.opacity(0.4))
+                             .frame(width: 40, height: 35)
+                     )
+             })
+             
+             Text("\(meetingViewModel.currentDate.formatted(.dateTime.month(.wide)))")
+             .font(.title2)
+             .fontWeight(.semibold)
+             .foregroundColor(.gray)
+             .hCenter()
+             
+             Spacer()
+             Button(action: {
+             
+             // Generate Meeting
+             }, label: {
+                 Image(systemName: "plus")
+                     .resizable()
+                     .foregroundColor(Color(.gray))
+                     .frame(width: 20, height: 20)
+             })
+             .padding(.trailing, 7)
+         }
+         .hLeading()
+         .padding([.leading],19)
+         .padding([.trailing ,.bottom],10)
+         .padding([.top],55)
      }
     
  }
