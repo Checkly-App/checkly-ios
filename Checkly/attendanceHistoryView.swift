@@ -13,6 +13,7 @@ struct attendanceHistoryView: View {
     @State var fromDate = Date()
     @State var toDate = Date()
     @ObservedObject var vm = attendanceHistoryViewModel()
+    @State var refresh: Bool = false
 
     
     var body: some View {
@@ -25,6 +26,7 @@ struct attendanceHistoryView: View {
         // Search Button
             Text("Search").onTapGesture {
                     vm.returnDatesInRange(fromDate: fromDate, toDate: toDate)
+                vm.filteredAttendancesDates.removeAll()
             }
             ForEach (vm.filteredAttendancesDates) { attendance in
             HStack {
