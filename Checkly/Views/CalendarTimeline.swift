@@ -21,7 +21,7 @@ struct CalendarTimeline: View {
      // for attendees sheet
      @State private var showingSheet = false
      // for map view
-     @State private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0,longitude: 0.0),span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
+     @State private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0,longitude: 0.0),span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
     
      var body: some View {
              

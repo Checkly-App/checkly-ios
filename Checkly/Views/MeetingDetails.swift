@@ -199,7 +199,7 @@ struct MeetingDetails: View {
             if meeting.latitude != "unavailable" && meeting.longitude != "unavailable" {
                 
                 Map(coordinateRegion: $coordinateRegion, annotationItems: [AnnotatedItem(coordinate: .init(latitude: Double(meeting.latitude) ?? 0.0, longitude: Double(meeting.longitude) ?? 0.0) )]){ item in
-                    MapMarker(coordinate: item.coordinate, tint: .red)
+                    MapMarker(coordinate: item.coordinate, tint: Color("BlueA"))
                     
                 }
                         .frame(width: 340, height: 140, alignment: .center)
