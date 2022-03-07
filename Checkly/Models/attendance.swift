@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct attendance: Identifiable {
+struct attendance: Identifiable, Hashable {
     var id: String
     var date: String
     var checkIn: String

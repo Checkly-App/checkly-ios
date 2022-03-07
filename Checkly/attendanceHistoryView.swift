@@ -28,7 +28,7 @@ struct attendanceHistoryView: View {
                 vm.returnDatesInRange(fromDate: fromDate, toDate: toDate)
                 vm.filteredAttendancesDates.removeAll()
             }
-            ForEach (vm.filteredAttendancesDates) { attendance in
+            ForEach (vm.filteredAttendancesDates, id: \.self) { attendance in
             HStack {
                 VStack{
                     Text("Date")
