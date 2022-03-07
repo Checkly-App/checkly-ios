@@ -25,7 +25,7 @@ struct attendanceHistoryView: View {
         DatePicker("To Date", selection: $toDate, in: ...Date() , displayedComponents: .date).padding()
         // Search Button
             Text("Search").onTapGesture {
-                    vm.returnDatesInRange(fromDate: fromDate, toDate: toDate)
+                vm.returnDatesInRange(fromDate: fromDate, toDate: toDate)
                 vm.filteredAttendancesDates.removeAll()
             }
             ForEach (vm.filteredAttendancesDates) { attendance in
@@ -36,11 +36,11 @@ struct attendanceHistoryView: View {
                 }
                 VStack{
                     Text("Check In")
-                    Text(attendance.time)
+                    Text(attendance.checkIn)
                 }.padding()
                 VStack{
                     Text("Check Out")
-                    Text("6:08")
+                    Text(attendance.checkOut)
                 }.padding()
             }.padding()
             }
@@ -62,23 +62,26 @@ class attendanceHistoryViewModel: ObservableObject {
     
     let ref = Database.database().reference()
     let searchQueue = DispatchQueue.init(label: "searchQueue")
-    
+    let empID = "8UoUAkIZvnP5KSWHydWliuZmOKt2" //change
+        
     searchQueue.sync {
-        ref.child("Attendance").observe(.childAdded) { snapshot in
-            
-            let obj = snapshot.value as! [String: Any]
-            let emp_id = obj["employee_id"] as! String
-            let date = obj["date"] as! String
-            let time = obj["time"] as! String
-            let type = obj["type"] as! String
+        
+        ref.child("LocationAttendance/emp\(empID)-Attendance").observe(.value, with: { dataSnapshot in
 
+            for child in dataSnapshot.children {
+                let snap = child as! DataSnapshot
+                let obj = snap.value as! [String: Any]
+                let checkIn = obj["check-in"] as! String
+                let checkOut = obj["check-out"] as! String
+                let status = obj["status"] as! String
+                let workingHours = obj["working-hours"] as! String
+                let date = snap.key
             
-            let attendance = attendance(id: emp_id, date: date, time: time, type: type)
-            // should be logged-in user ID
-            if ( attendance.id == "111111111")  {
-                self.attendances.append(attendance)
-        }
-        }
+                let attendance = attendance(id: empID, date: date, checkIn: checkIn, checkOut: checkOut, status: status, workingHours: workingHours)
+                
+                    self.attendances.append(attendance)
+            }
+        })
     }
     
 }
@@ -89,39 +92,52 @@ class attendanceHistoryViewModel: ObservableObject {
     
     
     func returnDatesInRange (fromDate: Date, toDate: Date) {
-        let range = fromDate...toDate
-        let ref = Database.database().reference()
-        let searchQueue = DispatchQueue.init(label: "searchQueue")
         
-        searchQueue.sync {
-            ref.child("Attendance").observe(.childAdded) { snapshot in
-                
-                let obj = snapshot.value as! [String: Any]
-                let emp_id = obj["employee_id"] as! String
-                let date = obj["date"] as! String
-                let time = obj["time"] as! String
-                let type = obj["type"] as! String
+    let ref = Database.database().reference()
+    let searchQueue = DispatchQueue.init(label: "searchQueue")
+    let empID = "8UoUAkIZvnP5KSWHydWliuZmOKt2" //change
+    let range = fromDate...toDate
+        
+    searchQueue.sync {
+        
+        ref.child("LocationAttendance/emp\(empID)-Attendance").observe(.value, with: { dataSnapshot in
 
-                
-                let attendance = attendance(id: emp_id, date: date, time: time, type: type)
-                var formattedDate = convertDateToObject(Date: attendance.date)
-                if range.contains(formattedDate) {
-                    self.filteredAttendancesDates.append(attendance)
-                } else {
-                    print("The date is outside the range")
-                }
+            for child in dataSnapshot.children {
+                let snap = child as! DataSnapshot
+                let obj = snap.value as! [String: Any]
+                let checkIn = obj["check-in"] as! String
+                let checkOut = obj["check-out"] as! String
+                let status = obj["status"] as! String
+                let workingHours = obj["working-hours"] as! String
+                let date = snap.key
+            
+                let attendance = attendance(id: empID, date: date, checkIn: checkIn, checkOut: checkOut, status: status, workingHours: workingHours)
+                    let formattedDate = convertDateToObject(Date: attendance.date)
+                    if range.contains(formattedDate) {
+                        self.filteredAttendancesDates.append(attendance)
+                    } else {
+                        print("The date is outside the range")
+                    }
             }
-        }
+        })
     }
+}
 }
 
     func convertDateToObject (Date: String) -> Date {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "dd-MM-yyyy"
+//        let date = dateFormatter.date(from: Date)!
+//        return date
+        print(Date)
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        let date = dateFormatter.date(from: Date)!
-        return date
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.locale = Locale.current
+        let date = dateFormatter.date(from: Date)
+        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",date)
+        return date!
     }
-
 
 //func convertDateToString (Date: Date) {
 //    let dateFormatter = DateFormatter()

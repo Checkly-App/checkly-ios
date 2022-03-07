@@ -10,6 +10,8 @@ import Foundation
 struct attendance: Identifiable {
     var id: String
     var date: String
-    var time: String
-    var type: String
+    var checkIn: String
+    var checkOut: String
+    var status: String
+    var workingHours: String
 }
