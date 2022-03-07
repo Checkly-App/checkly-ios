@@ -13,8 +13,10 @@ struct attendanceHistoryView: View {
     @State var fromDate = Date()
     @State var toDate = Date()
     @ObservedObject var vm = attendanceHistoryViewModel()
-    @State var refresh: Bool = false
-
+    @State var selectedStatus: String?
+    let statues: [String] = ["On time",
+                            "Late",
+                            "Absent"]
     
     var body: some View {
                 
@@ -23,11 +25,18 @@ struct attendanceHistoryView: View {
         DatePicker("From Date", selection: $fromDate, in: ...Date() , displayedComponents: .date).padding()
         
         DatePicker("To Date", selection: $toDate, in: ...Date() , displayedComponents: .date).padding()
+        // statues filter
+            HStack {
+                ForEach(statues, id:  \.description) { status in
+                    CheckBox(selectedStatus: self.$selectedStatus, status: status)
+                }
+            }
         // Search Button
             Text("Search").onTapGesture {
                 vm.returnDatesInRange(fromDate: fromDate, toDate: toDate)
                 vm.filteredAttendancesDates.removeAll()
             }
+                Text(selectedStatus ?? "On time")
             ForEach (vm.filteredAttendancesDates, id: \.self) { attendance in
             HStack {
                 VStack{
@@ -47,6 +56,7 @@ struct attendanceHistoryView: View {
         }
     }
 }
+
 
 class attendanceHistoryViewModel: ObservableObject {
     
@@ -85,7 +95,6 @@ class attendanceHistoryViewModel: ObservableObject {
     }
     
 }
-    
     func fetchFilteredAttendances () {
         
     }
@@ -125,31 +134,34 @@ class attendanceHistoryViewModel: ObservableObject {
 }
 
     func convertDateToObject (Date: String) -> Date {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "dd-MM-yyyy"
-//        let date = dateFormatter.date(from: Date)!
-//        return date
-        print(Date)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.locale = Locale.current
         let date = dateFormatter.date(from: Date)
-        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",date)
         return date!
     }
-
-//func convertDateToString (Date: Date) {
-//    let dateFormatter = DateFormatter()
-//    dateFormatter.dateFormat = "dd/MM/yyyy"
-//    dateFormatter.string(from: Date)
-//}
 
 struct attendanceHistoryView_Previews: PreviewProvider {
     static var previews: some View {
         attendanceHistoryView()
     }
 }
+    
+    struct CheckBox: View {
+
+        @Binding var selectedStatus: String?
+        var status: String
+
+        var body: some View {
+            Button(action: { self.selectedStatus = self.status }) {
+                VStack{
+                    Text(status).foregroundColor(.black)
+                }.frame(width: 100, height: 100).background(Color(.green))
+            }
+    }
+}
+
 
 
 
