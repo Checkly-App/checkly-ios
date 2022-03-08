@@ -82,6 +82,6 @@ struct MeetingAttendeesListView: View {
 
 struct MeetingAttendeesListView_Previews: PreviewProvider {
     static var previews: some View {
-        MeetingAttendeesListView(meeting: Meeting(id: "11", host: "none", title: "none", date: Date(), type: "Online", location: "none", attendees: ["12":"accepted"], agenda: "lorem ipsum", end_time: "9:30 AM", start_time: "9:30 AM", latitude: "unavailable", longitude: "unavailable"))
+        MeetingAttendeesListView(meeting: Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
     }
 }

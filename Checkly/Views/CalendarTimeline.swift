@@ -105,12 +105,12 @@ struct CalendarTimeline: View {
 
          .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [BottomSheet.Options.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray), .background(AnyView(Color.white))], content: {
              // see view under "Views" folder
-             MeetingDetails(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", date: Date(), type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", end_time: "9:45 AM", start_time: "9:00 AM", latitude: "unavailable", longitude: "unavailable"))
+             MeetingDetails(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
 
          })
          .sheet(isPresented: $showingSheet) {
              // see view under "Views" folder
-             MeetingAttendeesListView(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", date: Date(), type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", end_time: "9:45 AM", start_time: "9:00 AM", latitude: "unavailable", longitude: "unavailable"))
+             MeetingAttendeesListView(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
          }
          .background(
              LinearGradient(colors: [Color(red: 0.753, green: 0.91, blue: 0.98),Color(red: 0.639, green: 0.878, blue: 0.988)], startPoint: .top, endPoint: .bottom)
@@ -193,7 +193,7 @@ struct CalendarTimeline: View {
                      }
                      .hLeading()
                      // to display time in 12-hour format
-                     Text(meeting.date.formatted(date: .omitted, time: .shortened))
+                     Text(meeting.datetime_start.formatted(date: .omitted, time: .shortened))
                  }
              }
              .hLeading()

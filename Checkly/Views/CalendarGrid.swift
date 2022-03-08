@@ -166,7 +166,7 @@ struct CalendarGrid: View {
                             .padding(.vertical,20)
                         
                         if let meeting = meetingViewModel.meetings.first(where: { meeting in
-                            return isSameDay(date1: meeting.date, date2: currentDate)
+                            return isSameDay(date1: meeting.datetime_start, date2: currentDate)
                         }) {
                             ForEach(self.meetingViewModel.filteredMeetingsArray(date:currentDate)!){ meeting in
                                 Button {
@@ -203,12 +203,12 @@ struct CalendarGrid: View {
                 // MARK: Meeting Details
                 .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [BottomSheet.Options.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray), .background(AnyView(Color.white))], content: {
                     // see view under "Views" folder
-                    MeetingDetails(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", date: Date(), type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", end_time: "9:45 AM", start_time: "9:00 AM", latitude: "unavailable", longitude: "unavailable"))
+                    MeetingDetails(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
                 })
             // MARK: Attendees List
             .sheet(isPresented: $showingSheet) {
                 // see view under "Views" folder
-                MeetingAttendeesListView(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", date: Date(), type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", end_time: "9:45 AM", start_time: "9:00 AM", latitude: "unavailable", longitude: "unavailable"))
+                MeetingAttendeesListView(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
             }
             .navigationBarHidden(true)
         .navigationBarTitle(Text("Calendar"))
@@ -223,7 +223,7 @@ struct CalendarGrid: View {
                 
                 if let meeting = meetingViewModel.meetings.first(where: { meeting in
                     
-                    return isSameDay(date1: meeting.date, date2: value.date)
+                    return isSameDay(date1: meeting.datetime_start, date2: value.date)
                 }){
                     if isSameDay(date1: todaysDate, date2: value.date){
                             Text("\(value.day)")
@@ -288,7 +288,7 @@ struct CalendarGrid: View {
                     }
                     .hLeading()
                     // to display time in 12-hour format
-                    Text(meeting.date.formatted(date: .omitted, time: .shortened))
+                    Text(meeting.datetime_start.formatted(date: .omitted, time: .shortened))
                 }
             }
             .hLeading()

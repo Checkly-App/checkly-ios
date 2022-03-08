@@ -42,18 +42,17 @@ class MeetingViewModel: ObservableObject{
                 let meeting = snapshot.value as! [String: Any]
                 let agenda = meeting["agenda"] as! String
                 let attendees = meeting["attendees"] as! [String:String]
-                let date = meeting["date"] as! Int
-                let end_time = meeting["end_time"] as! String
+                let datetime_end = meeting["datetime_end"] as! Int
+                let datetime_start = meeting["datetime_start"] as! Int
                 let host = meeting["host"] as! String
                 let latitude = meeting["latitude"] as! String
                 let location = meeting["location"] as! String
                 let longitude = meeting["longitude"] as! String
-                let start_time = meeting["start_time"] as! String
                 let title = meeting["title"] as! String
                 let type = meeting["type"] as! String
                 let meeting_id = snapshot.key
         
-                let mt = Meeting(id: meeting_id, host: host, title: title, date: .init(timeIntervalSince1970: TimeInterval(date)), type: type, location: location, attendees: attendees, agenda: agenda, end_time: end_time, start_time: start_time, latitude: latitude, longitude: longitude)
+                let mt = Meeting(id: meeting_id, host: host, title: title, datetime_start: .init(timeIntervalSince1970: TimeInterval(datetime_start)), datetime_end: .init(timeIntervalSince1970: TimeInterval(datetime_end)), type: type, location: location, attendees: attendees, agenda: agenda, latitude: latitude, longitude: longitude)
         
 //                print(mt)
                 // MARK: Fetch UID from Auth
@@ -71,10 +70,10 @@ class MeetingViewModel: ObservableObject{
                 let calendar = NSCalendar.current
         
                 let filtered = self.meetings.filter {
-                    return calendar.isDate($0.date, inSameDayAs: self.currentDate)
+                    return calendar.isDate($0.datetime_start, inSameDayAs: self.currentDate)
                 }
                         .sorted { meeting1, meeting2 in
-                                return meeting1.date < meeting2.date
+                                return meeting1.datetime_start < meeting2.datetime_start
                         }
                         DispatchQueue.main.async {
                             withAnimation {
@@ -121,11 +120,11 @@ class MeetingViewModel: ObservableObject{
         DispatchQueue.global(qos: .userInteractive).async {
             
         let filtered = self.meetings.filter {
-            return calendar.isDate($0.date, inSameDayAs: self.currentDate)
+            return calendar.isDate($0.datetime_start, inSameDayAs: self.currentDate)
         }
         
             .sorted { meeting1, meeting2 in
-                return meeting1.date < meeting2.date
+                return meeting1.datetime_start < meeting2.datetime_start
             }
         
         DispatchQueue.main.async {
@@ -142,11 +141,11 @@ class MeetingViewModel: ObservableObject{
         
             
         filtered = self.meetings.filter {
-            return calendar.isDate($0.date, inSameDayAs: date)
+            return calendar.isDate($0.datetime_start, inSameDayAs: date)
         }
         
             .sorted { meeting1, meeting2 in
-                return meeting1.date < meeting2.date
+                return meeting1.datetime_start < meeting2.datetime_start
             }
         
         return filtered

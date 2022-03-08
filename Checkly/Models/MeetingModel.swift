@@ -12,13 +12,12 @@ struct Meeting: Identifiable {
     var id: String
     var host: String
     var title: String
-    var date: Date
+    var datetime_start: Date
+    var datetime_end: Date
     var type: String
     var location: String
     var attendees: [String:String]
     var agenda: String
-    var end_time: String
-    var start_time: String
     var latitude: String
     var longitude: String
 }

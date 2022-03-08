@@ -25,10 +25,13 @@ struct MeetingDetails: View {
                     .fill(meeting.type == "Online" ? Color("BlueA") : Color("Purple"))
                     .frame(width: 10, height: 10)
                     .padding(.top, 10)
+               
+                // Title
                 Text(meeting.title)
                     .font(.system(size: 25, weight: .bold))
                     .fontWeight(.semibold)
                     .hLeading()
+                // type
                 ZStack{
                     RoundedRectangle(cornerRadius: 25)
                         .fill(meeting.type == "Online" ? Color("BlueA").opacity(0.2) : Color("Purple").opacity(0.2))
@@ -40,13 +43,15 @@ struct MeetingDetails: View {
                         .padding(.trailing, 10)
                     }
                     .padding([.leading], 15)
-            // MARK: Host name
+            
+            // Host name
             Text("By: \(meetingViewModel.getHostName(hostID: meeting.host))")
                  .font(.system(size: 16, weight: .semibold))
                  .foregroundColor(.gray)
                  .hLeading()
                  .padding([.leading], 15)
-            // MARK: Attendees images
+            
+            // Attendees images
             HStack(spacing: -10){
                 if meetingViewModel.meetingAttendeesArray(meeting: meeting).count != 0 {
                    
@@ -136,11 +141,13 @@ struct MeetingDetails: View {
             .padding([.leading], 15)
             
             Divider()
+            
+            // Time
             HStack(spacing: 13) {
                 Image( systemName: "clock")
                     .resizable()
                     .frame(width: 20, height: 20)
-                Text("\(meeting.start_time) - \(meeting.end_time)")
+                Text("\(meeting.datetime_start.formatted(date: .omitted, time: .shortened)) - \(meeting.datetime_end.formatted(date: .omitted, time: .shortened))")
                     .font(.system(size: 19, weight: .semibold))
                     
             }
@@ -148,12 +155,13 @@ struct MeetingDetails: View {
             .hLeading()
             .padding([.leading], 15)
             .padding([.top], 5)
-
+            
+            // Date
             HStack(spacing: 13) {
                 Image( systemName: "calendar")
                     .resizable()
                     .frame(width: 20, height: 20)
-                Text(meeting.date.formatted(date: .abbreviated, time: .omitted))
+                Text(meeting.datetime_start.formatted(date: .abbreviated, time: .omitted))
                     .font(.system(size: 19, weight: .semibold))
                     
                 }
@@ -161,7 +169,24 @@ struct MeetingDetails: View {
                 .hLeading()
                 .padding([.leading], 15)
                 .padding([.top], 5)
-
+       
+            // Agenda
+            HStack(spacing: 13) {
+                Image( systemName: "text.alignleft")
+                    .resizable()
+                    .frame(width: 19, height: 19)
+                Text(meeting.agenda)
+                    .font(.system(size: 19, weight: .semibold))
+                    .multilineTextAlignment(.leading)
+                    .padding(.trailing, 5)
+                
+                }
+                .foregroundColor(.gray)
+                .hLeading()
+                .padding([.leading], 15)
+                .padding([.top], 5)
+            
+            // meeting location
             HStack(spacing: 13) {
                 Image( systemName: "mappin.and.ellipse")
                     .resizable()
@@ -179,24 +204,9 @@ struct MeetingDetails: View {
                     .hLeading()
                     .padding([.leading], 15)
                     .padding([.top], 5)
-            // Fix multiline image issue
-            HStack(spacing: 13) {
-                Image( systemName: "text.alignleft")
-                    .resizable()
-                    .frame(width: 19, height: 19)
-                Text(meeting.agenda)
-                    .font(.system(size: 19, weight: .semibold))
-                    .multilineTextAlignment(.leading)
-                    .padding(.trailing, 5)
-                
-                }
-                .foregroundColor(.gray)
-                .hLeading()
-                .padding([.leading], 15)
-                .padding([.top], 5)
-
+            
          // Map view if available
-            if meeting.latitude != "unavailable" && meeting.longitude != "unavailable" {
+            if meeting.latitude != "0" && meeting.longitude != "0" {
                 
                 Map(coordinateRegion: $coordinateRegion, annotationItems: [AnnotatedItem(coordinate: .init(latitude: Double(meeting.latitude) ?? 0.0, longitude: Double(meeting.longitude) ?? 0.0) )]){ item in
                     MapMarker(coordinate: item.coordinate, tint: Color("BlueA"))
@@ -223,7 +233,6 @@ struct MeetingDetails: View {
                    print((error?.localizedDescription)!)
                    return
                }
-               print("Download success")
            }
     }
 }
@@ -234,6 +243,6 @@ struct MeetingDetails_Previews: PreviewProvider {
     @State static private var showingSheet = false
     
     static var previews: some View {
-        MeetingDetails(coordinateRegion: $coordinateRegion, showingSheet: $showingSheet, meeting: Meeting(id: "1", host: "e0a6ozh4A0QVOXY0tyiMSFyfL163", title: "Cloud Security Engineers Meeting", date: Date(), type: "On-site", location: "STC HQ, IT Meeting Room", attendees: ["VsWRopBPLQYNMXlL5u5mkcGETze2" : "accepted"], agenda: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", end_time: "9:45 AM", start_time: "9:00 AM", latitude: "24.7534673", longitude: "46.6920362"))
+        MeetingDetails(coordinateRegion: $coordinateRegion, showingSheet: $showingSheet, meeting: Meeting(id: "1", host: "e0a6ozh4A0QVOXY0tyiMSFyfL163", title: "Cloud Security Engineers Meeting", datetime_start: Date(), datetime_end: Date() ,type: "On-site", location: "STC HQ, IT Meeting Room", attendees: ["VsWRopBPLQYNMXlL5u5mkcGETze2" : "accepted"], agenda: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", latitude: "24.7534673", longitude: "46.6920362"))
     }
 }
