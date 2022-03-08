@@ -21,7 +21,7 @@ struct UserProfileView: View {
     @State private var showingSheet = false
     private var ref = Database.database().reference()
 
-    @State var user = ""
+    @State var user = "-Mxdz74Cf01pJpth5ovK"
      var name = ""
     @State private var userimage: UIImage?
 
@@ -123,7 +123,7 @@ Spacer()
                                Image(systemName: "chevron.right").foregroundColor(.black)
                     
                     }   }.padding().fullScreenCover(isPresented: $ispresent3) {
-                        EditProfileView()
+                        EditMeetingView( Meetingid:$user)
                     }
                 
                     

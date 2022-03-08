@@ -1,9 +1,4 @@
-//
-//  GenerateMeetingView.swift
-//  Checkly
-//
-//  Created by  Lama Alshahrani on 17/07/1443 AH.
-//
+
 
 import SwiftUI
 import Firebase
@@ -13,17 +8,9 @@ import FirebaseAuth
 import SDWebImageSwiftUI
 import MapKit
 
-struct GenerateMeetingView1: View {
 
-    @State var sattendencelist0 =  Set<Employee>()
 
-    var body: some View {
-        ZStack{
-            GenerateMeetingView()
-        }
-    }}
-
-struct GenerateMeetingView: View {
+struct EditMeetingView: View {
     @State  var locations: [Mark] = []
 
     @Environment(\.dismiss) var dismiss
@@ -31,38 +18,37 @@ struct GenerateMeetingView: View {
     @State var location = ""
     @State var starttime0 = ""
     @State var endtime0 = ""
-    @State var street = "n"
-    @State var city_c = ""
-    @State var isshow = false
     @State var Address_pic = "Select Location"
 
     @State var selectrow = Set<Employee>()
 @State var attendeneslist: [Employee] = []
-  //  @State var attendeeslist = [Employee]()
-
+    @Binding var Meetingid : String
     @State var text = ""
     @State var type = "Online"
      var ref = Database.database().reference()
     
     let userid = Auth.auth().currentUser!.uid
-@State var Isselectattendense = false
+@State var Isselectattendense = true
     @State var isSelectedinline = true
-    @State var IsSelectedSite = false
+    @State var Isshow = true
+
+    
+//    @State var IsSelectedSite = false
     @State var presentAlert = false
     @State var error0 = "All Feilds are required"
     
-    @State var IsitONsite = false
-    @State  var date = Date()
+//    @State var IsitONsite = false
+  //  @State  var date = Date.form()
     @State  var now = Date()
 
-    @State  var starttime = Date()+86400
-    @State  var endtime = Date()+86400
+    @State  var starttime = Date()
+    @State  var endtime = Date()+60
    @State var viewlist = false
     @State var viewlist1 = false
     @ObservedObject  var viewModel = EmployeeViewModel()
 
    @State var attendenceID: [String: String] = [:]
-
+   
     var body: some View {
         NavigationView{
             ScrollView {
@@ -71,14 +57,14 @@ struct GenerateMeetingView: View {
                 Text("Title")
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(Color(UIColor(named: "LightGray")!))
-                TextField("type title of the meeting", text: $title)
+                TextField("type title of the meeting", text: $viewModel.MeetingObj.title)
                     .autocapitalization(.none)
                     .padding(10)
                     .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
-                                .stroke(title.isEmpty ?
+                                .stroke(viewModel.MeetingObj.title.isEmpty ?
                                         Color(UIColor(named: "LightGray")!) :
                                             Color(UIColor(named: "Blue")!) , lineWidth: 0.5))
-                    .foregroundColor(title.isEmpty ?
+                    .foregroundColor(viewModel.MeetingObj.title.isEmpty ?
                                      Color(UIColor(named: "LightGray")!) :
                                         Color(UIColor(named: "Blue")!))
             }
@@ -88,15 +74,15 @@ struct GenerateMeetingView: View {
                 Text("Location")
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(Color(UIColor(named: "LightGray")!))
-                TextField("type the location", text: $location)
+                TextField("type the location", text: $viewModel.MeetingObj.location)
                     .keyboardType(.emailAddress)
                     .autocapitalization(.none)
                     .padding(10)
                     .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
-                                .stroke(location.isEmpty ?
+                                .stroke(viewModel.MeetingObj.location.isEmpty ?
                                         Color(UIColor(named: "LightGray")!) :
                                             Color(UIColor(named: "Blue")!) , lineWidth: 0.5))
-                    .foregroundColor(location.isEmpty ?
+                    .foregroundColor(viewModel.MeetingObj.location.isEmpty ?
                                      Color(UIColor(named: "LightGray")!) :
                                         Color(UIColor(named: "Blue")!))
             }
@@ -110,7 +96,7 @@ struct GenerateMeetingView: View {
                 
                   DatePicker(
                         "Start Date",
-                        selection: $date,
+                        selection: $viewModel.MeetingObj.date,
                         in: Date.now..., displayedComponents: [.date]
                   ).labelsHidden().fixedSize().frame(maxWidth: .infinity/2,maxHeight: 44, alignment: .leading).background(.gray.opacity(0.0)).cornerRadius(7).border(.white.opacity(0.4))
                     
@@ -125,7 +111,7 @@ struct GenerateMeetingView: View {
                     
                     DatePicker(
                           "Start time",
-                          selection: $starttime,
+                          selection:$viewModel.MeetingObj.date,
                           in: Date.now..., displayedComponents: [.hourAndMinute ]
                     ).labelsHidden().padding(.trailing).fixedSize().frame(maxWidth: .infinity/2,maxHeight: 44, alignment: .leading).background(.gray.opacity(0.0)).cornerRadius(7).border(.white.opacity(0.4)).environment(\.timeZone, TimeZone(abbreviation: "GMT+3")!)}
                     HStack{
@@ -135,7 +121,7 @@ struct GenerateMeetingView: View {
                         
                         DatePicker(
                               "End time",
-                              selection: $endtime,
+                              selection: $viewModel.MeetingObj.end_time,
                               in: Date.now..., displayedComponents: [.hourAndMinute]
                         ).labelsHidden().fixedSize().frame(maxWidth: .infinity/2.5,maxHeight: 44, alignment: .leading).background(.gray.opacity(0.0)).cornerRadius(7).border(.white.opacity(0.4))
                     }
@@ -147,18 +133,18 @@ struct GenerateMeetingView: View {
                     Text("Agenda")
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(Color(UIColor(named: "LightGray")!))
-                    CustomTextEditor.init(placeholder: "enter meeting agenda", text: $text)
-                        .font(.body).foregroundColor(text.isEmpty ?
+                    CustomTextEditor.init(placeholder: "enter meeting agenda", text: $viewModel.MeetingObj.agenda)
+                        .font(.body).foregroundColor(viewModel.MeetingObj.agenda.isEmpty ?
                                                       Color(UIColor(named: "LightGray")!) :
                                                          Color(UIColor(named: "Blue")!))
                                            
                                            .accentColor(.cyan)
                                            .frame(height: 100)
                                            .cornerRadius(8).overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
-                                                                        .stroke(text.isEmpty ?
+                                                                        .stroke(viewModel.MeetingObj.agenda.isEmpty ?
                                                                                 Color(UIColor(named: "LightGray")!) :
                                                                                     Color(UIColor(named: "Blue")!) , lineWidth: 0.5))
-                                                            .foregroundColor(text.isEmpty ?
+                                                            .foregroundColor(viewModel.MeetingObj.agenda.isEmpty ?
                                                                              Color(UIColor(named: "LightGray")!) :
                                                                                 Color(UIColor(named: "Blue")!))
                 }
@@ -167,14 +153,15 @@ struct GenerateMeetingView: View {
                     Text("Type")
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(Color(UIColor(named: "LightGray")!))
+                    
                     HStack {
                         
                      
                         Button(action: {
-                             isSelectedinline = true
-                            IsitONsite = false
+                            viewModel.isSelectedinline = true
+                            viewModel.IsSelectedSite = false
 
-                            IsSelectedSite = false
+                            viewModel.isonsite = false
                             type = "Online"
                         }) {
                             HStack {
@@ -184,20 +171,18 @@ struct GenerateMeetingView: View {
                                     .font(.caption)
                             }
                             .padding()
-                            .foregroundColor(isSelectedinline ? .cyan:.gray)
-                            .background(isSelectedinline ? .cyan.opacity(0.20):.gray.opacity(0.20))
+                            .foregroundColor(viewModel.isSelectedinline ? .cyan:.gray)
+                            .background(viewModel.isSelectedinline ? .cyan.opacity(0.20):.gray.opacity(0.20))
                             .cornerRadius(90)
                         }
                         Button(action: {
-                            isSelectedinline = false
-                           IsSelectedSite = true
-                            IsitONsite = true
+                          
+                            viewModel.IsSelectedSite = true
+
+                            viewModel.isonsite = true
+                            viewModel.isSelectedinline = false
                             type = "On-site"
-                            DatePicker(
-                                  "Start Date",
-                                  selection: $date,
-                                  in: Date.now..., displayedComponents: [.date]
-                            ).labelsHidden().datePickerStyle(.graphical)
+                       
                         }) {
                             HStack {
                            
@@ -206,8 +191,8 @@ struct GenerateMeetingView: View {
                                     .font(.caption)
                             }
                             .padding()
-                            .foregroundColor(IsSelectedSite ? .cyan:.gray)
-                            .background(IsSelectedSite ? .cyan.opacity(0.20):.gray.opacity(0.20))
+                            .foregroundColor(viewModel.IsSelectedSite ? .cyan:.gray)
+                            .background(viewModel.IsSelectedSite ? .cyan.opacity(0.20):.gray.opacity(0.20))
                             .cornerRadius(90)
                             
                         }
@@ -217,7 +202,7 @@ struct GenerateMeetingView: View {
             
                 }
                 .padding(.horizontal)
-                if IsitONsite {
+                if viewModel.isonsite {
                 VStack(alignment:.leading){
                     Text("")
                         .font(.system(size: 14, weight: .medium))
@@ -243,15 +228,6 @@ struct GenerateMeetingView: View {
                            
                             .animation(.default)
                              
-//                                Text("Select location")
-//                                    .foregroundColor(.white)
-//                                    .font(.body)
-//                                    .padding().background(
-//                                        LinearGradient(gradient: Gradient(colors: [
-//                                            Color(UIColor(named: "Blue")!),
-//                                            Color(UIColor(named: "LightTeal")!)]),
-//                                                       startPoint: .leading, endPoint: .trailing)).cornerRadius(10)
-//
    }
                 }
                     }
@@ -266,7 +242,30 @@ struct GenerateMeetingView: View {
                         .foregroundColor(Color(UIColor(named: "LightGray")!))
                     HStack{
                     HStack(spacing: -10){
+                        
                         if Isselectattendense {
+                            if Isshow == true {
+         if attendeneslist.count == 0 {
+            ForEach(viewModel.emplyeelist, id: \.self) { emp in
+
+                ForEach(viewModel.attendetry, id: \.self) { emp1 in
+                    if emp1 == emp.id {
+                        
+                        //attendeneslist.append(emp)
+                if emp.tokens == "null"{
+                    Image(systemName: "person.circle.fill").resizable() .foregroundColor(Color("LightGray")).frame(width: 50,height: 50)}
+                else {
+                    WebImage(url:URL(string: emp.tokens)).resizable().frame(width: 50,height: 50).clipShape(Circle())
+                }
+                }
+                }
+            }
+
+
+            }
+        }
+                            
+                    
                             if (attendeneslist.count > 4) {         ForEach(1...4, id: \.self) { row in
 
                                 if attendeneslist[row].tokens == "null"{
@@ -281,7 +280,7 @@ struct GenerateMeetingView: View {
                                 Text("+\(attendeneslist.count-4)").foregroundColor(Color.white).frame(width: 50,height: 50).clipShape(Circle()).background(.black.opacity(0.80)).cornerRadius(40)
                             }
                             else {
-                        ForEach(attendeneslist, id: \.self) { emp in
+                                ForEach(attendeneslist, id: \.self) { emp in
                             if emp.tokens == "null"{
                                 Image(systemName: "person.circle.fill").resizable() .foregroundColor(Color("LightGray")).frame(width: 50,height: 50)}
                             else {
@@ -299,6 +298,23 @@ struct GenerateMeetingView: View {
                         
                      
                         Button(action: {
+                            if title == "" {
+                            for em1 in viewModel.emplyeelist {
+                                
+
+                                for em in viewModel.MeetingObj.attendees{
+                                    print("other imore")
+            print(em.key)
+                                    if em1.id == em.key{
+                                        selectrow.insert(em1)
+                                        attendeneslist.append(em1)
+                                       
+                                    }
+                                }
+                               title = "in"
+                            }
+                            }
+                         //   Isshow = false
                             viewlist = true
                         // Isselectattendense = false
                 }) {
@@ -324,11 +340,11 @@ struct GenerateMeetingView: View {
                 Spacer()
             VStack(alignment: .trailing){
             Button {
-                if !validate(){
+                if false {
                    presentAlert = true
                 }
                 else {
-                    Generate()
+                    Update()
                     dismiss()
                 }
           
@@ -337,6 +353,7 @@ struct GenerateMeetingView: View {
                 label: {
                 HStack{
                     Text("Save")
+                        .fontWeight(.semibold)
                         .foregroundColor(Color("Blue"))
                     Circle().fill(
                         LinearGradient(gradient: Gradient(colors: [
@@ -346,7 +363,7 @@ struct GenerateMeetingView: View {
 )
                     
                 } .sheet(isPresented: $viewlist, content: {
-                    AttendenceListViewselect(selectrow: $selectrow, selectatt: $Isselectattendense, isshow: $isshow, attendeneslist: $attendeneslist)
+                    AttendenceListViewselect(selectrow: $selectrow, selectatt: $Isselectattendense, isshow: $Isshow, attendeneslist: $attendeneslist)
                 })
                 }.sheet(isPresented: $viewlist1, content: {
                  // LocationMeetingView()
@@ -359,7 +376,7 @@ struct GenerateMeetingView: View {
             })
             }
             .padding(.leading)
-        }.navigationBarTitle("Generate Meeting").toolbar {
+        }.navigationBarTitle("Edit Meeting").toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
                            dismiss()
@@ -372,23 +389,38 @@ struct GenerateMeetingView: View {
                        }
             }
         }
-        }.navigationBarTitleDisplayMode(.inline)
+            }.navigationBarTitleDisplayMode(.inline).task{
+                viewModel.getMeetings(meetingid: Meetingid)
+           
+            }
+
+              
+            
+              
+            
         }
         
-        
-        
-    }
     
-    func Generate(){
+        }
+    func Update(){
+        starttime0 = viewModel.MeetingObj.date.formatted(.dateTime.hour().minute())
         var lang = "0"
         var long = "0"
-
+        if attendeneslist.count > 0 {
         for attendeneslist in attendeneslist {
             
             attendenceID[attendeneslist.id] = "sent"
 
         }
-        if IsSelectedSite {
+        }
+        else {
+            for attendeneslist in viewModel.MeetingObj.attendees {
+                
+                attendenceID[attendeneslist.key] = "sent"
+
+            }
+        }
+        if viewModel.IsSelectedSite {
             if locations.count > 0 {
                 print(locations[0].coordinate.latitude)
                 lang = "\(locations[0].coordinate.latitude)"
@@ -399,8 +431,8 @@ struct GenerateMeetingView: View {
       //Date
         var calender = Calendar.current
         calender.timeZone = TimeZone(abbreviation: "GMT+3")!
-        let datecomp = calender.dateComponents([.day,.month,.year], from: date)
-        let timecomp = calender.dateComponents([.hour,.minute,.second], from: starttime)
+        let datecomp = calender.dateComponents([.day,.month,.year], from: viewModel.MeetingObj.date)
+        let timecomp = calender.dateComponents([.hour,.minute,.second], from: viewModel.MeetingObj.date)
         var newcomponent = DateComponents()
         newcomponent.timeZone = TimeZone(abbreviation: "GMT+3")
         
@@ -418,8 +450,8 @@ struct GenerateMeetingView: View {
         //End time
           var calender0 = Calendar.current
           calender0.timeZone = TimeZone(abbreviation: "GMT+3")!
-          let datecomp0 = calender.dateComponents([.day,.month,.year], from: date)
-          let endtime = calender.dateComponents([.hour,.minute,.second], from: endtime)
+          let datecomp0 = calender.dateComponents([.day,.month,.year], from: viewModel.MeetingObj.date)
+          let endtime = calender.dateComponents([.hour,.minute,.second], from: viewModel.MeetingObj.end_time)
           var newcomponentEnd = DateComponents()
         newcomponentEnd.timeZone = TimeZone(abbreviation: "GMT+3")
           
@@ -434,14 +466,19 @@ struct GenerateMeetingView: View {
           let intervalEndtime = Int( intervalend!.timeIntervalSince1970)
          print(intervalEndtime)
         
-       
+       print(long)
+        print(lang)
+        print(attendenceID)
+        print(viewModel.MeetingObj.title)
+        print(viewModel.MeetingObj.agenda)
+        print(viewModel.MeetingObj.location)
+print(type)
+
+
+        self.ref.child("Meetings").child(Meetingid).updateChildValues(["title":viewModel.MeetingObj.title , "agenda":viewModel.MeetingObj.agenda ,"location":viewModel.MeetingObj.location,"type":type,"start_time":starttime0 , "end_time":intervalEndtime ,"attendees":attendenceID,"latitude":lang,"longitude":long , "date":interval])
 
 
 
-
-
-        ref.child("Meetings").childByAutoId().setValue(["title": title,"agenda": text,"host":userid,"location":location,"type":type,"date":interval,"start_time":starttime0,"end_time":intervalEndtime,"attendees":attendenceID,"latitude":lang,"longitude":long
-                                                            ])
 
 
 
@@ -451,85 +488,10 @@ struct GenerateMeetingView: View {
 
     }
     
-    func validate()-> Bool{
-        starttime0 = starttime.formatted(.dateTime.hour().minute())
-        var hourin =  starttime0.prefix(2)
-        
-              if hourin.suffix(1) == ":"
-              {
-                  hourin = hourin.prefix(1)
-
-             }
-        var minuted = starttime.formatted(.dateTime.minute())
-        let AmOrPM = starttime0.suffix(2)
-        
-        
-        
-        /// end time
-      endtime0 = endtime.formatted(.dateTime.hour().minute())
-        var endhour =  endtime0.prefix(2)
-        
-              if endhour.suffix(1) == ":"
-              {
-                  endhour = endhour.prefix(1)
-
-             }
-        var minutedend = endtime.formatted(.dateTime.minute())
-        let AmOrPMEnd = endtime0.suffix(2)
-        
-       
-//       if AmOrPMEnd == "AM" && AmOrPM == "PM"
-//        {
-//           error0 = "Please enter a valid time"
-//           return false
-//       }
-//        if AmOrPMEnd == AmOrPM {
-//        if endhour == hourin {
-//          if  minutedend <= minuted{
-//              error0 = "Please enter a valid time"
-//
-//                return false
-//            }
-//        }else
-//            if endhour < hourin{
-//            error0 = "Please enter a valid time"
-//
-//            return false
-//        }
-//        }
-       
-        if starttime >= endtime {
-            error0 = "Please enter a valid time"
-                    return false
-        }
- 
-        if title == ""{
-            error0 = "All feild are required"
-
-            return false }
-        if location == "" {
-            error0 = "All feild are required"
-
-            return false }
-        if text == "" {
-            error0 = "All feild are required"
-
-            return false }
-        if attendeneslist.count == 0{
-            error0 = "Please add at least one attendees"
-
-            return false 
-        }
-     
-            
-        return true
     }
-                                        }
-                                        
-                                        
-                                        
-
-struct CustomTextEditor: View {
+        
+        
+struct CustomTextEditor0: View {
     let placeholder: String
     @Binding var text: String
     let internalPadding: CGFloat = 5
@@ -550,10 +512,17 @@ struct CustomTextEditor: View {
         }
     }
 }
- 
 
-struct GenerateMeetingView_Previews: PreviewProvider {
+
+
+
+
+
+
+struct EditMeetingView_Previews: PreviewProvider {
     static var previews: some View {
-        GenerateMeetingView()
+        EditMeetingView( Meetingid: .constant(""))
     }
 }
+
+

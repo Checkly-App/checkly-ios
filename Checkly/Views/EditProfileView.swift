@@ -467,6 +467,7 @@ struct EditProfileView: View {
                     label: {
                     HStack{
                         Text("Update")
+                            .fontWeight(.semibold)
                             .foregroundColor(Color("Blue"))
                         Circle().fill(
                             LinearGradient(gradient: Gradient(colors: [

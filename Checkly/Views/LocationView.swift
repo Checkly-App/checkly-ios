@@ -145,7 +145,7 @@ struct locationselect: View {
                 // Location name
                 if let locationName = placeMark.addressDictionary!["Name"] as? String {
                     print(locationName)
-                    location_add = location_add + locationName as String
+                    location_add =   locationName as String
                 }
 
                 // Street address

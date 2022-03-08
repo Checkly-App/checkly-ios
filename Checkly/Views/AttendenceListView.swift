@@ -42,6 +42,7 @@ struct AttendenceListView: View {
                 Text(emp.position)
                     .font(.callout)
                     .foregroundColor(Color.gray)
+                    .multilineTextAlignment(.leading)
             }
             Spacer()
             
@@ -80,6 +81,7 @@ struct AttendenceListViewselect: View {
     
     @Binding var selectrow : Set<Employee>
     @Binding var selectatt : Bool
+    @Binding var isshow : Bool
     @Environment(\.dismiss) var dismiss
     @Binding var attendeneslist: [Employee]
     @State var attendeneslist1: [Employee] = []
@@ -107,11 +109,12 @@ struct AttendenceListViewselect: View {
                 print(attendeneslist.count)
                 print(attendeneslist1.count)
                 selectatt = true
+                isshow = false
          dismiss()
         } label: {
             VStack{
             Text(" Save")
-                .fontWeight(.bold)
+                    .fontWeight(.semibold)
                 .foregroundColor(.white)
                 .frame(maxWidth: 250)
                 .padding()
@@ -132,14 +135,14 @@ struct AttendenceListViewselect: View {
             
         }
         
-        .navigationBarTitle(" Select Attendess")
+        .navigationBarTitle(" Select Attendeess")
 }
     
         
     }}
 struct AttendenceListView_Previews: PreviewProvider {
     static var previews: some View {
-        AttendenceListViewselect( selectrow: (.constant(Set<Employee>())), selectatt: .constant(false), attendeneslist: .constant([]))
+        AttendenceListViewselect( selectrow: (.constant(Set<Employee>())), selectatt: .constant(false), isshow: .constant(false), attendeneslist: .constant([]))
                                   
                                   }
 }

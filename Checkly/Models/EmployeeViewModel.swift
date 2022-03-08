@@ -51,7 +51,7 @@ class EmployeeViewModel: ObservableObject {
     //@Published var userId = "111111111"
 
 
-
+   
 
 
 
@@ -164,58 +164,7 @@ class EmployeeViewModel: ObservableObject {
 }
         }
     }
-    func fetchcompany() {
-
-        var depid: String!
-        var comID0: String!
-
-
-
-        ref.child("Employee").observe(.value) { snapshot in
-
-                for contact in snapshot.children{
-              
-
-
-                    let obj = contact as! DataSnapshot
-                    if obj.key == self.userid {
-
-                    depid = obj.childSnapshot(forPath: "department").value as? String
-                        print("fetch function 1")
-                        print(depid)
-         
-                    }
-                }
-                        self.ref.child("Department").observe(.value) { snapshot in
-            
-                                for contact in snapshot.children{
-            
-            
-            
-                                    let obj = contact as! DataSnapshot
-                                    if obj.key == depid {
-                                        comID0 = ((obj.childSnapshot(forPath: "company_id").value as? String)!)
-                                        print("fetch function 2")
-                                        print(comID0)
-            
-                       }
-            
-                                 }
-            
-            
-                         }
-                }
-     
-        }
-    
-
-        
-      
-            
-        
-    
-
-        
+   
     func fetchDatalist() {
 
             var nameem: String!
@@ -234,12 +183,6 @@ class EmployeeViewModel: ObservableObject {
             var add: String!
             var toke: String!
             var comID: String!
-
-
-
-            
-
-
 
 
 
@@ -268,7 +211,9 @@ class EmployeeViewModel: ObservableObject {
                         self.finddep(Empl: employee)
                         
                     }}
-            }}
+            }
+        
+    }
     func finddep(  Empl  :  Employee ){
         var depid: String!
         var comIDuser: String!
@@ -284,9 +229,7 @@ class EmployeeViewModel: ObservableObject {
                     if obj.key == self.userid {
 
                     depid = obj.childSnapshot(forPath: "department").value as? String
-                        print("fetch function 1")
-                        print(depid)
-         
+                       
                     }
                 }
         
@@ -299,25 +242,21 @@ class EmployeeViewModel: ObservableObject {
                                     let obj = contact as! DataSnapshot
                                     if obj.key == depid {
                                         comIDuser = ((obj.childSnapshot(forPath: "company_id").value as? String)!)
-                                        print("fetch function 2")
-                                        print(comIDuser)
+                                      
             
                        }
                                 }
         var emp = Empl
     var comID: String!
     var dep: String!
-      print("this is")
 
                             self.ref.child("Department").observe(.value) { snapshot in
   
                                   for contact in snapshot.children{
-  print("enter")
   
   
                                       let obj = contact as! DataSnapshot
                                       if obj.key == emp.department {
-                                          print("correct dep")
                                           dep = obj.childSnapshot(forPath: "name").value as? String
                                       //    comID = obj.childSnapshot(forPath: "name").value as? String
                                           self.depname =                                           (obj.childSnapshot(forPath: "name").value as? String)!
@@ -331,15 +270,8 @@ class EmployeeViewModel: ObservableObject {
 //
                                           if emp.comid == comIDuser  && emp.id != self.userid {
                                       self.emplyeelist.append(emp)
-                                              print(self.emplyeelist)
                                           }
-                                     // var i = 0
-//                                      for  emplyeelist in self.emplyeelist {
-//                                            //  i = i+1
-//                                                   if emplyeelist.id != emp.id {
-//                                      self.emplyeelist.append(emp)
-//
-//                                                   }}
+
                           
                                   }
                         }
@@ -349,53 +281,99 @@ class EmployeeViewModel: ObservableObject {
                         }
         }
     }
+    
+
+@Published var MeetingId = ""
+    @Published var IsSelectedSite = false
+    @Published var isSelectedinline = false
+    @Published var isonsite = false
+    @Published var date0 = Date()
+
+    @Published var selectrow = Set<Employee>()
+
+    @Published var attendeneslist0: [Employee] = []
+    @Published var attendetry: [String] = []
+
+
+    @Published var MeetingObjattendeneess : [String: String] = [:]
+   // @Published var Meeti : Meeting()
+    @Published var MeetingObj = Meeting(id: "", host: "", title: "", date: Date(), type: "", location: "", attendees: ["":""], agenda: "", end_time: Date(), start_time: "", latitude: "", longitude: "")
+    func getMeetings(meetingid:String){
+        var attendeneslist0: [Employee] = []
+        self.fetchDatalist()
+
+            let ref = Database.database().reference()
+            
+            DispatchQueue.main.async {
+                ref.child("Meetings").observe(.value) { snapshot in
                     
-  
-//    func finddep1(  Empl  :  Employee){
-//        var emp = Empl
-//    var comID: String!
-//    var dep: String!
-//        var user_id: String!
-//        var depid0: String!
-//        var comID0 = ""
-//
-//
-//        ref.child("Employee").observe(.value) { snapshot in
-//
-//                for contact in snapshot.children{
-//
-//
-//
-//                    let obj = contact as! DataSnapshot
-//                    if obj.key == self.userid {
-//
-//                    depid0 = obj.childSnapshot(forPath: "Department").value as? String
-//
-//
-//
-//            print(depid0)
-//            self.ref.child("Department").observe(.value) { snapshot in
-//
-//                    for contact in snapshot.children{
-//
-//
-//
-//                        let obj = contact as! DataSnapshot
-//                        if obj.key == depid0 {
-//                            comID0 = ((obj.childSnapshot(forPath: "company_id").value as? String)!)
-//                            self.finddep(Empl: Empl, comp: comID0)
-// return
-//
-//
-//    }
-//                    }
-//                }
-//        }
-//}
-//
-//        }
-//    }
+                    for contact in snapshot.children{
+              
+
+                        
+                            let obj = contact as! DataSnapshot
+                    if obj.key  as! String == meetingid {
+
+
+                    let agenda =  obj.childSnapshot(forPath: "agenda").value as? String
+                        let attendees =  obj.childSnapshot(forPath: "attendees").value as? [String:String]
+                    let date =   obj.childSnapshot(forPath: "date").value as? Int
+                    let end_time =  obj.childSnapshot(forPath: "end_time").value as? Int
+                    let host =  obj.childSnapshot(forPath: "host").value as? String
+                    let latitude =  obj.childSnapshot(forPath: "latitude").value as? String
+                    let location =  obj.childSnapshot(forPath: "location").value as? String
+                    let longitude =  obj.childSnapshot(forPath: "longitude").value as? String
+                    let start_time =   obj.childSnapshot(forPath: "start_time").value as? String
+                    let title =   obj.childSnapshot(forPath: "title").value as? String
+                    let type =  obj.childSnapshot(forPath: "type").value as? String
+                    let meeting_id = obj.key
+                        for mt in attendees! {
+                            self.MeetingObjattendeneess[mt.key] = mt.value
+                        }
+                        let mt = Meeting(id: meeting_id, host: host!, title: title!, date: .init(timeIntervalSince1970: TimeInterval(date!)), type: type!, location: location!, attendees: attendees!, agenda: agenda!, end_time: .init(timeIntervalSince1970: TimeInterval(end_time!)), start_time: start_time!, latitude: latitude!, longitude: longitude!)
+                        self.MeetingObj = mt
+
+                        if mt.type == "On-site"{
+
+                            self.IsSelectedSite = true
+                            self.isSelectedinline = false
+                            self.isonsite = true
+                        }
+                        else {
+                            self.IsSelectedSite = false
+                            self.isSelectedinline = true
+                            self.isonsite = false
+                        }
+                       
+                        for em2 in attendees! {
+                            self.attendetry.append(em2.key)
+                        }
+                        for emp1 in self.emplyeelist {
+                            for em2 in attendees! {
+                                if em2.key == emp1.id {
+                                 attendeneslist0.append(emp1)
+                                    print("wor")
+                                    self.selectrow.insert(emp1)
+
+                                }
+                            }
+                        }
+                      
+
+                      print(attendeneslist0)
+                      
+                       
+
+                }
+                }
+                }
+              
+                
+            }
+      
 }
+}
+
     
 
     

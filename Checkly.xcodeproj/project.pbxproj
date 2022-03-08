@@ -35,6 +35,8 @@
 		F5509B1727C95AA20099690B /* LocationMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5509B1627C95AA20099690B /* LocationMeetingView.swift */; };
 		F5509B1927C9734B0099690B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5509B1827C9734B0099690B /* LocationManager.swift */; };
 		F5509B1B27D133CE0099690B /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5509B1A27D133CD0099690B /* LocationView.swift */; };
+		F5509B2027D547410099690B /* EditMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5509B1F27D547410099690B /* EditMeetingView.swift */; };
+		F5509B2227D54C440099690B /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5509B2127D54C440099690B /* Meeting.swift */; };
 		F551EBAD27C42CF500A8FE7C /* GenerateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F551EBAC27C42CF400A8FE7C /* GenerateView.swift */; };
 		F55E524127B6773B00288187 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F55E524027B6773B00288187 /* FirebaseStorage */; };
 		F55E524327B678EE00288187 /* EmployeeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55E524227B678EE00288187 /* EmployeeViewModel.swift */; };
@@ -71,6 +73,8 @@
 		F5509B1827C9734B0099690B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		F5509B1A27D133CD0099690B /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		F5509B1C27D180090099690B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F5509B1F27D547410099690B /* EditMeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMeetingView.swift; sourceTree = "<group>"; };
+		F5509B2127D54C440099690B /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		F551EBAC27C42CF400A8FE7C /* GenerateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateView.swift; sourceTree = "<group>"; };
 		F55E524227B678EE00288187 /* EmployeeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeViewModel.swift; sourceTree = "<group>"; };
 		F55E524627B679E800288187 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 				F55E524A27B67AC700288187 /* EditProfileView.swift */,
 				F5715FAB27B82B5F001FADE6 /* GenderView.swift */,
 				F5509B1A27D133CD0099690B /* LocationView.swift */,
+				F5509B1F27D547410099690B /* EditMeetingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -174,6 +179,7 @@
 				F55E524627B679E800288187 /* ImagePicker.swift */,
 				F5BA076B27C45A6500A07DD4 /* Employee.swift */,
 				F5509B1827C9734B0099690B /* LocationManager.swift */,
+				F5509B2127D54C440099690B /* Meeting.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -316,11 +322,13 @@
 				F5F4CF1E27C4FC7E00443725 /* AttendenceListView.swift in Sources */,
 				F5509B1727C95AA20099690B /* LocationMeetingView.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
+				F5509B2227D54C440099690B /* Meeting.swift in Sources */,
 				F5715FB627BFAF2E001FADE6 /* GenerateMeetingView.swift in Sources */,
 				71C62C8327AD598900C573E7 /* InputsView.swift in Sources */,
 				F5BA076C27C45A6500A07DD4 /* Employee.swift in Sources */,
 				F55E524927B67A8000288187 /* UserProfileView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
+				F5509B2027D547410099690B /* EditMeetingView.swift in Sources */,
 				71D09A6427A9DADD00DA2D1D /* ResetPasswordView.swift in Sources */,
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,
 				71C62C8527AD5AC300C573E7 /* TitleView.swift in Sources */,
