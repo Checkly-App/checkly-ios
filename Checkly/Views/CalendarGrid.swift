@@ -22,7 +22,7 @@ struct CalendarGrid: View {
     // for attendees sheet
     @State private var showingSheet = false
     // for map view
-    @State private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0,longitude: 0.0),span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+    @State private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0,longitude: 0.0),span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
     
     var todaysDate = Date()
     
@@ -140,7 +140,7 @@ struct CalendarGrid: View {
                                 
                                 ForEach(extractDate()) { value in
                                     
-                                    CardView(value: value)
+                                    DatesView(value: value)
                                         .background(
                                             Capsule()
                                                 // light blue Color(red: 0.824, green: 0.925, blue: 0.976)
@@ -172,7 +172,7 @@ struct CalendarGrid: View {
                                 Button {
                                     meetingViewModel.selectedMeeting = meeting
                                     // Update coordinate region on click
-                                    coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: Double(meetingViewModel.selectedMeeting?.latitude ?? "0.0") ?? 0.0,longitude: Double(meetingViewModel.selectedMeeting?.longitude ?? "0.0") ?? 0.0),span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
+                                    coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: Double(meetingViewModel.selectedMeeting?.latitude ?? "0.0") ?? 0.0,longitude: Double(meetingViewModel.selectedMeeting?.longitude ?? "0.0") ?? 0.0),span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
                                     DispatchQueue.main.schedule(after: .init(.now() + 0.3)) {
                                         withAnimation{
                                             bottomSheetPosition = .middle
@@ -216,7 +216,7 @@ struct CalendarGrid: View {
     }// body
     
     @ViewBuilder
-    func CardView(value: DateValueModel) -> some View{
+    func DatesView(value: DateValueModel) -> some View{
         
         VStack{
             if value.day != -1 {

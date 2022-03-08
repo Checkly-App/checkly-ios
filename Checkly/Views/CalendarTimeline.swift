@@ -21,7 +21,7 @@ struct CalendarTimeline: View {
      // for attendees sheet
      @State private var showingSheet = false
      // for map view
-     @State private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0,longitude: 0.0),span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+     @State private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0,longitude: 0.0),span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
     
      var body: some View {
              
@@ -147,7 +147,7 @@ struct CalendarTimeline: View {
                      ForEach(meetings){ meeting in
                          Button {
                              meetingViewModel.selectedMeeting = meeting
-                             coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: Double(meetingViewModel.selectedMeeting?.latitude ?? "0.0") ?? 0.0,longitude: Double(meetingViewModel.selectedMeeting?.longitude ?? "0.0") ?? 0.0),span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
+                             coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: Double(meetingViewModel.selectedMeeting?.latitude ?? "0.0") ?? 0.0,longitude: Double(meetingViewModel.selectedMeeting?.longitude ?? "0.0") ?? 0.0),span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
                              DispatchQueue.main.schedule(after: .init(.now() + 0.3)) {
                                  withAnimation{
                                      bottomSheetPosition = .middle
