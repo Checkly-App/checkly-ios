@@ -33,7 +33,7 @@ struct attendanceHistoryView: View {
             }
         // Search Button
             Text("Search").onTapGesture {
-                vm.returnDatesInRange(fromDate: fromDate, toDate: toDate)
+                vm.fetchFilteredAttendances(fromDate: fromDate, toDate: toDate, selectedStatus: selectedStatus ?? "Not selected")
                 vm.filteredAttendancesDates.removeAll()
             }
                 Text(selectedStatus ?? "On time")
@@ -51,6 +51,10 @@ struct attendanceHistoryView: View {
                     Text("Check Out")
                     Text(attendance.checkOut)
                 }.padding()
+                VStack{
+                    Text("Status")
+                    Text(attendance.status)
+                }.padding()
             }.padding()
             }
         }
@@ -65,7 +69,7 @@ class attendanceHistoryViewModel: ObservableObject {
     @Published var filteredAttendancesDates = [attendance]()
     
     init () {
-        fetchAttendances()
+        
     }
 
     func fetchAttendances () {
@@ -95,18 +99,14 @@ class attendanceHistoryViewModel: ObservableObject {
     }
     
 }
-    func fetchFilteredAttendances () {
-        
-    }
-    
-    
-    func returnDatesInRange (fromDate: Date, toDate: Date) {
+    func fetchFilteredAttendances (fromDate: Date, toDate: Date, selectedStatus: String) {
         
     let ref = Database.database().reference()
     let searchQueue = DispatchQueue.init(label: "searchQueue")
     let empID = "8UoUAkIZvnP5KSWHydWliuZmOKt2" //change
     let range = fromDate...toDate
-        
+     
+        print ("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", selectedStatus)
     searchQueue.sync {
         
         ref.child("LocationAttendance/emp\(empID)-Attendance").observe(.value, with: { dataSnapshot in
@@ -122,11 +122,12 @@ class attendanceHistoryViewModel: ObservableObject {
             
                 let attendance = attendance(id: empID, date: date, checkIn: checkIn, checkOut: checkOut, status: status, workingHours: workingHours)
                     let formattedDate = convertDateToObject(Date: attendance.date)
-                    if range.contains(formattedDate) {
-                        self.filteredAttendancesDates.append(attendance)
-                    } else {
-                        print("The date is outside the range")
-                    }
+                print(status)
+                if ( range.contains(formattedDate) && attendance.status == selectedStatus ) {
+                    print (attendance.status)
+                    print (selectedStatus)
+                    self.filteredAttendancesDates.append(attendance)
+                }
             }
         })
     }
