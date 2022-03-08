@@ -17,7 +17,7 @@
 		7149E91827A985BC008E3553 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91727A985BC008E3553 /* Authentication.swift */; };
 		7149E91A27A987DE008E3553 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91927A987DD008E3553 /* Session.swift */; };
 		7152C6A527B6B66300E2CEAD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6A427B6B66300E2CEAD /* NotificationManager.swift */; };
-		7152C6A727B6BDEE00E2CEAD /* MeetingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6A627B6BDED00E2CEAD /* MeetingModel.swift */; };
+		7152C6A727B6BDEE00E2CEAD /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6A627B6BDED00E2CEAD /* Meeting.swift */; };
 		7152C6A927B6BE2500E2CEAD /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6A827B6BE2500E2CEAD /* DateModel.swift */; };
 		7152C6AB27B6CF5100E2CEAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6AA27B6CF5100E2CEAD /* AppDelegate.swift */; };
 		7152C6AE27B82FCE00E2CEAD /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 7152C6AD27B82FCE00E2CEAD /* PopupView */; };
@@ -49,7 +49,7 @@
 		7149E91727A985BC008E3553 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		7149E91927A987DD008E3553 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		7152C6A427B6B66300E2CEAD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		7152C6A627B6BDED00E2CEAD /* MeetingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingModel.swift; sourceTree = "<group>"; };
+		7152C6A627B6BDED00E2CEAD /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		7152C6A827B6BE2500E2CEAD /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
 		7152C6AA27B6CF5100E2CEAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71A5EBF327AEA052009F68B9 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
@@ -138,7 +138,7 @@
 			children = (
 				7149E91127A96FCA008E3553 /* Credentials.swift */,
 				7149E91927A987DD008E3553 /* Session.swift */,
-				7152C6A627B6BDED00E2CEAD /* MeetingModel.swift */,
+				7152C6A627B6BDED00E2CEAD /* Meeting.swift */,
 				7152C6A827B6BE2500E2CEAD /* DateModel.swift */,
 			);
 			path = Models;
@@ -266,7 +266,7 @@
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,
 				71C62C8527AD5AC300C573E7 /* TitleView.swift in Sources */,
 				7152C6AB27B6CF5100E2CEAD /* AppDelegate.swift in Sources */,
-				7152C6A727B6BDEE00E2CEAD /* MeetingModel.swift in Sources */,
+				7152C6A727B6BDEE00E2CEAD /* Meeting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

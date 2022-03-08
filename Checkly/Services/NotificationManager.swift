@@ -37,7 +37,7 @@ class NotificationManager {
                 let agenda = meetingNode["agenda"] as! String
                 let attendees = meetingNode["attendees"] as! [String: String]
                 let date = meetingNode["date"] as! Int
-                let end_time = meetingNode["end_time"] as! String
+                let end_time = meetingNode["end_time"] as! Int
                 let host = meetingNode["host"] as! String
                 let latitude = meetingNode["latitude"] as! String
                 let location = meetingNode["location"] as! String
@@ -47,7 +47,7 @@ class NotificationManager {
                 let type = meetingNode["type"] as! String
                 let meeting_id = snapshot.key
                 
-                let meeting = Meeting(id: meeting_id, host: host, title: title, date: .init(timeIntervalSince1970: TimeInterval(date)), type: type, location: location, attendees: attendees, agenda: agenda, end_time: end_time, start_time: start_time, latitude: latitude, longitude: longitude)
+                let meeting = Meeting(id: meeting_id, host: host, title: title, date: .init(timeIntervalSince1970: TimeInterval(date)), type: type, location: location, attendees: attendees, agenda: agenda, end_time: .init(timeIntervalSince1970: TimeInterval(end_time)), start_time: start_time, latitude: latitude, longitude: longitude)
                 
                 for attendee in attendees {
                     /// trigger a notification only if the current user was invited. i.e.,  is in the attendees list
@@ -115,7 +115,7 @@ class NotificationManager {
         
         /// convert to the correct timzone then to a date component  - this could be a simulator problem though!
         var calendar = Calendar.current
-        calendar.timeZone = TimeZone(abbreviation: "GMT+3")!
+//        calendar.timeZone = TimeZone(abbreviation: "GMT+3")!
         let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
         let uuid = UUID().uuidString
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false) /// trigger based on a specific date
