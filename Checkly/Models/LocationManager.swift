@@ -1,43 +1,13 @@
-//import CoreLocation
-//import CoreLocationUI
-//
-//
-//class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-//    let manager = CLLocationManager()
-//
-//    @Published var location: CLLocationCoordinate2D?
-//
-//    override init() {
-//        super.init()
-//        manager.delegate = self
-//        manager.desiredAccuracy = kCLLocationAccuracyBest
-//        manager.distanceFilter = kCLDistanceFilterNone
-//        manager.requestAlwaysAuthorization()
-//        manager.startUpdatingLocation()
-//    }
-//
-//    func requestLocation() {
-//        manager.requestLocation()
-//    }
-//
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-////        guard  let location = locations.last else {
-////            return
-////        }
-//        location = locations.first?.coordinate
-//
-//    }
-//}
-
 import Foundation
 import CoreLocation
 import Combine
 
-class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+class LocationManager: NSObject, ObservableObject {
 
     private let locationManager = CLLocationManager()
-    @Published var locationStatus: CLAuthorizationStatus?
+   // @Published var locationStatus: CLAuthorizationStatus?
     @Published var lastLocation: CLLocation?
+    static let shared = LocationManager()
 
     override init() {
         super.init()
@@ -46,32 +16,39 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
-
-   
-    
-    var statusString: String {
-        guard let status = locationStatus else {
-            return "unknown"
-        }
-        
-        switch status {
-        case .notDetermined: return "notDetermined"
-        case .authorizedWhenInUse: return "authorizedWhenInUse"
-        case .authorizedAlways: return "authorizedAlways"
-        case .restricted: return "restricted"
-        case .denied: return "denied"
-        default: return "unknown"
-        }
+    func requestlocation(){
+        locationManager.requestWhenInUseAuthorization()
     }
 
+}
+
+extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        locationStatus = status
-        print(#function, statusString)
+        switch status {
+        case .notDetermined:
+            print("notDetermined")
+        case .restricted:
+            print("restricted")
+
+        case .denied:
+            print("denied")
+
+        case .authorizedAlways:
+            print("authorizedAlways")
+
+        case .authorizedWhenInUse:
+            print("authorizedWhenInUse")
+
+        case .authorized:
+            print("authorized")
+
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        lastLocation = location
-        print(#function, location)
+        guard let location  = locations.last else  {return}
+        self.lastLocation = location
     }
 }
+
+

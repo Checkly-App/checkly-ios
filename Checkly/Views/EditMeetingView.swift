@@ -26,12 +26,15 @@ struct EditMeetingView: View {
     @State var text = ""
     @State var type = "Online"
      var ref = Database.database().reference()
-    
+    @StateObject var locationManager = LocationManager.shared
+
     let userid = Auth.auth().currentUser!.uid
 @State var Isselectattendense = true
     @State var isSelectedinline = true
     @State var Isshow = true
+    @State var isselectADD = false
 
+@State var oldAddress = ""
     
 //    @State var IsSelectedSite = false
     @State var presentAlert = false
@@ -96,7 +99,7 @@ struct EditMeetingView: View {
                 
                   DatePicker(
                         "Start Date",
-                        selection: $viewModel.MeetingObj.date,
+                        selection: $viewModel.MeetingObj.datetime_end,
                         in: Date.now..., displayedComponents: [.date]
                   ).labelsHidden().fixedSize().frame(maxWidth: .infinity/2,maxHeight: 44, alignment: .leading).background(.gray.opacity(0.0)).cornerRadius(7).border(.white.opacity(0.4))
                     
@@ -111,7 +114,7 @@ struct EditMeetingView: View {
                     
                     DatePicker(
                           "Start time",
-                          selection:$viewModel.MeetingObj.date,
+                          selection:$viewModel.MeetingObj.datetime_start,
                           in: Date.now..., displayedComponents: [.hourAndMinute ]
                     ).labelsHidden().padding(.trailing).fixedSize().frame(maxWidth: .infinity/2,maxHeight: 44, alignment: .leading).background(.gray.opacity(0.0)).cornerRadius(7).border(.white.opacity(0.4)).environment(\.timeZone, TimeZone(abbreviation: "GMT+3")!)}
                     HStack{
@@ -121,7 +124,7 @@ struct EditMeetingView: View {
                         
                         DatePicker(
                               "End time",
-                              selection: $viewModel.MeetingObj.end_time,
+                              selection: $viewModel.MeetingObj.datetime_end,
                               in: Date.now..., displayedComponents: [.hourAndMinute]
                         ).labelsHidden().fixedSize().frame(maxWidth: .infinity/2.5,maxHeight: 44, alignment: .leading).background(.gray.opacity(0.0)).cornerRadius(7).border(.white.opacity(0.4))
                     }
@@ -213,7 +216,9 @@ struct EditMeetingView: View {
                             viewlist1 = true
                 }) {
                             HStack {
-                                TextField("Select Address", text: $Address_pic)  .accentColor(Color.cyan)
+                                if isselectADD == false {
+                               // if  viewModel.oldAddress == "Select Location" {
+                                TextField("Select Address", text: $viewModel.oldAddress)  .accentColor(Color.cyan)
                                    
                                     .autocapitalization(.none).disabled(true)
                                     .padding(10)
@@ -226,7 +231,22 @@ struct EditMeetingView: View {
                                                         Color(UIColor(named: "Blue")!))
                             
                            
-                            .animation(.default)
+                                        .animation(.default) } else {
+                                            TextField("Select Address", text: $Address_pic)  .accentColor(Color.cyan)
+                                               
+                                                .autocapitalization(.none).disabled(true)
+                                                .padding(10)
+                                                .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
+                                                            .stroke(Address_pic.isEmpty ?
+                                                                    Color(UIColor(named: "Blue")!) :
+                                                                        Color(UIColor(named: "Blue")!) , lineWidth: 0.5))
+                                                .foregroundColor(Address_pic.isEmpty ?
+                                                                 Color(UIColor(named: "Blue")!) :
+                                                                    Color(UIColor(named: "Blue")!))
+                                        
+                                       
+                                                    .animation(.default)
+                                        }
                              
    }
                 }
@@ -369,7 +389,7 @@ struct EditMeetingView: View {
                 })
                 }.sheet(isPresented: $viewlist1, content: {
                  // LocationMeetingView()
-                    locationselect(locations: $locations, location_add: $Address_pic)
+                    locationselect(locations: $locations, location_add: $Address_pic, isselectADD: $isselectADD)
                 })
             }.alert("Oops!..", isPresented: $presentAlert, actions: {
                 // actions
@@ -393,7 +413,7 @@ struct EditMeetingView: View {
         }
             }.navigationBarTitleDisplayMode(.inline).task{
                 viewModel.getMeetings(meetingid: Meetingid)
-           
+               
             }.toolbar {
                 ToolbarItem(placement: .keyboard) {
                  
@@ -419,9 +439,9 @@ struct EditMeetingView: View {
             }
         }
     func Update(){
-        starttime0 = viewModel.MeetingObj.date.formatted(.dateTime.hour().minute())
-        var lang = "0"
-        var long = "0"
+        starttime0 = viewModel.MeetingObj.datetime_start.formatted(.dateTime.hour().minute())
+//        var lang = "0"
+//        var long = "0"
         if attendeneslist.count > 0 {
         for attendeneslist in attendeneslist {
             
@@ -436,19 +456,19 @@ struct EditMeetingView: View {
 
             }
         }
-        if viewModel.IsSelectedSite {
-            if locations.count > 0 {
-                print(locations[0].coordinate.latitude)
-                lang = "\(locations[0].coordinate.latitude)"
-                long = "\(locations[0].coordinate.longitude)"
-            }
-        }
+//        if viewModel.IsSelectedSite {
+//            if locations.count > 0 {
+//                print(locations[0].coordinate.latitude)
+//                lang = "\(locations[0].coordinate.latitude)"
+//                long = "\(locations[0].coordinate.longitude)"
+//            }
+//        }
 
       //Date
         var calender = Calendar.current
         calender.timeZone = TimeZone(abbreviation: "GMT+3")!
-        let datecomp = calender.dateComponents([.day,.month,.year], from: viewModel.MeetingObj.date)
-        let timecomp = calender.dateComponents([.hour,.minute,.second], from: viewModel.MeetingObj.date)
+        let datecomp = calender.dateComponents([.day,.month,.year], from: viewModel.MeetingObj.datetime_start)
+        let timecomp = calender.dateComponents([.hour,.minute,.second], from: viewModel.MeetingObj.datetime_start)
         var newcomponent = DateComponents()
         newcomponent.timeZone = TimeZone(abbreviation: "GMT+3")
         
@@ -466,8 +486,8 @@ struct EditMeetingView: View {
         //End time
           var calender0 = Calendar.current
           calender0.timeZone = TimeZone(abbreviation: "GMT+3")!
-          let datecomp0 = calender.dateComponents([.day,.month,.year], from: viewModel.MeetingObj.date)
-          let endtime = calender.dateComponents([.hour,.minute,.second], from: viewModel.MeetingObj.end_time)
+          let datecomp0 = calender.dateComponents([.day,.month,.year], from: viewModel.MeetingObj.datetime_start)
+        let endtime = calender.dateComponents([.hour,.minute,.second], from: viewModel.MeetingObj.datetime_end)
           var newcomponentEnd = DateComponents()
         newcomponentEnd.timeZone = TimeZone(abbreviation: "GMT+3")
           
@@ -482,30 +502,45 @@ struct EditMeetingView: View {
           let intervalEndtime = Int( intervalend!.timeIntervalSince1970)
          print(intervalEndtime)
         
-       print(long)
-        print(lang)
+      
         print(attendenceID)
         print(viewModel.MeetingObj.title)
         print(viewModel.MeetingObj.agenda)
         print(viewModel.MeetingObj.location)
-print(type)
 
+        if  viewModel.isSelectedinline == true {
+            type = "Online"
+        }
+        else {
+            type = "On-site"
+        }
+        if  viewModel.isSelectedinline == false {
+            if locations.count > 0 {
+                
+                viewModel.MeetingObj.latitude = "\(locations[0].coordinate.latitude)"
+                viewModel.MeetingObj.longitude = "\(locations[0].coordinate.longitude)"
+            }else {
+                viewModel.MeetingObj.latitude = "0"
+                viewModel.MeetingObj.longitude = "0"
+            }
+        }else {
+            viewModel.MeetingObj.latitude = "0"
+            viewModel.MeetingObj.longitude = "0"
+        }
+        print(type)
+        print( viewModel.MeetingObj.latitude)
+        print( viewModel.MeetingObj.longitude )
 
-        self.ref.child("Meetings").child(Meetingid).updateChildValues(["title":viewModel.MeetingObj.title , "agenda":viewModel.MeetingObj.agenda ,"location":viewModel.MeetingObj.location,"type":type, "datetime_end":intervalEndtime ,"attendees":attendenceID,"latitude":lang,"longitude":long , "datetime_start":interval])
+        self.ref.child("Meetings").child(Meetingid).updateChildValues(["title":viewModel.MeetingObj.title , "agenda":viewModel.MeetingObj.agenda ,"location":viewModel.MeetingObj.location,"type":type, "datetime_end":intervalEndtime ,"attendees":attendenceID,"latitude":viewModel.MeetingObj.latitude,"longitude":viewModel.MeetingObj.longitude , "datetime_start":interval])
 
-
-        
-
-
-
-
-
-        
+   
 
     }
+    
+
     func validate()-> Bool{
  
-       var starttime0 = viewModel.MeetingObj.date.formatted(.dateTime.hour().minute())
+       var starttime0 = viewModel.MeetingObj.datetime_start.formatted(.dateTime.hour().minute())
        
                 var hourin =  starttime0.prefix(2)
         
@@ -514,10 +549,10 @@ print(type)
                           hourin = hourin.prefix(1)
         
                      }
-        var minuted = viewModel.MeetingObj.date.formatted(.dateTime.minute())
+        var minuted = viewModel.MeetingObj.datetime_start.formatted(.dateTime.minute())
         let AmOrPM = starttime0.suffix(2)
         //End time for validate
-     let    endtime0 = viewModel.MeetingObj.end_time.formatted(.dateTime.hour().minute())
+        let    endtime0 = viewModel.MeetingObj.datetime_end.formatted(.dateTime.hour().minute())
         
         
         var endhour =  endtime0.prefix(2)
@@ -528,7 +563,7 @@ print(type)
          
                       }
        
-       let minutesend = viewModel.MeetingObj.end_time.formatted(.dateTime.minute())
+        let minutesend = viewModel.MeetingObj.datetime_end.formatted(.dateTime.minute())
         let AmOrPMend = endtime0.suffix(2)
      
         

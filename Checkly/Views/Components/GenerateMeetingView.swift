@@ -24,6 +24,8 @@ struct GenerateMeetingView1: View {
     }}
 
 struct GenerateMeetingView: View {
+    @StateObject var locationManager = LocationManager.shared
+
     @State  var locations: [Mark] = []
 
     @Environment(\.dismiss) var dismiss
@@ -34,6 +36,8 @@ struct GenerateMeetingView: View {
     @State var street = "n"
     @State var city_c = ""
     @State var isshow = false
+    @State var isshowadd = false
+
     @State var Address_pic = "Select Location"
     @FocusState private var isfocus : Bool
 
@@ -351,7 +355,7 @@ struct GenerateMeetingView: View {
                 })
                 }.sheet(isPresented: $viewlist1, content: {
                  // LocationMeetingView()
-                    locationselect(locations: $locations, location_add: $Address_pic)
+                    locationselect(locations: $locations, location_add: $Address_pic, isselectADD: $isshowadd)
                 })
             }.alert("Oops!..", isPresented: $presentAlert, actions: {
                 // actions

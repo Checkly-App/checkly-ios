@@ -14,6 +14,7 @@ import FirebaseDatabase
 import FirebaseStorage
 import SwiftUI
 import FirebaseAuth
+import MapKit
 
 class EmployeeViewModel: ObservableObject {
   //  @Published var Employeeinfolist = [Employeeinfo]()
@@ -288,6 +289,7 @@ class EmployeeViewModel: ObservableObject {
     @Published var isSelectedinline = false
     @Published var isonsite = false
     @Published var date0 = Date()
+    @Published var oldAddress = "Select Location"
 
     @Published var selectrow = Set<Employee>()
 
@@ -297,7 +299,7 @@ class EmployeeViewModel: ObservableObject {
 
     @Published var MeetingObjattendeneess : [String: String] = [:]
    // @Published var Meeti : Meeting()
-    @Published var MeetingObj = Meeting(id: "", host: "", title: "", date: Date(), type: "", location: "", attendees: ["":""], agenda: "", end_time: Date(), latitude: "", longitude: "")
+    @Published var MeetingObj = Meeting(id: "", host: "", title: "", datetime_start: Date(), datetime_end: Date(), type: "", location: "", attendees: ["":""], agenda: "",  latitude: "", longitude: "")
     func getMeetings(meetingid:String){
         var attendeneslist0: [Employee] = []
         self.fetchDatalist()
@@ -329,7 +331,7 @@ class EmployeeViewModel: ObservableObject {
                         for mt in attendees! {
                             self.MeetingObjattendeneess[mt.key] = mt.value
                         }
-                        let mt = Meeting(id: meeting_id, host: host!, title: title!, date: .init(timeIntervalSince1970: TimeInterval(date!)), type: type!, location: location!, attendees: attendees!, agenda: agenda!, end_time: .init(timeIntervalSince1970: TimeInterval(end_time!)), latitude: latitude!, longitude: longitude!)
+                        let mt = Meeting(id: meeting_id, host: host!, title: title!, datetime_start: .init(timeIntervalSince1970: TimeInterval(date!)), datetime_end: .init(timeIntervalSince1970: TimeInterval(end_time!)), type: type!, location: location!, attendees: attendees!, agenda: agenda!, latitude: latitude!, longitude: longitude!)
                         self.MeetingObj = mt
 
                         if mt.type == "On-site"{
@@ -360,8 +362,39 @@ class EmployeeViewModel: ObservableObject {
                       
 
                       print(attendeneslist0)
-                      
-                       
+                        if latitude != "0" {
+                        let geoCoder = CLGeocoder()
+                        let locationin = CLLocation(latitude: Double (latitude!)!, longitude: Double (longitude!)!)
+                        //selectedLat and selectedLon are double values set by the app in a previous process
+
+                        geoCoder.reverseGeocodeLocation(locationin, completionHandler: { (placemarks, error) -> Void in
+
+                            // Place details
+                            var placeMark: CLPlacemark!
+                            placeMark = placemarks?[0]
+
+                           
+
+                            // Location name
+                            if let locationName = placeMark.addressDictionary!["Name"] as? String {
+                                print(locationName)
+                                self.oldAddress =   "\(locationName as String) , "
+                            }
+
+                           
+
+                            // City
+                            if let city = placeMark.addressDictionary!["City"] as? String {
+                                print(city)
+                                self.oldAddress = self.oldAddress + "\(city as String ) "
+                            }
+
+                        
+
+
+
+                        })
+                        }
 
                 }
                 }

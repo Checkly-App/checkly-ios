@@ -3,7 +3,8 @@ import SwiftUI
 struct locationselect: View {
     @Binding var locations: [Mark]
     @Binding  var location_add : String
-   
+    @Binding var isselectADD : Bool
+
 
 //
     @Environment(\.dismiss) var dismiss
@@ -23,7 +24,7 @@ struct locationselect: View {
 //            longitudeDelta: 10
 //        )
 //    )
-    @StateObject var locationManager = LocationManager()
+    @StateObject var locationManager = LocationManager.shared
        
        var userLatitude: String {
            return "\(locationManager.lastLocation?.coordinate.latitude ?? 0)"
@@ -40,9 +41,11 @@ struct locationselect: View {
             latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude),
                                        latitudinalMeters: 1000, longitudinalMeters: 1000)}
         else {
-           
+          // print(locationManager.lastLocation!.coordinate.longitude)
+           // print(locationManager.lastLocation!.coordinate.longitude)
+            
             region = MKCoordinateRegion(center: CLLocationCoordinate2D(
-                latitude: Double(userLatitude)!, longitude: Double(userLongitude)! ),
+                latitude: locationManager.lastLocation!.coordinate.latitude, longitude: locationManager.lastLocation!.coordinate.longitude ),
                                         latitudinalMeters: 1000, longitudinalMeters: 1000)
             
         }
@@ -88,9 +91,11 @@ struct locationselect: View {
                         locations.append(Mark(coordinate: region.center))
                         print(locations)
                         getAddress()
+                        isselectADD = true
                         dismiss()
                     }){
                         VStack{
+                           
                         Text("Select")
                             .fontWeight(.bold)
                             .foregroundColor(.white)
@@ -145,31 +150,24 @@ struct locationselect: View {
                 // Location name
                 if let locationName = placeMark.addressDictionary!["Name"] as? String {
                     print(locationName)
-                    location_add =   locationName as String
+                    location_add =   "\(locationName as String) , "
                 }
 
-                // Street address
-                if let street = placeMark.addressDictionary!["Thoroughfare"] as? NSString {
-                    print(street)
-                    
-                }
+               
 
                 // City
                 if let city = placeMark.addressDictionary!["City"] as? String {
                     print(city)
-                    location_add = location_add + city as String
+                    location_add = location_add + "\(city as String ) "
                 }
 
-                // Zip code
-                if let zip = placeMark.addressDictionary!["ZIP"] as? NSString {
-                    print(zip)
-                }
+               
 
-                // Country
-                if let country = placeMark.addressDictionary!["Country"] as? String {
-                    print(country)
-                    location_add = location_add + country as String
-                }
+//                // Country
+//                if let country = placeMark.addressDictionary!["Country"] as? String {
+//                    print(country)
+//                    location_add = location_add + country as String
+//                }
 
             })
 
@@ -178,7 +176,7 @@ struct locationselect: View {
 }
 struct locationselect_Previews: PreviewProvider {
     static var previews: some View {
-        locationselect(locations: .constant([Mark]()), location_add: .constant("") )
+        locationselect(locations: .constant([Mark]()), location_add: .constant(""), isselectADD: .constant(false) )
     }
 }
 struct Mark: Identifiable {
