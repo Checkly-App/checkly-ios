@@ -19,9 +19,11 @@ struct attendanceHistoryView: View {
                 
         // Date Pickers
         VStack {
-        DatePicker("From Date", selection: $fromDate, in: ...Date() , displayedComponents: .date).padding()
+            Text("Attendance history").padding(.bottom) // userd as a sub for now
+            
+            DatePicker("From Date", selection: $fromDate, in: ...Date() , displayedComponents: .date).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383)).padding().frame(width: 360, height: 45).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.954, green: 0.954, blue: 0.954), Color(red: 0.954, green: 0.954, blue: 0.954).opacity(0)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(7)
         
-        DatePicker("To Date", selection: $toDate, in: ...Date() , displayedComponents: .date).padding()
+        DatePicker("To Date", selection: $toDate, in: ...Date() , displayedComponents: .date).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383)).padding().frame(width: 360, height: 45).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.954, green: 0.954, blue: 0.954), Color(red: 0.954, green: 0.954, blue: 0.954).opacity(0)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(7)
         // statues filter
             HStack {
                 Text("CATEGORIES").fontWeight(.bold).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383))
@@ -29,45 +31,58 @@ struct attendanceHistoryView: View {
             }.padding()
             ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                
+                // Late filter
                 Button(action: { selectedStatus = "Late" }) {
                     VStack{
+                        HStack {
                         Image(systemName: "minus").foregroundColor(.white).padding()
+                            Spacer()
+                        }
+                        Spacer()
+                        HStack{
                         Spacer()
                         Text("Late").foregroundColor(.white).fontWeight(.bold).padding()
-                        }.frame(width: 130, height: 100).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.353, green: 0.51, blue: 0.969), Color(red: 0.353, green: 0.51, blue: 0.969)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(5)
+                        }
+                    }.frame(width: 130, height: 100).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.353, green: 0.51, blue: 0.969), Color(red: 0.353, green: 0.51, blue: 0.969).opacity(0.8)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(5).shadow(color: .gray, radius: 4, x: 2, y: 2)
                 }.padding(.leading)
-                
+                // On time filter
                 Button(action: { selectedStatus = "On time" }) {
                     VStack{
+                        HStack{
                         Image(systemName: "checkmark").foregroundColor(.white).padding()
+                            Spacer()
+                        }
                         Spacer()
+                        HStack{
+                            Spacer()
                         Text("On time").foregroundColor(.white).fontWeight(.bold).padding()
-                    }.frame(width: 130, height: 100).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.306, green: 0.902, blue: 0.604), Color(red: 0.306, green: 0.902, blue: 0.604)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(5)
+                        }
+                    }.frame(width: 130, height: 100).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.306, green: 0.902, blue: 0.604), Color(red: 0.306, green: 0.902, blue: 0.604).opacity(0.8)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(5).shadow(color: .gray, radius: 4, x: 2, y: 2)
+                    
             }
-            
+                // Absent filter
                 Button(action: { selectedStatus = "Absent" }) {
                     VStack{
+                        HStack{
                         Image(systemName: "xmark").foregroundColor(.white).padding()
+                            Spacer()
+                        }
                         Spacer()
-                        Text("Absent").foregroundColor(.white).fontWeight(.bold).padding()
-                    }.frame(width: 130, height: 100).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.333, green: 0.667, blue: 0.984), Color(red: 0.333, green: 0.667, blue: 0.984)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(5)
+                        HStack{
+                            Spacer()
+                            Text("Absent").foregroundColor(.white).fontWeight(.bold).padding()
+                        }
+                    }.frame(width: 130, height: 100).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.333, green: 0.667, blue: 0.984), Color(red: 0.333, green: 0.667, blue: 0.984).opacity(0.8)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(5).shadow(color: .gray, radius: 4, x: 2, y: 2)
             }
-                
-                
-            
+            }.padding(.bottom)
             }
-            }
-            
-        // Search Button
-            Text("Search").onTapGesture {
-                vm.fetchFilteredAttendances(fromDate: fromDate, toDate: toDate, selectedStatus: selectedStatus ?? "Not selected")
-                vm.filteredAttendancesDates.removeAll()
-            }
+    
+            //results view
             HStack {
                 Text("RESULTS").fontWeight(.bold).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383))
                 Spacer()
             }.padding()
+            ScrollView(.vertical, showsIndicators: false) {
             ForEach (vm.filteredAttendancesDates, id: \.self) { attendance in
             HStack {
                 RoundedRectangle(cornerRadius: 20).frame(width: 80, height: 80).foregroundColor(.gray).opacity(0.2).overlay(
@@ -97,6 +112,14 @@ struct attendanceHistoryView: View {
             }.padding().frame(width: 350, height: 100).background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
             }
             Spacer()
+        }
+            // Search Button
+            HStack{
+                Text("Search").onTapGesture {
+                    vm.fetchFilteredAttendances(fromDate: fromDate, toDate: toDate, selectedStatus: selectedStatus ?? "Not selected")
+                    vm.filteredAttendancesDates.removeAll()
+                }
+            }
         }
     }
 }
