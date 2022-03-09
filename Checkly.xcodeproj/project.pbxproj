@@ -23,6 +23,7 @@
 		BE064A3427C7AA1700BE4970 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE064A3327C7AA1700BE4970 /* HomeView.swift */; };
 		BE1C295A27CC75260079ADFE /* CardExpansionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C295927CC75260079ADFE /* CardExpansionDetails.swift */; };
 		BE1C295C27CC7F2B0079ADFE /* CardExpansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C295B27CC7F2B0079ADFE /* CardExpansion.swift */; };
+		BE79E50A27D8EA7C00BADD9C /* tabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE79E50927D8EA7C00BADD9C /* tabModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		BE064A3327C7AA1700BE4970 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BE1C295927CC75260079ADFE /* CardExpansionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardExpansionDetails.swift; sourceTree = "<group>"; };
 		BE1C295B27CC7F2B0079ADFE /* CardExpansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardExpansion.swift; sourceTree = "<group>"; };
+		BE79E50927D8EA7C00BADD9C /* tabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			children = (
 				7149E91127A96FCA008E3553 /* Credentials.swift */,
 				7149E91927A987DD008E3553 /* LoginModel.swift */,
+				BE79E50927D8EA7C00BADD9C /* tabModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
 				7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */,
 				7149E91227A96FCA008E3553 /* Credentials.swift in Sources */,
+				BE79E50A27D8EA7C00BADD9C /* tabModel.swift in Sources */,
 				7149E91427A977D7008E3553 /* tabView.swift in Sources */,
 				BE064A3427C7AA1700BE4970 /* HomeView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,

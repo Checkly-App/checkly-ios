@@ -6,7 +6,7 @@
 
 
 import SwiftUI
-import FirebaseAuth
+import Firebase
 
 struct tabView: View {
     
@@ -18,6 +18,9 @@ struct tabView: View {
     
     //MARK: - @NameSpaces
     @Namespace var animation
+    
+    //MARK: - @SatateObjects
+    @StateObject var tabModelObject = tabModel()
     
     //MARK: - Variables
     var tabsNames = ["Messages","Calendar","Home","Statistics","Services"]
@@ -44,6 +47,31 @@ struct tabView: View {
                         //Services
                         Text("Services")
                             .opacity(selectedTab == 4 ? 1 : 0)
+                }
+            }
+            .onChange(of: selectedTab) { _ in
+                switch selectedTab {
+                case 0:
+                    if !tabModelObject.isMessagesViewLoaded {
+                        tabModelObject.loadMessages()
+                    }
+                    break
+                case 1:
+                    if !tabModelObject.isCalendarViewLoaded {
+                        tabModelObject.loadCalendar()
+                    }
+                case 2:
+                    print("Home Loaded")
+                case 3:
+                    if !tabModelObject.isStatisticsViewLoaded {
+                        tabModelObject.loadServices()
+                    }
+                case 4:
+                    if !tabModelObject.isServicesLoaded {
+                        tabModelObject.loadServices()
+                    }
+                default:
+                    print("default case")
                 }
             }
             
@@ -73,7 +101,7 @@ struct tabView: View {
                                     .renderingMode(.template)
                                     .resizable()
                                     .foregroundColor(selectedTab == tab ? Color(red: 0.333, green: 0.667, blue: 0.984) : Color.gray)
-                                    .frame(width: 28, height: 24)
+                                    .frame(width: 24, height: 24)
                                 
                                 Text(tabsNames[tab])
                                     .font(.caption)
@@ -93,7 +121,7 @@ struct tabView: View {
             .ignoresSafeArea()
         }
         .ignoresSafeArea()
-        .background(Color.black.opacity(0.06).ignoresSafeArea())
+        
     }
 }
 
