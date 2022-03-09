@@ -25,6 +25,13 @@ struct ContentView: View {
                 } label: {
                     Text("sign out")
                 }
+                Button(action: {
+                    
+                }, label: {
+                    NavigationLink(destination: messagesView()) {
+                         Text("Open View")
+                     }
+                })
             }
         }
     }

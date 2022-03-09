@@ -35,7 +35,7 @@ class createNewMessageViewModel: ObservableObject {
                 
                 let emp = Employee(id: id, name: name, department: department, photoURL: photoURL)
                     //auth
-                if ( emp.id != "111111111")  {
+                if ( emp.id != "8UoUAkIZvnP5KSWHydWliuZmOKt2")  {
                     self.users.append(emp)
             }
             }

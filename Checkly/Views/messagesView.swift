@@ -31,15 +31,15 @@ struct messagesView: View {
                                 HStack {
                                     HStack (spacing: 16){
                                         if ( recentMessage.photoURL == "null") {
-                                            Image(systemName: "person.crop.circle.fill").font(.system(size:65)).foregroundColor(.gray).frame(width: 64, height: 64).clipped().cornerRadius(64).overlay(RoundedRectangle(cornerRadius: 64).stroke(Color(hexStringToUIColor(hex: "2CAFEE")), lineWidth: 1)).shadow(radius: 5)
+                                            Image(systemName: "person.crop.circle.fill").font(.system(size:65)).foregroundColor(.gray).frame(width: 64, height: 64).clipped().cornerRadius(64).overlay(RoundedRectangle(cornerRadius: 64).stroke(Color(.gray), lineWidth: 1)).shadow(radius: 5)
                                         } else {
-                                        WebImage(url: URL(string: recentMessage.photoURL)).resizable().scaledToFill().frame(width: 64, height: 64).clipped().cornerRadius(64).overlay(RoundedRectangle(cornerRadius: 64).stroke(Color(hexStringToUIColor(hex: "2CAFEE")), lineWidth: 1)).shadow(radius: 5)
+                                            WebImage(url: URL(string: recentMessage.photoURL)).resizable().scaledToFill().frame(width: 64, height: 64).clipped().cornerRadius(64).overlay(RoundedRectangle(cornerRadius: 64).stroke(Color(.gray), lineWidth: 1)).shadow(radius: 5)
                                         }
                                         
                                         VStack (alignment: .leading, spacing: 10){
 //                                            Text(recentMessage.photoURL)
                                             //change to current user
-                                            if ( recentMessage.senderName == "Shahad Alshahrani") {
+                                            if ( recentMessage.senderName == "Dalal Bin Humaid") {
                                                 Text(recentMessage.receiverName).font(.system(size: 16, weight: .bold)).foregroundColor(.black)
                                                 Text(recentMessage.text).font(.system(size: 14)).foregroundColor(Color(.darkGray))
                                                     .multilineTextAlignment(.leading )

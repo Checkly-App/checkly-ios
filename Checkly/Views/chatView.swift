@@ -10,7 +10,7 @@ import SwiftUI
 struct chatView: View {
     
     let chatUser: Employee?
-    let userID = "111111111"
+    let userID = "8UoUAkIZvnP5KSWHydWliuZmOKt2"
     
     init(chatUser: Employee?) {
         self.chatUser = chatUser
@@ -34,7 +34,7 @@ struct chatView: View {
                                             Text(message.text)
                                                 .foregroundColor(.white)
                                         }.padding()
-                                            .background(Color(hexStringToUIColor(hex: "2CAFEE")))
+                                            .background(Color(red: 0.341, green: 0.733, blue: 0.925))
                                             .cornerRadius(20, corners: [ .topLeft, .bottomRight, .bottomLeft])
                                             
                                     }
@@ -45,7 +45,7 @@ struct chatView: View {
                                                 .foregroundColor(.black)
                                         }
                                         .padding()
-                                        .background(Color.gray.opacity(0.5))
+                                        .background(Color(red: 0.769, green: 0.769, blue: 0.769)).opacity(0.8)
                                             .cornerRadius(20, corners: [ .topLeft, .topRight, .bottomRight])
                                         Spacer()
                                     }
@@ -74,7 +74,7 @@ struct chatView: View {
                     Button {
                         vm.handelSend()
                     } label: {
-                        Image(systemName: "paperplane.circle.fill").font(.system(size: 45)).foregroundColor(Color(hexStringToUIColor(hex: "3DD2BB")))
+                        Image(systemName: "paperplane.circle.fill").font(.system(size: 45)).foregroundColor(Color(red: 0.239, green: 0.824, blue: 0.733))
                     }
 
                 }

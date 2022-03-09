@@ -25,7 +25,7 @@ class chatViewModel: ObservableObject{
     
     func fetchMessages() {
         //change to current user
-        let fromID = "111111111"
+        let fromID = "8UoUAkIZvnP5KSWHydWliuZmOKt2"
         guard let toID = chatUser?.id else { return }
         
         DB.collection("texts").document(fromID).collection(toID).order(by: "timestamp").addSnapshotListener { querySnapshot, error in
@@ -48,7 +48,7 @@ class chatViewModel: ObservableObject{
     
     func handelSend() {
         //change to current user
-        let fromID = "111111111"
+        let fromID = "8UoUAkIZvnP5KSWHydWliuZmOKt2"
         guard let toID = chatUser?.id else { return }
 
         let document = DB.collection("texts").document(fromID).collection(toID).document()
@@ -84,7 +84,7 @@ class chatViewModel: ObservableObject{
         }
 
             //change to current user
-        let userID = "111111111"
+        let userID = "8UoUAkIZvnP5KSWHydWliuZmOKt2"
         guard let toID = self.chatUser?.id else { return }
                 
         let data = [
@@ -93,7 +93,7 @@ class chatViewModel: ObservableObject{
             "fromID": userID,
             "toID": toID,
             "username": chatUser.name,
-            "senderName": "Shahad Alshahrani", //change to current user
+            "senderName": "Dalal Bin Humaid", //change to current user
             "receiverName": chatUser.name,
             "photoURL": chatUser.photoURL
         ] as [String : Any]
@@ -114,9 +114,9 @@ class chatViewModel: ObservableObject{
             "fromID": userID,
             "toID": toID,
             "username": chatUser.name,
-            "senderName": "Shahad Alshahrani",
+            "senderName": "Dalal Bin Humaid",
             "receiverName": chatUser.name,
-            "photoURL": "https://firebasestorage.googleapis.com:443/v0/b/checkly-292d2.appspot.com/o/VsWRopBPLQYNMXlL5u5mkcGETze2?alt=media&token=1c45e222-888c-49d5-a341-f45a17d59798"
+            "photoURL": "https://firebasestorage.googleapis.com:443/v0/b/checkly-292d2.appspot.com/o/8UoUAkIZvnP5KSWHydWliuZmOKt2?alt=media&token=a79f694e-2d5f-4e30-8b9a-35cfa81a3523"
         ] as [String : Any]
         
         DB.collection("recent_messages").document(toID)

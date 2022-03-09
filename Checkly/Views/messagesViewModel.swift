@@ -12,7 +12,7 @@ import Firebase
 class messagesViewModel: ObservableObject {
     
     @Published var recentMessages = [recentMessage]()
-    let userID = "111111111"
+    let userID = "8UoUAkIZvnP5KSWHydWliuZmOKt2"
 
     
     init() {
@@ -22,7 +22,7 @@ class messagesViewModel: ObservableObject {
     private func fetchRecentMessages() {
 
         let DB = Firestore.firestore()
-        let userID = "111111111"
+        let userID = "8UoUAkIZvnP5KSWHydWliuZmOKt2"
 
         DB.collection("recent_messages").document(userID).collection("messages").order(by: "timestamp").addSnapshotListener { querySnapshot, error in
             if let error = error {
