@@ -66,7 +66,7 @@ struct createNewMessageView: View {
                                 Image(systemName: "person.crop.circle.fill").foregroundColor(.gray)
                                     .font(.system(size: 45))
                             } else {
-                            WebImage(url: URL(string: user.photoURL)).resizable().scaledToFill().frame(width: 45, height: 45).clipped().cornerRadius(64).overlay(RoundedRectangle(cornerRadius: 64).stroke(Color(hexStringToUIColor(hex: "2CAFEE")), lineWidth: 1)).shadow(radius: 5)
+                                WebImage(url: URL(string: user.photoURL)).resizable().scaledToFill().frame(width: 45, height: 45).clipped().cornerRadius(64).overlay(RoundedRectangle(cornerRadius: 64).stroke(Color(.gray), lineWidth: 1)).shadow(radius: 5)
                             }
 //                            Image(systemName: "person.circle.fill").foregroundColor(.gray)
 //                                .font(.system(size: 30))
@@ -75,11 +75,12 @@ struct createNewMessageView: View {
                                 Text(user.department).font(.caption2).foregroundColor(.gray)
                             }
                             Spacer()
-                        }
+                        }.padding(1)
+                            .padding(.leading)
                     }
-                    .padding(.horizontal)
+                    
                      Divider()
-                    .padding(.vertical)
+                    
                 }
             }.navigationTitle("New Message")
                 .toolbar {
