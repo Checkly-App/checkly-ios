@@ -18,7 +18,7 @@ struct Meeting: Identifiable {
     var attendees: [String:String]
     var agenda: String
     var end_time: Date
-    var start_time: String
+   
     var latitude: String
     var longitude: String
 }

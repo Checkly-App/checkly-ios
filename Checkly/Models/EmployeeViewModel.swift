@@ -297,7 +297,7 @@ class EmployeeViewModel: ObservableObject {
 
     @Published var MeetingObjattendeneess : [String: String] = [:]
    // @Published var Meeti : Meeting()
-    @Published var MeetingObj = Meeting(id: "", host: "", title: "", date: Date(), type: "", location: "", attendees: ["":""], agenda: "", end_time: Date(), start_time: "", latitude: "", longitude: "")
+    @Published var MeetingObj = Meeting(id: "", host: "", title: "", date: Date(), type: "", location: "", attendees: ["":""], agenda: "", end_time: Date(), latitude: "", longitude: "")
     func getMeetings(meetingid:String){
         var attendeneslist0: [Employee] = []
         self.fetchDatalist()
@@ -317,20 +317,19 @@ class EmployeeViewModel: ObservableObject {
 
                     let agenda =  obj.childSnapshot(forPath: "agenda").value as? String
                         let attendees =  obj.childSnapshot(forPath: "attendees").value as? [String:String]
-                    let date =   obj.childSnapshot(forPath: "date").value as? Int
-                    let end_time =  obj.childSnapshot(forPath: "end_time").value as? Int
+                    let date =   obj.childSnapshot(forPath: "datetime_start").value as? Int
+                    let end_time =  obj.childSnapshot(forPath: "datetime_end").value as? Int
                     let host =  obj.childSnapshot(forPath: "host").value as? String
                     let latitude =  obj.childSnapshot(forPath: "latitude").value as? String
                     let location =  obj.childSnapshot(forPath: "location").value as? String
                     let longitude =  obj.childSnapshot(forPath: "longitude").value as? String
-                    let start_time =   obj.childSnapshot(forPath: "start_time").value as? String
                     let title =   obj.childSnapshot(forPath: "title").value as? String
                     let type =  obj.childSnapshot(forPath: "type").value as? String
                     let meeting_id = obj.key
                         for mt in attendees! {
                             self.MeetingObjattendeneess[mt.key] = mt.value
                         }
-                        let mt = Meeting(id: meeting_id, host: host!, title: title!, date: .init(timeIntervalSince1970: TimeInterval(date!)), type: type!, location: location!, attendees: attendees!, agenda: agenda!, end_time: .init(timeIntervalSince1970: TimeInterval(end_time!)), start_time: start_time!, latitude: latitude!, longitude: longitude!)
+                        let mt = Meeting(id: meeting_id, host: host!, title: title!, date: .init(timeIntervalSince1970: TimeInterval(date!)), type: type!, location: location!, attendees: attendees!, agenda: agenda!, end_time: .init(timeIntervalSince1970: TimeInterval(end_time!)), latitude: latitude!, longitude: longitude!)
                         self.MeetingObj = mt
 
                         if mt.type == "On-site"{

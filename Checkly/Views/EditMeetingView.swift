@@ -15,11 +15,11 @@ struct EditMeetingView: View {
 
     @Environment(\.dismiss) var dismiss
     @State var title = ""
-    @State var location = ""
+    @State var isAtend = 1
     @State var starttime0 = ""
     @State var endtime0 = ""
     @State var Address_pic = "Select Location"
-
+    @FocusState private var isfocus : Bool
     @State var selectrow = Set<Employee>()
 @State var attendeneslist: [Employee] = []
     @Binding var Meetingid : String
@@ -74,7 +74,7 @@ struct EditMeetingView: View {
                 Text("Location")
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(Color(UIColor(named: "LightGray")!))
-                TextField("type the location", text: $viewModel.MeetingObj.location)
+                TextField("type the location", text: $viewModel.MeetingObj.location).focused($isfocus)
                     .keyboardType(.emailAddress)
                     .autocapitalization(.none)
                     .padding(10)
@@ -133,7 +133,7 @@ struct EditMeetingView: View {
                     Text("Agenda")
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(Color(UIColor(named: "LightGray")!))
-                    CustomTextEditor.init(placeholder: "enter meeting agenda", text: $viewModel.MeetingObj.agenda)
+                    CustomTextEditor.init(placeholder: "enter meeting agenda", text: $viewModel.MeetingObj.agenda).focused($isfocus)
                         .font(.body).foregroundColor(viewModel.MeetingObj.agenda.isEmpty ?
                                                       Color(UIColor(named: "LightGray")!) :
                                                          Color(UIColor(named: "Blue")!))
@@ -340,16 +340,18 @@ struct EditMeetingView: View {
                 Spacer()
             VStack(alignment: .trailing){
             Button {
-                if false {
+                if !validate() {
                    presentAlert = true
                 }
                 else {
+                    
                     Update()
-                    dismiss()
+                   dismiss()
+                    }
                 }
           
 
-            }
+            
                 label: {
                 HStack{
                     Text("Save")
@@ -392,15 +394,29 @@ struct EditMeetingView: View {
             }.navigationBarTitleDisplayMode(.inline).task{
                 viewModel.getMeetings(meetingid: Meetingid)
            
-            }
-
+            }.toolbar {
+                ToolbarItem(placement: .keyboard) {
+                 
               
+                    Button {
+                        isfocus = false
+                           } label: {
+                           
+                               HStack{
+                                 
+                                   Text("Done").foregroundColor(Color("Blue"))
+                               
+
+                           }
+
+                           }
             
               
             
         }
+            }
         
-    
+            }
         }
     func Update(){
         starttime0 = viewModel.MeetingObj.date.formatted(.dateTime.hour().minute())
@@ -475,10 +491,10 @@ struct EditMeetingView: View {
 print(type)
 
 
-        self.ref.child("Meetings").child(Meetingid).updateChildValues(["title":viewModel.MeetingObj.title , "agenda":viewModel.MeetingObj.agenda ,"location":viewModel.MeetingObj.location,"type":type,"start_time":starttime0 , "end_time":intervalEndtime ,"attendees":attendenceID,"latitude":lang,"longitude":long , "date":interval])
+        self.ref.child("Meetings").child(Meetingid).updateChildValues(["title":viewModel.MeetingObj.title , "agenda":viewModel.MeetingObj.agenda ,"location":viewModel.MeetingObj.location,"type":type, "datetime_end":intervalEndtime ,"attendees":attendenceID,"latitude":lang,"longitude":long , "datetime_start":interval])
 
 
-
+        
 
 
 
@@ -487,6 +503,123 @@ print(type)
         
 
     }
+    func validate()-> Bool{
+ 
+       var starttime0 = viewModel.MeetingObj.date.formatted(.dateTime.hour().minute())
+       
+                var hourin =  starttime0.prefix(2)
+        
+                      if hourin.suffix(1) == ":"
+                      {
+                          hourin = hourin.prefix(1)
+        
+                     }
+        var minuted = viewModel.MeetingObj.date.formatted(.dateTime.minute())
+        let AmOrPM = starttime0.suffix(2)
+        //End time for validate
+     let    endtime0 = viewModel.MeetingObj.end_time.formatted(.dateTime.hour().minute())
+        
+        
+        var endhour =  endtime0.prefix(2)
+         
+                       if endhour.suffix(1) == ":"
+                       {
+                           endhour = endhour.prefix(1)
+         
+                      }
+       
+       let minutesend = viewModel.MeetingObj.end_time.formatted(.dateTime.minute())
+        let AmOrPMend = endtime0.suffix(2)
+     
+        
+        if AmOrPMend == "AM" && AmOrPM == "PM"
+         {
+            error0 = "Please enter a valid time"
+            return false
+        }
+        if AmOrPMend == AmOrPM {
+            if hourin == "12" && endhour == "12"{
+                if minuted >= minutesend {
+                    print("1")
+
+                    error0 = "Please enter a valid time"
+                    return false
+                }
+            }}
+        
+       if AmOrPMend == AmOrPM {
+
+              if  endhour == "12"{
+                if    (hourin != "12") {
+                    print("3")
+
+                    error0 = "Please enter a valid time"
+                    return false
+                }
+                
+            }
+        }
+        
+
+        
+
+       
+      
+        
+        if AmOrPMend == AmOrPM   {
+            if endhour != "12" &&  hourin != "12"{
+                if endhour < hourin {
+                    print("4")
+
+            error0 = "Please enter a valid time"
+
+            return false
+            }
+            }
+            
+        }
+       
+
+        if AmOrPMend == AmOrPM  && endhour == hourin {
+            print("enter in 5")
+
+          if  minutesend <= minuted{
+              print("pig")
+              error0 = "Please enter a valid time"
+
+                return false
+            }
+        }
+        
+       
+
+ 
+        if viewModel.MeetingObj.title == ""{
+            error0 = "All feild are required"
+
+            return false }
+        if viewModel.MeetingObj.location == "" {
+            error0 = "All feild are required"
+
+            return false }
+        if viewModel.MeetingObj.agenda == "" {
+            error0 = "All feild are required"
+
+            return false }
+        if Isshow == false {
+        if selectrow.count == 0 {
+            error0 = "Please add at least one attendees"
+
+            return false
+        }
+        }
+            
+        return true
+    }
+                                        
+                                        
+                                        
+            
     
     }
         
@@ -524,5 +657,6 @@ struct EditMeetingView_Previews: PreviewProvider {
         EditMeetingView( Meetingid: .constant(""))
     }
 }
+
 
 

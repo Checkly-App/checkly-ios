@@ -35,6 +35,7 @@ struct GenerateMeetingView: View {
     @State var city_c = ""
     @State var isshow = false
     @State var Address_pic = "Select Location"
+    @FocusState private var isfocus : Bool
 
     @State var selectrow = Set<Employee>()
 @State var attendeneslist: [Employee] = []
@@ -147,7 +148,7 @@ struct GenerateMeetingView: View {
                     Text("Agenda")
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(Color(UIColor(named: "LightGray")!))
-                    CustomTextEditor.init(placeholder: "enter meeting agenda", text: $text)
+                    CustomTextEditor.init(placeholder: "enter meeting agenda", text: $text).focused($isfocus)
                         .font(.body).foregroundColor(text.isEmpty ?
                                                       Color(UIColor(named: "LightGray")!) :
                                                          Color(UIColor(named: "Blue")!))
@@ -372,7 +373,28 @@ struct GenerateMeetingView: View {
                        }
             }
         }
-        }.navigationBarTitleDisplayMode(.inline)
+        }.navigationBarTitleDisplayMode(.inline).toolbar {
+            ToolbarItem(placement: .keyboard) {
+             
+          
+                Button {
+                    isfocus = false
+                       } label: {
+                       
+                           HStack{
+                             
+                               Text("Done").foregroundColor(Color("Blue"))
+                           
+
+                       }
+
+                       }
+        
+          
+        
+    }
+        }
+
         }
         
         
@@ -440,7 +462,7 @@ struct GenerateMeetingView: View {
 
 
 
-        ref.child("Meetings").childByAutoId().setValue(["title": title,"agenda": text,"host":userid,"location":location,"type":type,"date":interval,"start_time":starttime0,"end_time":intervalEndtime,"attendees":attendenceID,"latitude":lang,"longitude":long
+        ref.child("Meetings").childByAutoId().setValue(["title": title,"agenda": text,"host":userid,"location":location,"type":type,"datetime_start":interval,"datetime_end":intervalEndtime,"attendees":attendenceID,"latitude":lang,"longitude":long
                                                             ])
 
 
@@ -452,32 +474,32 @@ struct GenerateMeetingView: View {
     }
     
     func validate()-> Bool{
-        starttime0 = starttime.formatted(.dateTime.hour().minute())
-        var hourin =  starttime0.prefix(2)
-        
-              if hourin.suffix(1) == ":"
-              {
-                  hourin = hourin.prefix(1)
-
-             }
-        var minuted = starttime.formatted(.dateTime.minute())
-        let AmOrPM = starttime0.suffix(2)
-        
-        
-        
-        /// end time
-      endtime0 = endtime.formatted(.dateTime.hour().minute())
-        var endhour =  endtime0.prefix(2)
-        
-              if endhour.suffix(1) == ":"
-              {
-                  endhour = endhour.prefix(1)
-
-             }
-        var minutedend = endtime.formatted(.dateTime.minute())
-        let AmOrPMEnd = endtime0.suffix(2)
-        
-       
+//        starttime0 = starttime.formatted(.dateTime.hour().minute())
+//        var hourin =  starttime0.prefix(2)
+//
+//              if hourin.suffix(1) == ":"
+//              {
+//                  hourin = hourin.prefix(1)
+//
+//             }
+//        var minuted = starttime.formatted(.dateTime.minute())
+//        let AmOrPM = starttime0.suffix(2)
+//
+//
+//
+//        /// end time
+//      endtime0 = endtime.formatted(.dateTime.hour().minute())
+//        var endhour =  endtime0.prefix(2)
+//
+//              if endhour.suffix(1) == ":"
+//              {
+//                  endhour = endhour.prefix(1)
+//
+//             }
+//        var minutedend = endtime.formatted(.dateTime.minute())
+//        let AmOrPMEnd = endtime0.suffix(2)
+//
+//
 //       if AmOrPMEnd == "AM" && AmOrPM == "PM"
 //        {
 //           error0 = "Please enter a valid time"
@@ -497,7 +519,7 @@ struct GenerateMeetingView: View {
 //            return false
 //        }
 //        }
-       
+//
         if starttime >= endtime {
             error0 = "Please enter a valid time"
                     return false
