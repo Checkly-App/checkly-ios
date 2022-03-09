@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseDatabase
+import FirebaseAuth
 
 class MeetingViewModel: ObservableObject{
    
@@ -14,7 +15,7 @@ class MeetingViewModel: ObservableObject{
     
     @Published var selectedMeeting: Meeting?
     
-    @Published var employeesList = [emp]()
+    @Published var attendeesList = [attendee]()
 
     // current week days
     @Published var currentWeek: [Date] = []
@@ -29,7 +30,7 @@ class MeetingViewModel: ObservableObject{
     init(){
         fetchCurrentWeek()
         getMeetings()
-        fillEmployeesList()
+        fillAttendeesList()
     }
     
     // REALTIME
@@ -84,7 +85,7 @@ class MeetingViewModel: ObservableObject{
         }
     }
     
-    func fillEmployeesList(){
+    func fillAttendeesList(){
         
         let ref = Database.database().reference()
             ref.child("Employee").observe(.value) { snapshot in
@@ -94,9 +95,8 @@ class MeetingViewModel: ObservableObject{
                     let name = obj.childSnapshot(forPath:  "name").value as! String
                     let position = obj.childSnapshot(forPath: "position").value as! String
                     let imgToken = obj.childSnapshot(forPath: "image_token").value as! String
-                    let employee = emp(id: uID, name: name, position: position,imgToken: imgToken)
-//                    print(employee)
-                    self.employeesList.append(employee)
+                    let employee = attendee(id: uID, name: name, position: position ,imgToken: imgToken, status: "")
+                    self.attendeesList.append(employee)
                 }
             }
     }
@@ -104,7 +104,7 @@ class MeetingViewModel: ObservableObject{
     func getHostName(hostID: String) -> String {
         
         var hostName = ""
-        for host in employeesList{
+        for host in attendeesList{
             if host.id == hostID {
                 hostName = host.name
             }
@@ -151,16 +151,29 @@ class MeetingViewModel: ObservableObject{
         return filtered
     }
     
-    func meetingAttendeesArray(meeting: Meeting) -> [emp] {
+    func meetingAttendeesArray(meeting: Meeting) -> [attendee] {
         
-        var attendeesArray = [emp]()
+        var attendeesArray = [attendee]()
         
-        if meeting.attendees.count != 0 {
+        // if current user is the host if the meetings fetch all attendees regardless of their status
+        if isHost(meeting: meeting){
+            if meeting.attendees.count != 0 {
+                for attendant in meeting.attendees{
+                    for employee in attendeesList {
+                        if attendant.key == employee.id {
+                            let employee = attendee(id: employee.id, name: employee.name, position: employee.position ,imgToken: employee.imgToken, status: attendant.value)
+                            attendeesArray.append(employee)
+                        }
+                    }
+                }
+            }
+        }
+        else if meeting.attendees.count != 0 {
             for attendant in meeting.attendees{
                 if attendant.value == "accepted" {
-                    for employee in employeesList {
+                    for employee in attendeesList {
                         if attendant.key == employee.id {
-                            let employee = emp(id: employee.id, name: employee.name, position: employee.position ,imgToken: employee.imgToken)
+                            let employee = attendee(id: employee.id, name: employee.name, position: employee.position ,imgToken: employee.imgToken, status: attendant.value)
                             attendeesArray.append(employee)
                         }
                     }
@@ -170,6 +183,22 @@ class MeetingViewModel: ObservableObject{
             attendeesArray = []
         }
         return attendeesArray
+    }
+    
+    func isHost(meeting: Meeting)-> Bool{
+        
+        // get current user id
+//        let userID = Auth.auth().currentUser?.uid
+        
+        // check if current user is the host
+//        if meeting.host == userID {
+//            return true
+//        }
+        if meeting.host == "e0a6ozh4A0QVOXY0tyiMSFyfL163" {
+            return true
+        }
+        
+        return false
     }
     
     // Fetch current week days from Sun to Sat
@@ -216,9 +245,10 @@ class MeetingViewModel: ObservableObject{
     
 }
 
-struct emp: Identifiable{
+struct attendee: Identifiable{
     var id: String
     var name: String
     var position: String
     var imgToken: String
+    var status: String
 }

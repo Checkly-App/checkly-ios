@@ -59,6 +59,35 @@ struct MeetingAttendeesListView: View {
                                     .font(.system(size: 14))
                             }
                             .multilineTextAlignment(.leading)
+                        
+                        Spacer()
+                        // attendee status (only if current user is host)
+                        if meetingViewModel.isHost(meeting: meeting){
+                            ZStack{
+                                if attendee.status == "accepted" {
+                                    Text("Accepted")
+                                        .foregroundColor(Color(red: 0.38, green: 0.153, blue: 0.22))
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .fill(Color("Green").opacity(0.5))
+                                        .frame(width: 65, height: 28)
+                                } else if attendee.status == "rejected" {
+                                    Text("Rejected")
+                                        .foregroundColor(Color(red: 0.38, green: 0.153, blue: 0.22))
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .fill(Color("Pink").opacity(0.5))
+                                        .frame(width: 65, height: 28)
+                                } else if attendee.status == "sent" || attendee.status == "notified" {
+                                    Text("Pending")
+                                        .foregroundColor(Color(red: 0.38, green: 0.153, blue: 0.22))
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .fill(Color("Orange").opacity(0.5))
+                                        .frame(width: 65, height: 28)
+                                }
+                                
+                            }
+                            .font(.system(size: 12, weight: .medium))
+                        }
+                        
                         }
                         .frame(height: 60)
                     }

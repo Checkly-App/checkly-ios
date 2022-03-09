@@ -56,7 +56,7 @@ struct MeetingDetails: View {
                 if meetingViewModel.meetingAttendeesArray(meeting: meeting).count != 0 {
                    
                  // if attendees are less than 7 display all their images, else display 7 only
-                  if meetingViewModel.meetingAttendeesArray(meeting: meeting).count < 7 {
+                  if meetingViewModel.meetingAttendeesArray(meeting: meeting).count <= 7 {
                         
                       ForEach(meetingViewModel.meetingAttendeesArray(meeting: meeting)){ attendee in
                         if URL(string: attendee.imgToken) == URL(string: "null"){
@@ -88,7 +88,7 @@ struct MeetingDetails: View {
                       
                 } else {
                     // display only 7 images and the 8th will be (+ plus)
-                    ForEach(1...7, id: \.self){ index in
+                    ForEach(0...6, id: \.self){ index in
                         
                         // attendee does not have an image
                         if URL(string: meetingViewModel.meetingAttendeesArray(meeting: meeting)[index].imgToken) == URL(string: "null"){
