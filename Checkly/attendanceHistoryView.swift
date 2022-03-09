@@ -84,6 +84,7 @@ struct attendanceHistoryView: View {
             }.padding()
             ScrollView(.vertical, showsIndicators: false) {
             ForEach (vm.filteredAttendancesDates, id: \.self) { attendance in
+                VStack{
             HStack {
                 RoundedRectangle(cornerRadius: 20).frame(width: 80, height: 80).foregroundColor(.gray).opacity(0.2).overlay(
                     VStack{
@@ -110,8 +111,15 @@ struct attendanceHistoryView: View {
                 
                 Image(uiImage: UIImage(named:"arrow")!).resizable().frame(width: 13, height: 20)
             }.padding().frame(width: 350, height: 100).background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
-            }
+                }.padding(.trailing)
             Spacer()
+            }
+                
+                VStack (alignment: .center) {
+                    Text("Oops!").font(.system(size: 20, weight: .heavy)).foregroundColor(Color(.gray))
+                    Text("No results matching your filters").font(.system(size: 17)).foregroundColor(.gray)
+                }.offset(y: 30)
+                    .opacity(vm.filteredAttendancesDates.count == 0 ? 1 : 0 )
         }
             // Search Button
             HStack{
