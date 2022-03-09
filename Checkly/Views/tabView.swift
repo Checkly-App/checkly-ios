@@ -10,6 +10,10 @@ import Firebase
 
 struct tabView: View {
     
+    
+    //    let uuid = Auth.auth().currentUser?.uid
+    let uuid = "cjuQp8hCBgge0MtYsJxYXbTK50F3"
+
     //MARK: - @EnvironmentObjects
     @EnvironmentObject var authentication: Authentication
     
@@ -20,7 +24,7 @@ struct tabView: View {
     @Namespace var animation
     
     //MARK: - @SatateObjects
-    @StateObject var tabModelObject = tabModel()
+    @StateObject var tabModelObject = tabViewModel()
     
     //MARK: - Variables
     var tabsNames = ["Messages","Calendar","Home","Statistics","Services"]
@@ -32,6 +36,7 @@ struct tabView: View {
             GeometryReader{_ in
                 ZStack{
                         //Messages
+                    //pass to her the logged in user struct
                         Text("Messages")
                             .opacity(selectedTab == 0 ? 1 : 0)
                         

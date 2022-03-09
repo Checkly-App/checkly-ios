@@ -6,16 +6,27 @@
 //
 
 import Foundation
+import Firebase
 
-class tabModel: ObservableObject{
+class tabViewModel: ObservableObject{
     
     @Published var isMessagesViewLoaded = false
     @Published var isCalendarViewLoaded = false
     @Published var isStatisticsViewLoaded = false
     @Published var isServicesLoaded = false
     
+    private var ref = Database.database().reference()
+    
+    
     init(){
         print("Home is loaded")
+        loadHome()
+    }
+    
+    func loadHome(){
+        
+        
+        
     }
     
     func loadMessages(){

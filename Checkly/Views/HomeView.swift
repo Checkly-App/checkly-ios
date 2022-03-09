@@ -13,6 +13,7 @@ struct HomeView: View {
     @State var date = "eeee dd mm yyyy"
     @State var showCardSheet = false
     
+    
     var updateTimer: Timer {
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             self.timeDate = getTime()
