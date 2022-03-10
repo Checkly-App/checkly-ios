@@ -24,7 +24,8 @@ struct tabView: View {
     @Namespace var animation
     
     //MARK: - @SatateObjects
-    @StateObject var tabModelObject = tabViewModel()
+    @ObservedObject var tabModelObject = tabViewModel()
+    
     
     //MARK: - Variables
     var tabsNames = ["Messages","Calendar","Home","Statistics","Services"]
@@ -44,7 +45,7 @@ struct tabView: View {
                         Text("Calendar")
                             .opacity(selectedTab == 1 ? 1 : 0)
                         //Home
-                        HomeView()
+                        HomeView(emp: tabModelObject.emp)
                             .opacity(selectedTab == 2 ? 1 : 0)
                         //Statistics
                         Text("Statistics")

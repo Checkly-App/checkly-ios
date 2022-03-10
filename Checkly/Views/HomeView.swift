@@ -13,6 +13,7 @@ struct HomeView: View {
     @State var date = "eeee dd mm yyyy"
     @State var showCardSheet = false
     
+    var emp: Employee
     
     var updateTimer: Timer {
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
@@ -25,7 +26,6 @@ struct HomeView: View {
             self.date = getDate()
         }
     }
-    
     
     
     var body: some View {
@@ -88,6 +88,7 @@ struct HomeView: View {
                     }
                     
                     //location
+                    Text(emp.name)
                     
                     //check-in information
                     
@@ -160,7 +161,10 @@ struct DigitalCard: Shape{
 }
 
 struct HomeView_Previews: PreviewProvider {
+    
+    static let employee = Employee(address: "", birthdate: "", department: "", email: "", gender: "", name: "", national_id: "", phone_number:  "", position: "")
+    
     static var previews: some View {
-        HomeView()
+        HomeView(emp: employee)
     }
 }
