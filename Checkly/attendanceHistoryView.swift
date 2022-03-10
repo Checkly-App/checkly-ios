@@ -99,7 +99,8 @@ struct attendanceHistoryView: View {
                 Spacer()
             }.padding()
             ScrollView(.vertical, showsIndicators: false) {
-                ForEach (vm.filteredAttendancesDates, id: \.self) { attendance in
+                if ( searched == false ) {
+                ForEach (vm.attendances, id: \.self) { attendance in
                 VStack{
             HStack {
                 RoundedRectangle(cornerRadius: 20).frame(width: 80, height: 80).foregroundColor(.gray).opacity(0.2).overlay(
@@ -136,7 +137,42 @@ struct attendanceHistoryView: View {
                     Text("No results matching your filters").font(.system(size: 17)).foregroundColor(.gray)
                 }.offset(y: 120)
                     .opacity(vm.filteredAttendancesDates.count == 0 ? 1 : 0 )
-
+                } else {
+                    ForEach (vm.filteredAttendancesDates, id: \.self) { attendance in
+                    VStack{
+                HStack {
+                    RoundedRectangle(cornerRadius: 20).frame(width: 80, height: 80).foregroundColor(.gray).opacity(0.2).overlay(
+                        VStack{
+                            let monthName = DateFormatter().monthSymbols[Int(attendance.date[3..<5])! - 1]
+                            if ( monthName == "July" || monthName == "June" ) {
+                                Text(monthName.uppercased()).font(.system(size: 13)).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383)).fontWeight(.bold)
+                                Text(attendance.date[0..<3]).font(.largeTitle).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383))
+                            }
+                            Text(monthName[0..<3].uppercased()).font(.system(size: 13)).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383)).fontWeight(.bold)
+                            Text(attendance.date[0..<2]).font(.largeTitle).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383))
+                        }
+                    )
+                    VStack{
+                        Text("Check In").font(.system(size:13))
+                        Text(attendance.checkIn).foregroundColor(.gray).fontWeight(.thin)
+                    }.padding()
+                    //divider
+                    Rectangle().fill(Color.gray).frame(width: 0.35, height: 35)
+                    
+                    VStack{
+                        Text("Check Out").font(.system(size:13))
+                        Text(attendance.checkOut).foregroundColor(.gray).fontWeight(.thin)
+                    }.padding()
+                    
+                    Image(uiImage: UIImage(named:"arrow")!).resizable().frame(width: 13, height: 20)
+                }.padding().frame(width: 350, height: 100).background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
+                    }.padding(.trailing)
+                Spacer()
+                }
+                    
+                }
+            }.onAppear {
+                vm.fetchAttendances()
             }
             // Search Button
             HStack{
