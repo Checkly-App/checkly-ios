@@ -15,10 +15,26 @@ struct CardExpansion: View {
     //MARK: - @Environement Objects
     @Environment(\.presentationMode) var presentationMode
     
+    @State var timeDate = "hh:mm:ss"
+    @State var date = "eeee dd mm yyyy"
+        
+    var updateTimer: Timer {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            self.timeDate = getTime()
+        }
+    }
+    
+    var updateDate: Timer {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            self.date = getDate()
+        }
+    }
+    
     //MARK: - Varibales
     let context = CIContext()
     let filter = CIFilter.qrCodeGenerator()
     let names: [String] = ["k","l"]
+    var emp: Employee
     
     
     //MARK: - Body
@@ -37,14 +53,14 @@ struct CardExpansion: View {
                 //2- QR Code and employee id
                 VStack(alignment: .center, spacing: 16){
                     
-                    Image(uiImage: generateQRCode(string: "Noura Alsulayfih"))
+                    Image(uiImage: generateQRCode(string: "\(emp.employee_id)-\(emp.name)-\($date)-\($timeDate)"))
                         .resizable()
                         .interpolation(.none)
                         .frame(width: 200, height: 200, alignment: .center)
                         .cornerRadius(8)
                         .shadow(color: .gray, radius: 10, x: 1, y: 1)
                     
-                    Text("Employee ID 1210116")
+                    Text("Employee ID \(emp.employee_id)")
                         .foregroundColor(Color(.sRGB, red: 0.639, green: 0.631, blue: 0.631, opacity: 1))
                         .fontWeight(.medium)
                 }
@@ -57,20 +73,9 @@ struct CardExpansion: View {
                                                 Color(.sRGB, red: 0.345, green: 0.74, blue: 0.921, opacity: 1)]
                                        , startPoint: .top, endPoint: .bottom)
                     )
-                    .frame(width: .infinity, height: 400, alignment: .center)
-                    .overlay(
-                        
-                        VStack {
-                            Text("Latest check-in")
-                                .font(.system(size: 30))
-                                .foregroundColor(.white)
-                                .fontWeight(.bold)
-                            ScrollView {
-                                
-                            }
-                        }
-                    
-                    )
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 400, alignment: .center)
+
                 
                 
                 
@@ -106,14 +111,28 @@ struct CardExpansion: View {
         }
         return UIImage(systemName: "xmark.circle") ?? UIImage()
     }
+    
+    func getTime()->String{
+        let time = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HH:mm"
+        let stringDate = timeFormatter.string(from: time)
+        return stringDate
+    }
+    
+    func getDate()-> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.setLocalizedDateFormatFromTemplate("EEE MMM d yyyy")
+        return dateFormatter.string(from: Date())
+    }
 }
 
 
 struct CustomeShape: Shape{
     func path(in rect: CGRect) -> Path {
         var path = Path()
-        path.move(to: CGPoint(x: rect.minX, y: rect.minY+5))
-        path.addCurve(to: CGPoint(x: rect.maxX, y: rect.minY+5), control1: CGPoint(x: rect.midX, y: -20), control2: CGPoint(x: rect.midX, y: -20))
+        path.move(to: CGPoint(x: rect.minX, y: rect.minY+20))
+        path.addCurve(to: CGPoint(x: rect.maxX, y: rect.minY+10), control1: CGPoint(x: rect.midX, y: rect.minY-20), control2: CGPoint(x: rect.midX, y: rect.minY-20))
         path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
         path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
         path.closeSubpath()
@@ -122,7 +141,10 @@ struct CustomeShape: Shape{
 }
 
 struct CardExpansion_Previews: PreviewProvider {
+    
+    static let employee = Employee(address: "", birthdate: "", department: "", email: "", employee_id: "", gender: "", name: "", national_id: "", phone_number:  "", position: "")
+    
     static var previews: some View {
-        CardExpansion()
+        CardExpansion(emp: employee)
     }
 }

@@ -12,6 +12,7 @@ struct Employee{
     var birthdate: String
     var department: String
     var email: String
+    var employee_id: String
     var gender: String
     var name: String
     var national_id: String

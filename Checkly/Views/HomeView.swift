@@ -71,7 +71,8 @@ struct HomeView: View {
                                     .offset(x: 0, y: 15)
                                 Spacer()
                                 Rectangle()
-                                    .frame(width: .infinity, height: 120)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 120)
                                     .foregroundColor(Color(.sRGB, red: 0.745, green: 0.91, blue: 0.98, opacity: 1))
                             }
                                 .cornerRadius(16)
@@ -80,7 +81,7 @@ struct HomeView: View {
                             self.showCardSheet.toggle()
                         }
                         .sheet(isPresented: $showCardSheet) {
-                            CardExpansion()
+                            CardExpansion(emp: emp)
                         }
                     
                     if showCardSheet {
@@ -162,7 +163,7 @@ struct DigitalCard: Shape{
 
 struct HomeView_Previews: PreviewProvider {
     
-    static let employee = Employee(address: "", birthdate: "", department: "", email: "", gender: "", name: "", national_id: "", phone_number:  "", position: "")
+    static let employee = Employee(address: "", birthdate: "", department: "", email: "", employee_id: "", gender: "", name: "", national_id: "", phone_number:  "", position: "")
     
     static var previews: some View {
         HomeView(emp: employee)
