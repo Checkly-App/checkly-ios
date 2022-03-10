@@ -14,7 +14,8 @@ struct attendanceHistoryView: View {
     @State var toDate = Date()
     @ObservedObject var vm = attendanceHistoryViewModel()
     @State var selectedStatus: String?
-    
+    @State var searched = false
+
     var body: some View {
                 
         // Date Pickers
@@ -31,6 +32,36 @@ struct attendanceHistoryView: View {
             }.padding()
             ScrollView(.horizontal, showsIndicators: false) {
             HStack {
+                
+                Button(action: { selectedStatus = "All" }) {
+                    VStack{
+                        HStack{
+                        Image(systemName: "checkmark").foregroundColor(.white).padding()
+                            Spacer()
+                        }
+                        Spacer()
+                        HStack{
+                            Spacer()
+                        Text("All").foregroundColor(.white).fontWeight(.bold).padding()
+                        }
+                    }.frame(width: 130, height: 100).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.173, green: 0.686, blue: 0.933), Color(red: 0.173, green: 0.686, blue: 0.933).opacity(0.6)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(5).shadow(color: .gray, radius: 4, x: 2, y: 2)
+                    
+            }.padding(.leading)
+                
+                Button(action: { selectedStatus = "On time" }) {
+                    VStack{
+                        HStack{
+                        Image(systemName: "checkmark").foregroundColor(.white).padding()
+                            Spacer()
+                        }
+                        Spacer()
+                        HStack{
+                            Spacer()
+                        Text("On time").foregroundColor(.white).fontWeight(.bold).padding()
+                        }
+                    }.frame(width: 130, height: 100).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.239, green: 0.824, blue: 0.733), Color(red: 0.239, green: 0.824, blue: 0.733).opacity(0.7)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(5).shadow(color: .gray, radius: 4, x: 2, y: 2)
+                    
+            }
                 // Late filter
                 Button(action: { selectedStatus = "Late" }) {
                     VStack{
@@ -43,23 +74,8 @@ struct attendanceHistoryView: View {
                         Spacer()
                         Text("Late").foregroundColor(.white).fontWeight(.bold).padding()
                         }
-                    }.frame(width: 130, height: 100).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.353, green: 0.51, blue: 0.969), Color(red: 0.353, green: 0.51, blue: 0.969).opacity(0.8)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(5).shadow(color: .gray, radius: 4, x: 2, y: 2)
-                }.padding(.leading)
-                // On time filter
-                Button(action: { selectedStatus = "On time" }) {
-                    VStack{
-                        HStack{
-                        Image(systemName: "checkmark").foregroundColor(.white).padding()
-                            Spacer()
-                        }
-                        Spacer()
-                        HStack{
-                            Spacer()
-                        Text("On time").foregroundColor(.white).fontWeight(.bold).padding()
-                        }
-                    }.frame(width: 130, height: 100).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.306, green: 0.902, blue: 0.604), Color(red: 0.306, green: 0.902, blue: 0.604).opacity(0.8)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(5).shadow(color: .gray, radius: 4, x: 2, y: 2)
-                    
-            }
+                    }.frame(width: 130, height: 100).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.353, green: 0.51, blue: 0.969), Color(red: 0.353, green: 0.51, blue: 0.969).opacity(0.7)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(5).shadow(color: .gray, radius: 4, x: 2, y: 2)
+                }
                 // Absent filter
                 Button(action: { selectedStatus = "Absent" }) {
                     VStack{
@@ -72,7 +88,7 @@ struct attendanceHistoryView: View {
                             Spacer()
                             Text("Absent").foregroundColor(.white).fontWeight(.bold).padding()
                         }
-                    }.frame(width: 130, height: 100).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.333, green: 0.667, blue: 0.984), Color(red: 0.333, green: 0.667, blue: 0.984).opacity(0.8)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(5).shadow(color: .gray, radius: 4, x: 2, y: 2)
+                    }.frame(width: 130, height: 100).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.333, green: 0.667, blue: 0.984), Color(red: 0.333, green: 0.667, blue: 0.984).opacity(0.7)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(5).shadow(color: .gray, radius: 4, x: 2, y: 2)
             }
             }.padding(.bottom)
             }
@@ -83,7 +99,7 @@ struct attendanceHistoryView: View {
                 Spacer()
             }.padding()
             ScrollView(.vertical, showsIndicators: false) {
-            ForEach (vm.filteredAttendancesDates, id: \.self) { attendance in
+                ForEach (vm.filteredAttendancesDates, id: \.self) { attendance in
                 VStack{
             HStack {
                 RoundedRectangle(cornerRadius: 20).frame(width: 80, height: 80).foregroundColor(.gray).opacity(0.2).overlay(
@@ -118,16 +134,24 @@ struct attendanceHistoryView: View {
                 VStack (alignment: .center) {
                     Text("Oops!").font(.system(size: 20, weight: .heavy)).foregroundColor(Color(.gray))
                     Text("No results matching your filters").font(.system(size: 17)).foregroundColor(.gray)
-                }.offset(y: 30)
+                }.offset(y: 120)
                     .opacity(vm.filteredAttendancesDates.count == 0 ? 1 : 0 )
-        }
+
+            }
             // Search Button
             HStack{
-                Text("Search").onTapGesture {
+                Image(systemName: "magnifyingglass")
+                Text("Search").foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383)).bold()
+            }.padding()
+                .frame(width: 330, height: 40)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 25)
+                        .stroke(Color(red: 0.383, green: 0.383, blue: 0.383), lineWidth: 3)
+                ).contentShape(Rectangle()).onTapGesture {
+                    searched = true
                     vm.fetchFilteredAttendances(fromDate: fromDate, toDate: toDate, selectedStatus: selectedStatus ?? "Not selected")
                     vm.filteredAttendancesDates.removeAll()
                 }
-            }
         }
     }
 }
@@ -147,7 +171,7 @@ class attendanceHistoryViewModel: ObservableObject {
     
     let ref = Database.database().reference()
     let searchQueue = DispatchQueue.init(label: "searchQueue")
-    let empID = "8UoUAkIZvnP5KSWHydWliuZmOKt2" //change
+    let empID = "8UoUAkIZvnP5KSWHydWliuZmOKt2" //change to auth
         
     searchQueue.sync {
         
@@ -179,7 +203,7 @@ class attendanceHistoryViewModel: ObservableObject {
      
         print ("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", selectedStatus)
         // did not choose a status filter case
-        if ( selectedStatus == "Not selected") {
+        if ( selectedStatus == "Not selected" || selectedStatus == "All" ) {
         searchQueue.sync {
             
             ref.child("LocationAttendance/emp\(empID)-Attendance").observe(.value, with: { dataSnapshot in
