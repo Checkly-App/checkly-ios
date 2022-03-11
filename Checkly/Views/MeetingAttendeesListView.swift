@@ -82,6 +82,18 @@ struct MeetingAttendeesListView: View {
                                     RoundedRectangle(cornerRadius: 25)
                                         .fill(Color("Orange").opacity(0.5))
                                         .frame(width: 65, height: 28)
+                                } else if attendee.status == "attended" {
+                                    Text("Attended")
+                                        .foregroundColor(Color(red: 0.38, green: 0.153, blue: 0.22))
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .fill(Color("Green").opacity(0.5))
+                                        .frame(width: 65, height: 28)
+                                } else if attendee.status == "absent"{
+                                    Text("Absent")
+                                        .foregroundColor(Color(red: 0.38, green: 0.153, blue: 0.22))
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .fill(Color("Pink").opacity(0.5))
+                                        .frame(width: 65, height: 28)
                                 }
                                 
                             }

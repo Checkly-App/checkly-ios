@@ -201,6 +201,23 @@ class MeetingViewModel: ObservableObject{
         return false
     }
     
+    func takeMeetingAttendance(meeting_id: String, attendeesDictionary: [String:String]){
+        
+        let ref = Database.database().reference()
+        ref.child("Meetings").child(meeting_id).child("attendees").updateChildValues(attendeesDictionary)
+        
+    }
+    
+    func meetingAttendanceTaken(meeting: Meeting) -> Bool {
+        
+        for attendee in meeting.attendees{
+            if attendee.value == "attended" || attendee.value == "absent" {
+                return true
+            }
+        }
+        return false
+    }
+    
     // Fetch current week days from Sun to Sat
     func fetchCurrentWeek(){
         

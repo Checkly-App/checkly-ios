@@ -187,7 +187,7 @@ struct CalendarGrid: View {
             // MARK: Take Participants Attendance
             .sheet(isPresented: $showingPASheet, content: {
                 // display Participants Attendance view
-                ParticipantsAttendance(participants: meetingViewModel.meetingAttendeesArray(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable")))
+                ParticipantsAttendance(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
                 
             })
             

@@ -2,7 +2,7 @@
 //  MeetingDetails.swift
 //  Checkly
 //
-//  Created by a w on 04/03/2022.
+//  Created by a w on 28/02/2022.
 //
 
 import SwiftUI
@@ -27,13 +27,12 @@ struct MeetingDetails: View {
                     .fill(meeting.type == "Online" ? Color("BlueA") : Color("Purple"))
                     .frame(width: 10, height: 10)
                     .padding(.top, 10)
-               
                 // Title
                 Text(meeting.title)
                     .font(.system(size: 25, weight: .bold))
                     .fontWeight(.semibold)
                     .hLeading()
-                // type
+                // Type
                 ZStack{
                     RoundedRectangle(cornerRadius: 25)
                         .fill(meeting.type == "Online" ? Color("BlueA").opacity(0.2) : Color("Purple").opacity(0.2))
@@ -143,7 +142,6 @@ struct MeetingDetails: View {
             .padding([.leading], 15)
             
             Divider()
-            
             // Time
             HStack(spacing: 13) {
                 Image( systemName: "clock")
@@ -171,7 +169,7 @@ struct MeetingDetails: View {
                 .hLeading()
                 .padding([.leading], 15)
                 .padding([.top], 5)
-       
+           
             // Agenda
             HStack(spacing: 13) {
                 Image( systemName: "text.alignleft")
@@ -187,8 +185,9 @@ struct MeetingDetails: View {
                 .hLeading()
                 .padding([.leading], 15)
                 .padding([.top], 5)
-            
-            // meeting location
+                .padding([.trailing], 7)
+
+            // Location
             HStack(spacing: 13) {
                 Image( systemName: "mappin.and.ellipse")
                     .resizable()
@@ -217,9 +216,9 @@ struct MeetingDetails: View {
                         .frame(width: 340, height: 140, alignment: .center)
                         .cornerRadius(10)
             }
-            
-            // (Only if Host) Take Participants attendance Button
-            if(meetingViewModel.isHost(meeting: meeting)){
+            // (Only if current user is Host & the time has elapsed & attendance has not not been taken yet)
+            // Take Participants attendance Button
+            if(meetingViewModel.isHost(meeting: meeting) && meeting.datetime_start <= Date() && !meetingViewModel.meetingAttendanceTaken(meeting: meeting) ){
                 Button{
                     showingPASheet.toggle()
                 } label: {
@@ -235,7 +234,49 @@ struct MeetingDetails: View {
                 }
                 .padding(.top, 20)
             }
-
+            // (Only if current user is host) if meeting has not started yet
+            else if (meetingViewModel.isHost(meeting: meeting) && meeting.datetime_start > Date() ) {
+                HStack{
+                    Image(systemName: "person.crop.circle.badge.checkmark")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 25, height: 25)
+                        .padding(.leading, 10)
+                    Text("You can take participants attendance once the meeting starts")
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.center)
+                        .padding([.top,.bottom, .leading],4)
+                        .padding(.trailing, 15)
+                }
+                .foregroundColor(Color("Orange"))
+                .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color("Orange"))
+                    )
+                .padding()
+            }
+            // (Only if current user is host) participants attendance have been taken
+            else if (meetingViewModel.isHost(meeting: meeting) && meetingViewModel.meetingAttendanceTaken(meeting: meeting)){
+                HStack{
+                    Image(systemName: "person.crop.circle.badge.checkmark")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 25, height: 25)
+                        .padding(.leading, 5)
+                    Text("Attendance has been taken")
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.center)
+                        .padding([.top,.bottom, .leading],4)
+                        .padding(.trailing, 8)
+                }
+                .padding()
+                .foregroundColor(Color(red: 0.173, green: 0.686, blue: 0.933))
+                .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color(red: 0.173, green: 0.686, blue: 0.933))
+                    )
+            }
+            
         }
         .frame(
             minWidth: 0,
@@ -259,11 +300,11 @@ struct MeetingDetails: View {
 
 struct MeetingDetails_Previews: PreviewProvider {
    
-    @State static private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 24.7534673 ,longitude: 46.6920362),span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
+    @State static private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 24.7534673 ,longitude: 46.6920362),span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
     @State static private var showingSheet = false
     @State static private var showingPASheet = false
-    
+
     static var previews: some View {
-        MeetingDetails(coordinateRegion: $coordinateRegion, showingSheet: $showingSheet, meeting: Meeting(id: "1", host: "e0a6ozh4A0QVOXY0tyiMSFyfL163", title: "Cloud Security Engineers Meeting", datetime_start: Date(), datetime_end: Date() ,type: "On-site", location: "STC HQ, IT Meeting Room", attendees: ["VsWRopBPLQYNMXlL5u5mkcGETze2" : "accepted"], agenda: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", latitude: "24.7534673", longitude: "46.6920362"), showingPASheet: $showingPASheet)
+        MeetingDetails(coordinateRegion: $coordinateRegion, showingSheet: $showingSheet, meeting: Meeting(id: "1", host: "e0a6ozh4A0QVOXY0tyiMSFyfL163", title: "Cloud Security Engineers Meeting", datetime_start: .init(timeIntervalSince1970: TimeInterval(1646892000)), datetime_end: .init(timeIntervalSince1970: TimeInterval(1646893800)),type: "On-site", location: "STC HQ, IT Meeting Room", attendees: ["VsWRopBPLQYNMXlL5u5mkcGETze2":"attended", "8UoUAkIZvnP5KSWHydWliuZmOKt2":"attended" ,"141A9FHDjhXJGvIE7czgFg0OFxT2":"attended","c3FxXlBlKLMpGOLO6sHmwj6CScs2":"attended","cjuQp8hCBgge0MtYsJxYXbTK50F3":"attended","gRgNfXsCSqfSWRMAU5aHtdBOJ113":"attended","mHeNGXP0R3NDlV8KXZfhK6mUKFB3":"attended","npHQyalq1PNvTwPtvaKeC48TCnn2":"attended"], agenda: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", latitude: "24.7534673", longitude: "46.6920362"), showingPASheet: $showingPASheet)
     }
 }
