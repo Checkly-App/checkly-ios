@@ -151,7 +151,7 @@ struct attendanceHistoryView: View {
                     .opacity(vm.filteredAttendancesDates.count == 0 ? 1 : 0 )
                     
                 } else {
-                    ForEach (vm.filteredAttendancesDates, id: \.self) { attendance in
+                    ForEach (vm.filteredAttendancesDates.sorted(by: { $0.computedDate > $1.computedDate }), id: \.self) { attendance in
                     VStack{
                 Button {
                 selectedAttendance = attendance
@@ -193,7 +193,6 @@ struct attendanceHistoryView: View {
                 }
             }.onAppear {
                 vm.fetchAttendances()
-                vm.attendances.sorted(by: { $0.computedDate > $1.computedDate })
             }
 
             // Search Button
