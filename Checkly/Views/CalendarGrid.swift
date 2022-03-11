@@ -21,52 +21,23 @@ struct CalendarGrid: View {
     @State private var bottomSheetPosition: BottomSheetPosition = .hidden
     // for attendees sheet
     @State private var showingSheet = false
+    // for participants attendance (PA) sheet
+    @State private var showingPASheet = false
     // for map view
     @State private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0,longitude: 0.0),span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
     
     var todaysDate = Date()
     
     var body: some View {
+        
         NavigationView{
-                ScrollView(.vertical, showsIndicators: false){
+            
+            ScrollView(.vertical, showsIndicators: false){
+                
                 VStack(spacing: 5) {
-                    HStack(spacing: 25){
-                                    Button(action: {
-                                        print("Already in Calendar Grid")
-                                    }, label: {
-                                        Image(systemName: "calendar")
-                                            .resizable()
-                                            .foregroundColor(Color(.gray))
-                                            .frame(width: 20, height: 20)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 25)
-                                                    .fill(Color("BlueA").opacity(0.3))
-                                                    .frame(width: 40, height: 35)
-                                            )
-                                    })
-                                    Button(action: {
-                                        print("Go to Timeline")
-                                        viewRouter.currentPage = .CalendarTimeline
-                                    }, label: {
-                                        Image(systemName: "list.bullet")
-                                            .resizable()
-                                            .foregroundColor(Color(.gray))
-                                            .frame(width: 18, height: 18)
-                                    })
-                                    Spacer()
-                                    Button(action: {
-                                        // Generate Meeting
-                                    }, label: {
-                                        Image(systemName: "plus")
-                                            .resizable()
-                                            .foregroundColor(Color(.gray))
-                                            .frame(width: 20, height: 20)
-                                    }).padding([.trailing], 6)
-                                  
-                    }.padding([.leading],19)
-                    .padding([.trailing ,.bottom],17)
-                    .padding([.top],15)
-                    .hLeading()
+                    
+                    // contains filter group, and plus button
+                    HeaderView()
                     
                     // Days
                     let days: [String] = ["S", "M", "T", "W", "T", "F", "S"]
@@ -200,16 +171,26 @@ struct CalendarGrid: View {
                     currentDate = getCurrentMonth()
                 }
             }
-                // MARK: Meeting Details
-                .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [BottomSheet.Options.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray), .background(AnyView(Color.white))], content: {
+            
+            // MARK: Meeting Details
+            .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [BottomSheet.Options.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray), .background(AnyView(Color.white))], content: {
                     // see view under "Views" folder
-                    MeetingDetails(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
-                })
+                    MeetingDetails(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"), showingPASheet: $showingPASheet)
+            })
+            
             // MARK: Attendees List
             .sheet(isPresented: $showingSheet) {
                 // see view under "Views" folder
                 MeetingAttendeesListView(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
             }
+            
+            // MARK: Take Participants Attendance
+            .sheet(isPresented: $showingPASheet, content: {
+                // display Participants Attendance view
+                ParticipantsAttendance(participants: meetingViewModel.meetingAttendeesArray(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable")))
+                
+            })
+            
             .navigationBarHidden(true)
         .navigationBarTitle(Text("Calendar"))
       }
@@ -291,16 +272,60 @@ struct CalendarGrid: View {
                     Text(meeting.datetime_start.formatted(date: .omitted, time: .shortened))
                 }
             }
-            .hLeading()
             .padding([.top,.bottom, .trailing], 10)
+            
         }
-        .hLeading()
         .background(
             Color(meeting.type == "Online" ? "BlueA" : "Purple")
                 .opacity(0.06)
         )
-        .frame(width: 360)
         .cornerRadius(5)
+        .padding([.leading,.trailing],10)
+    }
+    
+    func HeaderView() -> some View {
+        
+        HStack(spacing: 25){
+            
+            Button(action: {
+                print("Already in Calendar Grid")
+            }, label: {
+                Image(systemName: "calendar")
+                    .resizable()
+                    .foregroundColor(Color(.gray))
+                    .frame(width: 20, height: 20)
+                    .overlay(
+                RoundedRectangle(cornerRadius: 25)
+                    .fill(Color("BlueA").opacity(0.3))
+                    .frame(width: 40, height: 35)
+                )
+            })
+            
+            Button(action: {
+                print("Go to Timeline")
+                viewRouter.currentPage = .CalendarTimeline
+            }, label: {
+                Image(systemName: "list.bullet")
+                    .resizable()
+                    .foregroundColor(Color(.gray))
+                    .frame(width: 18, height: 18)
+            })
+            Spacer()
+            Button(action: {
+                // Generate Meeting
+            }, label: {
+                Image(systemName: "plus")
+                    .resizable()
+                    .foregroundColor(Color(.gray))
+                    .frame(width: 20, height: 20)
+            })
+                .padding([.trailing], 6)
+                      
+        }
+        .padding([.leading],19)
+        .padding([.trailing ,.bottom],17)
+        .padding([.top],15)
+        .hLeading()
     }
     
     // checking dates

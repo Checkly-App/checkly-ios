@@ -245,7 +245,7 @@ class MeetingViewModel: ObservableObject{
     
 }
 
-struct attendee: Identifiable{
+struct attendee: Identifiable, Hashable{
     var id: String
     var name: String
     var position: String

@@ -23,6 +23,8 @@
 		A35A20DB27C2F54600719A01 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = A35A20DA27C2F54600719A01 /* SDWebImageSwiftUI */; };
 		A35A20DD27C2F57100719A01 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A35A20DC27C2F57100719A01 /* FirebaseStorage */; };
 		A362C15827BEE49A00BD761A /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = A362C15727BEE49A00BD761A /* BottomSheet */; };
+		A365EA4727DAE43300034F79 /* ParticipantRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A365EA4627DAE43300034F79 /* ParticipantRow.swift */; };
+		A365EA4927DAE46800034F79 /* ParticipantsAttendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A365EA4827DAE46800034F79 /* ParticipantsAttendance.swift */; };
 		A39913FF27D29FB400B26628 /* MeetingAttendeesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39913FE27D29FB400B26628 /* MeetingAttendeesListView.swift */; };
 		A399140127D29FEC00B26628 /* MeetingDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A399140027D29FEC00B26628 /* MeetingDetails.swift */; };
 		A3B8D84A27B1171A00752F63 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A3B8D84927B1171A00752F63 /* FirebaseFirestore */; };
@@ -50,6 +52,8 @@
 		7149E91727A985BC008E3553 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		7149E91927A987DD008E3553 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
+		A365EA4627DAE43300034F79 /* ParticipantRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantRow.swift; sourceTree = "<group>"; };
+		A365EA4827DAE46800034F79 /* ParticipantsAttendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsAttendance.swift; sourceTree = "<group>"; };
 		A39913FE27D29FB400B26628 /* MeetingAttendeesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingAttendeesListView.swift; sourceTree = "<group>"; };
 		A399140027D29FEC00B26628 /* MeetingDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetails.swift; sourceTree = "<group>"; };
 		A3B8D84C27B117E400752F63 /* MeetingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingModel.swift; sourceTree = "<group>"; };
@@ -134,6 +138,8 @@
 				A3B8D85727B11A5600752F63 /* CalendarTimeline.swift */,
 				A39913FE27D29FB400B26628 /* MeetingAttendeesListView.swift */,
 				A399140027D29FEC00B26628 /* MeetingDetails.swift */,
+				A365EA4627DAE43300034F79 /* ParticipantRow.swift */,
+				A365EA4827DAE46800034F79 /* ParticipantsAttendance.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -277,12 +283,14 @@
 				A39913FF27D29FB400B26628 /* MeetingAttendeesListView.swift in Sources */,
 				7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */,
 				7149E91227A96FCA008E3553 /* Credentials.swift in Sources */,
+				A365EA4927DAE46800034F79 /* ParticipantsAttendance.swift in Sources */,
 				A399140127D29FEC00B26628 /* MeetingDetails.swift in Sources */,
 				A3B8D85227B119FB00752F63 /* CalendarHelper.swift in Sources */,
 				A3B8D85827B11A5600752F63 /* CalendarTimeline.swift in Sources */,
 				A3B8D85C27B13D9F00752F63 /* DateValueModel.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
+				A365EA4727DAE43300034F79 /* ParticipantRow.swift in Sources */,
 				A3B8D85627B11A4200752F63 /* CalendarGrid.swift in Sources */,
 				A3B8D85A27B11A8900752F63 /* CalendarViewRouterHelper.swift in Sources */,
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,

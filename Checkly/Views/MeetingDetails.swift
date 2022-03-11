@@ -17,6 +17,8 @@ struct MeetingDetails: View {
     // for attendees sheet
     @Binding var showingSheet: Bool
     var meeting: Meeting
+    // for participants attendance (PA) sheet
+    @Binding var showingPASheet: Bool
     
     var body: some View {
         VStack(spacing: 20) {
@@ -215,6 +217,24 @@ struct MeetingDetails: View {
                         .frame(width: 340, height: 140, alignment: .center)
                         .cornerRadius(10)
             }
+            
+            // (Only if Host) Take Participants attendance Button
+            if(meetingViewModel.isHost(meeting: meeting)){
+                Button{
+                    showingPASheet.toggle()
+                } label: {
+                    Text("Take Attendance")
+                       .font(.system(size: 19, weight: .semibold))
+                       .foregroundColor(.white)
+                       .frame(width: 300)
+                       .padding()
+                       .background(
+                           LinearGradient(colors: [Color(red: 0.337, green: 0.729, blue: 0.922),Color(red: 0.275, green: 0.631, blue: 0.953)], startPoint: .leading, endPoint: .trailing)
+                        )
+                       .cornerRadius(10.0)
+                }
+                .padding(.top, 20)
+            }
 
         }
         .frame(
@@ -241,8 +261,9 @@ struct MeetingDetails_Previews: PreviewProvider {
    
     @State static private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 24.7534673 ,longitude: 46.6920362),span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
     @State static private var showingSheet = false
+    @State static private var showingPASheet = false
     
     static var previews: some View {
-        MeetingDetails(coordinateRegion: $coordinateRegion, showingSheet: $showingSheet, meeting: Meeting(id: "1", host: "e0a6ozh4A0QVOXY0tyiMSFyfL163", title: "Cloud Security Engineers Meeting", datetime_start: Date(), datetime_end: Date() ,type: "On-site", location: "STC HQ, IT Meeting Room", attendees: ["VsWRopBPLQYNMXlL5u5mkcGETze2" : "accepted"], agenda: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", latitude: "24.7534673", longitude: "46.6920362"))
+        MeetingDetails(coordinateRegion: $coordinateRegion, showingSheet: $showingSheet, meeting: Meeting(id: "1", host: "e0a6ozh4A0QVOXY0tyiMSFyfL163", title: "Cloud Security Engineers Meeting", datetime_start: Date(), datetime_end: Date() ,type: "On-site", location: "STC HQ, IT Meeting Room", attendees: ["VsWRopBPLQYNMXlL5u5mkcGETze2" : "accepted"], agenda: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", latitude: "24.7534673", longitude: "46.6920362"), showingPASheet: $showingPASheet)
     }
 }
