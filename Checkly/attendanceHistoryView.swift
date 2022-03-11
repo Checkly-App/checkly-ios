@@ -36,7 +36,7 @@ struct attendanceHistoryView: View {
                 Button(action: { selectedStatus = "All" }) {
                     VStack{
                         HStack{
-                        Image(systemName: "checkmark").foregroundColor(.white).padding()
+                        Image(systemName: "sum").foregroundColor(.white).padding()
                             Spacer()
                         }
                         Spacer()
@@ -130,13 +130,14 @@ struct attendanceHistoryView: View {
             }.padding().frame(width: 350, height: 100).background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
                 }.padding(.trailing)
             Spacer()
+                    
             }
-                
                 VStack (alignment: .center) {
                     Text("Oops!").font(.system(size: 20, weight: .heavy)).foregroundColor(Color(.gray))
                     Text("No results matching your filters").font(.system(size: 17)).foregroundColor(.gray)
                 }.offset(y: 120)
                     .opacity(vm.filteredAttendancesDates.count == 0 ? 1 : 0 )
+                    
                 } else {
                     ForEach (vm.filteredAttendancesDates, id: \.self) { attendance in
                     VStack{
@@ -174,6 +175,7 @@ struct attendanceHistoryView: View {
             }.onAppear {
                 vm.fetchAttendances()
             }
+
             // Search Button
             HStack{
                 Image(systemName: "magnifyingglass")
@@ -237,7 +239,6 @@ class attendanceHistoryViewModel: ObservableObject {
     let empID = "8UoUAkIZvnP5KSWHydWliuZmOKt2" //change
     let range = fromDate...toDate
      
-        print ("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", selectedStatus)
         // did not choose a status filter case
         if ( selectedStatus == "Not selected" || selectedStatus == "All" ) {
         searchQueue.sync {
