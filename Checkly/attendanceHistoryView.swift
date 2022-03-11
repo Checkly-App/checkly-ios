@@ -104,7 +104,7 @@ struct attendanceHistoryView: View {
         
             ScrollView(.vertical, showsIndicators: false) {
                 if ( searched == false ) {
-                ForEach (vm.attendances, id: \.self) { attendance in
+                ForEach (vm.attendances.sorted(by: { $0.computedDate > $1.computedDate }), id: \.self) { attendance in
                 VStack{
                     Button {
                     selectedAttendance = attendance
@@ -193,6 +193,7 @@ struct attendanceHistoryView: View {
                 }
             }.onAppear {
                 vm.fetchAttendances()
+                vm.attendances.sorted(by: { $0.computedDate > $1.computedDate })
             }
 
             // Search Button
@@ -249,6 +250,8 @@ class attendanceHistoryViewModel: ObservableObject {
             }
         })
     }
+        print(attendances)
+        print(attendances.sorted(by: { $0.computedDate > $1.computedDate }))
     
 }
     func fetchFilteredAttendances (fromDate: Date, toDate: Date, selectedStatus: String) {
