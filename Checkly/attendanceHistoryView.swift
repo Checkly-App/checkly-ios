@@ -15,9 +15,12 @@ struct attendanceHistoryView: View {
     @ObservedObject var vm = attendanceHistoryViewModel()
     @State var selectedStatus: String?
     @State var searched = false
+    @State private var showingSheet = false
+    @State var selectedAttendance: attendance?
+
 
     var body: some View {
-                
+          
         // Date Pickers
         VStack {
             Text("Attendance history").padding(.bottom) // userd as a sub for now
@@ -32,7 +35,7 @@ struct attendanceHistoryView: View {
             }.padding()
             ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                
+            
                 Button(action: { selectedStatus = "All" }) {
                     VStack{
                         HStack{
@@ -98,39 +101,48 @@ struct attendanceHistoryView: View {
                 Text("RESULTS").fontWeight(.bold).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383))
                 Spacer()
             }.padding()
+        
             ScrollView(.vertical, showsIndicators: false) {
                 if ( searched == false ) {
                 ForEach (vm.attendances, id: \.self) { attendance in
                 VStack{
-            HStack {
-                RoundedRectangle(cornerRadius: 20).frame(width: 80, height: 80).foregroundColor(.gray).opacity(0.2).overlay(
-                    VStack{
-                        let monthName = DateFormatter().monthSymbols[Int(attendance.date[3..<5])! - 1]
-                        if ( monthName == "July" || monthName == "June" ) {
-                            Text(monthName.uppercased()).font(.system(size: 13)).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383)).fontWeight(.bold)
-                            Text(attendance.date[0..<3]).font(.largeTitle).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383))
-                        }
-                        Text(monthName[0..<3].uppercased()).font(.system(size: 13)).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383)).fontWeight(.bold)
-                        Text(attendance.date[0..<2]).font(.largeTitle).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383))
+                    Button {
+                    selectedAttendance = attendance
+                    showingSheet.toggle()
+                    } label: {
+                        HStack {
+                            RoundedRectangle(cornerRadius: 20).frame(width: 80, height: 80).foregroundColor(.gray).opacity(0.2).overlay(
+                                VStack{
+                                    let monthName = DateFormatter().monthSymbols[Int(attendance.date[3..<5])! - 1]
+                                    if ( monthName == "July" || monthName == "June" ) {
+                                        Text(monthName.uppercased()).font(.system(size: 13)).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383)).fontWeight(.bold)
+                                        Text(attendance.date[0..<3]).font(.largeTitle).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383))
+                                    }
+                                    Text(monthName[0..<3].uppercased()).font(.system(size: 13)).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383)).fontWeight(.bold)
+                                    Text(attendance.date[0..<2]).font(.largeTitle).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383))
+                                }
+                            )
+                            VStack{
+                                Text("Check In").foregroundColor(.black).font(.system(size:13))
+                                Text(attendance.checkIn).foregroundColor(.gray).fontWeight(.thin)
+                            }.padding()
+                            //divider
+                            Rectangle().fill(Color.gray).frame(width: 0.35, height: 35)
+                            
+                            VStack{
+                                Text("Check Out").foregroundColor(.black).font(.system(size:13))
+                                Text(attendance.checkOut).foregroundColor(.gray).fontWeight(.thin)
+                            }.padding()
+                            
+                            Image(uiImage: UIImage(named:"arrow")!).resizable().frame(width: 13, height: 20)
+                        }.padding().frame(width: 350, height: 100).background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
+                    }.sheet(isPresented: $showingSheet) {
+                        SheetView(attendance: self.selectedAttendance)
                     }
-                )
-                VStack{
-                    Text("Check In").font(.system(size:13))
-                    Text(attendance.checkIn).foregroundColor(.gray).fontWeight(.thin)
-                }.padding()
-                //divider
-                Rectangle().fill(Color.gray).frame(width: 0.35, height: 35)
                 
-                VStack{
-                    Text("Check Out").font(.system(size:13))
-                    Text(attendance.checkOut).foregroundColor(.gray).fontWeight(.thin)
-                }.padding()
-                
-                Image(uiImage: UIImage(named:"arrow")!).resizable().frame(width: 13, height: 20)
-            }.padding().frame(width: 350, height: 100).background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
                 }.padding(.trailing)
+                
             Spacer()
-                    
             }
                 VStack (alignment: .center) {
                     Text("Oops!").font(.system(size: 20, weight: .heavy)).foregroundColor(Color(.gray))
@@ -141,6 +153,10 @@ struct attendanceHistoryView: View {
                 } else {
                     ForEach (vm.filteredAttendancesDates, id: \.self) { attendance in
                     VStack{
+                Button {
+                selectedAttendance = attendance
+                showingSheet.toggle()
+                } label: {
                 HStack {
                     RoundedRectangle(cornerRadius: 20).frame(width: 80, height: 80).foregroundColor(.gray).opacity(0.2).overlay(
                         VStack{
@@ -154,19 +170,22 @@ struct attendanceHistoryView: View {
                         }
                     )
                     VStack{
-                        Text("Check In").font(.system(size:13))
+                        Text("Check In").foregroundColor(.black).font(.system(size:13))
                         Text(attendance.checkIn).foregroundColor(.gray).fontWeight(.thin)
                     }.padding()
                     //divider
                     Rectangle().fill(Color.gray).frame(width: 0.35, height: 35)
                     
                     VStack{
-                        Text("Check Out").font(.system(size:13))
+                        Text("Check Out").foregroundColor(.black).font(.system(size:13))
                         Text(attendance.checkOut).foregroundColor(.gray).fontWeight(.thin)
                     }.padding()
                     
                     Image(uiImage: UIImage(named:"arrow")!).resizable().frame(width: 13, height: 20)
                 }.padding().frame(width: 350, height: 100).background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
+                }.sheet(isPresented: $showingSheet) {
+                    SheetView(attendance: self.selectedAttendance)
+                }
                     }.padding(.trailing)
                 Spacer()
                 }
@@ -303,6 +322,23 @@ class attendanceHistoryViewModel: ObservableObject {
 struct attendanceHistoryView_Previews: PreviewProvider {
     static var previews: some View {
         attendanceHistoryView()
+    }
+}
+
+
+struct SheetView: View {
+    
+    var attendance: attendance?
+    @Environment(\.dismiss) var dismiss
+
+    var body: some View {
+        Text(attendance?.checkIn ?? "fail")
+        Button("Press to dismiss") {
+            dismiss()
+        }
+        .font(.title)
+        .padding()
+        .background(Color.black)
     }
 }
     
