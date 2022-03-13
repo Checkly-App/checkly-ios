@@ -59,6 +59,7 @@
 		DA2A569427C5436C0005D079 /* chatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2A569327C5436C0005D079 /* chatViewModel.swift */; };
 		DA2A569627C543A10005D079 /* createNewMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2A569527C543A10005D079 /* createNewMessageView.swift */; };
 		DA2A569827C544710005D079 /* extinsions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2A569727C544700005D079 /* extinsions.swift */; };
+		DAD7A74427DE45DF0081B35C /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD7A74327DE45DD0081B35C /* Department.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		DA2A569327C5436C0005D079 /* chatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatViewModel.swift; sourceTree = "<group>"; };
 		DA2A569527C543A10005D079 /* createNewMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createNewMessageView.swift; sourceTree = "<group>"; };
 		DA2A569727C544700005D079 /* extinsions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extinsions.swift; sourceTree = "<group>"; };
+		DAD7A74327DE45DD0081B35C /* Department.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 				DA2A568527C53ECE0005D079 /* Employee.swift */,
 				DA2A568727C53F7F0005D079 /* message.swift */,
 				DA2A568927C53FEE0005D079 /* recentMessage.swift */,
+				DAD7A74327DE45DD0081B35C /* Department.swift */,
 				DA2A568B27C5411F0005D079 /* chatMessage.swift */,
 			);
 			path = Models;
@@ -325,6 +328,7 @@
 				DA2A569027C543130005D079 /* messagesViewModel.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
 				DA2A569427C5436C0005D079 /* chatViewModel.swift in Sources */,
+				DAD7A74427DE45DF0081B35C /* Department.swift in Sources */,
 				DA2A568E27C542BB0005D079 /* messagesView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
 				DA2A568A27C53FEE0005D079 /* recentMessage.swift in Sources */,

@@ -13,35 +13,162 @@ import SDWebImageSwiftUI
 class createNewMessageViewModel: ObservableObject {
     
     @Published var users = [Employee]()
+    @Published var departments = ["dep1"]
+    let userID = "8UoUAkIZvnP5KSWHydWliuZmOKt2"
+ 
     
     init() {
-        fetchAllUsers()
+        getCompanyEmployees()
     }
     
-    private func fetchAllUsers() {
+    
+//    private func searchDepartments() {
+//        
+//        let ref = Database.database().reference()
+//        let searchQueue = DispatchQueue.init(label: "searchQueue")
+//        
+//        var department = fetchDepartment()
+//        
+//        searchQueue.sync {
+//            ref.child("Department/\(department)").observe(.value, with: { dataSnapshot in
+//
+//            let obj = dataSnapshot.value as! [String:Any]
+//
+//            let company_id = obj["company_id"] as! String
+//
+//                let companyID = company_id
+//
+//                print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX", companyID)
+//            })
+//        }
+//    }
+    
+//    func fetchDepartment() -> String{
+//        var department: String?
+//        getDepartment(){ dep in
+//            department = dep
+//        }
+//        return department!
+//    }
+    
+    
+    func getCompanyEmployees(){
+
+        let ref = Database.database().reference()
+        let Queue = DispatchQueue.init(label: "Queue")
+
+
+        Queue.sync {
+
+        print("start search")
+        ref.child("Employee").observe(.value, with: { dataSnapshot in
+        for emp in dataSnapshot.children {
+        let obj = emp as! DataSnapshot
+
+        let name = obj.childSnapshot(forPath: "name").value as! String
+        let id = obj.childSnapshot(forPath: "employee_id").value as! String
+        let department = obj.childSnapshot(forPath: "department").value as! String
+        let photoURL  = obj.childSnapshot(forPath: "image_token").value as! String
+            
+            let emp = Employee(id: id, name: name, department: department, photoURL: photoURL)
+            
+            if ( self.departments.contains(emp.department) ) {
+                self.users.append(emp)
+            }
+            print(self.users)
+
+        }
+                        }, withCancel: { error in
+                            print(error.localizedDescription)
+                        })
+                }
+        print(self.users)
+            }
+    
+func getCompanyDepartments(){
+            
+    let ref = Database.database().reference()
+    let Queue = DispatchQueue.init(label: "Queue")
+            
+            
+            Queue.sync {
+                        
+                print("start search")
+                ref.child("Department").observe(.value, with: { dataSnapshot in
+                    for dep in dataSnapshot.children {
+                        let obj = dep as! DataSnapshot
+                            
+                    if ( obj.childSnapshot(forPath: "company_id").value as! String == "com1" ) {
+                        self.departments.append(obj.key)
+                            }
+
+                        print("departments are",self.departments)
+                            
+                            }
+                    }, withCancel: { error in
+                        print(error.localizedDescription)
+                    })
+            }
+        }
+    
+    
+func getCompany(){
         
         let ref = Database.database().reference()
-        let searchQueue = DispatchQueue.init(label: "searchQueue")
+        let Queue = DispatchQueue.init(label: "Queue")
         
-        searchQueue.sync {
-            ref.child("Employee").observe(.childAdded) { snapshot in
+        
+        Queue.sync {
+                    
+                    print("start search")
+                    ref.child("Department/dep1").observe(.value, with: { dataSnapshot in
+
+                    let obj = dataSnapshot.value as! [String:Any]
+
+                    let companyID = obj["company_id"] as! String
+
+                        print("XXXXXXXXXXXXXXXXXXXXXXXXXXX",companyID)
+                        
+                        
+                }, withCancel: { error in
+                    print(error.localizedDescription)
+                })
+        }
+    }
+    
+
+func getDepartment() -> String{
+    
+    let ref = Database.database().reference()
+    let Queue = DispatchQueue.init(label: "Queue")
+    var dep: String?
+    
+    Queue.sync {
                 
-                let obj = snapshot.value as! [String: Any]
+                print("start search")
+                ref.child("Employee/8UoUAkIZvnP5KSWHydWliuZmOKt2").observe(.value, with: { dataSnapshot in
+
+                let obj = dataSnapshot.value as! [String:Any]
+
+
                 let name = obj["name"] as! String
                 let id = obj["employee_id"] as! String
                 let department = obj["department"] as! String
                 let photoURL = obj["image_token"] as! String
-
-                
-                let emp = Employee(id: id, name: name, department: department, photoURL: photoURL)
-                    //auth
-                if ( emp.id != "8UoUAkIZvnP5KSWHydWliuZmOKt2")  {
-                    self.users.append(emp)
-            }
-            }
-        }
+                    
+                    let emp = Employee(id: id, name: name, department: department, photoURL: photoURL)
+                    dep = emp.department
+                    print("XXXXXXXXXXXXXXXXXXXXXXXXXXX",dep)
+                    
+                    
+            }, withCancel: { error in
+                print(error.localizedDescription)
+            })
     }
+    return dep!
 }
+}
+
 
 
 struct createNewMessageView: View {
