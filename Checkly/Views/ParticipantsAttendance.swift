@@ -15,6 +15,8 @@ struct ParticipantsAttendance: View {
     
     @State private var attendees: [String : String] = [:]
     
+    @State private var showingAlert = false
+    
     var meeting : Meeting
     
     @Environment(\.dismiss) var dismiss
@@ -37,18 +39,24 @@ struct ParticipantsAttendance: View {
                     // Save button
                     Button{
                      
-                        // this loops through unselected attendees
-                        for attendee in attendees {
-                            if attendee.value != "attended" && attendee.value != "absent" {
-                                attendees[attendee.key] = "absent"
-                            }
-                        }
-                        // insert attendees dictionary into DB at specified meeting id location
-                        meetingViewModel.takeMeetingAttendance(meeting_id: meeting.id, attendeesDictionary: attendees)
+                        // Pop up alert if user did not mark any attendee as "attended"
+                        if !attendeesSelected(){
+                            
+                            showingAlert = true
                         
-                      print(selectedRows)
-                      print(attendees)
-                      dismiss()
+                        } else {
+                            // this loops through unselected attendees
+                            for attendee in attendees {
+                                if attendee.value != "attended" && attendee.value != "absent" {
+                                    attendees[attendee.key] = "absent"
+                                }
+                            }
+                            // insert attendees dictionary into DB at specified meeting id location
+                            meetingViewModel.takeMeetingAttendance(meeting_id: meeting.id, attendeesDictionary: attendees)
+
+                          dismiss()
+                        }
+                        
                      } label: {
                          Text("Save")
                             .font(.system(size: 19, weight: .semibold))
@@ -63,11 +71,53 @@ struct ParticipantsAttendance: View {
                 }
             }
             
-             .navigationBarTitle("Participants")
-        }.onAppear {
+             .navigationBarTitle("Take Attendance")
+             .toolbar {
+                 Button("Cancel"){
+                     dismiss()
+                 }
+             }
+        }
+        
+        .alert("Oops..!", isPresented: $showingAlert, actions: {
+            Button("No", role: .cancel) { }
+            Button("Yes") {
+                for attendee in attendees {
+                    if attendee.value != "attended" && attendee.value != "absent" {
+                        attendees[attendee.key] = "absent"
+                    }
+                }
+                // insert attendees dictionary into DB at specified meeting id location
+                meetingViewModel.takeMeetingAttendance(meeting_id: meeting.id, attendeesDictionary: attendees)
+
+              dismiss()
+            }
+        }, message: {
+            Text("You did not select any participant, this will mark all participants as \"Absent\", Do you want to proceed?")
+        })
+        
+        .onAppear {
             attendees = meeting.attendees
         }
     }
+    
+    func attendeesSelected() -> Bool{
+        
+        var i = 0
+        
+        for attendee in attendees {
+            if attendee.value != "attended" {
+                i+=1
+            }
+        }
+        // this means the host did not mark any participant as "attended"
+        if attendees.count == i{
+            return false
+        }
+            
+        return true
+    }
+    
 }
 
 struct ParticipantsAttendance_Previews: PreviewProvider {

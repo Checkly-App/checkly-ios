@@ -47,7 +47,8 @@ struct ParticipantRow: View {
                     .font(.system(size: 20, weight: .medium))
                 // attendee position
                 Text(attendee.position)
-                    .font(.system(size: 14))
+                    .font(.callout)
+                    .foregroundColor(.gray)
                 }
                 .multilineTextAlignment(.leading)
             
