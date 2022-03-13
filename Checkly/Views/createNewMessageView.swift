@@ -13,43 +13,22 @@ import SDWebImageSwiftUI
 class createNewMessageViewModel: ObservableObject {
     
     @Published var users = [Employee]()
-    @Published var departments = ["dep1"]
+    @Published var departments = [String]()
     let userID = "8UoUAkIZvnP5KSWHydWliuZmOKt2"
+    var companyID: String?
+    var Department: String?
  
     
-    init() {
-        getCompanyEmployees()
+init() {
+    getDepartment {
+        getCompany {
+            getCompanyDepartments {
+                getCompanyEmployees()
+            }
+        }
     }
-    
-    
-//    private func searchDepartments() {
-//        
-//        let ref = Database.database().reference()
-//        let searchQueue = DispatchQueue.init(label: "searchQueue")
-//        
-//        var department = fetchDepartment()
-//        
-//        searchQueue.sync {
-//            ref.child("Department/\(department)").observe(.value, with: { dataSnapshot in
-//
-//            let obj = dataSnapshot.value as! [String:Any]
-//
-//            let company_id = obj["company_id"] as! String
-//
-//                let companyID = company_id
-//
-//                print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX", companyID)
-//            })
-//        }
-//    }
-    
-//    func fetchDepartment() -> String{
-//        var department: String?
-//        getDepartment(){ dep in
-//            department = dep
-//        }
-//        return department!
-//    }
+}
+
     
     
     func getCompanyEmployees(){
@@ -85,7 +64,7 @@ class createNewMessageViewModel: ObservableObject {
         print(self.users)
             }
     
-func getCompanyDepartments(){
+    func getCompanyDepartments(completion: () -> Void) {
             
     let ref = Database.database().reference()
     let Queue = DispatchQueue.init(label: "Queue")
@@ -98,7 +77,7 @@ func getCompanyDepartments(){
                     for dep in dataSnapshot.children {
                         let obj = dep as! DataSnapshot
                             
-                    if ( obj.childSnapshot(forPath: "company_id").value as! String == "com1" ) {
+                        if ( obj.childSnapshot(forPath: "company_id").value as! String == self.companyID ) {
                         self.departments.append(obj.key)
                             }
 
@@ -109,10 +88,11 @@ func getCompanyDepartments(){
                         print(error.localizedDescription)
                     })
             }
+        completion()
         }
     
     
-func getCompany(){
+    func getCompany(completion: () -> Void){
         
         let ref = Database.database().reference()
         let Queue = DispatchQueue.init(label: "Queue")
@@ -120,28 +100,25 @@ func getCompany(){
         
         Queue.sync {
                     
-                    print("start search")
-                    ref.child("Department/dep1").observe(.value, with: { dataSnapshot in
+            ref.child("Department/dep1").observe(.value, with: { dataSnapshot in
 
                     let obj = dataSnapshot.value as! [String:Any]
 
-                    let companyID = obj["company_id"] as! String
-
-                        print("XXXXXXXXXXXXXXXXXXXXXXXXXXX",companyID)
+                    self.companyID = obj["company_id"] as! String
                         
                         
                 }, withCancel: { error in
                     print(error.localizedDescription)
                 })
         }
+        completion()
     }
     
 
-func getDepartment() -> String{
+    func getDepartment(completion: () -> Void) {
     
     let ref = Database.database().reference()
     let Queue = DispatchQueue.init(label: "Queue")
-    var dep: String?
     
     Queue.sync {
                 
@@ -157,15 +134,15 @@ func getDepartment() -> String{
                 let photoURL = obj["image_token"] as! String
                     
                     let emp = Employee(id: id, name: name, department: department, photoURL: photoURL)
-                    dep = emp.department
-                    print("XXXXXXXXXXXXXXXXXXXXXXXXXXX",dep)
+                    self.Department = emp.department
                     
+                    print("XXXXXXXX",self.Department,"XXXXXXXX")
                     
             }, withCancel: { error in
                 print(error.localizedDescription)
             })
     }
-    return dep!
+        completion()
 }
 }
 
