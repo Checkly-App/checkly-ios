@@ -9,29 +9,36 @@ import SwiftUI
 import FirebaseAuth
 
 struct ContentView: View {
-    @EnvironmentObject var authentication: Authentication
+    @StateObject private var session: Session = Session()
+    @AppStorage("isLoggedIn") var isLoggedIn = true
+    @AppStorage("isSignedOut") var isSignedOut = false
+    let email: String = Auth.auth().currentUser?.email ?? " "
+    @State var isCompany = false
     
     var body: some View {
         NavigationView{
-            VStack{
-                Text("Logged in")
-                Button{
-                    do {
-                        try Auth.auth().signOut()
-                        authentication.updateValidation(success: false)
-                    } catch let signOutError as NSError {
-                        print("Error signing out: %@", signOutError)
+            if isCompany {
+//                ScannerView()
+            }
+            else{
+                VStack{
+                    Text("Logged in as \(email)")
+                    Button{
+                        session.signOutUser { success in
+                            isLoggedIn = !success
+                            isSignedOut = success
+                        }
+                    } label: {
+                        Text("sign out")
                     }
-                } label: {
-                    Text("sign out")
                 }
             }
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+        .onAppear {
+            session.isCompanyEmail(currentEmail: email) { success in
+                isCompany = success
+                print("logged in as \(email)")
+            }
+        }
     }
 }
