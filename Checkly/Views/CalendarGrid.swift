@@ -25,6 +25,8 @@ struct CalendarGrid: View {
     @State private var showingPASheet = false
     // for map view
     @State private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0,longitude: 0.0),span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+    // temp
+    @Environment(\.dismiss) var dismiss
     
     var todaysDate = Date()
     
@@ -191,9 +193,24 @@ struct CalendarGrid: View {
                 
             })
             
-            .navigationBarHidden(true)
-        .navigationBarTitle(Text("Calendar"))
-      }
+//            .navigationBarHidden(true)
+            
+            // MARK: TO BE REMOVED
+            .navigationBarTitle(Text("Calendar")).toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button{
+                        dismiss()
+                    } label: {
+                        HStack{
+                            Image(systemName: "chevron.left")
+                            Text("Back")
+                        }
+                    }
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
+      
+        }// Navigation View
     }// body
     
     @ViewBuilder
