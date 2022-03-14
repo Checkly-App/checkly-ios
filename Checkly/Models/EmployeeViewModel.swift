@@ -196,7 +196,7 @@ class EmployeeViewModel: ObservableObject {
 
                         let obj = contact as! DataSnapshot
                         userid = obj.key
-                       
+                        toke = obj.childSnapshot(forPath: "image_token").value as? String
                         depid = obj.childSnapshot(forPath: "department").value as? String
                         email = obj.childSnapshot(forPath: "email").value as? String
                         nameem = obj.childSnapshot(forPath: "name").value as? String
@@ -207,7 +207,7 @@ class EmployeeViewModel: ObservableObject {
                         natid = obj.childSnapshot(forPath: "national_id").value as? String
                         phone = obj.childSnapshot(forPath: "phone_number").value as? String
                         position = obj.childSnapshot(forPath: "position").value as? String
-                            toke = obj.childSnapshot(forPath: "image_token").value as? String
+                            
                         let employee = Employee( id:userid,name:nameem,position: position,department:depid,birthdate: dateb ,tokens:toke,address:add,phone: phone,NationalID:natid ,EmplyeeId: empid ,gender: gender0,emaill:email,comid:self.comid0)
                         self.finddep(Empl: employee)
                         

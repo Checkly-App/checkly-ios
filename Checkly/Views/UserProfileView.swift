@@ -10,7 +10,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseStorage
 import FirebaseAuth
-
+import SDWebImageSwiftUI
 
 
 struct UserProfileView: View {
@@ -49,8 +49,8 @@ struct UserProfileView: View {
             //first section
             VStack(spacing:8){
              
-               if let image = self.userimage{
-                    Image(uiImage: image).resizable().scaledToFill().frame(width: 137, height: 137)            .clipShape(Circle())
+               if  viewModel.tokens != "null"{
+                   WebImage(url:URL(string: viewModel.tokens)).resizable().scaledToFill().frame(width: 137, height: 137)            .clipShape(Circle())
 
                     
                 }
@@ -184,43 +184,17 @@ Spacer()
                 print(userid)
                 showingSheet = true
             viewModel.fetchData()
-            }.task{
-                // fetch image before ediiting
-
-            Storage.storage().reference().child(userid).getData(maxSize: 15*1024*1024){
-                            (imageDate,err) in
-                            if let err = err {
-                                print("error\(err.localizedDescription)")
-                            } else {
-                                if let imageData = imageDate{
-                                    self.userimage = UIImage(data: imageData)
-                                }
-                                
-                            
-                            else {
-                            
-                                    print("no error")
-                                
-                            }
-                                Storage.storage().reference().child(userid).downloadURL{url,err in
-                                    if let err = err {
-                                        print(err.localizedDescription)
-                                    }
-                                    print(url?.absoluteString)
-                                    imageURL = url!.absoluteString
-                                    
-                                    
-                                }
-                            }
                 showingSheet = false
-                        }
-            
-            
-                    
+
             }.task {
 // fetch image after ediiting
-                ref.child("Employee").child(userid).child("change_image").observe(.value) { snapshot in
-                              showingSheet = true
+                ref.child("Employee").child(userid).child("image_token").observe(.value) { snapshot in
+                            
+                    
+                    showingSheet = true
+          
+         
+         
                 Storage.storage().reference().child(userid).getData(maxSize: 15*1024*1024){
                                 (imageDate,err) in
                                 if let err = err {

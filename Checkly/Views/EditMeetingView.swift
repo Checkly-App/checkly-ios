@@ -384,10 +384,10 @@ struct EditMeetingView: View {
                                        startPoint: .leading, endPoint: .trailing)).frame(width: 50, height: 50).overlay(Image(systemName: "chevron.right").foregroundColor(.white)    .font(.largeTitle)
 )
                     
-                } .sheet(isPresented: $viewlist, content: {
+                }.padding(.trailing) .sheet(isPresented: $viewlist, content: {
                     AttendenceListViewselect(selectrow: $selectrow, selectatt: $Isselectattendense, isshow: $Isshow, attendeneslist: $attendeneslist)
                 })
-                }.sheet(isPresented: $viewlist1, content: {
+                }.padding(.trailing) .sheet(isPresented: $viewlist1, content: {
                  // LocationMeetingView()
                     locationselect(locations: $locations, location_add: $Address_pic, isselectADD: $isselectADD)
                 })
@@ -630,20 +630,20 @@ struct EditMeetingView: View {
 
  
         if viewModel.MeetingObj.title == ""{
-            error0 = "All feild are required"
+            error0 = "All fields are required"
 
             return false }
         if viewModel.MeetingObj.location == "" {
-            error0 = "All feild are required"
+            error0 = "All fields are required"
 
             return false }
         if viewModel.MeetingObj.agenda == "" {
-            error0 = "All feild are required"
+            error0 = "All fields are required"
 
             return false }
         if Isshow == false {
         if selectrow.count == 0 {
-            error0 = "Please add at least one attendees"
+            error0 = "Please add at least one attendee"
 
             return false
         }

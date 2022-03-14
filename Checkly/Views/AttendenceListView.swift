@@ -80,6 +80,7 @@ struct AttendenceListViewselect: View {
    // @StateObject
     
     @Binding var selectrow : Set<Employee>
+    @State var selectrow1 = Set<Employee>()
     @Binding var selectatt : Bool
     @Binding var isshow : Bool
     @Environment(\.dismiss) var dismiss
@@ -91,7 +92,7 @@ struct AttendenceListViewselect: View {
         ZStack{
             VStack{
             List<Employee, ForEach<[Employee], String, AttendenceListView>>(viewModel.emplyeelist,selection: $selectrow){  empl in
-                AttendenceListView(emp:empl,attendeneslist: $attendeneslist1, selectitem: $selectrow)
+                AttendenceListView(emp:empl,attendeneslist: $attendeneslist1, selectitem: $selectrow1)
         }              .task {
             viewModel.fetchDatalist()
         }}
@@ -101,7 +102,11 @@ struct AttendenceListViewselect: View {
               
              //   attendeneslist1.removeAll()
                 attendeneslist.removeAll()
+                selectrow.removeAll()
                 
+                for selectrow2 in selectrow1 {
+                    selectrow.insert(selectrow2)
+                }
                 print("thiscontains'")
                 for attend in attendeneslist1 {
                     attendeneslist.append(attend)
@@ -131,6 +136,9 @@ struct AttendenceListViewselect: View {
         }.background(.white).task{
             for attend in attendeneslist {
                 attendeneslist1.append(attend)
+            }
+            for selectrow in selectrow {
+                selectrow1.insert(selectrow)
             }
             
         }

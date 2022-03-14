@@ -363,7 +363,7 @@ struct GenerateMeetingView: View {
                 Text(error0)
             })
             }
-            .padding(.leading)
+            .padding(.trailing)
         }.navigationBarTitle("Generate Meeting").toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
@@ -530,19 +530,19 @@ struct GenerateMeetingView: View {
         }
  
         if title == ""{
-            error0 = "All feild are required"
+            error0 = "All feilds are required"
 
             return false }
         if location == "" {
-            error0 = "All feild are required"
+            error0 = "All feilds are required"
 
             return false }
         if text == "" {
-            error0 = "All feild are required"
+            error0 = "All feilds are required"
 
             return false }
         if attendeneslist.count == 0{
-            error0 = "Please add at least one attendees"
+            error0 = "Please add at least one attendee"
 
             return false 
         }

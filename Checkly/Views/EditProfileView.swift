@@ -10,7 +10,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseStorage
 import FirebaseAuth
-
+import SDWebImageSwiftUI
 struct EditProfileView: View {
     @Environment(\.dismiss) var dismiss
        @State private var showingImagePicker = false
@@ -58,10 +58,11 @@ struct EditProfileView: View {
                 
             }
                                               
-                    else if let image = self.userimage{
-                        Image(uiImage: image).resizable().scaledToFill().frame(width: 137, height: 137)            .clipShape(Circle())
-            }
-                        else {
+                    else if  viewModel.tokens != "null"{
+                        WebImage(url:URL(string: viewModel.tokens)).resizable().scaledToFill().frame(width: 137, height: 137)            .clipShape(Circle())
+
+                         
+                     }                        else {
                             Image("ProfileImage").resizable()
                                     .frame(width: 137.0, height: 137.0)
            }
@@ -452,10 +453,11 @@ struct EditProfileView: View {
             }else{
                                                                                            }
                         if showingSheet{
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 4){
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 4)
+                            {
                         let randomDouble = Double.random(in: 1...100)
 
-    self.ref.child("Employee").child(userid).updateChildValues(["ChangeImage": randomDouble ])
+    
                             showingSheet = false
                             dismiss()
                         }
@@ -558,10 +560,9 @@ struct EditProfileView: View {
                     }else{
                                                                                                    }
                                 if showingSheet{
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 4){
-                                let randomDouble = Double.random(in: 1...100)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                                let randomDouble = Double.random(in: 3...100)
 
-            self.ref.child("Employee").child(userid).updateChildValues(["change_image": randomDouble ])
                                     showingSheet = false
                                     dismiss()
                                 }
@@ -576,7 +577,7 @@ struct EditProfileView: View {
                         
             }.task{
                 
-                Storage.storage().reference().child(userid).getData(maxSize: 15*1024*1024){
+                Storage.storage().reference().child("/Employees/\(userid)").getData(maxSize: 15*1024*1024){
                                 (imageDate,err) in
                                 if let err = err {
                                     print("error\(err.localizedDescription)")
@@ -601,6 +602,7 @@ struct EditProfileView: View {
             showingSheet = true
 
             self.viewModel.fetchData()
+            showingSheet = false
         }
        .overlay(showingSheet ? LoadingView(): nil)
         
@@ -608,15 +610,19 @@ struct EditProfileView: View {
     }
     // for upload image
     func imageUpload(image:UIImage){
+      
+
+                let metaData = StorageMetadata()
+                metaData.contentType = "image/jpg"
                if let imageDate = image.jpegData(compressionQuality: 1){
                    let storage = Storage.storage()
-                   storage.reference().child(userid).putData(imageDate, metadata: nil){
+                   storage.reference().child("/Employees/\(userid)").putData(imageDate, metadata: metaData){
                        (_,err) in
                        if let err = err {
                            print("error\(err.localizedDescription)")
                        }else{
                            print("no error")
-                           storage.reference().child(userid).downloadURL{url,err in
+                           storage.reference().child("/Employees/\(userid)").downloadURL{url,err in
                                if let err = err {
                                    print(err.localizedDescription)
                                }
