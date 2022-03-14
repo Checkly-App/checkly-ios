@@ -224,7 +224,10 @@ struct CalendarTimeline: View {
          HStack(spacing: 25){
              Button(action: {
                        // Go to Calendar Grid
-                         viewRouter.currentPage = .CalendarGrid
+                 withAnimation {
+                     viewRouter.currentPage = .CalendarGrid
+                 }
+                        
                      }, label: {
                          Image(systemName: "calendar")
                              .resizable()

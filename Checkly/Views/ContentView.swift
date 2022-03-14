@@ -14,6 +14,8 @@ struct ContentView: View {
     @AppStorage("isSignedOut") var isSignedOut = false
     let email: String = Auth.auth().currentUser?.email ?? " "
     @State var isCompany = false
+    @StateObject var viewRouter = CalendarViewRouterHelper()
+    @State var calendarView = false
     
     var body: some View {
         NavigationView{
@@ -22,7 +24,9 @@ struct ContentView: View {
             }
             else{
                 VStack{
+                    
                     Text("Logged in as \(email)")
+                    
                     Button{
                         session.signOutUser { success in
                             isLoggedIn = !success
@@ -31,6 +35,17 @@ struct ContentView: View {
                     } label: {
                         Text("sign out")
                     }
+                   
+                    // navigate to calendar view
+                    Button{
+                        calendarView.toggle()
+                    } label: {
+                        Text("Calendar")
+                    }
+                    .fullScreenCover(isPresented: $calendarView) {
+                        Calendar(viewRouter: viewRouter)
+                    }
+
                 }
             }
         }

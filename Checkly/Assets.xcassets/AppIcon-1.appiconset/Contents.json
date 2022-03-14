@@ -1,0 +1,176 @@
+{
+  "images" : [
+    {
+      "filename" : "App Logo.png",
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "size" : "20x20"
+    },
+    {
+      "filename" : "App Logo-2.png",
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "size" : "20x20"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d.png",
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-1.png",
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-2.png",
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "size" : "40x40"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-4.png",
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "size" : "40x40"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-5.png",
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "size" : "60x60"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-6.png",
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "size" : "60x60"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-7.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "20x20"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-8.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "20x20"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-10.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-11.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-9.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "40x40"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-3.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "40x40"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-12.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "76x76"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-13.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "76x76"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-14.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "83.5x83.5"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-15.png",
+      "idiom" : "ios-marketing",
+      "scale" : "1x",
+      "size" : "1024x1024"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-16.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "16x16"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-17.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "16x16"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-18.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "32x32"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-19.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "32x32"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-20.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "128x128"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-21.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "128x128"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-22.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "256x256"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-23.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "256x256"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-24.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "512x512"
+    },
+    {
+      "filename" : "446f8d7d-8916-42c6-84eb-e049d5853c9d-25.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "512x512"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

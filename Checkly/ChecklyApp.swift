@@ -22,7 +22,7 @@ struct ChecklyApp: App {
                 ContentView() // Home view
             }
             else {
-//                LaunchView()
+                LaunchView()
             }
         }
     }

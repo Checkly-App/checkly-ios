@@ -15,10 +15,8 @@ struct Calendar: View {
     var body: some View {
         switch viewRouter.currentPage {
         case .CalendarGrid:
-            VStack(spacing: 20){
                 // Calendar Grid
                 CalendarGrid(currentDate: $currentDate, viewRouter: viewRouter)
-            }
         case .CalendarTimeline:
             CalendarTimeline(viewRouter: viewRouter)
         }

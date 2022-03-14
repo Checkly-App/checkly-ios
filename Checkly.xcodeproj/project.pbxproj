@@ -27,6 +27,11 @@
 		A3027EBB27DFE1D900E305F8 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EBA27DFE1D900E305F8 /* LoadingView.swift */; };
 		A3027EBD27DFE1F800E305F8 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EBC27DFE1F800E305F8 /* TitleView.swift */; };
 		A3027EBF27DFE25900E305F8 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EBE27DFE25900E305F8 /* ResetPasswordView.swift */; };
+		A3027EC127DFE6AA00E305F8 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EC027DFE6AA00E305F8 /* LaunchView.swift */; };
+		A3027EC327DFE6D600E305F8 /* FirstOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EC227DFE6D600E305F8 /* FirstOnboardingView.swift */; };
+		A3027EC527DFE70100E305F8 /* SecondOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EC427DFE70100E305F8 /* SecondOnboardingView.swift */; };
+		A3027EC727DFE73900E305F8 /* ThirdOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EC627DFE73900E305F8 /* ThirdOnboardingView.swift */; };
+		A3027EC927DFE79E00E305F8 /* LiquidSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EC827DFE79E00E305F8 /* LiquidSwipe.swift */; };
 		A35A20DB27C2F54600719A01 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = A35A20DA27C2F54600719A01 /* SDWebImageSwiftUI */; };
 		A35A20DD27C2F57100719A01 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A35A20DC27C2F57100719A01 /* FirebaseStorage */; };
 		A362C15827BEE49A00BD761A /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = A362C15727BEE49A00BD761A /* BottomSheet */; };
@@ -66,6 +71,11 @@
 		A3027EBA27DFE1D900E305F8 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		A3027EBC27DFE1F800E305F8 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		A3027EBE27DFE25900E305F8 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		A3027EC027DFE6AA00E305F8 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		A3027EC227DFE6D600E305F8 /* FirstOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnboardingView.swift; sourceTree = "<group>"; };
+		A3027EC427DFE70100E305F8 /* SecondOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboardingView.swift; sourceTree = "<group>"; };
+		A3027EC627DFE73900E305F8 /* ThirdOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdOnboardingView.swift; sourceTree = "<group>"; };
+		A3027EC827DFE79E00E305F8 /* LiquidSwipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidSwipe.swift; sourceTree = "<group>"; };
 		A365EA4627DAE43300034F79 /* ParticipantRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantRow.swift; sourceTree = "<group>"; };
 		A365EA4827DAE46800034F79 /* ParticipantsAttendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsAttendance.swift; sourceTree = "<group>"; };
 		A39913FE27D29FB400B26628 /* MeetingAttendeesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingAttendeesListView.swift; sourceTree = "<group>"; };
@@ -156,6 +166,10 @@
 				A365EA4827DAE46800034F79 /* ParticipantsAttendance.swift */,
 				A3027EB527DFE12500E305F8 /* FaceIDView.swift */,
 				A3027EBE27DFE25900E305F8 /* ResetPasswordView.swift */,
+				A3027EC027DFE6AA00E305F8 /* LaunchView.swift */,
+				A3027EC227DFE6D600E305F8 /* FirstOnboardingView.swift */,
+				A3027EC427DFE70100E305F8 /* SecondOnboardingView.swift */,
+				A3027EC627DFE73900E305F8 /* ThirdOnboardingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -169,6 +183,7 @@
 				A3CE73FD27CD5593002D2517 /* AnnotatedItemModel.swift */,
 				A3027EB127DFE00700E305F8 /* Company.swift */,
 				A3027EB327DFE05D00E305F8 /* Session.swift */,
+				A3027EC827DFE79E00E305F8 /* LiquidSwipe.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -321,14 +336,19 @@
 				A399140127D29FEC00B26628 /* MeetingDetails.swift in Sources */,
 				A3B8D85227B119FB00752F63 /* CalendarHelper.swift in Sources */,
 				A3B8D85827B11A5600752F63 /* CalendarTimeline.swift in Sources */,
+				A3027EC327DFE6D600E305F8 /* FirstOnboardingView.swift in Sources */,
+				A3027EC127DFE6AA00E305F8 /* LaunchView.swift in Sources */,
 				A3B8D85C27B13D9F00752F63 /* DateValueModel.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
 				A3027EBB27DFE1D900E305F8 /* LoadingView.swift in Sources */,
 				A365EA4727DAE43300034F79 /* ParticipantRow.swift in Sources */,
 				A3B8D85627B11A4200752F63 /* CalendarGrid.swift in Sources */,
+				A3027EC527DFE70100E305F8 /* SecondOnboardingView.swift in Sources */,
 				A3027EB427DFE05D00E305F8 /* Session.swift in Sources */,
 				A3B8D85A27B11A8900752F63 /* CalendarViewRouterHelper.swift in Sources */,
+				A3027EC927DFE79E00E305F8 /* LiquidSwipe.swift in Sources */,
+				A3027EC727DFE73900E305F8 /* ThirdOnboardingView.swift in Sources */,
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,
 				A3B8D84D27B117E500752F63 /* MeetingModel.swift in Sources */,
 			);

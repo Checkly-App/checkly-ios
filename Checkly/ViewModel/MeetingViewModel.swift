@@ -26,6 +26,12 @@ class MeetingViewModel: ObservableObject{
     // filter meetings based on selected date
     @Published var filteredMeetings: [Meeting]?
     
+    // Variables
+    private var ref = Database.database().reference()
+    private var calendar = NSCalendar.current
+    private var userID = Auth.auth().currentUser?.uid
+    
+    
     // initializing
     init(){
         fetchCurrentWeek()
@@ -36,10 +42,8 @@ class MeetingViewModel: ObservableObject{
     // REALTIME
     func getMeetings(){
         
-        let ref = Database.database().reference()
-        
         DispatchQueue.main.async {
-            ref.child("Meetings").observe(.childAdded) { snapshot in
+            self.ref.child("Meetings").observe(.childAdded) { snapshot in
                 let meeting = snapshot.value as! [String: Any]
                 let agenda = meeting["agenda"] as! String
                 let attendees = meeting["attendees"] as! [String:String]
@@ -55,23 +59,21 @@ class MeetingViewModel: ObservableObject{
         
                 let mt = Meeting(id: meeting_id, host: host, title: title, datetime_start: .init(timeIntervalSince1970: TimeInterval(datetime_start)), datetime_end: .init(timeIntervalSince1970: TimeInterval(datetime_end)), type: type, location: location, attendees: attendees, agenda: agenda, latitude: latitude, longitude: longitude)
         
-//                print(mt)
                 // MARK: Fetch UID from Auth
-                if(mt.host == "e0a6ozh4A0QVOXY0tyiMSFyfL163"){
+                if(mt.host == self.userID){
                     self.meetings.append(mt)
                 }
                 for attendant in mt.attendees {
-                    if "e0a6ozh4A0QVOXY0tyiMSFyfL163" == attendant.key {
+                    if self.userID == attendant.key {
                         if "accepted" == attendant.value{
                             self.meetings.append(mt)
                         }
                     }
                 }
                 
-                let calendar = NSCalendar.current
         
                 let filtered = self.meetings.filter {
-                    return calendar.isDate($0.datetime_start, inSameDayAs: self.currentDate)
+                    return self.calendar.isDate($0.datetime_start, inSameDayAs: self.currentDate)
                 }
                         .sorted { meeting1, meeting2 in
                                 return meeting1.datetime_start < meeting2.datetime_start
@@ -87,7 +89,6 @@ class MeetingViewModel: ObservableObject{
     
     func fillAttendeesList(){
         
-        let ref = Database.database().reference()
             ref.child("Employee").observe(.value) { snapshot in
                 for employee in snapshot.children{
                     let obj = employee as! DataSnapshot
@@ -113,14 +114,11 @@ class MeetingViewModel: ObservableObject{
     }
     
     func filterTodayMeetings(){
-       
-
-        let calendar = NSCalendar.current
         
         DispatchQueue.global(qos: .userInteractive).async {
             
         let filtered = self.meetings.filter {
-            return calendar.isDate($0.datetime_start, inSameDayAs: self.currentDate)
+            return self.calendar.isDate($0.datetime_start, inSameDayAs: self.currentDate)
         }
         
             .sorted { meeting1, meeting2 in
@@ -137,8 +135,6 @@ class MeetingViewModel: ObservableObject{
     func filteredMeetingsArray(date: Date) -> [Meeting]? {
        
         var filtered = [Meeting]()
-        let calendar = NSCalendar.current
-        
             
         filtered = self.meetings.filter {
             return calendar.isDate($0.datetime_start, inSameDayAs: date)
@@ -187,23 +183,20 @@ class MeetingViewModel: ObservableObject{
     
     func isHost(meeting: Meeting)-> Bool{
         
-        // get current user id
-//        let userID = Auth.auth().currentUser?.uid
-        
         // check if current user is the host
-//        if meeting.host == userID {
-//            return true
-//        }
-        if meeting.host == "e0a6ozh4A0QVOXY0tyiMSFyfL163" {
+        if meeting.host == userID {
             return true
         }
+        
+//        if meeting.host == "olU8zzFyDhN2cn4IxJKyIuXT5hM2" {
+//            return true
+//        }
         
         return false
     }
     
     func takeMeetingAttendance(meeting_id: String, attendeesDictionary: [String:String]){
         
-        let ref = Database.database().reference()
         ref.child("Meetings").child(meeting_id).child("attendees").updateChildValues(attendeesDictionary)
         
     }
@@ -222,9 +215,7 @@ class MeetingViewModel: ObservableObject{
     func fetchCurrentWeek(){
         
         let today = Date()
-//        let calendar = Calendar.current
-        var calendar = NSCalendar.current
-//        var calendar = Calendar(identifier: .gregorian)
+        
         calendar.firstWeekday = 7
         
         let week = calendar.dateInterval(of: .weekOfMonth, for: today)
@@ -254,8 +245,6 @@ class MeetingViewModel: ObservableObject{
 
     // Check if current date is today's date
     func isToday(date: Date) -> Bool{
-       
-        let calendar = NSCalendar.current
         
         return calendar.isDate(currentDate, inSameDayAs: date)
     }

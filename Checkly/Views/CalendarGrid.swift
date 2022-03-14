@@ -288,7 +288,7 @@ struct CalendarGrid: View {
         HStack(spacing: 25){
             
             Button(action: {
-                print("Already in Calendar Grid")
+                // Already in Calendar Grid
             }, label: {
                 Image(systemName: "calendar")
                     .resizable()
@@ -302,8 +302,11 @@ struct CalendarGrid: View {
             })
             
             Button(action: {
-                print("Go to Timeline")
-                viewRouter.currentPage = .CalendarTimeline
+                // Go to Timeline
+                withAnimation {
+                    viewRouter.currentPage = .CalendarTimeline
+                }
+                
             }, label: {
                 Image(systemName: "list.bullet")
                     .resizable()
