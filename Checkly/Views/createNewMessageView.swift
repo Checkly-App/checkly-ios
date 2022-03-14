@@ -14,7 +14,7 @@ class createNewMessageViewModel: ObservableObject {
     
     @Published var users = [Employee]()
     @Published var departments = [String]()
-    let userID = "8UoUAkIZvnP5KSWHydWliuZmOKt2"
+    let userID = "FJvmCdXGd7UWELDQIEJS3kisTa03"
     var companyID: String?
     var Department: String?
  
@@ -100,7 +100,7 @@ init() {
         
         Queue.sync {
                     
-            ref.child("Department/dep1").observe(.value, with: { dataSnapshot in
+            ref.child("Department/dep2").observe(.value, with: { dataSnapshot in
 
                     let obj = dataSnapshot.value as! [String:Any]
 
@@ -117,13 +117,14 @@ init() {
 
     func getDepartment(completion: () -> Void) {
     
+  
     let ref = Database.database().reference()
     let Queue = DispatchQueue.init(label: "Queue")
     
-    Queue.sync {
+        Queue.sync {
                 
                 print("start search")
-                ref.child("Employee/8UoUAkIZvnP5KSWHydWliuZmOKt2").observe(.value, with: { dataSnapshot in
+                ref.child("Employee/FJvmCdXGd7UWELDQIEJS3kisTa03").observe(.value, with: { dataSnapshot in
 
                 let obj = dataSnapshot.value as! [String:Any]
 
@@ -136,12 +137,14 @@ init() {
                     let emp = Employee(id: id, name: name, department: department, photoURL: photoURL)
                     self.Department = emp.department
                     
-                    print("XXXXXXXX",self.Department,"XXXXXXXX")
+                    print("XXXXXXXX",self.Department!,"XXXXXXXX")
                     
             }, withCancel: { error in
                 print(error.localizedDescription)
             })
+            
     }
+
         completion()
 }
 }

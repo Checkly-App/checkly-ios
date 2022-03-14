@@ -10,7 +10,7 @@ import SwiftUI
 struct chatView: View {
     
     let chatUser: Employee?
-    let userID = "8UoUAkIZvnP5KSWHydWliuZmOKt2"
+    let userID = "FJvmCdXGd7UWELDQIEJS3kisTa03"
     
     init(chatUser: Employee?) {
         self.chatUser = chatUser

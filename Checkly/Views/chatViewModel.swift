@@ -25,7 +25,7 @@ class chatViewModel: ObservableObject{
     
     func fetchMessages() {
         //change to current user
-        let fromID = "8UoUAkIZvnP5KSWHydWliuZmOKt2"
+        let fromID = "FJvmCdXGd7UWELDQIEJS3kisTa03"
         guard let toID = chatUser?.id else { return }
         
         DB.collection("texts").document(fromID).collection(toID).order(by: "timestamp").addSnapshotListener { querySnapshot, error in
@@ -48,7 +48,7 @@ class chatViewModel: ObservableObject{
     
     func handelSend() {
         //change to current user
-        let fromID = "8UoUAkIZvnP5KSWHydWliuZmOKt2"
+        let fromID = "FJvmCdXGd7UWELDQIEJS3kisTa03"
         guard let toID = chatUser?.id else { return }
 
         let document = DB.collection("texts").document(fromID).collection(toID).document()
@@ -84,7 +84,7 @@ class chatViewModel: ObservableObject{
         }
 
             //change to current user
-        let userID = "8UoUAkIZvnP5KSWHydWliuZmOKt2"
+        let userID = "FJvmCdXGd7UWELDQIEJS3kisTa03"
         guard let toID = self.chatUser?.id else { return }
                 
         let data = [
@@ -116,7 +116,7 @@ class chatViewModel: ObservableObject{
             "username": chatUser.name,
             "senderName": "Dalal Bin Humaid",
             "receiverName": chatUser.name,
-            "photoURL": "https://firebasestorage.googleapis.com:443/v0/b/checkly-292d2.appspot.com/o/8UoUAkIZvnP5KSWHydWliuZmOKt2?alt=media&token=a79f694e-2d5f-4e30-8b9a-35cfa81a3523"
+            "photoURL": "null"
         ] as [String : Any]
         
         DB.collection("recent_messages").document(toID)
