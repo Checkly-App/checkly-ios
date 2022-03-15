@@ -19,6 +19,8 @@ struct MeetingDetails: View {
     var meeting: Meeting
     // for participants attendance (PA) sheet
     @Binding var showingPASheet: Bool
+    // to to navigate to edit meeting
+    @Binding var editMeetingDetails: Bool
     
     var body: some View {
         VStack(spacing: 20) {
@@ -151,10 +153,11 @@ struct MeetingDetails: View {
                     .font(.system(size: 19, weight: .semibold))
                 
                 // if current user is host show edit button
-                if meetingViewModel.isHost(meeting: meeting){
+                if meetingViewModel.isHost(meeting: meeting) && meeting.datetime_start > Date(){
                     Spacer()
                     Button{
                         // edit meeting
+                        editMeetingDetails.toggle()
                     }label: {
                         Image(systemName: "pencil.circle")
                             .resizable()
@@ -325,9 +328,10 @@ struct MeetingDetails_Previews: PreviewProvider {
     @State static private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 24.7534673 ,longitude: 46.6920362),span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
     @State static private var showingSheet = false
     @State static private var showingPASheet = false
+    @State static private var editMeetingDetails = false
 
     static var previews: some View {
-        MeetingDetails(coordinateRegion: $coordinateRegion, showingSheet: $showingSheet, meeting: Meeting(id: "1", host: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", title: "Cloud Security Engineers Meeting", datetime_start: .init(timeIntervalSince1970: TimeInterval(1646892000)), datetime_end: .init(timeIntervalSince1970: TimeInterval(1646893800)),type: "On-site", location: "STC HQ, IT Meeting Room", attendees: ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"attended", "SsemeSIGH6Syjkf8ctO8No1I3hB3":"attended"], agenda: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", latitude: "24.7534673", longitude: "46.6920362"), showingPASheet: $showingPASheet)
+        MeetingDetails(coordinateRegion: $coordinateRegion, showingSheet: $showingSheet, meeting: Meeting(id: "1", host: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", title: "Cloud Security Engineers Meeting", datetime_start: .init(timeIntervalSince1970: TimeInterval(1646892000)), datetime_end: .init(timeIntervalSince1970: TimeInterval(1646893800)),type: "On-site", location: "STC HQ, IT Meeting Room", attendees: ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"attended", "SsemeSIGH6Syjkf8ctO8No1I3hB3":"attended"], agenda: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", latitude: "24.7534673", longitude: "46.6920362"), showingPASheet: $showingPASheet, editMeetingDetails: $editMeetingDetails)
     }
 }
 

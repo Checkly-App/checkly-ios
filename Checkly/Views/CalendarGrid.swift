@@ -25,6 +25,11 @@ struct CalendarGrid: View {
     @State private var showingPASheet = false
     // for map view
     @State private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0,longitude: 0.0),span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+    //  to navigate to generate meeting
+    @State private var generateMeetingView = false
+    // to navigate to edit meeting
+    @State private var editMeetingView = false
+    
     // temp
     @Environment(\.dismiss) var dismiss
     
@@ -177,7 +182,7 @@ struct CalendarGrid: View {
             // MARK: Meeting Details Sheet
             .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [BottomSheet.Options.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray), .background(AnyView(Color.white))], content: {
                     // see view under "Views" folder
-                    MeetingDetails(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: self.meetingViewModel.filteredMeetingsArray(date: currentDate)?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"), showingPASheet: $showingPASheet)
+                MeetingDetails(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: self.meetingViewModel.filteredMeetingsArray(date: currentDate)?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"), showingPASheet: $showingPASheet, editMeetingDetails: $editMeetingView)
             })
             
             // MARK: Attendees List Sheet
@@ -193,6 +198,17 @@ struct CalendarGrid: View {
                 
             })
             
+            // MARK: Generate Meeting View
+            .fullScreenCover(isPresented: $generateMeetingView) {
+                GenerateMeetingView()
+            }
+            
+            // MARK: Edit Meeting View
+            .fullScreenCover(isPresented: $editMeetingView) {
+                EditMeetingView(meeting: self.meetingViewModel.filteredMeetingsArray(date: currentDate)?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
+            }
+            
+            // to be added later
 //            .navigationBarHidden(true)
             
             // MARK: TO BE REMOVED
@@ -332,7 +348,7 @@ struct CalendarGrid: View {
             })
             Spacer()
             Button(action: {
-                // Generate Meeting
+                generateMeetingView.toggle()
             }, label: {
                 Image(systemName: "plus")
                     .resizable()

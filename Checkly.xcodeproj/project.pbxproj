@@ -32,6 +32,13 @@
 		A3027EC527DFE70100E305F8 /* SecondOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EC427DFE70100E305F8 /* SecondOnboardingView.swift */; };
 		A3027EC727DFE73900E305F8 /* ThirdOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EC627DFE73900E305F8 /* ThirdOnboardingView.swift */; };
 		A3027EC927DFE79E00E305F8 /* LiquidSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EC827DFE79E00E305F8 /* LiquidSwipe.swift */; };
+		A31E8F0127E12771009AE0FA /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0027E12771009AE0FA /* LocationView.swift */; };
+		A31E8F0327E127F3009AE0FA /* GenerateMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0227E127F3009AE0FA /* GenerateMeetingView.swift */; };
+		A31E8F0727E129A3009AE0FA /* EditMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0627E129A3009AE0FA /* EditMeetingView.swift */; };
+		A31E8F0927E12A5F009AE0FA /* AttendenceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0827E12A5F009AE0FA /* AttendenceListView.swift */; };
+		A31E8F0B27E12AE4009AE0FA /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0A27E12AE4009AE0FA /* LocationManager.swift */; };
+		A31E8F0D27E12B22009AE0FA /* EmployeeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0C27E12B22009AE0FA /* EmployeeViewModel.swift */; };
+		A31E8F0F27E12BF2009AE0FA /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0E27E12BF2009AE0FA /* Employee.swift */; };
 		A35A20DB27C2F54600719A01 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = A35A20DA27C2F54600719A01 /* SDWebImageSwiftUI */; };
 		A35A20DD27C2F57100719A01 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A35A20DC27C2F57100719A01 /* FirebaseStorage */; };
 		A362C15827BEE49A00BD761A /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = A362C15727BEE49A00BD761A /* BottomSheet */; };
@@ -76,6 +83,13 @@
 		A3027EC427DFE70100E305F8 /* SecondOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboardingView.swift; sourceTree = "<group>"; };
 		A3027EC627DFE73900E305F8 /* ThirdOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdOnboardingView.swift; sourceTree = "<group>"; };
 		A3027EC827DFE79E00E305F8 /* LiquidSwipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidSwipe.swift; sourceTree = "<group>"; };
+		A31E8F0027E12771009AE0FA /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		A31E8F0227E127F3009AE0FA /* GenerateMeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateMeetingView.swift; sourceTree = "<group>"; };
+		A31E8F0627E129A3009AE0FA /* EditMeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMeetingView.swift; sourceTree = "<group>"; };
+		A31E8F0827E12A5F009AE0FA /* AttendenceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendenceListView.swift; sourceTree = "<group>"; };
+		A31E8F0A27E12AE4009AE0FA /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		A31E8F0C27E12B22009AE0FA /* EmployeeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeViewModel.swift; sourceTree = "<group>"; };
+		A31E8F0E27E12BF2009AE0FA /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		A365EA4627DAE43300034F79 /* ParticipantRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantRow.swift; sourceTree = "<group>"; };
 		A365EA4827DAE46800034F79 /* ParticipantsAttendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsAttendance.swift; sourceTree = "<group>"; };
 		A39913FE27D29FB400B26628 /* MeetingAttendeesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingAttendeesListView.swift; sourceTree = "<group>"; };
@@ -170,6 +184,10 @@
 				A3027EC227DFE6D600E305F8 /* FirstOnboardingView.swift */,
 				A3027EC427DFE70100E305F8 /* SecondOnboardingView.swift */,
 				A3027EC627DFE73900E305F8 /* ThirdOnboardingView.swift */,
+				A31E8F0027E12771009AE0FA /* LocationView.swift */,
+				A31E8F0227E127F3009AE0FA /* GenerateMeetingView.swift */,
+				A31E8F0627E129A3009AE0FA /* EditMeetingView.swift */,
+				A31E8F0827E12A5F009AE0FA /* AttendenceListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -184,6 +202,8 @@
 				A3027EB127DFE00700E305F8 /* Company.swift */,
 				A3027EB327DFE05D00E305F8 /* Session.swift */,
 				A3027EC827DFE79E00E305F8 /* LiquidSwipe.swift */,
+				A31E8F0A27E12AE4009AE0FA /* LocationManager.swift */,
+				A31E8F0E27E12BF2009AE0FA /* Employee.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -219,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				A3B8D84E27B1182200752F63 /* MeetingViewModel.swift */,
+				A31E8F0C27E12B22009AE0FA /* EmployeeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -334,6 +355,7 @@
 				A3027EBD27DFE1F800E305F8 /* TitleView.swift in Sources */,
 				A365EA4927DAE46800034F79 /* ParticipantsAttendance.swift in Sources */,
 				A399140127D29FEC00B26628 /* MeetingDetails.swift in Sources */,
+				A31E8F0327E127F3009AE0FA /* GenerateMeetingView.swift in Sources */,
 				A3B8D85227B119FB00752F63 /* CalendarHelper.swift in Sources */,
 				A3B8D85827B11A5600752F63 /* CalendarTimeline.swift in Sources */,
 				A3027EC327DFE6D600E305F8 /* FirstOnboardingView.swift in Sources */,
@@ -347,9 +369,15 @@
 				A3027EC527DFE70100E305F8 /* SecondOnboardingView.swift in Sources */,
 				A3027EB427DFE05D00E305F8 /* Session.swift in Sources */,
 				A3B8D85A27B11A8900752F63 /* CalendarViewRouterHelper.swift in Sources */,
+				A31E8F0727E129A3009AE0FA /* EditMeetingView.swift in Sources */,
+				A31E8F0D27E12B22009AE0FA /* EmployeeViewModel.swift in Sources */,
+				A31E8F0127E12771009AE0FA /* LocationView.swift in Sources */,
+				A31E8F0F27E12BF2009AE0FA /* Employee.swift in Sources */,
 				A3027EC927DFE79E00E305F8 /* LiquidSwipe.swift in Sources */,
 				A3027EC727DFE73900E305F8 /* ThirdOnboardingView.swift in Sources */,
+				A31E8F0927E12A5F009AE0FA /* AttendenceListView.swift in Sources */,
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,
+				A31E8F0B27E12AE4009AE0FA /* LocationManager.swift in Sources */,
 				A3B8D84D27B117E500752F63 /* MeetingModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -485,6 +513,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow FaceID to access user credentials";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Enable location fetching to select meeting location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -515,6 +544,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow FaceID to access user credentials";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Enable location fetching to select meeting location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
