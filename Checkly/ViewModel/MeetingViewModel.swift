@@ -35,43 +35,37 @@ class MeetingViewModel: ObservableObject{
     // initializing
     init(){
         fetchCurrentWeek()
-        getMeetings()
+        fetchMeetings()
         fillAttendeesList()
     }
     
     // REALTIME
-    func getMeetings(){
-        
+    func fetchMeetings(){
+
         DispatchQueue.main.async {
-            self.ref.child("Meetings").observe(.childAdded) { snapshot in
-                let meeting = snapshot.value as! [String: Any]
-                let agenda = meeting["agenda"] as! String
-                let attendees = meeting["attendees"] as! [String:String]
-                let datetime_end = meeting["datetime_end"] as! Int
-                let datetime_start = meeting["datetime_start"] as! Int
-                let host = meeting["host"] as! String
-                let latitude = meeting["latitude"] as! String
-                let location = meeting["location"] as! String
-                let longitude = meeting["longitude"] as! String
-                let title = meeting["title"] as! String
-                let type = meeting["type"] as! String
-                let meeting_id = snapshot.key
-        
-                let mt = Meeting(id: meeting_id, host: host, title: title, datetime_start: .init(timeIntervalSince1970: TimeInterval(datetime_start)), datetime_end: .init(timeIntervalSince1970: TimeInterval(datetime_end)), type: type, location: location, attendees: attendees, agenda: agenda, latitude: latitude, longitude: longitude)
-        
-                // MARK: Fetch UID from Auth
-                if(mt.host == self.userID){
-                    self.meetings.append(mt)
-                }
-                for attendant in mt.attendees {
-                    if self.userID == attendant.key {
-                        if "accepted" == attendant.value{
-                            self.meetings.append(mt)
+
+            self.ref.child("Meetings").observe(.value, with: { dataSnapshot in
+                
+                self.meetings.removeAll()
+                
+                for meetings in dataSnapshot.children{
+                    
+                    let obj = meetings as! DataSnapshot
+                    
+                    let mt = Meeting(id: obj.key, host: obj.childSnapshot(forPath: "host").value as? String ?? "none", title: obj.childSnapshot(forPath: "title").value as? String ?? "none", datetime_start: .init(timeIntervalSince1970: TimeInterval(obj.childSnapshot(forPath: "datetime_start").value as? Int ?? 1648127220)), datetime_end: .init(timeIntervalSince1970: TimeInterval(obj.childSnapshot(forPath: "datetime_end").value as? Int ?? 1648127220)), type: obj.childSnapshot(forPath: "type").value as? String ?? "none", location: obj.childSnapshot(forPath: "location").value as? String ?? "none", attendees: obj.childSnapshot(forPath: "attendees").value as? [String:String] ?? ["olU8zzFyDhN2cn4IxJKyIuXT5hM2":"sent"], agenda: obj.childSnapshot(forPath: "agenda").value as? String ?? "none", latitude: obj.childSnapshot(forPath: "latitude").value as? String ?? "24.7537162", longitude: obj.childSnapshot(forPath: "longitude").value as? String ?? "46.6923626")
+
+                    if(mt.host == self.userID){
+                        self.meetings.append(mt)
+                    }
+                    for attendant in mt.attendees {
+                        if self.userID == attendant.key {
+                            if "accepted" == attendant.value{
+                                self.meetings.append(mt)
+                            }
                         }
                     }
                 }
                 
-        
                 let filtered = self.meetings.filter {
                     return self.calendar.isDate($0.datetime_start, inSameDayAs: self.currentDate)
                 }
@@ -83,8 +77,10 @@ class MeetingViewModel: ObservableObject{
                                 self.filteredMeetings = filtered
                         }
                     }
-            }
+
+            } )
         }
+
     }
     
     func fillAttendeesList(){
@@ -187,10 +183,6 @@ class MeetingViewModel: ObservableObject{
         if meeting.host == userID {
             return true
         }
-        
-//        if meeting.host == "olU8zzFyDhN2cn4IxJKyIuXT5hM2" {
-//            return true
-//        }
         
         return false
     }

@@ -53,7 +53,10 @@ struct ParticipantsAttendance: View {
                             }
                             // insert attendees dictionary into DB at specified meeting id location
                             meetingViewModel.takeMeetingAttendance(meeting_id: meeting.id, attendeesDictionary: attendees)
-
+                            
+                            // setting up selected meeting in order to update it
+                            meetingViewModel.selectedMeeting = meeting
+                            
                           dismiss()
                         }
                         
@@ -89,7 +92,10 @@ struct ParticipantsAttendance: View {
                 }
                 // insert attendees dictionary into DB at specified meeting id location
                 meetingViewModel.takeMeetingAttendance(meeting_id: meeting.id, attendeesDictionary: attendees)
-
+                
+                // setting up selected meeting in order to update it
+                meetingViewModel.selectedMeeting = meeting
+                
               dismiss()
             }
         }, message: {

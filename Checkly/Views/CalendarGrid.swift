@@ -174,19 +174,19 @@ struct CalendarGrid: View {
                 }
             }
             
-            // MARK: Meeting Details
+            // MARK: Meeting Details Sheet
             .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [BottomSheet.Options.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray), .background(AnyView(Color.white))], content: {
                     // see view under "Views" folder
-                    MeetingDetails(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"), showingPASheet: $showingPASheet)
+                    MeetingDetails(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: self.meetingViewModel.filteredMeetingsArray(date: currentDate)?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"), showingPASheet: $showingPASheet)
             })
             
-            // MARK: Attendees List
+            // MARK: Attendees List Sheet
             .sheet(isPresented: $showingSheet) {
                 // see view under "Views" folder
-                MeetingAttendeesListView(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
+                MeetingAttendeesListView(meeting: self.meetingViewModel.filteredMeetingsArray(date: currentDate)?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
             }
             
-            // MARK: Take Participants Attendance
+            // MARK: Take Participants Attendance Sheet
             .sheet(isPresented: $showingPASheet, content: {
                 // display Participants Attendance view
                 ParticipantsAttendance(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
