@@ -52,8 +52,8 @@ struct CardExpansion: View {
                 
                 //2- QR Code and employee id
                 VStack(alignment: .center, spacing: 16){
-                    
-                    Image(uiImage: generateQRCode(string: "\(emp.employee_id)-\(emp.name)-\($date)-\($timeDate)"))
+                    //encode the string
+                    Image(uiImage: generateQRCode(string: "\(emp.employee_id)-\(emp.name)-\(date)-\(timeDate)"))
                         .resizable()
                         .interpolation(.none)
                         .frame(width: 200, height: 200, alignment: .center)
@@ -63,6 +63,10 @@ struct CardExpansion: View {
                     Text("Employee ID \(emp.employee_id)")
                         .foregroundColor(Color(.sRGB, red: 0.639, green: 0.631, blue: 0.631, opacity: 1))
                         .fontWeight(.medium)
+                }
+                .onAppear {
+                    let _ = self.updateTimer
+                    let _ = self.updateDate
                 }
                 Spacer()
                 
@@ -115,14 +119,14 @@ struct CardExpansion: View {
     func getTime()->String{
         let time = Date()
         let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "HH:mm"
+        timeFormatter.dateFormat = "HH:mm:ss"
         let stringDate = timeFormatter.string(from: time)
         return stringDate
     }
     
     func getDate()-> String{
         let dateFormatter = DateFormatter()
-        dateFormatter.setLocalizedDateFormatFromTemplate("EEE MMM d yyyy")
+        dateFormatter.setLocalizedDateFormatFromTemplate("MMM d yyyy")
         return dateFormatter.string(from: Date())
     }
 }

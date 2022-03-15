@@ -35,7 +35,7 @@ struct CardExpansionDetails: View {
                         Text("Check-in")
                             .fontWeight(.medium)
                         Spacer()
-                        Text("09:03 AM")
+                        Text("09:03:09 AM")
 
                     }
                     .padding(10)
@@ -45,7 +45,7 @@ struct CardExpansionDetails: View {
                         Text("Check-out")
                             .fontWeight(.medium)
                         Spacer()
-                        Text("06:09 PM")
+                        Text("06:09:35 PM")
                     }
                     .padding(10)
                     
@@ -80,7 +80,7 @@ struct CardExpansionDetails: View {
             Text("Generated and projected by Checkly")
                 .foregroundColor(.gray)
                 .font(.system(size: 15))
-                .padding([.bottom],20)
+                .padding([.bottom],24)
             
         }
         .ignoresSafeArea()
