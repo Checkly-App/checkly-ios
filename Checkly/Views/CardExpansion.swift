@@ -53,14 +53,14 @@ struct CardExpansion: View {
                 //2- QR Code and employee id
                 VStack(alignment: .center, spacing: 16){
                     //encode the string
-                    Image(uiImage: generateQRCode(string: "\(emp.employee_id)-\(emp.name)-\(date)-\(timeDate)"))
+                    Image(uiImage: generateQRCode(string: "\(emp.id)-\(emp.name)-\(date)-\(timeDate)"))
                         .resizable()
                         .interpolation(.none)
                         .frame(width: 200, height: 200, alignment: .center)
                         .cornerRadius(8)
                         .shadow(color: .gray, radius: 10, x: 1, y: 1)
                     
-                    Text("Employee ID \(emp.employee_id)")
+                    Text("Employee ID \(emp.id)")
                         .foregroundColor(Color(.sRGB, red: 0.639, green: 0.631, blue: 0.631, opacity: 1))
                         .fontWeight(.medium)
                 }
@@ -146,7 +146,7 @@ struct CustomeShape: Shape{
 
 struct CardExpansion_Previews: PreviewProvider {
     
-    static let employee = Employee(address: "", birthdate: "", department: "", email: "", employee_id: "", gender: "", name: "", national_id: "", phone_number:  "", position: "")
+    static let employee = Employee(address: "", birthdate: "", department: "", email: "", id: "", gender: "", name: "", national_id: "", phone_number:  "", position: "", photoURL: "")
     
     static var previews: some View {
         CardExpansion(emp: employee)

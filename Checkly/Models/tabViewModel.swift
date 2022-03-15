@@ -14,7 +14,7 @@ class tabViewModel: ObservableObject{
     @Published var isCalendarViewLoaded = false
     @Published var isStatisticsViewLoaded = false
     @Published var isServicesLoaded = false
-    @Published var emp : Employee = Employee(address: "", birthdate: "", department: "", email: "", employee_id: "", gender: "", name: "", national_id: "", phone_number: "", position: "")
+    @Published var emp : Employee = Employee(address: "", birthdate: "", department: "", email: "", id: "", gender: "", name: "", national_id: "", phone_number: "", position: "", photoURL: "")
     
     //    let uuid = Auth.auth().currentUser?.uid
     private let loggedInUserID = "PIfzRqUP9FdUf8cAr1UKHmxtEK12"
@@ -31,7 +31,7 @@ class tabViewModel: ObservableObject{
             let uuid = snapshot.key
             if uuid == self.loggedInUserID {
                 DispatchQueue.main.async {
-                    self.emp = Employee(address: obj["address"] as! String, birthdate: obj["birthdate"] as! String, department: obj["department"] as! String, email: obj["email"] as! String, employee_id: obj["employee_id"] as! String, gender: obj["gender"] as! String, name: obj["name"] as! String, national_id: obj["national_id"] as! String, phone_number: obj["phone_number"] as! String, position: obj["position"] as! String)
+                    self.emp = Employee(address: obj["address"] as! String, birthdate: obj["birthdate"] as! String, department: obj["department"] as! String, email: obj["email"] as! String, id: obj["employee_id"] as! String, gender: obj["gender"] as! String, name: obj["name"] as! String, national_id: obj["national_id"] as! String, phone_number: obj["phone_number"] as! String, position: obj["position"] as! String, photoURL: obj["image_token"] as! String)
                     print(self.emp)
                 }
             }

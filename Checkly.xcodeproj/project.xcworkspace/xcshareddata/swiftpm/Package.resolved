@@ -101,6 +101,15 @@
         }
       },
       {
+        "package": "SDWebImage",
+        "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
+        "state": {
+          "branch": null,
+          "revision": "02283906996de3de7e582c885d98e4aff60f18b0",
+          "version": "5.12.4"
+        }
+      },
+      {
         "package": "SwiftProtobuf",
         "repositoryURL": "https://github.com/apple/swift-protobuf.git",
         "state": {
