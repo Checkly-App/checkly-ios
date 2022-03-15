@@ -88,9 +88,9 @@ struct messagesView: View {
                 
                 
                 .navigationTitle("Messages").navigationBarTitleDisplayMode(.inline)
-//                NavigationLink("" , isActive: $shouldNavigateToChatLogView) {
-//                    chatView(chatUser: self.selectedUser)
-//                }
+                NavigationLink("" , isActive: $shouldNavigateToChatLogView) {
+                    chatView(chatUser: self.selectedUser)
+                }
                 Button {
                     shouldShowNewMessageScreen.toggle()
                 } label: {
