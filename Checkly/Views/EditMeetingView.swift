@@ -8,10 +8,9 @@ import SDWebImageSwiftUI
 import MapKit
 
 
-
 struct EditMeetingView: View {
+    
     @State  var locations: [Mark] = []
-
     @Environment(\.dismiss) var dismiss
     @State var title = ""
     @State var isAtend = 1
@@ -21,7 +20,6 @@ struct EditMeetingView: View {
     @FocusState private var isfocus : Bool
     @State var selectrow = Set<Employee>()
     @State var attendeneslist: [Employee] = []
-//    @Binding var meeting : Meeting
     var meeting : Meeting
     @State var text = ""
     @State var type = "Online"
@@ -41,8 +39,7 @@ struct EditMeetingView: View {
     @State var viewlist = false
     @State var viewlist1 = false
     @ObservedObject  var viewModel = EmployeeViewModel()
-
-   @State var attendenceID: [String: String] = [:]
+    @State var attendenceID: [String: String] = [:]
    
     var body: some View {
         NavigationView{
@@ -389,16 +386,17 @@ struct EditMeetingView: View {
             })
             }
             .padding(.leading)
+            .preferredColorScheme(.light)
         }.navigationBarTitle("Edit Meeting").toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
                            dismiss()
                        } label: {
                            HStack{
-                Image(systemName: "chevron.left")
-                               Text("Back").foregroundColor(Color("Blue"))
+                               Image(systemName: "chevron.left")
+                               Text("Back")
                            }
-
+                           .foregroundColor(Color("Blue"))
                        }
             }
         }
@@ -602,36 +600,31 @@ struct EditMeetingView: View {
             }
         }
         
-       
-
- 
-        if viewModel.MeetingObj.title == ""{
+        if viewModel.MeetingObj.title == "" {
             error0 = "All fields are required"
-
-            return false }
-        if viewModel.MeetingObj.location == "" {
-            error0 = "All fields are required"
-
-            return false }
-        if viewModel.MeetingObj.agenda == "" {
-            error0 = "All fields are required"
-
-            return false }
-        if Isshow == false {
-        if selectrow.count == 0 {
-            error0 = "Please add at least one attendee"
-
             return false
         }
+        
+        if viewModel.MeetingObj.location == "" {
+            error0 = "All fields are required"
+            return false
+        }
+        
+        if viewModel.MeetingObj.agenda == "" {
+            error0 = "All fields are required"
+            return false
+        }
+        
+        if Isshow == false {
+            if selectrow.count == 0 {
+                error0 = "Please add at least one attendee"
+                return false
+            }
         }
             
         return true
     }
-                                        
-                                        
-                                        
-            
-    
+                                
     }
         
         

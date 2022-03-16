@@ -148,12 +148,14 @@ struct CalendarGrid: View {
                         }) {
                             ForEach(self.meetingViewModel.filteredMeetingsArray(date:currentDate)!){ meeting in
                                 Button {
-                                    meetingViewModel.selectedMeeting = meeting
-                                    // Update coordinate region on click
-                                    coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: Double(meetingViewModel.selectedMeeting?.latitude ?? "0.0") ?? 0.0,longitude: Double(meetingViewModel.selectedMeeting?.longitude ?? "0.0") ?? 0.0),span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
-                                    DispatchQueue.main.schedule(after: .init(.now() + 0.3)) {
-                                        withAnimation{
-                                            bottomSheetPosition = .middle
+                                    DispatchQueue.main.async {
+                                        meetingViewModel.selectedMeeting = meeting
+                                        // Update coordinate region on click
+                                        coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: Double(meetingViewModel.selectedMeeting?.latitude ?? "0.0") ?? 0.0,longitude: Double(meetingViewModel.selectedMeeting?.longitude ?? "0.0") ?? 0.0),span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+                                        DispatchQueue.main.schedule(after: .init(.now() + 0.3)) {
+                                            withAnimation{
+                                                bottomSheetPosition = .middle
+                                            }
                                         }
                                     }
                                 } label: {

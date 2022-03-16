@@ -4,6 +4,7 @@
 //
 //  Created by  Lama Alshahrani on 17/07/1443 AH.
 //
+
 import SwiftUI
 import Firebase
 import FirebaseDatabase
@@ -23,10 +24,9 @@ struct GenerateMeetingView1: View {
     }}
 
 struct GenerateMeetingView: View {
+    
     @StateObject var locationManager = LocationManager.shared
-
     @State  var locations: [Mark] = []
-
     @Environment(\.dismiss) var dismiss
     @State var title = ""
     @State var location = ""
@@ -36,35 +36,29 @@ struct GenerateMeetingView: View {
     @State var city_c = ""
     @State var isshow = false
     @State var isshowadd = false
-
     @State var Address_pic = "Select Location"
     @FocusState private var isfocus : Bool
-
     @State var selectrow = Set<Employee>()
-@State var attendeneslist: [Employee] = []
-  //  @State var attendeeslist = [Employee]()
+    @State var attendeneslist: [Employee] = []
+    //  @State var attendeeslist = [Employee]()
     @State var text = ""
     @State var type = "Online"
-     var ref = Database.database().reference()
-    
+    var ref = Database.database().reference()
     let userid = Auth.auth().currentUser!.uid
-@State var Isselectattendense = false
+    @State var Isselectattendense = false
     @State var isSelectedinline = true
     @State var IsSelectedSite = false
     @State var presentAlert = false
     @State var error0 = "All Feilds are required"
-    
     @State var IsitONsite = false
     @State  var date = Date()
     @State  var now = Date()
-
     @State  var starttime = Date()+86400
     @State  var endtime = Date()+86400
-   @State var viewlist = false
+    @State var viewlist = false
     @State var viewlist1 = false
     @ObservedObject  var viewModel = EmployeeViewModel()
-
-   @State var attendenceID: [String: String] = [:]
+    @State var attendenceID: [String: String] = [:]
 
     var body: some View {
         NavigationView{
@@ -325,8 +319,6 @@ struct GenerateMeetingView: View {
                     Generate()
                     dismiss()
                 }
-          
-
             }
                 label: {
                 HStack{
@@ -353,17 +345,18 @@ struct GenerateMeetingView: View {
             })
             }
             .padding(.trailing)
+            .preferredColorScheme(.light)
         }.navigationBarTitle("Generate Meeting").toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
-                           dismiss()
-                       } label: {
-                           HStack{
-                Image(systemName: "chevron.left")
-                               Text("Back").foregroundColor(Color("Blue"))
-                           }
-
-                       }
+                    dismiss()
+                } label: {
+                    HStack{
+                        Image(systemName: "chevron.left")
+                        Text("Back")
+                        }
+                        .foregroundColor(Color("Blue"))
+                    }
             }
         }
         }.navigationBarTitleDisplayMode(.inline).toolbar {
@@ -382,15 +375,10 @@ struct GenerateMeetingView: View {
                        }
 
                        }
-        
-          
-        
-    }
-        }
+                }
+            }
 
         }
-        
-        
         
     }
     
@@ -523,11 +511,6 @@ struct GenerateMeetingView: View {
                  }
                  
 
-                 
-
-                
-               
-                 
                  if AmOrPMend == AmOrPM   {
                      if endhour != "12" &&  hourin != "12"{
                          if endhour > hourin {
@@ -555,32 +538,32 @@ struct GenerateMeetingView: View {
                  
                 }
 
-          
-                //
 
         if starttime >= endtime {
             error0 = "Please enter a valid time"
                     return false
         }
  
-        if title == ""{
-            error0 = "All feilds are required"
-
-            return false }
+        if title == "" {
+            error0 = "All fields are required"
+            return false
+    
+        }
+        
         if location == "" {
-            error0 = "All feilds are required"
-
-            return false }
-        if text == "" {
-            error0 = "All feilds are required"
-
-            return false }
-        if attendeneslist.count == 0{
-            error0 = "Please add at least one attendee"
-
+            error0 = "All fields are required"
             return false
         }
-     
+        
+        if text == "" {
+            error0 = "All fields are required"
+            return false
+        }
+        
+        if attendeneslist.count == 0{
+            error0 = "Please add at least one attendee"
+            return false
+        }
             
         return true
     }

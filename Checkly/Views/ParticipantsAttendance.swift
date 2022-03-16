@@ -80,6 +80,7 @@ struct ParticipantsAttendance: View {
                      dismiss()
                  }
              }
+             .preferredColorScheme(.light)
         }
         
         .alert("Oops..!", isPresented: $showingAlert, actions: {

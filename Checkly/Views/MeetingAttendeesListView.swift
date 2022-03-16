@@ -107,7 +107,7 @@ struct MeetingAttendeesListView: View {
                 .listStyle(.plain)
             }
         }
-           
+        .preferredColorScheme(.light)
     }
   
      func loadImageFromFirebase(imgurl: String) {
