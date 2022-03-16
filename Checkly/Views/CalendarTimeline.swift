@@ -110,7 +110,7 @@ struct CalendarTimeline: View {
              .preferredColorScheme(.light)
          
          // MARK: Meeting Details Sheet
-         .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray), .background(AnyView(Color.white))], content: {
+             .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray), .background({AnyView(Color.white)})], content: {
              // see view under "Views" folder
              MeetingDetails(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: self.meetingViewModel.filteredMeetings?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"), showingPASheet: $showingPASheet, editMeetingDetails: $editMeetingView)
 
@@ -134,7 +134,9 @@ struct CalendarTimeline: View {
          }
          
          // MARK: Edit Meeting View
-         .fullScreenCover(isPresented: $editMeetingView) {
+         .fullScreenCover(isPresented: $editMeetingView, onDismiss: {
+             bottomSheetPosition = .hidden
+         }) {
              EditMeetingView(meeting: self.meetingViewModel.filteredMeetings?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
          }
          

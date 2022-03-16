@@ -142,7 +142,7 @@ struct AttendenceListViewselect: View {
             
         }
         
-        .navigationBarTitle(" Select Attendeess")
+        .navigationBarTitle(" Select Attendees")
 }
     
         
