@@ -30,7 +30,7 @@ struct CalendarGrid: View {
     // to navigate to edit meeting
     @State private var editMeetingView = false
     
-    // temp
+    // MARK: temp to be removed
     @Environment(\.dismiss) var dismiss
     
     var todaysDate = Date()
@@ -180,7 +180,7 @@ struct CalendarGrid: View {
             }
             
             // MARK: Meeting Details Sheet
-            .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [BottomSheet.Options.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray), .background(AnyView(Color.white))], content: {
+            .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray), .background(AnyView(Color.white))], content: {
                     // see view under "Views" folder
                 MeetingDetails(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: self.meetingViewModel.filteredMeetingsArray(date: currentDate)?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"), showingPASheet: $showingPASheet, editMeetingDetails: $editMeetingView)
             })
@@ -207,24 +207,9 @@ struct CalendarGrid: View {
             .fullScreenCover(isPresented: $editMeetingView) {
                 EditMeetingView(meeting: self.meetingViewModel.filteredMeetingsArray(date: currentDate)?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
             }
-            
-            // to be added later
-//            .navigationBarHidden(true)
-            
-            // MARK: TO BE REMOVED
-            .navigationBarTitle(Text("Calendar")).toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button{
-                        dismiss()
-                    } label: {
-                        HStack{
-                            Image(systemName: "chevron.left")
-                            Text("Back")
-                        }
-                    }
-                }
-            }
-            .navigationBarTitleDisplayMode(.inline)
+    
+            .navigationBarHidden(true)
+            .navigationBarTitle(Text("Calendar"))
       
         }// Navigation View
     }// body
@@ -347,6 +332,16 @@ struct CalendarGrid: View {
                     .frame(width: 18, height: 18)
             })
             Spacer()
+            
+            // MARK: TO BE REMOVED
+            Button {
+                // go back to
+                dismiss()
+            } label: {
+                Text("Navigate to logout")
+            }
+            Spacer()
+            
             Button(action: {
                 generateMeetingView.toggle()
             }, label: {

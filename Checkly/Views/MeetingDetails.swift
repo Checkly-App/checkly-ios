@@ -303,6 +303,7 @@ struct MeetingDetails: View {
             }
             
         }
+        .padding(5)
         .frame(
             minWidth: 0,
             maxWidth: .infinity,
