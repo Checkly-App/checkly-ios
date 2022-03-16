@@ -440,7 +440,12 @@ struct GenerateMeetingView: View {
         print(newintervaldate)
       
         let interval = Int( newintervaldate!.timeIntervalSince1970)
+        let currentD = Int( Date().timeIntervalSince1970)
+        print(currentD)
        print(interval)
+       
+        if interval > currentD {
+            print("true")}
         //End time
           var calender0 = Calendar.current
           calender0.timeZone = TimeZone(abbreviation: "GMT+3")!
@@ -478,52 +483,107 @@ struct GenerateMeetingView: View {
     }
     
     func validate()-> Bool{
-//        starttime0 = starttime.formatted(.dateTime.hour().minute())
-//        var hourin =  starttime0.prefix(2)
-//
-//              if hourin.suffix(1) == ":"
-//              {
-//                  hourin = hourin.prefix(1)
-//
-//             }
-//        var minuted = starttime.formatted(.dateTime.minute())
-//        let AmOrPM = starttime0.suffix(2)
-//
-//
-//
-//        /// end time
-//      endtime0 = endtime.formatted(.dateTime.hour().minute())
-//        var endhour =  endtime0.prefix(2)
-//
-//              if endhour.suffix(1) == ":"
-//              {
-//                  endhour = endhour.prefix(1)
-//
-//             }
-//        var minutedend = endtime.formatted(.dateTime.minute())
-//        let AmOrPMEnd = endtime0.suffix(2)
-//
-//
-//       if AmOrPMEnd == "AM" && AmOrPM == "PM"
-//        {
-//           error0 = "Please enter a valid time"
-//           return false
-//       }
-//        if AmOrPMEnd == AmOrPM {
-//        if endhour == hourin {
-//          if  minutedend <= minuted{
-//              error0 = "Please enter a valid time"
-//
-//                return false
-//            }
-//        }else
-//            if endhour < hourin{
-//            error0 = "Please enter a valid time"
-//
-//            return false
-//        }
-//        }
-//
+
+//validate if it same
+        var calender = Calendar.current
+        calender.timeZone = TimeZone(abbreviation: "GMT+3")!
+       
+        let datecompstart = calender.dateComponents([.day,.month,.year], from: date)
+        let datecompcurrent = calender.dateComponents([.day,.month,.year], from: Date())
+       
+        
+        var starttime0 = starttime.formatted(.dateTime.hour().minute())
+        
+                 var hourin =  starttime0.prefix(2)
+         
+                       if hourin.suffix(1) == ":"
+                       {
+                           hourin = hourin.prefix(1)
+         
+                      }
+         var minuted = starttime.formatted(.dateTime.minute())
+         let AmOrPM = starttime0.suffix(2)
+         //End time for validate
+         let    currenttime = Date().formatted(.dateTime.hour().minute())
+         
+         
+         var endhour =  currenttime.prefix(2)
+          
+                        if endhour.suffix(1) == ":"
+                        {
+                            endhour = endhour.prefix(1)
+          
+                       }
+        
+         let minutesend = Date().formatted(.dateTime.minute())
+         let AmOrPMend = currenttime.suffix(2)
+      
+        if datecompstart == datecompcurrent {
+            print("true")
+        
+         if AmOrPMend == "PM" && AmOrPM == "AM"
+          {
+             error0 = "Please enter a valid time"
+             return false
+         }
+         if AmOrPMend == AmOrPM {
+             if hourin == "12" && endhour == "12"{
+                 if minuted <= minutesend {
+                     print("1")
+
+                     error0 = "Please enter a valid time"
+                     return false
+                 }
+             }}
+         
+        if AmOrPMend == AmOrPM {
+
+               if  hourin == "12"{
+                 if    (endhour != "12") {
+                     print("3")
+
+                     error0 = "Please enter a valid time"
+                     return false
+                 }
+                 
+             }
+         }
+         
+
+         
+
+        
+       
+         
+         if AmOrPMend == AmOrPM   {
+             if endhour != "12" &&  hourin != "12"{
+                 if endhour > hourin {
+                     print("4")
+
+             error0 = "Please enter a valid time"
+
+             return false
+             }
+             }
+             
+         }
+        
+
+         if AmOrPMend == AmOrPM  && endhour == hourin {
+           
+
+           if  minutesend >= minuted{
+               print("pig")
+               error0 = "Please enter a valid time"
+
+                 return false
+             }
+         }
+         
+        }
+
+  
+        //
         if starttime >= endtime {
             error0 = "Please enter a valid time"
                     return false

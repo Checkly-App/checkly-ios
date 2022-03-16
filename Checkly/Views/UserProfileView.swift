@@ -21,7 +21,7 @@ struct UserProfileView: View {
     @State private var showingSheet = false
     private var ref = Database.database().reference()
 
-    @State var user = "-Mxdz74Cf01pJpth5ovK"
+    @State var user = "-MyI_ITa2ttXlgub1eBe"
      var name = ""
     @State private var userimage: UIImage?
 
@@ -45,10 +45,10 @@ struct UserProfileView: View {
     var body: some View {
         NavigationView{
             ScrollView{
+               
         VStack{
             //first section
             VStack(spacing:8){
-             
                if  viewModel.tokens != "null"{
                    WebImage(url:URL(string: viewModel.tokens)).resizable().scaledToFill().frame(width: 137, height: 137)            .clipShape(Circle())
 
@@ -62,7 +62,10 @@ struct UserProfileView: View {
                 }
                 Text(viewModel.Employeeinfolist1)
                     .font(.title)
-                    .fontWeight(.semibold)
+                    .fontWeight(.semibold).task {
+                        showingSheet = true
+
+                    }
                 Text(viewModel.department)
                     .font(.subheadline)
                     .fontWeight(.semibold)

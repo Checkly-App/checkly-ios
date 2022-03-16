@@ -11,8 +11,7 @@ import FirebaseAuth
 struct ContentView: View {
     @StateObject private var session: Session = Session()
     @EnvironmentObject var authentication: Authentication
-    
-    @AppStorage("isLoggedIn") var isLoggedIn = true
+     @AppStorage("isLoggedIn") var isLoggedIn = true
 @State var profile = false
     var body: some View {
         NavigationView{

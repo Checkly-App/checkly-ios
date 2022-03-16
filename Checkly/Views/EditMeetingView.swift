@@ -99,7 +99,7 @@ struct EditMeetingView: View {
                 
                   DatePicker(
                         "Start Date",
-                        selection: $viewModel.MeetingObj.datetime_end,
+                        selection: $viewModel.MeetingObj.datetime_start,
                         in: Date.now..., displayedComponents: [.date]
                   ).labelsHidden().fixedSize().frame(maxWidth: .infinity/2,maxHeight: 44, alignment: .leading).background(.gray.opacity(0.0)).cornerRadius(7).border(.white.opacity(0.4))
                     
@@ -366,7 +366,7 @@ struct EditMeetingView: View {
                 else {
                     
                     Update()
-                   dismiss()
+                  dismiss()
                     }
                 }
           
@@ -539,18 +539,115 @@ struct EditMeetingView: View {
     
 
     func validate()-> Bool{
- 
-       var starttime0 = viewModel.MeetingObj.datetime_start.formatted(.dateTime.hour().minute())
-       
-                var hourin =  starttime0.prefix(2)
+        // validate start and current
         
-                      if hourin.suffix(1) == ":"
-                      {
-                          hourin = hourin.prefix(1)
-        
+        //validate if it same
+                var calender = Calendar.current
+                calender.timeZone = TimeZone(abbreviation: "GMT+3")!
+               
+        let datecompstart = calender.dateComponents([.day,.month,.year], from: viewModel.MeetingObj.datetime_start)
+                let datecompcurrent = calender.dateComponents([.day,.month,.year], from: Date())
+               
+                
+                var starttime0 = viewModel.MeetingObj.datetime_start.formatted(.dateTime.hour().minute())
+                
+                         var hourin =  starttime0.prefix(2)
+                 
+                               if hourin.suffix(1) == ":"
+                               {
+                                   hourin = hourin.prefix(1)
+                 
+                              }
+                 var minuted = viewModel.MeetingObj.datetime_start.formatted(.dateTime.minute())
+                 let AmOrPM = starttime0.suffix(2)
+                 //End time for validate
+                 let    currenttime = Date().formatted(.dateTime.hour().minute())
+                 
+                 
+                 var currenthour =  currenttime.prefix(2)
+                  
+                                if currenthour.suffix(1) == ":"
+                                {
+                                    currenthour = currenthour.prefix(1)
+                  
+                               }
+                
+                 let minutescurrent = Date().formatted(.dateTime.minute())
+                 let AmOrPMcurrent = currenttime.suffix(2)
+              print(datecompstart)
+        print(datecompcurrent)
+
+                if datecompstart == datecompcurrent {
+                    print("true")
+                
+                 if AmOrPMcurrent == "PM" && AmOrPM == "AM"
+                  {
+                     error0 = "Please enter a valid time"
+                     return false
+                 }
+                 if AmOrPMcurrent == AmOrPM {
+                     if hourin == "12" && currenthour == "12"{
+                         if minuted <= minutescurrent {
+                             print("1")
+
+                             error0 = "Please enter a valid time"
+                             return false
+                         }
+                     }}
+                 
+                if AmOrPMcurrent == AmOrPM {
+
+                       if  hourin == "12"{
+                         if    (currenthour != "12") {
+                             print("3")
+
+                             error0 = "Please enter a valid time"
+                             return false
+                         }
+                         
                      }
-        var minuted = viewModel.MeetingObj.datetime_start.formatted(.dateTime.minute())
-        let AmOrPM = starttime0.suffix(2)
+                 }
+                 
+
+                 
+
+                
+               
+                 
+                 if AmOrPMcurrent == AmOrPM   {
+                     if currenthour != "12" &&  hourin != "12"{
+                         if currenthour > hourin {
+                             print("4")
+
+                     error0 = "Please enter a valid time"
+
+                     return false
+                     }
+                     }
+                     
+                 }
+                
+
+                 if AmOrPMcurrent == AmOrPM  && currenthour == hourin {
+                   
+
+                   if  minutescurrent >= minuted{
+                       print("pig")
+                       error0 = "Please enter a valid time"
+
+                         return false
+                     }
+                 }
+                 
+                }
+
+          
+                //
+        
+        // validate start and end
+      
+       
+       
         //End time for validate
         let    endtime0 = viewModel.MeetingObj.datetime_end.formatted(.dateTime.hour().minute())
         
@@ -616,7 +713,7 @@ struct EditMeetingView: View {
        
 
         if AmOrPMend == AmOrPM  && endhour == hourin {
-            print("enter in 5")
+          
 
           if  minutesend <= minuted{
               print("pig")
@@ -627,7 +724,7 @@ struct EditMeetingView: View {
         }
         
        
-
+// end
  
         if viewModel.MeetingObj.title == ""{
             error0 = "All fields are required"
