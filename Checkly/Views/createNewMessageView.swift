@@ -189,8 +189,7 @@ struct createNewMessageView: View {
                             } else {
                                 WebImage(url: URL(string: user.photoURL)).resizable().scaledToFill().frame(width: 45, height: 45).clipped().cornerRadius(64).overlay(RoundedRectangle(cornerRadius: 64).stroke(Color(.gray), lineWidth: 1)).shadow(radius: 5)
                             }
-//                            Image(systemName: "person.circle.fill").foregroundColor(.gray)
-//                                .font(.system(size: 30))
+
                             VStack (alignment: .leading){
                                 Text(user.name).bold().foregroundColor(.black)
                                 Text(user.department).font(.caption2).foregroundColor(.gray)
@@ -219,8 +218,11 @@ struct createNewMessageView: View {
 }
 
 struct createNewMessageView_Previews: PreviewProvider {
+    
+    static let employee = Employee(address: "", birthdate: "", department: "", email: "", id: "", gender: "", name: "", national_id: "", phone_number:  "", position: "", photoURL: "")
+    
     static var previews: some View {
-    messagesView()
+        messagesView(emp: employee)
     }
     
 }

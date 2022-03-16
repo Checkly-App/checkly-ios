@@ -19,9 +19,9 @@ struct messagesView: View {
     @State var shouldShowNewMessageScreen = false
     @State var selectedUser: Employee?
     @ObservedObject var vm = messagesViewModel()
+    var emp: Employee
+    
 
-    
-    
     var body: some View {
         NavigationView{
             VStack {
@@ -38,8 +38,6 @@ struct messagesView: View {
                                         }
                                         
                                         VStack (alignment: .leading, spacing: 10){
-//                                            Text(recentMessage.photoURL)
-                                            //change to current user
                                             if ( recentMessage.senderName == "Dalal Bin Humaid") {
                                                 Text(recentMessage.receiverName).font(.system(size: 16, weight: .bold)).foregroundColor(.black)
                                                 Text(recentMessage.text).font(.system(size: 14)).foregroundColor(Color(.darkGray))
@@ -130,7 +128,10 @@ extension Date {
 
 
 struct messagesView_Previews: PreviewProvider {
+    
+    static let employee = Employee(address: "", birthdate: "", department: "", email: "", id: "", gender: "", name: "", national_id: "", phone_number:  "", position: "", photoURL: "")
+    
     static var previews: some View {
-        messagesView()
+        messagesView(emp: employee)
     }
 }

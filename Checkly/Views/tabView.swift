@@ -11,8 +11,6 @@ import Firebase
 struct tabView: View {
     
     
-    //    let uuid = Auth.auth().currentUser?.uid
-    let uuid = "cjuQp8hCBgge0MtYsJxYXbTK50F3"
 
     //MARK: - @EnvironmentObjects
     @EnvironmentObject var authentication: Authentication
@@ -38,7 +36,7 @@ struct tabView: View {
                 ZStack{
                         //Messages
                     //pass to her the logged in user struct
-                        Text("Messages")
+                    messagesView(emp: tabModelObject.emp)
                             .opacity(selectedTab == 0 ? 1 : 0)
                         
                         //Calendar
