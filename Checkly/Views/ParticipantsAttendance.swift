@@ -47,7 +47,7 @@ struct ParticipantsAttendance: View {
                         } else {
                             // this loops through unselected attendees
                             for attendee in attendees {
-                                if attendee.value != "attended" && attendee.value != "absent" {
+                                if attendee.value != "attended" {
                                     attendees[attendee.key] = "absent"
                                 }
                             }

@@ -66,12 +66,12 @@ struct ParticipantRow: View {
                 // this means that the member exists in selectedRows set, so we are going to remove it
                 // and the user selected and unselected the row at the same time
                 self.selectedRows.remove(attendee)
-                print("\(attendee.id), \(attendee.status)")
-                
+//                print("\(attendee.id), \(attendee.status)")
+                attendeesDictionary["\(attendee.id)"] = "absent"
             } else {
                 // Get selected attendee
                 selectedRows.insert(attendee)
-                print("\(attendee.id), \(attendee.status)")
+//                print("\(attendee.id), \(attendee.status)")
                 // insert into attendees dictionary as 'attended'
                  attendeesDictionary["\(attendee.id)"] = "attended"
                 
