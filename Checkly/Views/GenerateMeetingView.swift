@@ -456,6 +456,107 @@ struct GenerateMeetingView: View {
     }
     
     func validate()-> Bool{
+        
+        //validate if it same
+                var calender = NSCalendar.current
+                calender.timeZone = TimeZone(abbreviation: "GMT+3")!
+               
+                let datecompstart = calender.dateComponents([.day,.month,.year], from: date)
+                let datecompcurrent = calender.dateComponents([.day,.month,.year], from: Date())
+               
+                
+                var starttime0 = starttime.formatted(.dateTime.hour().minute())
+                
+                         var hourin =  starttime0.prefix(2)
+                 
+                               if hourin.suffix(1) == ":"
+                               {
+                                   hourin = hourin.prefix(1)
+                 
+                              }
+                 var minuted = starttime.formatted(.dateTime.minute())
+                 let AmOrPM = starttime0.suffix(2)
+                 //End time for validate
+                 let    currenttime = Date().formatted(.dateTime.hour().minute())
+                 
+                 
+                 var endhour =  currenttime.prefix(2)
+                  
+                                if endhour.suffix(1) == ":"
+                                {
+                                    endhour = endhour.prefix(1)
+                  
+                               }
+                
+                 let minutesend = Date().formatted(.dateTime.minute())
+                 let AmOrPMend = currenttime.suffix(2)
+              
+                if datecompstart == datecompcurrent {
+                    print("true")
+                
+                 if AmOrPMend == "PM" && AmOrPM == "AM"
+                  {
+                     error0 = "Please enter a valid time"
+                     return false
+                 }
+                 if AmOrPMend == AmOrPM {
+                     if hourin == "12" && endhour == "12"{
+                         if minuted <= minutesend {
+                             print("1")
+
+                             error0 = "Please enter a valid time"
+                             return false
+                         }
+                     }}
+                 
+                if AmOrPMend == AmOrPM {
+
+                       if  hourin == "12"{
+                         if    (endhour != "12") {
+                             print("3")
+
+                             error0 = "Please enter a valid time"
+                             return false
+                         }
+                         
+                     }
+                 }
+                 
+
+                 
+
+                
+               
+                 
+                 if AmOrPMend == AmOrPM   {
+                     if endhour != "12" &&  hourin != "12"{
+                         if endhour > hourin {
+                             print("4")
+
+                     error0 = "Please enter a valid time"
+
+                     return false
+                     }
+                     }
+                     
+                 }
+                
+
+                 if AmOrPMend == AmOrPM  && endhour == hourin {
+                   
+
+                   if  minutesend >= minuted{
+                       print("pig")
+                       error0 = "Please enter a valid time"
+
+                         return false
+                     }
+                 }
+                 
+                }
+
+          
+                //
 
         if starttime >= endtime {
             error0 = "Please enter a valid time"

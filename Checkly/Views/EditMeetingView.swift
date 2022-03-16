@@ -91,7 +91,7 @@ struct EditMeetingView: View {
                 
                   DatePicker(
                         "Start Date",
-                        selection: $viewModel.MeetingObj.datetime_end,
+                        selection: $viewModel.MeetingObj.datetime_start,
                         in: Date.now..., displayedComponents: [.date]
                   ).labelsHidden().fixedSize().frame(maxWidth: .infinity/2,maxHeight: 44, alignment: .leading).background(.gray.opacity(0.0)).cornerRadius(7).border(.white.opacity(0.4))
                     
@@ -520,6 +520,7 @@ struct EditMeetingView: View {
     
 
     func validate()-> Bool{
+        
  
        var starttime0 = viewModel.MeetingObj.datetime_start.formatted(.dateTime.hour().minute())
        
