@@ -100,15 +100,14 @@
 		7149E8F927A8720A008E3553 /* Checkly */ = {
 			isa = PBXGroup;
 			children = (
-				71FE1D2927C2B6810067166D /* Info.plist */,
 				71D09A5F27A9A0CC00DA2D1D /* Services */,
 				7149E91027A96F92008E3553 /* Models */,
 				7149E90F27A96F71008E3553 /* Views */,
+				7149E90D27A8747B008E3553 /* GoogleService-Info.plist */,
+				71FE1D2927C2B6810067166D /* Info.plist */,
+				7149E8FE27A87213008E3553 /* Assets.xcassets */,
 				7149E8FA27A8720A008E3553 /* ChecklyApp.swift */,
 				7152C6AA27B6CF5100E2CEAD /* AppDelegate.swift */,
-				7149E91727A985BC008E3553 /* Authentication.swift */,
-				7149E90D27A8747B008E3553 /* GoogleService-Info.plist */,
-				7149E8FE27A87213008E3553 /* Assets.xcassets */,
 				7149E90027A87213008E3553 /* Preview Content */,
 			);
 			path = Checkly;
@@ -158,6 +157,7 @@
 		71D09A5F27A9A0CC00DA2D1D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7149E91727A985BC008E3553 /* Authentication.swift */,
 				71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */,
 				7152C6A427B6B66300E2CEAD /* NotificationManager.swift */,
 			);

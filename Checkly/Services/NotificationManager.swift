@@ -113,7 +113,7 @@ class NotificationManager {
         content.body = "Your meeting - \(title). Is in five minutes!"
         
         /// convert to the correct timzone then to a date component  - this could be a simulator problem though!
-        var calendar = Calendar.current
+        let calendar = Calendar.current
 //        calendar.timeZone = TimeZone(abbreviation: "GMT+3")!
         let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
         let uuid = UUID().uuidString
