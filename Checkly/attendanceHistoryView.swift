@@ -16,8 +16,9 @@ struct attendanceHistoryView: View {
     @State var selectedStatus: String?
     @State var searched = false
     @State private var showingSheet = false
-    @State var selectedAttendance: attendance?
-
+    @State var selectedAttendance = attendance(id: "", date: "", checkIn: "", checkOut: "", status: "", workingHours: "")
+    
+    
 
     var body: some View {
           
@@ -137,7 +138,7 @@ struct attendanceHistoryView: View {
                             Image(uiImage: UIImage(named:"arrow")!).resizable().frame(width: 13, height: 20)
                         }.padding().frame(width: 350, height: 100).background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
                     }.sheet(isPresented: $showingSheet) {
-                        SheetView(attendance: self.selectedAttendance)
+                        SheetView(attendance: $selectedAttendance)
                     }
                 
                 }.padding(.trailing)
@@ -184,7 +185,7 @@ struct attendanceHistoryView: View {
                     Image(uiImage: UIImage(named:"arrow")!).resizable().frame(width: 13, height: 20)
                 }.padding().frame(width: 350, height: 100).background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
                 }.sheet(isPresented: $showingSheet) {
-                    SheetView(attendance: self.selectedAttendance)
+                    SheetView(attendance: $selectedAttendance)
                 }
                     }.padding(.trailing)
                 Spacer()
@@ -321,7 +322,7 @@ class attendanceHistoryViewModel: ObservableObject {
         return date!
     }
 
-struct attendanceHistoryView_Previews: PreviewProvider {
+    struct attendanceHistoryView_Previews: PreviewProvider {
     static var previews: some View {
         attendanceHistoryView()
     }
@@ -330,11 +331,11 @@ struct attendanceHistoryView_Previews: PreviewProvider {
 
 struct SheetView: View {
     
-    var attendance: attendance?
+    @Binding var attendance: attendance
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        Text(attendance?.checkIn ?? "fail")
+        Text(attendance.checkIn)
         Button("Press to dismiss") {
             dismiss()
         }
