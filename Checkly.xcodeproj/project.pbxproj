@@ -184,10 +184,8 @@
 				BE1C295B27CC7F2B0079ADFE /* CardExpansion.swift */,
 				BE1C295927CC75260079ADFE /* CardExpansionDetails.swift */,
 				DA8647B127E1007A001CC261 /* chatView.swift */,
-				DA8647B327E1010E001CC261 /* chatViewModel.swift */,
 				DA8647B527E1015A001CC261 /* createNewMessageView.swift */,
 				DA8647B727E102D8001CC261 /* messagesView.swift */,
-				DA8647B927E10356001CC261 /* messagesViewModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -202,6 +200,8 @@
 				DA8647AB27E0FF75001CC261 /* chatMessage.swift */,
 				DA8647AD27E0FFA9001CC261 /* message.swift */,
 				DA8647AF27E0FFF4001CC261 /* recentMessage.swift */,
+				DA8647B327E1010E001CC261 /* chatViewModel.swift */,
+				DA8647B927E10356001CC261 /* messagesViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

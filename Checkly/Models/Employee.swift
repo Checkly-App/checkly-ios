@@ -8,6 +8,7 @@
 import Foundation
 
 struct Employee: Identifiable{
+    var employee_id: String
     var address: String
     var birthdate: String
     var department: String

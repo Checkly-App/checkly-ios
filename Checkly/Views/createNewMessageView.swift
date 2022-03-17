@@ -54,9 +54,9 @@ class createNewMessageViewModel: ObservableObject {
         let national_id = obj.childSnapshot(forPath: "national_id").value as! String
 
             
-            let emp = Employee(address: address, birthdate: birthdate, department: department, email: email, id: id, gender: gender, name: name, national_id: national_id, phone_number: phone_number, position: position, photoURL: photoURL)
+            let emp = Employee(employee_id: id, address: address, birthdate: birthdate, department: department, email: email, id: id, gender: gender, name: name, national_id: national_id, phone_number: phone_number, position: position, photoURL: photoURL)
             
-            if ( self.departments.contains(emp.department) && emp.id != self.emp.id  ) {
+            if ( self.departments.contains(emp.department) && emp.employee_id != self.emp.employee_id  ) {
                 self.users.append(emp)
             }
             print(self.users)
@@ -185,7 +185,7 @@ struct createNewMessageView: View {
 
 struct createNewMessageView_Previews: PreviewProvider {
     
-    static let employee = Employee(address: "", birthdate: "", department: "", email: "", id: "", gender: "", name: "", national_id: "", phone_number:  "", position: "", photoURL: "")
+    static let employee = Employee(employee_id: "", address: "", birthdate: "", department: "", email: "", id: "", gender: "", name: "", national_id: "", phone_number:  "", position: "", photoURL: "")
     
     static var previews: some View {
         messagesView(emp: employee)

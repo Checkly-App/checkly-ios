@@ -22,7 +22,7 @@ class chatViewModel: ObservableObject{
     func fetchMessages() {
        
         guard let toID = chatUser?.id else { return }
-        guard let empID = emp?.id else { return }
+        guard let empID = emp?.employee_id else { return }
         
         DB.collection("texts").document(empID).collection(toID).order(by: "timestamp").addSnapshotListener { querySnapshot, error in
             if let error = error {
@@ -45,7 +45,7 @@ class chatViewModel: ObservableObject{
     func handelSend() {
 
         guard let toID = chatUser?.id else { return }
-        guard let empID = emp?.id else { return }
+        guard let empID = emp?.employee_id else { return }
 
         let document = DB.collection("texts").document(empID).collection(toID).document()
         
@@ -88,7 +88,7 @@ class chatViewModel: ObservableObject{
         let data = [
             "timestamp": Timestamp(),
             "text": self.chatText,
-            "fromID": emp.id,
+            "fromID": emp.employee_id,
             "toID": toID,
             "username": chatUser.name,
             "senderName": emp.name,
@@ -96,7 +96,7 @@ class chatViewModel: ObservableObject{
             "photoURL": chatUser.photoURL
         ] as [String : Any]
         
-        DB.collection("recent_messages").document(emp.id)
+        DB.collection("recent_messages").document(emp.employee_id)
         .collection("messages")
         .document(toID)
         .setData(data) { error in
@@ -109,7 +109,7 @@ class chatViewModel: ObservableObject{
         let data2 = [
             "timestamp": Timestamp(),
             "text": self.chatText,
-            "fromID": emp.id,
+            "fromID": emp.employee_id,
             "toID": toID,
             "username": chatUser.name,
             "senderName": emp.name,
@@ -119,7 +119,7 @@ class chatViewModel: ObservableObject{
         
         DB.collection("recent_messages").document(toID)
         .collection("messages")
-        .document(emp.id)
+        .document(emp.employee_id)
         .setData(data2) { error in
             if let error = error {
                 print(error)

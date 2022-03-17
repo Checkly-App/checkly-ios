@@ -146,7 +146,7 @@ struct CustomeShape: Shape{
 
 struct CardExpansion_Previews: PreviewProvider {
     
-    static let employee = Employee(address: "", birthdate: "", department: "", email: "", id: "", gender: "", name: "", national_id: "", phone_number:  "", position: "", photoURL: "")
+    static let employee = Employee(employee_id: "", address: "", birthdate: "", department: "", email: "", id: "", gender: "", name: "", national_id: "", phone_number:  "", position: "", photoURL: "")
     
     static var previews: some View {
         CardExpansion(emp: employee)

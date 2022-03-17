@@ -25,7 +25,7 @@ class messagesViewModel: ObservableObject {
         
         guard let empID = emp?.id else { return }
         //here
-        DB.collection("recent_messages").document("439201282").collection("messages").order(by: "timestamp").addSnapshotListener { querySnapshot, error in
+        DB.collection("recent_messages").document("6387409293").collection("messages").order(by: "timestamp").addSnapshotListener { querySnapshot, error in
             if let error = error {
                 print(error)
                 return
@@ -96,7 +96,7 @@ class messagesViewModel: ObservableObject {
                     let phone_number = obj["phone_number"] as! String
                     let position = obj["position"] as! String
 
-                    let emp = Employee(address: address, birthdate: birthdate, department: department, email: email, id: id, gender: gender, name: name, national_id: national_id, phone_number: phone_number, position: position, photoURL: photoURL)
+                        let emp = Employee(employee_id: id, address: address, birthdate: birthdate, department: department, email: email, id: id, gender: gender, name: name, national_id: national_id, phone_number: phone_number, position: position, photoURL: photoURL)
                     
 
                         print("done with search")

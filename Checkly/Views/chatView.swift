@@ -29,7 +29,7 @@ struct chatView: View {
                     VStack{
                         ForEach(vm.chatMessages) { message in
                             VStack{
-                                if message.fromID == emp.id {
+                                if message.fromID == emp.employee_id{
                                     HStack{
                                         Spacer()
                                         HStack{
@@ -83,6 +83,7 @@ struct chatView: View {
                 .padding(.leading)
                 .padding(.trailing)
                 .padding(.top , 5)
+                .padding(.bottom, 5)
                 .background(Color(.systemBackground).ignoresSafeArea())
             }
         }
@@ -93,7 +94,7 @@ struct chatView: View {
 
 struct chatView_Previews: PreviewProvider {
     
-    static let employee = Employee(address: "", birthdate: "", department: "", email: "", id: "", gender: "", name: "", national_id: "", phone_number:  "", position: "", photoURL: "")
+    static let employee = Employee(employee_id: "", address: "", birthdate: "", department: "", email: "", id: "", gender: "", name: "", national_id: "", phone_number:  "", position: "", photoURL: "")
     
     static var previews: some View {
         messagesView(emp: employee)
