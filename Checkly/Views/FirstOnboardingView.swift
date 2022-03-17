@@ -127,7 +127,7 @@ struct FirstOnboardingView: View {
                 SecondOnboardingView()
             }
             if skip {
-                ContentView()
+                LoginView()
             }
             if second {
                 SecondOnboardingView()

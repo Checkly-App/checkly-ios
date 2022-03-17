@@ -4,7 +4,6 @@
 //
 //  Created by 🐈‍⬛ on 01/02/2022.
 //
-
 import SwiftUI
 import LocalAuthentication
 
@@ -28,6 +27,7 @@ class Authentication: ObservableObject {
         case emptyCredentials
         case exceededAttempts
         case cancelled
+
         
         var id: String {
             self.localizedDescription
@@ -139,3 +139,4 @@ class Authentication: ObservableObject {
         }
     }
 }
+

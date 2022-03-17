@@ -415,12 +415,6 @@ struct CalendarGrid: View {
     }
 } // Calendar Date Picker struct
 
-struct CalendarGrid_Previews: PreviewProvider {
-
-    static var previews: some View {
-        Calendar(viewRouter: CalendarViewRouterHelper())
-    }
-}
 
 // Extending date to get current month dates
 extension Date {

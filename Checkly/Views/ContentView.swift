@@ -17,10 +17,18 @@ struct ContentView: View {
     @StateObject var viewRouter = CalendarViewRouterHelper()
     @State var calendarView = false
     
+    var uid = Auth.auth().currentUser!.uid
+    
+    init(){
+        NotificationManager.instance.requestAuthorization()
+        NotificationManager.instance.meetingNotificationListener(uid: Auth.auth().currentUser!.uid)
+    }
+    
+    
     var body: some View {
         NavigationView{
             if isCompany {
-//                ScannerView()
+                //                ScannerView()
             }
             else{
                 VStack{
@@ -35,7 +43,7 @@ struct ContentView: View {
                     } label: {
                         Text("sign out")
                     }
-                   
+                    
                     // navigate to calendar view
                     Button{
                         calendarView.toggle()
@@ -43,9 +51,9 @@ struct ContentView: View {
                         Text("Calendar")
                     }
                     .fullScreenCover(isPresented: $calendarView) {
-                        Calendar(viewRouter: viewRouter)
+                        CalendarView(viewRouter: viewRouter)
                     }
-
+                    
                 }
             }
         }

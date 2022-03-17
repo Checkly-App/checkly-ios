@@ -14,6 +14,7 @@ struct LoginView: View {
     @State private var isVisible: Bool = false
     @State private var navigateToReset: Bool = false
     @AppStorage("isLoggedIn") var isLoggedIn = false
+    @AppStorage("isCompany") var isCompany = false
     
     var body: some View {
         NavigationView {
@@ -36,9 +37,15 @@ struct LoginView: View {
                     }
                     
                     // MARK: - Login Button
-                    Button{
-                        session.loginUser { success in
-                            isLoggedIn = success
+                    Button {
+                        session.showProgressView = true
+                        session.isCompanyEmail(currentEmail: session.credentials.email) { success in
+                            isCompany = success
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+                                session.loginUser { success in
+                                    isLoggedIn = success
+                                }
+                            })
                         }
                     } label: {
                         Text("Login")
@@ -89,13 +96,15 @@ struct LoginView: View {
                     LoadingView()
                 }
                 
+            }.onDisappear {
+                session.showProgressView = false
+                print("is Company \(isCompany)")
             }
-            .onTapGesture(perform: {
+            .onTapGesture {
                 self.hideKeyboard()
-            })
+            }
             .background(Color(UIColor(.white)))
             .navigationBarHidden(true)
-            .preferredColorScheme(.light)
         }
         
         .navigationViewStyle(StackNavigationViewStyle())
@@ -117,3 +126,11 @@ struct DividerView: View{
         }
     }
 }
+
+
+
+
+
+
+
+

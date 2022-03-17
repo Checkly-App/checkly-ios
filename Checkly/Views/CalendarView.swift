@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Calendar: View {
+struct CalendarView: View {
     
     @StateObject var viewRouter: CalendarViewRouterHelper
     @State private var currentDate: Date = Date()
@@ -23,8 +23,3 @@ struct Calendar: View {
     }
 }
 
-struct Calendar_Previews: PreviewProvider {
-    static var previews: some View {
-        Calendar(viewRouter: CalendarViewRouterHelper())
-    }
-}

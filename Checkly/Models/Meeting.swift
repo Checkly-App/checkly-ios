@@ -8,7 +8,6 @@
 import Foundation
 
 struct Meeting: Identifiable {
-    
     var id: String
     var host: String
     var title: String
