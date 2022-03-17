@@ -219,7 +219,7 @@ struct CalendarGrid: View {
     }// body
     
     @ViewBuilder
-    func DatesView(value: DateValueModel) -> some View{
+    func DatesView(value: DateValue) -> some View{
         
         VStack{
             if value.day != -1 {
@@ -391,25 +391,25 @@ struct CalendarGrid: View {
         return currentMonth
     }
     
-    func extractDate() -> [DateValueModel] {
+    func extractDate() -> [DateValue] {
         
         let calendar = NSCalendar.current
         
         // getting current month dates
         let currentMonth = getCurrentMonth()
         
-        var days = currentMonth.getAllDates().compactMap { date -> DateValueModel in
+        var days = currentMonth.getAllDates().compactMap { date -> DateValue in
             // getting days
             let day = calendar.component(.day, from: date)
             
-            return DateValueModel(day: day, date: date)
+            return DateValue(day: day, date: date)
         }
         
         // Adding offset days to get exact week days
         let firstWeekDay = calendar.component(.weekday, from: days.first?.date ?? Date())
         
         for _ in 0..<firstWeekDay - 1{
-            days.insert(DateValueModel(day: -1, date: Date()), at: 0)
+            days.insert(DateValue(day: -1, date: Date()), at: 0)
         }
         return days
     }

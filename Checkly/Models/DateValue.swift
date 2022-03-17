@@ -1,5 +1,5 @@
 //
-//  DateValueModel.swift
+//  DateValue.swift
 //  Checkly
 //
 //  Created by a w on 07/02/2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DateModel: Identifiable {
+struct DateValue: Identifiable {
     var id = UUID().uuidString
     var day: Int
     var date: Date

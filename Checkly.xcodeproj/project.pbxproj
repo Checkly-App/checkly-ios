@@ -18,7 +18,6 @@
 		714E7E2B27E38F9F00235308 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91927A987DD008E3553 /* Session.swift */; };
 		714E7E2D27E3916A00235308 /* EmployeeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0C27E12B22009AE0FA /* EmployeeViewModel.swift */; };
 		7152C6A527B6B66300E2CEAD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6A427B6B66300E2CEAD /* NotificationManager.swift */; };
-		7152C6A927B6BE2500E2CEAD /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6A827B6BE2500E2CEAD /* DateModel.swift */; };
 		7152C6AB27B6CF5100E2CEAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6AA27B6CF5100E2CEAD /* AppDelegate.swift */; };
 		7152C6AE27B82FCE00E2CEAD /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 7152C6AD27B82FCE00E2CEAD /* PopupView */; };
 		71C62C7227AC286900C573E7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71C62C7127AC286900C573E7 /* FirebaseAuth */; };
@@ -62,8 +61,7 @@
 		A3B8D85627B11A4200752F63 /* CalendarGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85527B11A4200752F63 /* CalendarGrid.swift */; };
 		A3B8D85827B11A5600752F63 /* CalendarTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85727B11A5600752F63 /* CalendarTimeline.swift */; };
 		A3B8D85A27B11A8900752F63 /* CalendarViewRouterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85927B11A8900752F63 /* CalendarViewRouterHelper.swift */; };
-		A3B8D85C27B13D9F00752F63 /* DateValueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85B27B13D9F00752F63 /* DateValueModel.swift */; };
-		A3C9709D27B184930041058A /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = A3C9709C27B184930041058A /* FirebaseDatabase */; };
+		A3B8D85C27B13D9F00752F63 /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85B27B13D9F00752F63 /* DateValue.swift */; };
 		A3CE73FE27CD5593002D2517 /* AnnotatedItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CE73FD27CD5593002D2517 /* AnnotatedItemModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,7 +77,6 @@
 		7149E91727A985BC008E3553 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		7149E91927A987DD008E3553 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		7152C6A427B6B66300E2CEAD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		7152C6A827B6BE2500E2CEAD /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
 		7152C6AA27B6CF5100E2CEAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
 		71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
@@ -114,7 +111,7 @@
 		A3B8D85527B11A4200752F63 /* CalendarGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarGrid.swift; sourceTree = "<group>"; };
 		A3B8D85727B11A5600752F63 /* CalendarTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTimeline.swift; sourceTree = "<group>"; };
 		A3B8D85927B11A8900752F63 /* CalendarViewRouterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewRouterHelper.swift; sourceTree = "<group>"; };
-		A3B8D85B27B13D9F00752F63 /* DateValueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValueModel.swift; sourceTree = "<group>"; };
+		A3B8D85B27B13D9F00752F63 /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
 		A3CE73FD27CD5593002D2517 /* AnnotatedItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedItemModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,7 +121,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A35A20DB27C2F54600719A01 /* SDWebImageSwiftUI in Frameworks */,
-				A3C9709D27B184930041058A /* FirebaseDatabase in Frameworks */,
 				A362C15827BEE49A00BD761A /* BottomSheet in Frameworks */,
 				A35A20DD27C2F57100719A01 /* FirebaseStorage in Frameworks */,
 				71C62C7827AC286900C573E7 /* FirebaseDatabaseSwift-Beta in Frameworks */,
@@ -217,14 +213,13 @@
 				A3B8D84B27B1178600752F63 /* View Models */,
 				7149E91127A96FCA008E3553 /* Credentials.swift */,
 				A3B8D84C27B117E400752F63 /* Meeting.swift */,
-				A3B8D85B27B13D9F00752F63 /* DateValueModel.swift */,
+				A3B8D85B27B13D9F00752F63 /* DateValue.swift */,
 				A3CE73FD27CD5593002D2517 /* AnnotatedItemModel.swift */,
 				A3027EB127DFE00700E305F8 /* Company.swift */,
 				A3027EB327DFE05D00E305F8 /* Session.swift */,
 				A3027EC827DFE79E00E305F8 /* LiquidSwipe.swift */,
 				A31E8F0E27E12BF2009AE0FA /* Employee.swift */,
 				7149E91927A987DD008E3553 /* Session.swift */,
-				7152C6A827B6BE2500E2CEAD /* DateModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -295,7 +290,6 @@
 			name = Checkly;
 			packageProductDependencies = (
 				71D09A5B27A9A02A00DA2D1D /* SwiftKeychainWrapper */,
-				A3C9709C27B184930041058A /* FirebaseDatabase */,
 				A362C15727BEE49A00BD761A /* BottomSheet */,
 				A35A20DA27C2F54600719A01 /* SDWebImageSwiftUI */,
 				A35A20DC27C2F57100719A01 /* FirebaseStorage */,
@@ -392,11 +386,10 @@
 				A3B8D85827B11A5600752F63 /* CalendarTimeline.swift in Sources */,
 				A3027EC327DFE6D600E305F8 /* FirstOnboardingView.swift in Sources */,
 				A3027EC127DFE6AA00E305F8 /* LaunchView.swift in Sources */,
-				A3B8D85C27B13D9F00752F63 /* DateValueModel.swift in Sources */,
+				A3B8D85C27B13D9F00752F63 /* DateValue.swift in Sources */,
 				7152C6A527B6B66300E2CEAD /* NotificationManager.swift in Sources */,
 				7149E91227A96FCA008E3553 /* Credentials.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
-				7152C6A927B6BE2500E2CEAD /* DateModel.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
 				A3027EBB27DFE1D900E305F8 /* LoadingView.swift in Sources */,
 				A365EA4727DAE43300034F79 /* ParticipantRow.swift in Sources */,
@@ -726,10 +719,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A362C15627BEE49A00BD761A /* XCRemoteSwiftPackageReference "BottomSheet" */;
 			productName = BottomSheet;
-		};
-		A3C9709C27B184930041058A /* FirebaseDatabase */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = FirebaseDatabase;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
