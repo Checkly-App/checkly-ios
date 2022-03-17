@@ -16,6 +16,7 @@
 		7149E91427A977D7008E3553 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91327A977D6008E3553 /* ContentView.swift */; };
 		714E7E2A27E38F8A00235308 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91727A985BC008E3553 /* Authentication.swift */; };
 		714E7E2B27E38F9F00235308 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91927A987DD008E3553 /* Session.swift */; };
+		714E7E2D27E3916A00235308 /* EmployeeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0C27E12B22009AE0FA /* EmployeeViewModel.swift */; };
 		7152C6A527B6B66300E2CEAD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6A427B6B66300E2CEAD /* NotificationManager.swift */; };
 		7152C6A927B6BE2500E2CEAD /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6A827B6BE2500E2CEAD /* DateModel.swift */; };
 		7152C6AB27B6CF5100E2CEAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6AA27B6CF5100E2CEAD /* AppDelegate.swift */; };
@@ -46,7 +47,6 @@
 		A31E8F0727E129A3009AE0FA /* EditMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0627E129A3009AE0FA /* EditMeetingView.swift */; };
 		A31E8F0927E12A5F009AE0FA /* AttendenceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0827E12A5F009AE0FA /* AttendenceListView.swift */; };
 		A31E8F0B27E12AE4009AE0FA /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0A27E12AE4009AE0FA /* LocationManager.swift */; };
-		A31E8F0D27E12B22009AE0FA /* EmployeeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0C27E12B22009AE0FA /* EmployeeViewModel.swift */; };
 		A31E8F0F27E12BF2009AE0FA /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0E27E12BF2009AE0FA /* Employee.swift */; };
 		A35A20DB27C2F54600719A01 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = A35A20DA27C2F54600719A01 /* SDWebImageSwiftUI */; };
 		A35A20DD27C2F57100719A01 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A35A20DC27C2F57100719A01 /* FirebaseStorage */; };
@@ -167,12 +167,12 @@
 				7149E91027A96F92008E3553 /* Models */,
 				7149E90F27A96F71008E3553 /* Views */,
 				A3B8D85027B1199E00752F63 /* Helpers */,
-				7149E90D27A8747B008E3553 /* GoogleService-Info.plist */,
+				7149E90027A87213008E3553 /* Preview Content */,
 				71FE1D2927C2B6810067166D /* Info.plist */,
+				7149E90D27A8747B008E3553 /* GoogleService-Info.plist */,
 				7149E8FE27A87213008E3553 /* Assets.xcassets */,
 				7149E8FA27A8720A008E3553 /* ChecklyApp.swift */,
 				7152C6AA27B6CF5100E2CEAD /* AppDelegate.swift */,
-				7149E90027A87213008E3553 /* Preview Content */,
 			);
 			path = Checkly;
 			sourceTree = "<group>";
@@ -215,6 +215,7 @@
 		7149E91027A96F92008E3553 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				714E7E2C27E3912D00235308 /* Model Views */,
 				7149E91127A96FCA008E3553 /* Credentials.swift */,
 				A3B8D84C27B117E400752F63 /* Meeting.swift */,
 				A3B8D85B27B13D9F00752F63 /* DateValueModel.swift */,
@@ -228,6 +229,14 @@
 				7152C6A827B6BE2500E2CEAD /* DateModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		714E7E2C27E3912D00235308 /* Model Views */ = {
+			isa = PBXGroup;
+			children = (
+				A31E8F0C27E12B22009AE0FA /* EmployeeViewModel.swift */,
+			);
+			path = "Model Views";
 			sourceTree = "<group>";
 		};
 		71D09A5F27A9A0CC00DA2D1D /* Services */ = {
@@ -262,7 +271,6 @@
 			isa = PBXGroup;
 			children = (
 				A3B8D84E27B1182200752F63 /* MeetingViewModel.swift */,
-				A31E8F0C27E12B22009AE0FA /* EmployeeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -369,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				714E7E2D27E3916A00235308 /* EmployeeViewModel.swift in Sources */,
 				714E7E2B27E38F9F00235308 /* Session.swift in Sources */,
 				714E7E2A27E38F8A00235308 /* Authentication.swift in Sources */,
 				A3B8D85427B11A2B00752F63 /* CalendarView.swift in Sources */,
@@ -402,7 +411,6 @@
 				A3027EC527DFE70100E305F8 /* SecondOnboardingView.swift in Sources */,
 				A3B8D85A27B11A8900752F63 /* CalendarViewRouterHelper.swift in Sources */,
 				A31E8F0727E129A3009AE0FA /* EditMeetingView.swift in Sources */,
-				A31E8F0D27E12B22009AE0FA /* EmployeeViewModel.swift in Sources */,
 				A31E8F0127E12771009AE0FA /* LocationView.swift in Sources */,
 				A31E8F0F27E12BF2009AE0FA /* Employee.swift in Sources */,
 				A3027EC927DFE79E00E305F8 /* LiquidSwipe.swift in Sources */,
