@@ -69,7 +69,7 @@ struct GenerateMeetingView: View {
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(Color(UIColor(named: "LightGray")!))
                 TextField("type title of the meeting", text: $title)
-                    .autocapitalization(.none)
+                    
                     .padding(10)
                     .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
                                 .stroke(title.isEmpty ?
@@ -86,8 +86,8 @@ struct GenerateMeetingView: View {
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(Color(UIColor(named: "LightGray")!))
                 TextField("type the location", text: $location)
-                    .keyboardType(.emailAddress)
-                    .autocapitalization(.none)
+                  
+                 
                     .padding(10)
                     .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
                                 .stroke(location.isEmpty ?
@@ -181,7 +181,7 @@ struct GenerateMeetingView: View {
                                     .font(.caption)
                             }
                             .padding()
-                            .foregroundColor(isSelectedinline ? .cyan:.gray)
+                            .foregroundColor(isSelectedinline ? (Color(UIColor(named: "AccentColor-1")!)) :.gray)
                             .background(isSelectedinline ? .cyan.opacity(0.20):.gray.opacity(0.20))
                             .cornerRadius(90)
                         }
@@ -203,7 +203,7 @@ struct GenerateMeetingView: View {
                                     .font(.caption)
                             }
                             .padding()
-                            .foregroundColor(IsSelectedSite ? .cyan:.gray)
+                            .foregroundColor(IsSelectedSite ? (Color(UIColor(named: "AccentColor-1")!)):.gray)
                             .background(IsSelectedSite ? .cyan.opacity(0.20):.gray.opacity(0.20))
                             .cornerRadius(90)
                             

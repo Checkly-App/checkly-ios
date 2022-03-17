@@ -92,9 +92,7 @@ struct AttendenceListViewselect: View {
             VStack{
             List<Employee, ForEach<[Employee], String, AttendenceListView>>(viewModel.emplyeelist,selection: $selectrow){  empl in
                 AttendenceListView(emp:empl,attendeneslist: $attendeneslist1, selectitem: $selectrow1)
-        }              .task {
-            viewModel.fetchDatalist()
-        }}
+        }           }
             VStack{
                 Spacer()
             Button{
@@ -133,6 +131,7 @@ struct AttendenceListViewselect: View {
         }.background(.white.opacity(0.1))
             }
         }.background(.white).task{
+            viewModel.fetchDatalist()
             for attend in attendeneslist {
                 attendeneslist1.append(attend)
             }

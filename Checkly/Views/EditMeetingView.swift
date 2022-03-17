@@ -61,14 +61,13 @@ struct EditMeetingView: View {
                                         Color(UIColor(named: "Blue")!))
             }
             .padding().padding(.top)
-            .animation(.default)
+          
             VStack(alignment: .leading) {
                 Text("Location")
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(Color(UIColor(named: "LightGray")!))
                 TextField("type the location", text: $viewModel.MeetingObj.location).focused($isfocus)
-                    .keyboardType(.emailAddress)
-                    .autocapitalization(.none)
+                   
                     .padding(10)
                     .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
                                 .stroke(viewModel.MeetingObj.location.isEmpty ?
@@ -79,7 +78,7 @@ struct EditMeetingView: View {
                                         Color(UIColor(named: "Blue")!))
             }
             .padding(.horizontal)
-            .animation(.default)
+          
             VStack(alignment: .leading){
                 HStack{
                 Text("Date:")
@@ -163,8 +162,8 @@ struct EditMeetingView: View {
                                     .font(.caption)
                             }
                             .padding()
-                            .foregroundColor(viewModel.isSelectedinline ? .cyan:.gray)
-                            .background(viewModel.isSelectedinline ? .cyan.opacity(0.20):.gray.opacity(0.20))
+                            .foregroundColor(viewModel.isSelectedinline ? (Color(UIColor(named: "AccentColor-1")!)):.gray)
+                            .background(viewModel.isSelectedinline ? (Color(UIColor(named: "AccentColor-1")!)).opacity(0.20):.gray.opacity(0.20))
                             .cornerRadius(90)
                         }
                         Button(action: {
@@ -183,8 +182,8 @@ struct EditMeetingView: View {
                                     .font(.caption)
                             }
                             .padding()
-                            .foregroundColor(viewModel.IsSelectedSite ? .cyan:.gray)
-                            .background(viewModel.IsSelectedSite ? .cyan.opacity(0.20):.gray.opacity(0.20))
+                            .foregroundColor(viewModel.IsSelectedSite ? (Color(UIColor(named: "AccentColor-1")!)):.gray)
+                            .background(viewModel.IsSelectedSite ? (Color(UIColor(named: "AccentColor-1")!)).opacity(0.20):.gray.opacity(0.20))
                             .cornerRadius(90)
                             
                         }
@@ -220,7 +219,7 @@ struct EditMeetingView: View {
                                                         Color(UIColor(named: "Blue")!))
                             
                            
-                                        .animation(.default) } else {
+                                       } else {
                                             TextField("Select Address", text: $Address_pic)  .accentColor(Color.cyan)
                                                
                                                 .autocapitalization(.none).disabled(true)
@@ -234,7 +233,7 @@ struct EditMeetingView: View {
                                                                     Color(UIColor(named: "Blue")!))
                                         
                                        
-                                                    .animation(.default)
+                                                   
                                         }
                              
    }
@@ -354,7 +353,7 @@ struct EditMeetingView: View {
                 else {
                     
                     Update()
-                   dismiss()
+                  dismiss()
                     }
                 }
           
@@ -459,7 +458,8 @@ struct EditMeetingView: View {
         newcomponent.second = timecomp.second
         let newintervaldate = calender.date(from: newcomponent)
         print(newintervaldate)
-      
+        let interv = newintervaldate
+       
         let interval = Int( newintervaldate!.timeIntervalSince1970)
        print(interval)
         //End time
@@ -477,10 +477,17 @@ struct EditMeetingView: View {
         newcomponentEnd.minute = endtime.minute
         newcomponentEnd.second = endtime.second
           let intervalend = calender0.date(from: newcomponentEnd)
-        
+      
+
           let intervalEndtime = Int( intervalend!.timeIntervalSince1970)
          print(intervalEndtime)
+        let  starttimetry = newintervaldate!.formatted(.dateTime.day().month().year().hour().minute())
         
+       let  starttimetry1 = intervalend!.formatted(.dateTime.day().month().year().hour().minute())
+        print(starttimetry)
+        print(starttimetry1)
+       
+      
       
         print(attendenceID)
         print(viewModel.MeetingObj.title)
@@ -521,84 +528,154 @@ struct EditMeetingView: View {
         
  
        var starttime0 = viewModel.MeetingObj.datetime_start.formatted(.dateTime.hour().minute())
-       
+
                 var hourin =  starttime0.prefix(2)
-        
+
                       if hourin.suffix(1) == ":"
                       {
                           hourin = hourin.prefix(1)
-        
+
                      }
         var minuted = viewModel.MeetingObj.datetime_start.formatted(.dateTime.minute())
         let AmOrPM = starttime0.suffix(2)
         //End time for validate
         let    endtime0 = viewModel.MeetingObj.datetime_end.formatted(.dateTime.hour().minute())
-        
-        
+
+
         var endhour =  endtime0.prefix(2)
-         
+
                        if endhour.suffix(1) == ":"
                        {
                            endhour = endhour.prefix(1)
-         
+
                       }
-       
+
         let minutesend = viewModel.MeetingObj.datetime_end.formatted(.dateTime.minute())
         let AmOrPMend = endtime0.suffix(2)
-     
-        
+     print(hourin)
+        print(minuted)
+        print(AmOrPM)
+        print(endhour)
+        print(minutesend)
+        print(AmOrPMend)
+
         if AmOrPMend == "AM" && AmOrPM == "PM"
          {
             error0 = "Please enter a valid time"
             return false
         }
-        if AmOrPMend == AmOrPM {
-            if hourin == "12" && endhour == "12"{
-                if minuted >= minutesend {
-                    print("1")
-
-                    error0 = "Please enter a valid time"
-                    return false
-                }
-            }}
-        
-       if AmOrPMend == AmOrPM {
-
-              if  endhour == "12"{
-                if    (hourin != "12") {
-                    print("3")
-
-                    error0 = "Please enter a valid time"
-                    return false
-                }
-                
-            }
-        }
-        
-        if AmOrPMend == AmOrPM   {
-            if endhour != "12" &&  hourin != "12"{
-                if endhour < hourin {
-                    print("4")
-
-            error0 = "Please enter a valid time"
-
-            return false
-            }
-            }
+//        if AmOrPMend == AmOrPM {
+//            if hourin == "12" && endhour == "12"{
+//                if minuted >= minutesend {
+//                    print("1")
+//
+//                    error0 = "Please enter a valid time"
+//                    return false
+//                }
+//            }
+//
+//        }
+//
+//       if AmOrPMend == AmOrPM {
+//
+//              if  endhour == "12"{
+//                if    (hourin != "12") {
+//                    print("3")
+//
+//                    error0 = "Please enter a valid time"
+//                    return false
+//                }
+//
+//            }
+//        }
+//
+//        if AmOrPMend == AmOrPM   {
+//
+//                if endhour < hourin {
+//                    print("4")
+//
+//            error0 = "Please enter a valid time"
+//
+//            return false
+//
+//            }
+//
+//        }
+//
+//
+//        if AmOrPMend == AmOrPM  && endhour == hourin {
+//            print("enter in 5")
+//
+//          if  minutesend <= minuted{
+//              print("pig")
+//              error0 = "Please enter a valid time"
+//
+//                return false
+//            }
+//        }
+        //Date
+          var calender = NSCalendar.current
+          calender.timeZone = TimeZone(abbreviation: "GMT+3")!
+          let datecomp = calender.dateComponents([.day,.month,.year], from: viewModel.MeetingObj.datetime_start)
+          let timecomp = calender.dateComponents([.hour,.minute,.second], from: viewModel.MeetingObj.datetime_start)
+          var newcomponent = DateComponents()
+          newcomponent.timeZone = TimeZone(abbreviation: "GMT+3")
+          
+          newcomponent.day = datecomp.day
+          newcomponent.month = datecomp.month
+          newcomponent.year = datecomp.year
+          newcomponent.hour = timecomp.hour
+          newcomponent.minute = timecomp.minute
+          newcomponent.second = timecomp.second
+          let newintervaldate = calender.date(from: newcomponent)
+          print(newintervaldate)
+          let interv = newintervaldate
+         
+          let interval = Int( newintervaldate!.timeIntervalSince1970)
+         print(interval)
+          //End time
+            var calender0 = NSCalendar.current
+            calender0.timeZone = TimeZone(abbreviation: "GMT+3")!
+            let datecomp0 = calender.dateComponents([.day,.month,.year], from: viewModel.MeetingObj.datetime_start)
+          let endtime = calender.dateComponents([.hour,.minute,.second], from: viewModel.MeetingObj.datetime_end)
+            var newcomponentEnd = DateComponents()
+          newcomponentEnd.timeZone = TimeZone(abbreviation: "GMT+3")
             
-        }
+          newcomponentEnd.day = datecomp0.day
+          newcomponentEnd.month = datecomp0.month
+          newcomponentEnd.year = datecomp0.year
+          newcomponentEnd.hour = endtime.hour
+          newcomponentEnd.minute = endtime.minute
+          newcomponentEnd.second = endtime.second
+            let intervalend = calender0.date(from: newcomponentEnd)
+        
+
+            let intervalEndtime = Int( intervalend!.timeIntervalSince1970)
+           print(intervalEndtime)
+          let  starttimetry = newintervaldate!.formatted(.dateTime.hour().minute())
+          
+         let  starttimetry1 = intervalend!.formatted(.dateTime.hour().minute())
+          print(starttimetry)
+          print(starttimetry1)
+         
+   
        
-
-        if AmOrPMend == AmOrPM  && endhour == hourin {
-            print("enter in 5")
-
-          if  minutesend <= minuted{
-              print("pig")
-              error0 = "Please enter a valid time"
-
-                return false
-            }
+        if starttimetry.compare(starttimetry1) == .orderedSame {
+            error0 = "Please enter a valid time"
+           
+                           return false
         }
+        if starttimetry.compare(starttimetry1) == .orderedDescending {
+            error0 = "Please enter a valid time"
+           
+                           return false
+        }
+//        if starttimetry.compare(starttimetry1) == .orderedAscending {
+//            error0 = "it is ok"
+//           
+//                           return false
+//        }
+        
         
         if viewModel.MeetingObj.title == "" {
             error0 = "All fields are required"
