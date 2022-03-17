@@ -16,14 +16,14 @@ class messagesViewModel: ObservableObject {
     
     init(emp:Employee?) {
         self.emp = emp
-        fetchRecentMessages()
+        fetchRecentMessages(empID: emp!.employee_id)
     }
         
-    private func fetchRecentMessages() {
+    private func fetchRecentMessages(empID: String) {
 
         let DB = Firestore.firestore()
         
-        guard let empID = emp?.id else { return }
+        guard let empID = emp?.employee_id else { return }
         //here
         DB.collection("recent_messages").document("6387409293").collection("messages").order(by: "timestamp").addSnapshotListener { querySnapshot, error in
             if let error = error {

@@ -22,7 +22,7 @@ struct messagesView: View {
     
     init (emp: Employee) {
         self.emp = emp
-        self.vm = .init(emp: self.emp)
+        self.vm = .init(emp: emp)
     }
     
     @ObservedObject var vm: messagesViewModel
