@@ -16,6 +16,5 @@ struct Employee: Identifiable ,Hashable{
     var gender: String
     var emaill: String
     var comid: String
-
 }
 
