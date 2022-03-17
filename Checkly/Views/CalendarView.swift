@@ -16,9 +16,9 @@ struct CalendarView: View {
         switch viewRouter.currentPage {
         case .CalendarGrid:
                 // Calendar Grid
-                CalendarGrid(currentDate: $currentDate, viewRouter: viewRouter)
+                CalendarGridView(currentDate: $currentDate, viewRouter: viewRouter)
         case .CalendarTimeline:
-            CalendarTimeline(viewRouter: viewRouter)
+            CalendarTimelineView(viewRouter: viewRouter)
         }
     }
 }

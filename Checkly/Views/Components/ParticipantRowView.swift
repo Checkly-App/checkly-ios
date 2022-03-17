@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseStorage
 import SDWebImageSwiftUI
 
-struct ParticipantRow: View {
+struct ParticipantRowView: View {
     
     @Binding var selectedRows: Set<attendee>
     @Binding var attendeesDictionary: [String:String]
@@ -97,7 +97,7 @@ struct ParticipantRow_Previews: PreviewProvider {
     @State static private var attendeesDictionary = ["8UoUAkIZvnP5KSWHydWliuZmOKt2":"accepted" ,"141A9FHDjhXJGvIE7czgFg0OFxT2":"accepted"]
     
     static var previews: some View {
-        ParticipantRow(selectedRows: (.constant(Set<attendee>())), attendeesDictionary: $attendeesDictionary ,attendee: attendee(id: "e0a6ozh4A0QVOXY0tyiMSFyfL163", name: "Aleen AlSuhaibani", position: "Associate", imgToken: "null", status: "accepted"))
+        ParticipantRowView(selectedRows: (.constant(Set<attendee>())), attendeesDictionary: $attendeesDictionary ,attendee: attendee(id: "e0a6ozh4A0QVOXY0tyiMSFyfL163", name: "Aleen AlSuhaibani", position: "Associate", imgToken: "null", status: "accepted"))
     }
 }
 

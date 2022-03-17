@@ -10,7 +10,7 @@ import MapKit
 
 import BottomSheet
 
-struct CalendarTimeline: View {
+struct CalendarTimelineView: View {
     
      @ObservedObject var meetingViewModel: MeetingViewModel = MeetingViewModel()
      @Namespace var animation
@@ -112,7 +112,7 @@ struct CalendarTimeline: View {
          // MARK: Meeting Details Sheet
              .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray), .background({AnyView(Color.white)})], content: {
              // see view under "Views" folder
-             MeetingDetails(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: self.meetingViewModel.filteredMeetings?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"), showingPASheet: $showingPASheet, editMeetingDetails: $editMeetingView)
+             MeetingDetailsView(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: self.meetingViewModel.filteredMeetings?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"), showingPASheet: $showingPASheet, editMeetingDetails: $editMeetingView)
 
          })
          // MARK: Attendees List Sheet
@@ -124,7 +124,7 @@ struct CalendarTimeline: View {
          .sheet(isPresented: $showingPASheet, content: {
              
              // display Participants Attendance view
-             ParticipantsAttendance(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
+             ParticipantsAttendanceView(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
              
          })
          
@@ -297,7 +297,7 @@ struct CalendarTimeline: View {
 
 struct CalendarTimeline_Previews: PreviewProvider {
     static var previews: some View {
-        CalendarTimeline(viewRouter: CalendarViewRouterHelper())
+        CalendarTimelineView(viewRouter: CalendarViewRouterHelper())
     }
 }
 

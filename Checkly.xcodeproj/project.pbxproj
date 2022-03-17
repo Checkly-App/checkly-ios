@@ -50,16 +50,16 @@
 		A35A20DB27C2F54600719A01 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = A35A20DA27C2F54600719A01 /* SDWebImageSwiftUI */; };
 		A35A20DD27C2F57100719A01 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A35A20DC27C2F57100719A01 /* FirebaseStorage */; };
 		A362C15827BEE49A00BD761A /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = A362C15727BEE49A00BD761A /* BottomSheet */; };
-		A365EA4727DAE43300034F79 /* ParticipantRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A365EA4627DAE43300034F79 /* ParticipantRow.swift */; };
-		A365EA4927DAE46800034F79 /* ParticipantsAttendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A365EA4827DAE46800034F79 /* ParticipantsAttendance.swift */; };
+		A365EA4727DAE43300034F79 /* ParticipantRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A365EA4627DAE43300034F79 /* ParticipantRowView.swift */; };
+		A365EA4927DAE46800034F79 /* ParticipantsAttendanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A365EA4827DAE46800034F79 /* ParticipantsAttendanceView.swift */; };
 		A39913FF27D29FB400B26628 /* MeetingAttendeesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39913FE27D29FB400B26628 /* MeetingAttendeesListView.swift */; };
-		A399140127D29FEC00B26628 /* MeetingDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A399140027D29FEC00B26628 /* MeetingDetails.swift */; };
+		A399140127D29FEC00B26628 /* MeetingDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A399140027D29FEC00B26628 /* MeetingDetailsView.swift */; };
 		A3B8D84D27B117E500752F63 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D84C27B117E400752F63 /* Meeting.swift */; };
 		A3B8D84F27B1182200752F63 /* MeetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D84E27B1182200752F63 /* MeetingViewModel.swift */; };
 		A3B8D85227B119FB00752F63 /* CalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85127B119FB00752F63 /* CalendarHelper.swift */; };
 		A3B8D85427B11A2B00752F63 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85327B11A2B00752F63 /* CalendarView.swift */; };
-		A3B8D85627B11A4200752F63 /* CalendarGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85527B11A4200752F63 /* CalendarGrid.swift */; };
-		A3B8D85827B11A5600752F63 /* CalendarTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85727B11A5600752F63 /* CalendarTimeline.swift */; };
+		A3B8D85627B11A4200752F63 /* CalendarGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85527B11A4200752F63 /* CalendarGridView.swift */; };
+		A3B8D85827B11A5600752F63 /* CalendarTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85727B11A5600752F63 /* CalendarTimelineView.swift */; };
 		A3B8D85A27B11A8900752F63 /* CalendarViewRouterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85927B11A8900752F63 /* CalendarViewRouterHelper.swift */; };
 		A3B8D85C27B13D9F00752F63 /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85B27B13D9F00752F63 /* DateValue.swift */; };
 		A3CE73FE27CD5593002D2517 /* AnnotatedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CE73FD27CD5593002D2517 /* AnnotatedItem.swift */; };
@@ -99,16 +99,16 @@
 		A31E8F0A27E12AE4009AE0FA /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A31E8F0C27E12B22009AE0FA /* EmployeeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeViewModel.swift; sourceTree = "<group>"; };
 		A31E8F0E27E12BF2009AE0FA /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
-		A365EA4627DAE43300034F79 /* ParticipantRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantRow.swift; sourceTree = "<group>"; };
-		A365EA4827DAE46800034F79 /* ParticipantsAttendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsAttendance.swift; sourceTree = "<group>"; };
+		A365EA4627DAE43300034F79 /* ParticipantRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantRowView.swift; sourceTree = "<group>"; };
+		A365EA4827DAE46800034F79 /* ParticipantsAttendanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsAttendanceView.swift; sourceTree = "<group>"; };
 		A39913FE27D29FB400B26628 /* MeetingAttendeesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingAttendeesListView.swift; sourceTree = "<group>"; };
-		A399140027D29FEC00B26628 /* MeetingDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetails.swift; sourceTree = "<group>"; };
+		A399140027D29FEC00B26628 /* MeetingDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailsView.swift; sourceTree = "<group>"; };
 		A3B8D84C27B117E400752F63 /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		A3B8D84E27B1182200752F63 /* MeetingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewModel.swift; sourceTree = "<group>"; };
 		A3B8D85127B119FB00752F63 /* CalendarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
 		A3B8D85327B11A2B00752F63 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
-		A3B8D85527B11A4200752F63 /* CalendarGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarGrid.swift; sourceTree = "<group>"; };
-		A3B8D85727B11A5600752F63 /* CalendarTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTimeline.swift; sourceTree = "<group>"; };
+		A3B8D85527B11A4200752F63 /* CalendarGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarGridView.swift; sourceTree = "<group>"; };
+		A3B8D85727B11A5600752F63 /* CalendarTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTimelineView.swift; sourceTree = "<group>"; };
 		A3B8D85927B11A8900752F63 /* CalendarViewRouterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewRouterHelper.swift; sourceTree = "<group>"; };
 		A3B8D85B27B13D9F00752F63 /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
 		A3CE73FD27CD5593002D2517 /* AnnotatedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedItem.swift; sourceTree = "<group>"; };
@@ -160,7 +160,6 @@
 				71D09A5F27A9A0CC00DA2D1D /* Services */,
 				7149E91027A96F92008E3553 /* Models */,
 				7149E90F27A96F71008E3553 /* Views */,
-				A3B8D85027B1199E00752F63 /* Helpers */,
 				7149E90027A87213008E3553 /* Preview Content */,
 				71FE1D2927C2B6810067166D /* Info.plist */,
 				7149E90D27A8747B008E3553 /* GoogleService-Info.plist */,
@@ -184,12 +183,11 @@
 			children = (
 				A3027EB727DFE19700E305F8 /* Components */,
 				A3B8D85327B11A2B00752F63 /* CalendarView.swift */,
-				A3B8D85527B11A4200752F63 /* CalendarGrid.swift */,
-				A3B8D85727B11A5600752F63 /* CalendarTimeline.swift */,
+				A3B8D85527B11A4200752F63 /* CalendarGridView.swift */,
+				A3B8D85727B11A5600752F63 /* CalendarTimelineView.swift */,
 				A39913FE27D29FB400B26628 /* MeetingAttendeesListView.swift */,
-				A399140027D29FEC00B26628 /* MeetingDetails.swift */,
-				A365EA4627DAE43300034F79 /* ParticipantRow.swift */,
-				A365EA4827DAE46800034F79 /* ParticipantsAttendance.swift */,
+				A399140027D29FEC00B26628 /* MeetingDetailsView.swift */,
+				A365EA4827DAE46800034F79 /* ParticipantsAttendanceView.swift */,
 				A3027EB527DFE12500E305F8 /* FaceIDView.swift */,
 				A3027EC027DFE6AA00E305F8 /* LaunchView.swift */,
 				A3027EC227DFE6D600E305F8 /* FirstOnboardingView.swift */,
@@ -225,6 +223,7 @@
 		71D09A5F27A9A0CC00DA2D1D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A3B8D85027B1199E00752F63 /* Helpers */,
 				71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */,
 				7149E91727A985BC008E3553 /* Authentication.swift */,
 				A3027EAF27DFDFAE00E305F8 /* ViewExtension.swift */,
@@ -237,6 +236,7 @@
 		A3027EB727DFE19700E305F8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A365EA4627DAE43300034F79 /* ParticipantRowView.swift */,
 				A3027EB827DFE1B700E305F8 /* InputsView.swift */,
 				A3027EBA27DFE1D900E305F8 /* LoadingView.swift */,
 				A3027EBC27DFE1F800E305F8 /* TitleView.swift */,
@@ -267,7 +267,8 @@
 				A3B8D85127B119FB00752F63 /* CalendarHelper.swift */,
 				A3B8D85927B11A8900752F63 /* CalendarViewRouterHelper.swift */,
 			);
-			path = Helpers;
+			name = Helpers;
+			path = ../Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,11 +378,11 @@
 				A39913FF27D29FB400B26628 /* MeetingAttendeesListView.swift in Sources */,
 				A3027EB227DFE00700E305F8 /* Company.swift in Sources */,
 				A3027EBD27DFE1F800E305F8 /* TitleView.swift in Sources */,
-				A365EA4927DAE46800034F79 /* ParticipantsAttendance.swift in Sources */,
-				A399140127D29FEC00B26628 /* MeetingDetails.swift in Sources */,
+				A365EA4927DAE46800034F79 /* ParticipantsAttendanceView.swift in Sources */,
+				A399140127D29FEC00B26628 /* MeetingDetailsView.swift in Sources */,
 				A31E8F0327E127F3009AE0FA /* GenerateMeetingView.swift in Sources */,
 				A3B8D85227B119FB00752F63 /* CalendarHelper.swift in Sources */,
-				A3B8D85827B11A5600752F63 /* CalendarTimeline.swift in Sources */,
+				A3B8D85827B11A5600752F63 /* CalendarTimelineView.swift in Sources */,
 				A3027EC327DFE6D600E305F8 /* FirstOnboardingView.swift in Sources */,
 				A3027EC127DFE6AA00E305F8 /* LaunchView.swift in Sources */,
 				A3B8D85C27B13D9F00752F63 /* DateValue.swift in Sources */,
@@ -389,8 +390,8 @@
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
 				A3027EBB27DFE1D900E305F8 /* LoadingView.swift in Sources */,
-				A365EA4727DAE43300034F79 /* ParticipantRow.swift in Sources */,
-				A3B8D85627B11A4200752F63 /* CalendarGrid.swift in Sources */,
+				A365EA4727DAE43300034F79 /* ParticipantRowView.swift in Sources */,
+				A3B8D85627B11A4200752F63 /* CalendarGridView.swift in Sources */,
 				A3027EC527DFE70100E305F8 /* SecondOnboardingView.swift in Sources */,
 				A3B8D85A27B11A8900752F63 /* CalendarViewRouterHelper.swift in Sources */,
 				A31E8F0727E129A3009AE0FA /* EditMeetingView.swift in Sources */,
