@@ -163,7 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				71D09A5F27A9A0CC00DA2D1D /* Services */,
-				A3B8D84B27B1178600752F63 /* ViewModel */,
 				7149E91027A96F92008E3553 /* Models */,
 				7149E90F27A96F71008E3553 /* Views */,
 				A3B8D85027B1199E00752F63 /* Helpers */,
@@ -215,7 +214,7 @@
 		7149E91027A96F92008E3553 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				714E7E2C27E3912D00235308 /* Model Views */,
+				A3B8D84B27B1178600752F63 /* View Models */,
 				7149E91127A96FCA008E3553 /* Credentials.swift */,
 				A3B8D84C27B117E400752F63 /* Meeting.swift */,
 				A3B8D85B27B13D9F00752F63 /* DateValueModel.swift */,
@@ -229,14 +228,6 @@
 				7152C6A827B6BE2500E2CEAD /* DateModel.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		714E7E2C27E3912D00235308 /* Model Views */ = {
-			isa = PBXGroup;
-			children = (
-				A31E8F0C27E12B22009AE0FA /* EmployeeViewModel.swift */,
-			);
-			path = "Model Views";
 			sourceTree = "<group>";
 		};
 		71D09A5F27A9A0CC00DA2D1D /* Services */ = {
@@ -267,12 +258,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A3B8D84B27B1178600752F63 /* ViewModel */ = {
+		A3B8D84B27B1178600752F63 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				A31E8F0C27E12B22009AE0FA /* EmployeeViewModel.swift */,
 				A3B8D84E27B1182200752F63 /* MeetingViewModel.swift */,
 			);
-			path = ViewModel;
+			name = "View Models";
+			path = "../View Models";
 			sourceTree = "<group>";
 		};
 		A3B8D85027B1199E00752F63 /* Helpers */ = {
