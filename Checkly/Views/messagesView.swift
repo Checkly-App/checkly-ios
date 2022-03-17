@@ -35,28 +35,31 @@ struct messagesView: View {
                         
                         
                                 HStack {
-                                    HStack (spacing: 16){
+                                    HStack (spacing: 10){
                                         if ( recentMessage.photoURL == "null") {
-                                            Image(systemName: "person.crop.circle.fill").font(.system(size:65)).foregroundColor(.gray).frame(width: 64, height: 64).clipped().cornerRadius(64).overlay(RoundedRectangle(cornerRadius: 64).stroke(Color(.gray), lineWidth: 1)).shadow(radius: 5)
+                                            Image(systemName: "person.crop.circle.fill").font(.system(size:60)).foregroundColor(.gray).frame(width: 64, height: 64).clipped().cornerRadius(64)
                                         } else {
-                                            WebImage(url: URL(string: recentMessage.photoURL)).resizable().scaledToFill().frame(width: 64, height: 64).clipped().cornerRadius(64).overlay(RoundedRectangle(cornerRadius: 64).stroke(Color(.gray), lineWidth: 1)).shadow(radius: 5)
+                                            WebImage(url: URL(string: recentMessage.photoURL)).resizable().scaledToFill().frame(width: 60, height: 60).clipped().cornerRadius(64).overlay(RoundedRectangle(cornerRadius: 64).stroke(Color(.gray), lineWidth: 1)).shadow(radius: 5)
                                         }
                                         
-                                        VStack (alignment: .leading, spacing: 10){
-                                            if ( recentMessage.senderName == emp.name) { //here
-                                                Text(recentMessage.receiverName).font(.system(size: 16, weight: .bold)).foregroundColor(.black)
-                                                Text(recentMessage.text).font(.system(size: 14)).foregroundColor(Color(.darkGray))
-                                                    .multilineTextAlignment(.leading )
+                                        VStack(alignment: .leading, spacing: 20) {
+                                        HStack {
+                                            if ( recentMessage.senderName == emp.name) {
+                                            Text(recentMessage.receiverName).font(.system(size: 16, weight: .bold)).foregroundColor(.black)
                                             } else {
                                                 Text(recentMessage.senderName).font(.system(size: 16, weight: .bold)).foregroundColor(.black)
-                                                Text(recentMessage.text).font(.system(size: 14)).foregroundColor(Color(.darkGray))
-                                                    .multilineTextAlignment(.leading )
                                             }
+                                            Spacer()
+                                            Text(recentMessage.timestamp.timeAgoDisplay()).font(.system(size: 10, weight: .semibold)).foregroundColor(.gray)
                                         }
-                                        Spacer()
-                                        Text(recentMessage.timestamp.timeAgoDisplay()).font(.system(size: 10, weight: .semibold)).foregroundColor(.gray)
+                                            
+                                            Text(recentMessage.text).font(.system(size: 14)).foregroundColor(Color(.darkGray))
+                                                .multilineTextAlignment(.leading )
+    
+                                        }
+                                    
                                     }
-                                    .padding()
+                                    .padding(10)
                                 }
                                 .background(NavigationLink(
                                     destination: chatView(chatUser: selectedUser, emp: self.emp),
