@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct CalendarView: View {
     
@@ -22,4 +23,16 @@ struct CalendarView: View {
         }
     }
 }
+
+enum Page {
+    case CalendarGrid
+    case CalendarTimeline
+}
+
+class CalendarViewRouterHelper: ObservableObject{
+    
+    @Published var currentPage: Page = .CalendarGrid
+    
+}
+
 

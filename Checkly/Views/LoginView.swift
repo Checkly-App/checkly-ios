@@ -106,7 +106,7 @@ struct LoginView: View {
             .background(Color(UIColor(.white)))
             .navigationBarHidden(true)
         }
-        
+        .preferredColorScheme(.light)
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }

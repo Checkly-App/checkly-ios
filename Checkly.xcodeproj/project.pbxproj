@@ -56,11 +56,9 @@
 		A399140127D29FEC00B26628 /* MeetingDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A399140027D29FEC00B26628 /* MeetingDetailsView.swift */; };
 		A3B8D84D27B117E500752F63 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D84C27B117E400752F63 /* Meeting.swift */; };
 		A3B8D84F27B1182200752F63 /* MeetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D84E27B1182200752F63 /* MeetingViewModel.swift */; };
-		A3B8D85227B119FB00752F63 /* CalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85127B119FB00752F63 /* CalendarHelper.swift */; };
 		A3B8D85427B11A2B00752F63 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85327B11A2B00752F63 /* CalendarView.swift */; };
 		A3B8D85627B11A4200752F63 /* CalendarGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85527B11A4200752F63 /* CalendarGridView.swift */; };
 		A3B8D85827B11A5600752F63 /* CalendarTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85727B11A5600752F63 /* CalendarTimelineView.swift */; };
-		A3B8D85A27B11A8900752F63 /* CalendarViewRouterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85927B11A8900752F63 /* CalendarViewRouterHelper.swift */; };
 		A3B8D85C27B13D9F00752F63 /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85B27B13D9F00752F63 /* DateValue.swift */; };
 		A3CE73FE27CD5593002D2517 /* AnnotatedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CE73FD27CD5593002D2517 /* AnnotatedItem.swift */; };
 /* End PBXBuildFile section */
@@ -105,11 +103,9 @@
 		A399140027D29FEC00B26628 /* MeetingDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailsView.swift; sourceTree = "<group>"; };
 		A3B8D84C27B117E400752F63 /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		A3B8D84E27B1182200752F63 /* MeetingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewModel.swift; sourceTree = "<group>"; };
-		A3B8D85127B119FB00752F63 /* CalendarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
 		A3B8D85327B11A2B00752F63 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		A3B8D85527B11A4200752F63 /* CalendarGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarGridView.swift; sourceTree = "<group>"; };
 		A3B8D85727B11A5600752F63 /* CalendarTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTimelineView.swift; sourceTree = "<group>"; };
-		A3B8D85927B11A8900752F63 /* CalendarViewRouterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewRouterHelper.swift; sourceTree = "<group>"; };
 		A3B8D85B27B13D9F00752F63 /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
 		A3CE73FD27CD5593002D2517 /* AnnotatedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -223,7 +219,6 @@
 		71D09A5F27A9A0CC00DA2D1D /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				A3B8D85027B1199E00752F63 /* Helpers */,
 				71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */,
 				7149E91727A985BC008E3553 /* Authentication.swift */,
 				A3027EAF27DFDFAE00E305F8 /* ViewExtension.swift */,
@@ -259,16 +254,6 @@
 			);
 			name = "View Models";
 			path = "../View Models";
-			sourceTree = "<group>";
-		};
-		A3B8D85027B1199E00752F63 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				A3B8D85127B119FB00752F63 /* CalendarHelper.swift */,
-				A3B8D85927B11A8900752F63 /* CalendarViewRouterHelper.swift */,
-			);
-			name = Helpers;
-			path = ../Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,7 +366,6 @@
 				A365EA4927DAE46800034F79 /* ParticipantsAttendanceView.swift in Sources */,
 				A399140127D29FEC00B26628 /* MeetingDetailsView.swift in Sources */,
 				A31E8F0327E127F3009AE0FA /* GenerateMeetingView.swift in Sources */,
-				A3B8D85227B119FB00752F63 /* CalendarHelper.swift in Sources */,
 				A3B8D85827B11A5600752F63 /* CalendarTimelineView.swift in Sources */,
 				A3027EC327DFE6D600E305F8 /* FirstOnboardingView.swift in Sources */,
 				A3027EC127DFE6AA00E305F8 /* LaunchView.swift in Sources */,
@@ -393,7 +377,6 @@
 				A365EA4727DAE43300034F79 /* ParticipantRowView.swift in Sources */,
 				A3B8D85627B11A4200752F63 /* CalendarGridView.swift in Sources */,
 				A3027EC527DFE70100E305F8 /* SecondOnboardingView.swift in Sources */,
-				A3B8D85A27B11A8900752F63 /* CalendarViewRouterHelper.swift in Sources */,
 				A31E8F0727E129A3009AE0FA /* EditMeetingView.swift in Sources */,
 				A31E8F0127E12771009AE0FA /* LocationView.swift in Sources */,
 				A31E8F0F27E12BF2009AE0FA /* Employee.swift in Sources */,
