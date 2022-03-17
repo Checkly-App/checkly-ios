@@ -40,6 +40,7 @@ struct GenerateMeetingView: View {
     @FocusState private var isfocus : Bool
     @State var selectrow = Set<Employee>()
     @State var attendeneslist: [Employee] = []
+    @State var sendattendeneslist: [Employee] = []
     //  @State var attendeeslist = [Employee]()
     @State var text = ""
     @State var type = "Online"
@@ -287,6 +288,7 @@ struct GenerateMeetingView: View {
                         
                      
                         Button(action: {
+                            sendattendeneslist = viewModel.emplyeelist
                             viewlist = true
                         // Isselectattendense = false
                 }) {
@@ -332,7 +334,7 @@ struct GenerateMeetingView: View {
 )
                     
                 } .sheet(isPresented: $viewlist, content: {
-                    AttendenceListViewselect(selectrow: $selectrow, selectatt: $Isselectattendense, isshow: $isshow, attendeneslist: $attendeneslist)
+                    AttendenceListViewselect(selectrow: $selectrow, selectatt: $Isselectattendense, isshow: $isshow, attendeneslist: $attendeneslist, Allemployee: $sendattendeneslist)
                 })
                 }.sheet(isPresented: $viewlist1, content: {
                  // LocationMeetingView()
@@ -344,7 +346,9 @@ struct GenerateMeetingView: View {
                 Text(error0)
             })
             }
-            .padding(.trailing)
+            .padding(.trailing).task{
+                viewModel.fetchDatalist()
+            }
             .preferredColorScheme(.light)
         }.navigationBarTitle("Generate Meeting").toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
