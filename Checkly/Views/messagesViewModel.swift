@@ -11,19 +11,21 @@ import Firebase
 class messagesViewModel: ObservableObject {
     
     @Published var recentMessages = [recentMessage]()
-    let userID = "FJvmCdXGd7UWELDQIEJS3kisTa03"
+    var emp: Employee?
 
     
-    init() {
+    init(emp:Employee?) {
+        self.emp = emp
         fetchRecentMessages()
     }
         
     private func fetchRecentMessages() {
 
         let DB = Firestore.firestore()
-        let userID = "FJvmCdXGd7UWELDQIEJS3kisTa03"
-
-        DB.collection("recent_messages").document(userID).collection("messages").order(by: "timestamp").addSnapshotListener { querySnapshot, error in
+        
+        guard let empID = emp?.id else { return }
+        //here
+        DB.collection("recent_messages").document("439201282").collection("messages").order(by: "timestamp").addSnapshotListener { querySnapshot, error in
             if let error = error {
                 print(error)
                 return

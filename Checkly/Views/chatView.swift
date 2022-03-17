@@ -11,11 +11,12 @@ import SwiftUI
 struct chatView: View {
     
     let chatUser: Employee?
-    let userID = "FJvmCdXGd7UWELDQIEJS3kisTa03"
+    var emp: Employee
     
-    init(chatUser: Employee?) {
+    init(chatUser: Employee?, emp:Employee) {
         self.chatUser = chatUser
-        self.vm = .init(chatUser: chatUser)
+        self.emp = emp
+        self.vm = .init(chatUser: chatUser, emp: emp)
     }
     
     @ObservedObject var vm: chatViewModel
@@ -28,7 +29,7 @@ struct chatView: View {
                     VStack{
                         ForEach(vm.chatMessages) { message in
                             VStack{
-                                if message.fromID == userID {
+                                if message.fromID == emp.id {
                                     HStack{
                                         Spacer()
                                         HStack{

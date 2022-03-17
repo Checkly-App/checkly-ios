@@ -11,18 +11,20 @@ class chatViewModel: ObservableObject{
     
     let chatUser: Employee?
     let DB = Firestore.firestore()
+    var emp: Employee?
     
-    init(chatUser: Employee? ) {
+    init(chatUser: Employee?, emp:Employee? ) {
+        self.emp = emp
         self.chatUser = chatUser
         fetchMessages()
     }
     
     func fetchMessages() {
-        //change to current user
-        let fromID = "FJvmCdXGd7UWELDQIEJS3kisTa03"
+       
         guard let toID = chatUser?.id else { return }
+        guard let empID = emp?.id else { return }
         
-        DB.collection("texts").document(fromID).collection(toID).order(by: "timestamp").addSnapshotListener { querySnapshot, error in
+        DB.collection("texts").document(empID).collection(toID).order(by: "timestamp").addSnapshotListener { querySnapshot, error in
             if let error = error {
                 print(error)
                 return
@@ -41,16 +43,16 @@ class chatViewModel: ObservableObject{
     }
     
     func handelSend() {
-        //change to current user
-        let fromID = "FJvmCdXGd7UWELDQIEJS3kisTa03"
-        guard let toID = chatUser?.id else { return }
 
-        let document = DB.collection("texts").document(fromID).collection(toID).document()
+        guard let toID = chatUser?.id else { return }
+        guard let empID = emp?.id else { return }
+
+        let document = DB.collection("texts").document(empID).collection(toID).document()
         
-        let messageData = ["fromID" : fromID, "toID" : toID, "text" : self.chatText, "timestamp" : Timestamp() ] as [String : Any]
+        let messageData = ["fromID" : empID, "toID" : toID, "text" : self.chatText, "timestamp" : Timestamp() ] as [String : Any]
         
         document.setData(messageData) { error in
-            if let error = error {
+            if error != nil {
                 return
             }
             
@@ -60,10 +62,10 @@ class chatViewModel: ObservableObject{
             self.count += 1
         }
         
-        let recipientMessageDocument = DB.collection("texts").document(toID).collection(fromID).document()
+        let recipientMessageDocument = DB.collection("texts").document(toID).collection(empID).document()
         
         recipientMessageDocument.setData(messageData) { error in
-            if let error = error {
+            if error != nil {
                 return
             }
         }
@@ -76,23 +78,25 @@ class chatViewModel: ObservableObject{
         guard let chatUser = chatUser else {
             return
         }
+        
+        guard let emp = emp else {
+            return
+        }
 
-            //change to current user
-        let userID = "FJvmCdXGd7UWELDQIEJS3kisTa03"
         guard let toID = self.chatUser?.id else { return }
                 
         let data = [
             "timestamp": Timestamp(),
             "text": self.chatText,
-            "fromID": userID,
+            "fromID": emp.id,
             "toID": toID,
             "username": chatUser.name,
-            "senderName": "Dalal Bin Humaid", //change to current user
+            "senderName": emp.name,
             "receiverName": chatUser.name,
             "photoURL": chatUser.photoURL
         ] as [String : Any]
         
-        DB.collection("recent_messages").document(userID)
+        DB.collection("recent_messages").document(emp.id)
         .collection("messages")
         .document(toID)
         .setData(data) { error in
@@ -105,17 +109,17 @@ class chatViewModel: ObservableObject{
         let data2 = [
             "timestamp": Timestamp(),
             "text": self.chatText,
-            "fromID": userID,
+            "fromID": emp.id,
             "toID": toID,
             "username": chatUser.name,
-            "senderName": "Dalal Bin Humaid",
+            "senderName": emp.name,
             "receiverName": chatUser.name,
-            "photoURL": "null"
+            "photoURL": emp.photoURL
         ] as [String : Any]
         
         DB.collection("recent_messages").document(toID)
         .collection("messages")
-        .document(userID)
+        .document(emp.id)
         .setData(data2) { error in
             if let error = error {
                 print(error)

@@ -18,9 +18,14 @@ struct messagesView: View {
     @State var shouldNavigateToChatLogView = false
     @State var shouldShowNewMessageScreen = false
     @State var selectedUser: Employee?
-    @ObservedObject var vm = messagesViewModel()
     var emp: Employee
     
+    init (emp: Employee) {
+        self.emp = emp
+        self.vm = .init(emp: self.emp)
+    }
+    
+    @ObservedObject var vm: messagesViewModel
 
     var body: some View {
         NavigationView{
@@ -38,7 +43,7 @@ struct messagesView: View {
                                         }
                                         
                                         VStack (alignment: .leading, spacing: 10){
-                                            if ( recentMessage.senderName == "Dalal Bin Humaid") {
+                                            if ( recentMessage.senderName == emp.name) { //here
                                                 Text(recentMessage.receiverName).font(.system(size: 16, weight: .bold)).foregroundColor(.black)
                                                 Text(recentMessage.text).font(.system(size: 14)).foregroundColor(Color(.darkGray))
                                                     .multilineTextAlignment(.leading )
@@ -54,12 +59,12 @@ struct messagesView: View {
                                     .padding()
                                 }
                                 .background(NavigationLink(
-                                    destination: chatView(chatUser: selectedUser),
+                                    destination: chatView(chatUser: selectedUser, emp: self.emp),
                                     isActive: $shouldNavigateToChatLogView) {
                                         EmptyView()
                                     }).contentShape(Rectangle())
                                 .onTapGesture {
-                                    if ( recentMessage.fromID == vm.userID ) {
+                                    if ( recentMessage.fromID == emp.id ) {
                                         vm.getSelectedUser(id: recentMessage.toID, completion: { emp in
                                             selectedUser = emp
                                         })
@@ -88,7 +93,7 @@ struct messagesView: View {
                 
                 .navigationTitle("Messages").navigationBarTitleDisplayMode(.inline)
                 NavigationLink("" , isActive: $shouldNavigateToChatLogView) {
-                    chatView(chatUser: self.selectedUser)
+                    chatView(chatUser: self.selectedUser, emp: self.emp)
                 }
                 Button {
                     shouldShowNewMessageScreen.toggle()
@@ -104,7 +109,7 @@ struct messagesView: View {
                         .padding(.horizontal)
                         .shadow(radius: 15)
                 }.fullScreenCover(isPresented: $shouldShowNewMessageScreen, onDismiss: nil) {
-                    createNewMessageView(didSelectNewUser: {
+                    createNewMessageView(emp: self.emp, didSelectNewUser: {
                         user in
                         self.shouldNavigateToChatLogView.toggle()
                         self.selectedUser = user

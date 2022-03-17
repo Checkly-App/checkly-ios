@@ -11,24 +11,22 @@ import SDWebImageSwiftUI
 
 class createNewMessageViewModel: ObservableObject {
     
+    var emp: Employee
     @Published var users = [Employee]()
     @Published var departments = [String]()
-    let userID = "FJvmCdXGd7UWELDQIEJS3kisTa03"
     var companyID: String?
-    var Department: String?
+   
  
     
-init() {
-    getDepartment {
+    init(emp: Employee) {
+        self.emp = emp
         getCompany {
             getCompanyDepartments {
                 getCompanyEmployees()
             }
         }
     }
-}
 
-    
     
     func getCompanyEmployees(){
 
@@ -58,7 +56,7 @@ init() {
             
             let emp = Employee(address: address, birthdate: birthdate, department: department, email: email, id: id, gender: gender, name: name, national_id: national_id, phone_number: phone_number, position: position, photoURL: photoURL)
             
-            if ( self.departments.contains(emp.department) ) {
+            if ( self.departments.contains(emp.department) && emp.id != self.emp.id  ) {
                 self.users.append(emp)
             }
             print(self.users)
@@ -107,7 +105,7 @@ init() {
         
         Queue.sync {
                     
-            ref.child("Department/dep2").observe(.value, with: { dataSnapshot in
+            ref.child("Department/\(emp.department)").observe(.value, with: { dataSnapshot in
 
                     let obj = dataSnapshot.value as! [String:Any]
 
@@ -120,58 +118,26 @@ init() {
         }
         completion()
     }
-    
 
-    func getDepartment(completion: () -> Void) {
-    
-  
-    let ref = Database.database().reference()
-    let Queue = DispatchQueue.init(label: "Queue")
-    
-        Queue.sync {
-                
-                print("start search")
-                ref.child("Employee/FJvmCdXGd7UWELDQIEJS3kisTa03").observe(.value, with: { dataSnapshot in
-
-                let obj = dataSnapshot.value as! [String:Any]
-
-
-                    let name = obj["name"] as! String
-                    let id = obj["employee_id"] as! String
-                    let department = obj["department"] as! String
-                    let photoURL = obj["image_token"] as! String
-                    let birthdate = obj["birthdate"] as! String
-                    let email = obj["email"] as! String
-                    let address = obj["address"] as! String
-                    let gender = obj["gender"] as! String
-                    let national_id = obj["national_id"] as! String
-                    let phone_number = obj["phone_number"] as! String
-                    let position = obj["position"] as! String
-
-                    let emp = Employee(address: address, birthdate: birthdate, department: department, email: email, id: id, gender: gender, name: name, national_id: national_id, phone_number: phone_number, position: position, photoURL: photoURL)
-                    self.Department = emp.department
-                    
-                    print("XXXXXXXX",self.Department!,"XXXXXXXX")
-                    
-            }, withCancel: { error in
-                print(error.localizedDescription)
-            })
-            
-    }
-
-        completion()
 }
-}
-
 
 
 struct createNewMessageView: View {
     
-    let didSelectNewUser: (Employee) -> ()
+   
     
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var vm = createNewMessageViewModel()
+    var emp: Employee
+    @ObservedObject var vm: createNewMessageViewModel
+    
+    init(emp: Employee, didSelectNewUser: @escaping (Employee) -> () ) {
+        self.emp = emp
+        self.vm = .init(emp: emp)
+        self.didSelectNewUser = didSelectNewUser
+    }
+    
+    let didSelectNewUser: (Employee) -> ()
     
     var body: some View {
         NavigationView {
