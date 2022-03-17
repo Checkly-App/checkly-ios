@@ -51,7 +51,7 @@ class NotificationManager {
                 for attendee in attendees {
                     /// trigger a notification only if the current user was invited. i.e.,  is in the attendees list
                     if uid == attendee.key && attendee.value == "sent"{
-                        print("create notification")
+                        print("create notification \(uid) and \(attendee.key)")
                         ref.child("Meetings").child("\(meeting.id)").child("attendees").updateChildValues(["\(uid)":"notified"])
                         createMeetingNotification(meeting: meeting, attendee_id: uid, date: datetime_start)
                     }
