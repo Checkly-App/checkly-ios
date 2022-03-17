@@ -222,7 +222,6 @@
 				A3027EB127DFE00700E305F8 /* Company.swift */,
 				A3027EB327DFE05D00E305F8 /* Session.swift */,
 				A3027EC827DFE79E00E305F8 /* LiquidSwipe.swift */,
-				A31E8F0A27E12AE4009AE0FA /* LocationManager.swift */,
 				A31E8F0E27E12BF2009AE0FA /* Employee.swift */,
 				7149E91927A987DD008E3553 /* Session.swift */,
 				7152C6A827B6BE2500E2CEAD /* DateModel.swift */,
@@ -237,6 +236,7 @@
 				7149E91727A985BC008E3553 /* Authentication.swift */,
 				A3027EAF27DFDFAE00E305F8 /* ViewExtension.swift */,
 				7152C6A427B6B66300E2CEAD /* NotificationManager.swift */,
+				A31E8F0A27E12AE4009AE0FA /* LocationManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
