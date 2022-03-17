@@ -107,6 +107,7 @@ struct messagesView: View {
                         .background(LinearGradient(gradient: Gradient(colors: [Color(hexStringToUIColor(hex: "58BCEC")), Color(hexStringToUIColor(hex: "439FF3"))]), startPoint: .leading, endPoint: .trailing))
                         .cornerRadius(32)
                         .padding(.horizontal)
+                        .padding(.bottom)
                         .shadow(radius: 15)
                 }.fullScreenCover(isPresented: $shouldShowNewMessageScreen, onDismiss: nil) {
                     createNewMessageView(emp: self.emp, didSelectNewUser: {
