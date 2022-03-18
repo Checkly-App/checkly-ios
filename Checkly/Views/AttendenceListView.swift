@@ -82,6 +82,7 @@ struct AttendenceListViewselect: View {
     @State var selectrow1 = Set<Employee>()
     @Binding var selectatt : Bool
     @Binding var isshow : Bool
+    @Binding var Allemployee: [Employee]
     @Environment(\.dismiss) var dismiss
     @Binding var attendeneslist: [Employee]
     @State var attendeneslist1: [Employee] = []
@@ -90,7 +91,7 @@ struct AttendenceListViewselect: View {
         NavigationView{
         ZStack{
             VStack{
-            List<Employee, ForEach<[Employee], String, AttendenceListView>>(viewModel.emplyeelist,selection: $selectrow){  empl in
+            List<Employee, ForEach<[Employee], String, AttendenceListView>>(Allemployee,selection: $selectrow){  empl in
                 AttendenceListView(emp:empl,attendeneslist: $attendeneslist1, selectitem: $selectrow1)
         }           }
             VStack{
@@ -131,7 +132,7 @@ struct AttendenceListViewselect: View {
         }.background(.white.opacity(0.1))
             }
         }.background(.white).task{
-            viewModel.fetchDatalist()
+          //  viewModel.fetchDatalist()
             for attend in attendeneslist {
                 attendeneslist1.append(attend)
             }
@@ -142,13 +143,14 @@ struct AttendenceListViewselect: View {
         }
         
         .navigationBarTitle(" Select Attendees")
+        .preferredColorScheme(.light)
 }
     
         
     }}
 struct AttendenceListView_Previews: PreviewProvider {
     static var previews: some View {
-        AttendenceListViewselect( selectrow: (.constant(Set<Employee>())), selectatt: .constant(false), isshow: .constant(false), attendeneslist: .constant([]))
+        AttendenceListViewselect( selectrow: (.constant(Set<Employee>())), selectatt: .constant(false), isshow: .constant(false), Allemployee: .constant([]), attendeneslist: .constant([]))
                                   
                                   }
 }

@@ -20,6 +20,7 @@ struct EditMeetingView: View {
     @FocusState private var isfocus : Bool
     @State var selectrow = Set<Employee>()
     @State var attendeneslist: [Employee] = []
+    @State var sendattendeneslist: [Employee] = []
     var meeting : Meeting
     @State var text = ""
     @State var type = "Online"
@@ -305,6 +306,7 @@ struct EditMeetingView: View {
                     HStack {
                      
                         Button(action: {
+                            sendattendeneslist = viewModel.emplyeelist
                             if title == "" {
                             for em1 in viewModel.emplyeelist {
                                 
@@ -372,7 +374,7 @@ struct EditMeetingView: View {
 )
                     
                 }.padding(.trailing) .sheet(isPresented: $viewlist, content: {
-                    AttendenceListViewselect(selectrow: $selectrow, selectatt: $Isselectattendense, isshow: $Isshow, attendeneslist: $attendeneslist)
+                    AttendenceListViewselect(selectrow: $selectrow, selectatt: $Isselectattendense, isshow: $Isshow, Allemployee: $sendattendeneslist, attendeneslist: $attendeneslist)
                 })
                 }.padding(.trailing) .sheet(isPresented: $viewlist1, content: {
                  // LocationMeetingView()
