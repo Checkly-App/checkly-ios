@@ -110,7 +110,7 @@ Spacer()
                                Image(systemName: "chevron.right").foregroundColor(.black)
                     
                     }   }.padding().fullScreenCover(isPresented: $ispresent2) {
-                     //   EditProfileView()
+                        EditProfileView()
                     }
                 HStack{
                     Button {
