@@ -1,19 +1,13 @@
-//  HomeView.swift
+//
+//  tabview3.swift
 //  Checkly
 //
-//  Created by Noura Alsulayfih on 23/07/1443 AH.
+//  Created by Noura Alsulayfih on 21/03/2022.
 //
 
-
 import SwiftUI
-import Firebase
 
-struct tabView: View {
-    
-    
-
-    //MARK: - @EnvironmentObjects
-    @EnvironmentObject var authentication: Authentication
+struct TabView: View {
     
     //MARK: - @States
     @State var selectedTab = 2
@@ -24,61 +18,87 @@ struct tabView: View {
     //MARK: - @SatateObjects
     @ObservedObject var tabModelObject = tabViewModel()
     
-    
     //MARK: - Variables
     var tabsNames = ["Messages","Calendar","Home","Statistics","Services"]
     var tabsImages = ["envelope","calendar","house","chart.bar","square.grid.2x2"]
+    var selectedTabsImages = ["envelope.fill","calendar","house.fill","chart.bar.fill","square.grid.2x2.fill"]
+    
     
     var body: some View {
+        ZStack{
+            VStack(spacing: 0) {
+                ZStack {
+                    //1- Messages View
+                    if selectedTab == 0 {
+                        NavigationView {
+                            VStack(spacing: 0) {
+                                messagesView(emp: tabModelObject.emp)
+                                    .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .center)
+                                tabBarView
+                            }
+                        }
+                    }
+                    
+                    //2- Calendar View
+                    else if selectedTab == 1 {
+                        NavigationView {
+                            VStack(spacing: 0) {
+                                Text("Calendar")
+                                    .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .center)
+                                tabBarView
+                            }
+                        }
+                    }
+                    
+                    //3- Home View
+                    else if selectedTab == 2 {
+                        NavigationView {
+                            VStack(spacing: 0) {
+                                HomeView(emp: tabModelObject.emp)
+                                tabBarView
+                            }
+                        }
+                    }
+                    
+                    //4- Statistics View
+                    else if selectedTab == 3 {
+                        NavigationView {
+                            VStack(spacing: 0) {
+                                Text("Statistics")
+                                    .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .center)
+                                tabBarView
+                            }
+                        }
+                    }
+                    
+                    //5- Services View
+                    else if selectedTab == 4 {
+                        NavigationView {
+                            VStack(spacing: 0) {
+                                Text("Services")
+                                    .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .center)
+                                tabBarView
+                            }
+                        }
+                    }
+                }
+            }
+//            if !tabModelObject.isHomeLoaded{
+//                ZStack{
+//                    Color.white
+//                        .ignoresSafeArea()
+//                        .opacity(0.9)
+//                    ProgressView()
+//                        .progressViewStyle(CircularProgressViewStyle(tint: Color(.sRGB, red: 0.024, green: 0.661, blue: 0.958, opacity: 1)))
+//                        .scaleEffect(3)
+//                }
+//            }
+        }
+    }
+    
+    var tabBarView: some View {
         VStack(spacing: 0) {
-            
-            GeometryReader{_ in
-                ZStack{
-                        //Messages
-                    //pass to her the logged in user struct
-                    messagesView(emp: tabModelObject.emp)
-                            .opacity(selectedTab == 0 ? 1 : 0)
-                        
-                        //Calendar
-                        Text("Calendar")
-                            .opacity(selectedTab == 1 ? 1 : 0)
-                        //Home
-                        HomeView(emp: tabModelObject.emp)
-                            .opacity(selectedTab == 2 ? 1 : 0)
-                        //Statistics
-                        Text("Statistics")
-                            .opacity(selectedTab == 3 ? 1 : 0)
-                        //Services
-                        Text("Services")
-                            .opacity(selectedTab == 4 ? 1 : 0)
-                }
-            }
-            .onChange(of: selectedTab) { _ in
-                switch selectedTab {
-                case 0:
-                    if !tabModelObject.isMessagesViewLoaded {
-                        tabModelObject.loadMessages()
-                    }
-                    break
-                case 1:
-                    if !tabModelObject.isCalendarViewLoaded {
-                        tabModelObject.loadCalendar()
-                    }
-                case 2:
-                    print("Home Loaded")
-                case 3:
-                    if !tabModelObject.isStatisticsViewLoaded {
-                        tabModelObject.loadServices()
-                    }
-                case 4:
-                    if !tabModelObject.isServicesLoaded {
-                        tabModelObject.loadServices()
-                    }
-                default:
-                    print("default case")
-                }
-            }
-            
+            Divider()
             HStack(spacing: 0){
                 ForEach((0..<5) , id: \.self){ tab in
                     Button {
@@ -88,6 +108,7 @@ struct tabView: View {
                     } label: {
                         VStack(spacing: 0){
                             ZStack{
+                                //9- indicator view
                                 Indicator()
                                     .fill(Color.clear)
                                     .frame(width: 45, height: 6)
@@ -100,13 +121,14 @@ struct tabView: View {
                                 }
                             }
                             .padding(.bottom,10)
-                            VStack{
-                                Image(systemName: tabsImages[tab] )
+                            VStack(spacing: 8){
+                                //10- tab view item image
+                                Image(systemName: selectedTab == tab ? selectedTabsImages[tab] : tabsImages[tab] )
                                     .renderingMode(.template)
                                     .resizable()
                                     .foregroundColor(selectedTab == tab ? Color(red: 0.333, green: 0.667, blue: 0.984) : Color.gray)
-                                    .frame(width: 24, height: 24)
-                                
+                                    .frame(width: tab == 0 ? 28 :24, height: tab == 0 ? 22 :24)
+                                //11- tab view item text
                                 Text(tabsNames[tab])
                                     .font(.caption)
                                     .fontWeight(.bold)
@@ -115,33 +137,30 @@ struct tabView: View {
                             }
                         }
                     }
+                    //12- if the selected tab view item is the last
                     if tab != 4 {
                         Spacer(minLength: 0)
                     }
                 }
             }
-            .padding([.bottom,.leading,.trailing],20)
+            .padding([.leading,.trailing],20)
             .background(Color.white)
             .ignoresSafeArea()
         }
-        .ignoresSafeArea()
-        
+        .frame(height: 42)
+        .background(Color.white.edgesIgnoringSafeArea(.all))
     }
 }
 
-
 struct Indicator: Shape{
-    
     func path(in rect: CGRect) -> Path {
-        
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: [.bottomLeft,.bottomRight], cornerRadii: CGSize(width: 10, height: 10))
-        
         return Path(path.cgPath)
     }
 }
 
-struct tabView_Previews: PreviewProvider {
+struct TabView_Previews: PreviewProvider {
     static var previews: some View {
-        tabView()
+        TabView()
     }
 }

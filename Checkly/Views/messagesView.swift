@@ -28,7 +28,7 @@ struct messagesView: View {
     @ObservedObject var vm: messagesViewModel
 
     var body: some View {
-        NavigationView{
+       
             VStack {
                 ScrollView {
                     ForEach(vm.recentMessages) { recentMessage in
@@ -110,7 +110,7 @@ struct messagesView: View {
                         .background(LinearGradient(gradient: Gradient(colors: [Color(hexStringToUIColor(hex: "58BCEC")), Color(hexStringToUIColor(hex: "439FF3"))]), startPoint: .leading, endPoint: .trailing))
                         .cornerRadius(32)
                         .padding(.horizontal)
-                        .padding(.bottom)
+                        .padding(.bottom, 24)
                         .shadow(radius: 15)
                 }.fullScreenCover(isPresented: $shouldShowNewMessageScreen, onDismiss: nil) {
                     createNewMessageView(emp: self.emp, didSelectNewUser: {
@@ -120,7 +120,7 @@ struct messagesView: View {
                     })
                 }
             }
-        }
+        
     }
 
 }

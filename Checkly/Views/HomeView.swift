@@ -29,8 +29,7 @@ struct HomeView: View {
     
     
     var body: some View {
-        NavigationView{
-            
+                    
             ZStack {
                 LinearGradient(colors: [Color(.sRGB, red: 1, green: 1, blue: 1, opacity: 1),
                                         Color(.sRGB, red: 0.954, green: 0.954, blue: 0.954, opacity: 1)],
@@ -120,7 +119,7 @@ struct HomeView: View {
                     }
             }
             }
-        }
+        
     }
     
     //MARK: - Functions

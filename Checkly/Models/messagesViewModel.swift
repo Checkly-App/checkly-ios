@@ -25,7 +25,7 @@ class messagesViewModel: ObservableObject {
         
         guard let empID = emp?.employee_id else { return }
         //here
-        DB.collection("recent_messages").document("6387409293").collection("messages").order(by: "timestamp").addSnapshotListener { querySnapshot, error in
+        DB.collection("recent_messages").document("439201282").collection("messages").order(by: "timestamp").addSnapshotListener { querySnapshot, error in
             if let error = error {
                 print(error)
                 return

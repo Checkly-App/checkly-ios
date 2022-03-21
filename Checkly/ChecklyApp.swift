@@ -19,7 +19,7 @@ struct ChecklyApp: App {
     var body: some Scene {
         WindowGroup {
 //            if authentication.isValidated {
-            tabView()
+            TabView()
 //                    .environmentObject(authentication)
 //            } else {
 //                LoginView()
