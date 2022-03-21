@@ -88,7 +88,7 @@ struct UserProfileView: View {
                     } label: {
                     Image("Terms").foregroundColor(.gray)
                     Text("Terms And Conditions")
-                        .font(.headline)
+                            .font(.body)
                         .fontWeight(.medium).foregroundColor(.black)
 Spacer()
                     
@@ -103,15 +103,14 @@ Spacer()
                     } label: {
                     Image("privacy-1").foregroundColor(.gray)
                     Text("Privacy Policy")
-                        .font(.headline)
+                            .font(.body)
                         .fontWeight(.medium).foregroundColor(.black)
 Spacer()
                     
                                Image(systemName: "chevron.right").foregroundColor(.black)
                     
                     }   }.padding().fullScreenCover(isPresented: $ispresent2) {
-                        GenerateMeetingView()
-
+                     //   EditProfileView()
                     }
                 HStack{
                     Button {
@@ -119,14 +118,14 @@ Spacer()
                     } label: {
                     Image("Editprofile").foregroundColor(.gray)
                     Text("Edit profile")
-                        .font(.headline)
+                            .font(.body)
                         .fontWeight(.medium).foregroundColor(.black)
 Spacer()
                     
                                Image(systemName: "chevron.right").foregroundColor(.black)
                     
                     }   }.padding().fullScreenCover(isPresented: $ispresent3) {
-                        EditMeetingView( Meetingid:$user)
+                        EditProfileView()
                     }
                 
                     
@@ -139,7 +138,7 @@ Spacer()
 
                    
                         
-                        Image("Notfication")
+                    Image("Notfication")
                     
                         
                            
