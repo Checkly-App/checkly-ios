@@ -19,13 +19,9 @@ struct messagesView: View {
     @State var shouldShowNewMessageScreen = false
     @State var selectedUser: Employee?
     var emp: Employee
+
     
-    init (emp: Employee) {
-        self.emp = emp
-        self.vm = .init(emp: emp)
-    }
-    
-    @ObservedObject var vm: messagesViewModel
+    @ObservedObject var vm = messagesViewModel()
 
     var body: some View {
        

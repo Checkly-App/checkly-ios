@@ -11,21 +11,41 @@ import Firebase
 class messagesViewModel: ObservableObject {
     
     @Published var recentMessages = [recentMessage]()
-    var emp: Employee?
-
     
-    init(emp:Employee?) {
-        self.emp = emp
-        fetchRecentMessages(empID: emp!.employee_id)
+    
+    // from auth
+    private let loggedInUserID = "PIfzRqUP9FdUf8cAr1UKHmxtEK12"
+    private var ref = Database.database().reference()
+    
+    init(){
+        fetchUser()
     }
+    
+    
+    func fetchUser(){
+        ref.child("Employee").child(loggedInUserID).observeSingleEvent(of: .value) { snapshot in
+            let obj = snapshot.value as! [String: Any]
+            let uuid = snapshot.key
+            if uuid == self.loggedInUserID {
+                DispatchQueue.main.async {
+                    let emp = Employee(employee_id: obj["employee_id"] as! String, address: obj["address"] as! String, birthdate: obj["birthdate"] as! String, department: obj["department"] as! String, email: obj["email"] as! String, id: obj["employee_id"] as! String, gender: obj["gender"] as! String, name: obj["name"] as! String, national_id: obj["national_id"] as! String, phone_number: obj["phone_number"] as! String, position: obj["position"] as! String, photoURL: obj["image_token"] as! String)
+                   
+                    self.fetchRecentMessages(empID: emp.employee_id)
+                }
+            }
+        } withCancel: { error in
+            print(error.localizedDescription)
+        }
+    }
+    
+    
         
     private func fetchRecentMessages(empID: String) {
 
         let DB = Firestore.firestore()
-        
-        guard let empID = emp?.employee_id else { return }
+    
         //here
-        DB.collection("recent_messages").document("439201282").collection("messages").order(by: "timestamp").addSnapshotListener { querySnapshot, error in
+        DB.collection("recent_messages").document(empID).collection("messages").order(by: "timestamp").addSnapshotListener { querySnapshot, error in
             if let error = error {
                 print(error)
                 return
