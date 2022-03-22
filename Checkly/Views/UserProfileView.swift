@@ -142,7 +142,7 @@ Spacer()
                     
                         
                            
-                    Text("Turn off Notification")
+                    Text(" Notification")
                         .font(.callout)
                         .fontWeight(.medium)
                        
@@ -154,7 +154,7 @@ Spacer()
                   
                                Image("Location-1").foregroundColor(.gray)
                            
-                    Text("Disable Location")
+                    Text("Location")
                         .font(.body)
                         .fontWeight(.medium)
 Spacer()
