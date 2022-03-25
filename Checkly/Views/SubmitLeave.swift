@@ -16,7 +16,7 @@ struct submitLeave: View {
     @State var fromDate = Date()
     @State var toDate = Date()
     var types = ["Sick Leave", "Vacation"]
-    @State private var selectedType = "Vacation"
+    @State private var selectedType = "Sick Leave"
     @State var showDocPicker = false
     @State private var notes: String = "Any additional notes?"
     var placeholderString: String = "Any additional notes?"
@@ -80,6 +80,10 @@ struct submitLeave: View {
             Button("Submit") {
                 vm.submitLeaveData(fromDate: fromDate, toDate: toDate, selectedType: selectedType, notes: notes, manager_id: manager_id)
                 showingAlert = true
+                self.notes = " "
+                self.toDate = Date()
+                self.fromDate = Date()
+                self.selectedType = "Sick Leave"
             }.alert("Your request has been submitted", isPresented: $showingAlert) {
                 Button("OK", role: .cancel) { }
             }
