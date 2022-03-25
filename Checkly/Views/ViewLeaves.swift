@@ -14,22 +14,51 @@ struct ViewLeaves: View {
     @ObservedObject var vm = ViewLeaveViewModel()
     
     var body: some View {
-        ForEach (vm.leaves,  id: \.self) { leave in
-                
-            Text(leave.type)
         
-    }
+        NavigationView {
+            ScrollView {
+                VStack {
+                    
+                
+        ForEach (vm.leaves,  id: \.self) { leave in
+            
+            
+            HStack (spacing: 10){
+                Text(leave.type)
+            }.padding()
+                .background(Color.white)
+
+                .clipped()
+                .shadow(color: Color.gray, radius: 3, x: 1, y: 1)
+             
+            
+            }
+                    
+                    
+                    
+        
+}
+            }.navigationTitle("Leave Requests").navigationBarTitleDisplayMode(.inline)
+}
 }
     
 }
 
 class ViewLeaveViewModel: ObservableObject {
     
+    //auth
+    let manager_id = "PIfzRqUP9FdUf8cAr1UKHmxtEK12"
+    
+    @Published var emp = Employee(employee_id: "", address: "", birthdate: "", department: "", email: "", id: "", gender: "", name: "", national_id: "", phone_number: "", position: "", photoURL: "")
+    
+    @Published var leaves = [Leave]()
+
+    
     init() {
         fetchLeaves()
     }
     
-    @Published var leaves = [Leave]()
+
     
     func fetchLeaves () {
         
@@ -48,16 +77,18 @@ class ViewLeaveViewModel: ObservableObject {
                 let status = obj["status"] as! String
                 let type = obj["type"] as! String
                 let notes = obj["notes"] as! String
+                let emp_id = obj["emp_id"] as! String
+                let manager = obj["manager_id"] as! String
                 
             
-                let Leave = Leave(start_date: start_date, end_date: end_date, status: status, notes: notes, document: "", id: "", type: type)
+                let Leave = Leave(start_date: start_date, end_date: end_date, status: status, notes: notes, document: "", id: UUID().uuidString, type: type, employee_id: emp_id, employee_name: "", employee_department: "")
                 
-                self.leaves.append(Leave)
+                if ( manager == self.manager_id ) {
+                    self.leaves.append(Leave)
+                }
             }
         })
     }
-        print(self.leaves)
-        
     }
     
 }
@@ -65,5 +96,19 @@ class ViewLeaveViewModel: ObservableObject {
 struct ViewLeaves_Previews: PreviewProvider {
     static var previews: some View {
         ViewLeaves()
+    }
+}
+
+extension Array where Element:Equatable {
+    func removeDuplicates() -> [Element] {
+        var result = [Element]()
+
+        for value in self {
+            if result.contains(value) == false {
+                result.append(value)
+            }
+        }
+
+        return result
     }
 }

@@ -48,6 +48,7 @@
 		DA60AB8D27EDD26A001532FC /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DA60AB8C27EDD26A001532FC /* FirebaseStorage */; };
 		DA60AB8F27EDD26A001532FC /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = DA60AB8E27EDD26A001532FC /* FirebaseStorageCombine-Community */; };
 		DA60AB9127EDD26A001532FC /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = DA60AB9027EDD26A001532FC /* FirebaseStorageSwift-Beta */; };
+		DA60AB9327EE1696001532FC /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60AB9227EE1695001532FC /* Employee.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
 		DA60AB5527EDCF58001532FC /* ViewLeaves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLeaves.swift; sourceTree = "<group>"; };
 		DA60AB5727EDCFD9001532FC /* Leave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leave.swift; sourceTree = "<group>"; };
+		DA60AB9227EE1695001532FC /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				7149E91127A96FCA008E3553 /* Credentials.swift */,
+				DA60AB9227EE1695001532FC /* Employee.swift */,
 				DA60AB5727EDCFD9001532FC /* Leave.swift */,
 				7149E91927A987DD008E3553 /* LoginModel.swift */,
 			);
@@ -282,6 +285,7 @@
 				7149E8FD27A8720A008E3553 /* LoginView.swift in Sources */,
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
 				7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */,
+				DA60AB9327EE1696001532FC /* Employee.swift in Sources */,
 				7149E91227A96FCA008E3553 /* Credentials.swift in Sources */,
 				DA60AB5827EDCFD9001532FC /* Leave.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,

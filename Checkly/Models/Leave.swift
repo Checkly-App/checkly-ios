@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Leave: Identifiable, Hashable {
+struct Leave: Identifiable, Hashable, Equatable {
     var start_date: String
     var end_date: String
     var status: String
@@ -16,4 +16,7 @@ struct Leave: Identifiable, Hashable {
     var document: String
     var id: String
     var type: String
+    var employee_id: String
+    var employee_name: String
+    var employee_department: String
 }
