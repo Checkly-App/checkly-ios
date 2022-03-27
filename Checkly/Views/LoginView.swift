@@ -38,14 +38,8 @@ struct LoginView: View {
                     
                     // MARK: - Login Button
                     Button {
-                        session.showProgressView = true
-                        session.isCompanyEmail(currentEmail: session.credentials.email) { success in
-                            isCompany = success
-                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
-                                session.loginUser { success in
-                                    isLoggedIn = success
-                                }
-                            })
+                        session.loginUser { success in
+                            isLoggedIn = success
                         }
                     } label: {
                         Text("Login")

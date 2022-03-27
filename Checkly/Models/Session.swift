@@ -29,6 +29,8 @@ class Session: ObservableObject {
     }
     
     func loginUser(completion: @escaping (Bool) -> Void){
+        let ref = Database.database().reference()
+        
         toggleProgress()
         
         Auth.auth().signIn(withEmail: credentials.email, password: credentials.password) { [self] result, authError in
@@ -52,25 +54,51 @@ class Session: ObservableObject {
                 
                 toggleError()
                 completion(false)
-            } else {
-                if storeCredentialsNext{
-                    print("the user stored")
-                    if KeychainStorage.saveCredentials(credentials){
-                        storeCredentialsNext = false
-                    }
+            }
+            
+            if storeCredentialsNext {
+                if KeychainStorage.saveCredentials(credentials){
+                    storeCredentialsNext = false
                 }
-                toggleSuccess()
-                completion(true)
+            }
+            
+            if result != nil {
+                let uid = result!.user.uid
+                
+                ref.child("Login").child(uid).observeSingleEvent(of: .value, with: { snapshot in
+                    // user first time logging in
+                    guard snapshot.exists() else {
+                        ref.child("Login").child("\(uid)").updateChildValues(["loggedIn":"true"])
+                        toggleSuccess()
+                        completion(true)
+                        return
+                    }
+                    // user has logged in before
+                    let isLogged = snapshot.childSnapshot(forPath: "loggedIn").value as! String
+                    if isLogged == "true"{ // check if there is an active session
+                        error = .alreadyLoggedIn
+                        toggleError()
+                        completion(false)
+                    }
+                    else { // log user in if ther is no active sssion
+                        ref.child("Login").child("\(uid)").updateChildValues(["loggedIn":"true"])
+                        toggleSuccess()
+                        completion(true)
+                    }
+                })
             }
         }
     }
     
     func signOutUser(completion: @escaping (Bool) -> Void){
         toggleProgress()
+        let ref = Database.database().reference()
+        let uid = Auth.auth().currentUser?.uid ?? "default"
         
         do {
             toggleProgress()
             try Auth.auth().signOut()
+            ref.child("Login").child("\(uid)").updateChildValues(["loggedIn":"false"])
             completion(true)
         } catch {
             completion(false)

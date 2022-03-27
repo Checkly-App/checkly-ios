@@ -27,6 +27,7 @@ class Authentication: ObservableObject {
         case emptyCredentials
         case exceededAttempts
         case cancelled
+        case alreadyLoggedIn
 
         
         var id: String {
@@ -55,6 +56,8 @@ class Authentication: ObservableObject {
                 return NSLocalizedString("You have exceeded your attempts. Please login normally.", comment: "")
             case .cancelled:
                 return NSLocalizedString("Operation was cancelled by the user.", comment: "")
+            case .alreadyLoggedIn:
+                return NSLocalizedString("Unable to login, make sure to sign out of any other device.", comment: "")
             }
             
         }

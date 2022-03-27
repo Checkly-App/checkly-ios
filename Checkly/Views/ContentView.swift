@@ -17,11 +17,11 @@ struct ContentView: View {
     @StateObject var viewRouter = CalendarViewRouterHelper()
     @State var calendarView = false
     
-    var uid = Auth.auth().currentUser!.uid
+    var uid = Auth.auth().currentUser?.uid ?? "hj"
     
     init(){
         NotificationManager.instance.requestAuthorization()
-        NotificationManager.instance.meetingNotificationListener(uid: Auth.auth().currentUser!.uid)
+        NotificationManager.instance.meetingNotificationListener(uid: uid)
     }
     
     
