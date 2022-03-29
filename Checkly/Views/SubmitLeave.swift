@@ -141,13 +141,15 @@ func fetchManager (emp_dep: String) -> String {
     let ref = Database.database().reference()
 
     let Leave: [String: Any] = [
-        "emp_id": "999",
+        //auth
+        "emp_id": "FJvmCdXGd7UWELDQIEJS3kisTa03",
         "start_date": formatter.string(from: fromDate),
         "end_date": formatter.string(from: toDate),
         "type": selectedType,
         "notes": notes,
         "status": "pending",
-        "manager_id": self.manager
+        "manager_id": self.manager,
+        "employee_name": "Norah AlSalem"
     ]
 
     ref.child("Leave").childByAutoId().setValue(Leave)

@@ -16,8 +16,8 @@
 		7149E91427A977D7008E3553 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91327A977D6008E3553 /* ContentView.swift */; };
 		7149E91827A985BC008E3553 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91727A985BC008E3553 /* Authentication.swift */; };
 		7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91927A987DD008E3553 /* LoginModel.swift */; };
-		71D09A5C27A9A02A00DA2D1D /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 71D09A5B27A9A02A00DA2D1D /* SwiftKeychainWrapper */; };
 		71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */; };
+		DAA742F327F3A0280098CE1C /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = DAA742F227F3A0280098CE1C /* SwiftKeychainWrapper */; };
 		DAA94AEF27ECA01100B80C36 /* SubmitLeave.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA94AEE27ECA01100B80C36 /* SubmitLeave.swift */; };
 		DAA94AF227ECABCB00B80C36 /* SwiftUILib.DocumentPicker in Frameworks */ = {isa = PBXBuildFile; productRef = DAA94AF127ECABCB00B80C36 /* SwiftUILib.DocumentPicker */; };
 		DAC62F3027ECE15B008B920E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DAC62F2F27ECE15B008B920E /* FirebaseAnalytics */; };
@@ -72,6 +72,7 @@
 			files = (
 				DAC62F5A27ECE15B008B920E /* FirebaseMessaging in Frameworks */,
 				DAC62F4C27ECE15B008B920E /* FirebaseFunctions in Frameworks */,
+				DAA742F327F3A0280098CE1C /* SwiftKeychainWrapper in Frameworks */,
 				DAC62F3827ECE15B008B920E /* FirebaseAppDistribution-Beta in Frameworks */,
 				DAC62F3C27ECE15B008B920E /* FirebaseAuthCombine-Community in Frameworks */,
 				DAA94AF227ECABCB00B80C36 /* SwiftUILib.DocumentPicker in Frameworks */,
@@ -79,7 +80,6 @@
 				DAC62F4827ECE15B008B920E /* FirebaseFirestoreCombine-Community in Frameworks */,
 				DAC62F3427ECE15B008B920E /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				DAC62F4A27ECE15B008B920E /* FirebaseFirestoreSwift-Beta in Frameworks */,
-				71D09A5C27A9A02A00DA2D1D /* SwiftKeychainWrapper in Frameworks */,
 				DAC62F3227ECE15B008B920E /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				DAC62F6027ECE15B008B920E /* FirebaseRemoteConfigSwift-Beta in Frameworks */,
 				DAC62F5827ECE15B008B920E /* FirebaseMLModelDownloader in Frameworks */,
@@ -189,7 +189,6 @@
 			);
 			name = Checkly;
 			packageProductDependencies = (
-				71D09A5B27A9A02A00DA2D1D /* SwiftKeychainWrapper */,
 				DAA94AF127ECABCB00B80C36 /* SwiftUILib.DocumentPicker */,
 				DAC62F2F27ECE15B008B920E /* FirebaseAnalytics */,
 				DAC62F3127ECE15B008B920E /* FirebaseAnalyticsSwift-Beta */,
@@ -219,6 +218,7 @@
 				DAC62F6127ECE15B008B920E /* FirebaseStorage */,
 				DAC62F6327ECE15B008B920E /* FirebaseStorageCombine-Community */,
 				DAC62F6527ECE15B008B920E /* FirebaseStorageSwift-Beta */,
+				DAA742F227F3A0280098CE1C /* SwiftKeychainWrapper */,
 			);
 			productName = Checkly;
 			productReference = 7149E8F727A8720A008E3553 /* Checkly.app */;
@@ -249,9 +249,9 @@
 			);
 			mainGroup = 7149E8EE27A8720A008E3553;
 			packageReferences = (
-				71D09A5A27A9A02900DA2D1D /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				DAA94AF027ECABCA00B80C36 /* XCRemoteSwiftPackageReference "document-picker" */,
 				DAC62F2E27ECE15B008B920E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				DAA742F127F3A0270098CE1C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 			);
 			productRefGroup = 7149E8F827A8720A008E3553 /* Products */;
 			projectDirPath = "";
@@ -494,7 +494,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		71D09A5A27A9A02900DA2D1D /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+		DAA742F127F3A0270098CE1C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
 			requirement = {
@@ -521,9 +521,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		71D09A5B27A9A02A00DA2D1D /* SwiftKeychainWrapper */ = {
+		DAA742F227F3A0280098CE1C /* SwiftKeychainWrapper */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 71D09A5A27A9A02900DA2D1D /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			package = DAA742F127F3A0270098CE1C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
 			productName = SwiftKeychainWrapper;
 		};
 		DAA94AF127ECABCB00B80C36 /* SwiftUILib.DocumentPicker */ = {
