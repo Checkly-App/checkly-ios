@@ -12,6 +12,7 @@ import FirebaseDatabase
 struct ViewLeaves: View {
     
     @ObservedObject var vm = ViewLeaveViewModel()
+    @State private var showingSheet = false
     
     var body: some View {
         
@@ -25,6 +26,11 @@ struct ViewLeaves: View {
             
             HStack (spacing: 10){
                 Text(leave.type)
+            }.contentShape(Rectangle())
+                .onTapGesture {
+                    showingSheet.toggle()
+                }.sheet(isPresented: $showingSheet) {
+                SheetView()
             }.padding()
                 .background(Color.white)
 
@@ -33,7 +39,6 @@ struct ViewLeaves: View {
              
             
             }
-                    
                     
                     
         
@@ -79,9 +84,10 @@ class ViewLeaveViewModel: ObservableObject {
                 let notes = obj["notes"] as! String
                 let emp_id = obj["emp_id"] as! String
                 let manager = obj["manager_id"] as! String
+                let employee_name = obj["employee_name"] as! String
                 
             
-                let Leave = Leave(start_date: start_date, end_date: end_date, status: status, notes: notes, document: "", id: UUID().uuidString, type: type, employee_id: emp_id, employee_name: "", employee_department: "")
+                let Leave = Leave(start_date: start_date, end_date: end_date, status: status, notes: notes, document: "", id: UUID().uuidString, type: type, employee_id: emp_id, employee_name: employee_name)
                 
                 if ( manager == self.manager_id ) {
                     self.leaves.append(Leave)
@@ -99,16 +105,16 @@ struct ViewLeaves_Previews: PreviewProvider {
     }
 }
 
-extension Array where Element:Equatable {
-    func removeDuplicates() -> [Element] {
-        var result = [Element]()
+struct SheetView: View {
+    @Environment(\.dismiss) var dismiss
 
-        for value in self {
-            if result.contains(value) == false {
-                result.append(value)
-            }
+    var body: some View {
+        Button("Press to dismiss") {
+            dismiss()
         }
-
-        return result
+        .font(.title)
+        .padding()
+        .background(Color.black)
     }
 }
+

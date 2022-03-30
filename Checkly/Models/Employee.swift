@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Employee: Identifiable, Hashable, Equatable{
+struct Employee: Identifiable, Hashable{
     var employee_id: String
     var address: String
     var birthdate: String

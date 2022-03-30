@@ -18,5 +18,4 @@ struct Leave: Identifiable, Hashable, Equatable {
     var type: String
     var employee_id: String
     var employee_name: String
-    var employee_department: String
 }
