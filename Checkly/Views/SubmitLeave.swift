@@ -149,7 +149,8 @@ func fetchManager (emp_dep: String) -> String {
         "notes": notes,
         "status": "pending",
         "manager_id": self.manager,
-        "employee_name": "Norah AlSalem"
+        "employee_name": "Norah AlSalem",
+        "leave_id": UUID().uuidString
     ]
 
     ref.child("Leave").childByAutoId().setValue(Leave)
