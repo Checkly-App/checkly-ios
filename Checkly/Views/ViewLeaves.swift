@@ -111,8 +111,30 @@ struct SheetView: View {
     
     @Binding var leave: Leave
     @Environment(\.dismiss) var dismiss
+    @State private var showingAlert = false
+    let ref = Database.database().reference()
 
     var body: some View {
+        
+        
+        Text(leave.start_date)
+        HStack{
+            Button("Accept") {
+                showingAlert = true
+            }
+            .alert("Are you sure you want to accept the leave request?", isPresented: $showingAlert) {
+                Button("Cancel", role: .cancel) { }
+                Button("Yes") {
+                
+                }
+            }
+        Button {
+            
+        } label: {
+            Text("Reject")
+        }
+        }
+
         Button("Press to dismiss") {
             dismiss()
         }
@@ -120,5 +142,17 @@ struct SheetView: View {
         .padding()
         .background(Color.black)
     }
+}
+
+func changeStatus () {
+    
+    let ref = Database.database().reference()
+
+    let Leave: [String: Any] = [
+        "status": "pending"
+    ]
+
+    ref.child("Leave").childByAutoId().setValue(Leave)
+    
 }
 
