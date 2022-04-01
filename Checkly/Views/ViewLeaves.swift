@@ -13,6 +13,7 @@ struct ViewLeaves: View {
     
     @ObservedObject var vm = ViewLeaveViewModel()
     @State private var showingSheet = false
+    @State var selectedLeave = Leave(start_date: "" , end_date: "", status: "", notes: "", document: "", id: "", type: "", employee_id: "", employee_name: "")
     
     var body: some View {
         
@@ -28,9 +29,10 @@ struct ViewLeaves: View {
                 Text(leave.type)
             }.contentShape(Rectangle())
                 .onTapGesture {
+                    selectedLeave = leave
                     showingSheet.toggle()
                 }.sheet(isPresented: $showingSheet) {
-                SheetView()
+                    SheetView(leave: $selectedLeave)
             }.padding()
                 .background(Color.white)
 
@@ -106,6 +108,8 @@ struct ViewLeaves_Previews: PreviewProvider {
 }
 
 struct SheetView: View {
+    
+    @Binding var leave: Leave
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
