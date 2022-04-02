@@ -72,13 +72,11 @@ class ViewLeaveViewModel: ObservableObject {
         let ref = Database.database().reference()
         let searchQueue = DispatchQueue.init(label: "searchQueue")
         
-    searchQueue.sync {
-        
-        ref.child("Leave").observe(.value, with: { dataSnapshot in
-
-            for child in dataSnapshot.children {
-                let snap = child as! DataSnapshot
-                let obj = snap.value as! [String: Any]
+        searchQueue.sync {
+            
+            ref.child("Leave").observe(.childAdded) { snapshot in
+                
+                let obj = snapshot.value as! [String: Any]
                 let start_date = obj["start_date"] as! String
                 let end_date = obj["end_date"] as! String
                 let status = obj["status"] as! String
@@ -87,18 +85,16 @@ class ViewLeaveViewModel: ObservableObject {
                 let emp_id = obj["emp_id"] as! String
                 let manager = obj["manager_id"] as! String
                 let employee_name = obj["employee_name"] as! String
+                let leave_id = obj["leave_id"] as! String
                 
-            
-                let Leave = Leave(start_date: start_date, end_date: end_date, status: status, notes: notes, document: "", id: UUID().uuidString, type: type, employee_id: emp_id, employee_name: employee_name)
+                let leave = Leave(start_date: start_date, end_date: end_date, status: status, notes: notes, document: "", id: leave_id, type: type, employee_id: emp_id, employee_name: employee_name)
                 
                 if ( manager == self.manager_id ) {
-                    self.leaves.append(Leave)
+                        self.leaves.append(leave)
                 }
             }
-        })
+        }
     }
-    }
-    
 }
 
 struct ViewLeaves_Previews: PreviewProvider {
@@ -111,48 +107,79 @@ struct SheetView: View {
     
     @Binding var leave: Leave
     @Environment(\.dismiss) var dismiss
-    @State private var showingAlert = false
+    @State private var showingAcceptAlert = false
+    @State private var showingRejectAlert = false
     let ref = Database.database().reference()
 
     var body: some View {
         
+        if ( leave.status == "pending") {
         
-        Text(leave.start_date)
+        Text(leave.id)
         HStack{
             Button("Accept") {
-                showingAlert = true
+                showingAcceptAlert = true
             }
-            .alert("Are you sure you want to accept the leave request?", isPresented: $showingAlert) {
+            .alert("Are you sure you want to accept the leave request?", isPresented: $showingAcceptAlert) {
                 Button("Cancel", role: .cancel) { }
                 Button("Yes") {
-                
+                    
+                    findLeave(leaveID: leave.id, newStatuss: "accepted")
+
                 }
             }
-        Button {
             
-        } label: {
-            Text("Reject")
-        }
-        }
+            Button("Reject") {
+                showingRejectAlert = true
+            }
+            .alert("Are you sure you want to reject the leave request?", isPresented: $showingRejectAlert) {
+                Button("Cancel", role: .cancel) { }
+                Button("Yes") {
+                    
+                    findLeave(leaveID: leave.id, newStatuss: "rejected")
 
-        Button("Press to dismiss") {
-            dismiss()
+                    }
+                }
+    
+            }
+        } else {
+            Text("This leave has already been \(leave.status)")
         }
-        .font(.title)
-        .padding()
-        .background(Color.black)
     }
 }
 
-func changeStatus () {
+func findLeave (leaveID: String, newStatuss: String) {
     
     let ref = Database.database().reference()
+    let searchQueue = DispatchQueue.init(label: "searchQueue")
+    
+    searchQueue.sync {
+        
+        ref.child("Leave").observe(.childAdded) { snapshot in
+            
+            let obj = snapshot.value as! [String: Any]
+            let start_date = obj["start_date"] as! String
+            let end_date = obj["end_date"] as! String
+            let status = obj["status"] as! String
+            let type = obj["type"] as! String
+            let notes = obj["notes"] as! String
+            let emp_id = obj["emp_id"] as! String
+            let employee_name = obj["employee_name"] as! String
+            let leave_id = obj["leave_id"] as! String
+            
+            let leave = Leave(start_date: start_date, end_date: end_date, status: status, notes: notes, document: "", id: leave_id, type: type, employee_id: emp_id, employee_name: employee_name)
+            
+            if ( leave.id == leaveID ) {
+                setStatus(key: snapshot.key, newStatuss: newStatuss)
+            }
+        }
+    }
+}
 
-    let Leave: [String: Any] = [
-        "status": "pending"
-    ]
-
-    ref.child("Leave").childByAutoId().setValue(Leave)
+func setStatus (key: String, newStatuss: String) {
+    
+    print("XXXXXXXXXXXXXXXXXXXXXXXXX",key)
+    Database.database().reference().root.child("Leave").child(key).updateChildValues(["status": newStatuss])
     
 }
 
