@@ -34,13 +34,23 @@ struct ViewLeaves: View {
                     Text(leave.type).foregroundColor(.gray)
                     }
                         Spacer()
-                        Text(leave.status)
+                        if ( leave.status == "rejected" ) {
+                        RoundedRectangle(cornerRadius: 20).frame(width: 90, height: 30).foregroundColor(Color(red: 0.902, green: 0.306, blue: 0.306)).opacity(0.2).overlay(
+                            Text(leave.status)).foregroundColor(Color(red: 0.902, green: 0.306, blue: 0.30))
+                        } else if ( leave.status == "accepted" )  {
+                        RoundedRectangle(cornerRadius: 20).frame(width: 90, height: 30).foregroundColor(Color(red: 0.306, green: 0.902, blue: 0.604)).opacity(0.2).overlay(
+                            Text(leave.status)).foregroundColor(Color(red: 0.306, green: 0.902, blue: 0.604))
+                        } else {
+                        RoundedRectangle(cornerRadius: 20).frame(width: 90, height: 30).foregroundColor(Color(red: 0.969, green: 0.675, blue: 0.408)).opacity(0.2).overlay(
+                            Text(leave.status)).foregroundColor(Color(red: 0.969, green: 0.675, blue: 0.408))
+                        }
                     }
                     HStack {
                         RoundedRectangle(cornerRadius: 10).frame(width: 100, height: 40).foregroundColor(.gray).opacity(0.2).overlay(
                             Text(leave.start_date)
                     )
                         Image(systemName: "arrow.right").foregroundColor(Color(red: 0.173, green: 0.686, blue: 0.933))
+                        
                         RoundedRectangle(cornerRadius: 10).frame(width: 100, height:    40).foregroundColor(.gray).opacity(0.2).overlay(
                             Text(leave.end_date)
                 )
