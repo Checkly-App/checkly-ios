@@ -143,33 +143,78 @@ struct SheetView: View {
         
         if ( leave.status == "pending") {
         
-        Text(leave.id)
-        HStack{
-            Button("Accept") {
-                showingAcceptAlert = true
-            }
-            .alert("Are you sure you want to accept the leave request?", isPresented: $showingAcceptAlert) {
-                Button("Cancel", role: .cancel) { }
-                Button("Yes") {
+            VStack {
+                
+                VStack (alignment: .center, spacing: 30) {
                     
-                    findLeave(leaveID: leave.id, newStatuss: "accepted")
-
-                }
-            }
-            
-            Button("Reject") {
-                showingRejectAlert = true
-            }
-            .alert("Are you sure you want to reject the leave request?", isPresented: $showingRejectAlert) {
-                Button("Cancel", role: .cancel) { }
-                Button("Yes") {
+                    VStack (spacing: 1) {
+                    Text("From \(leave.employee_name)").fontWeight(.bold).font(.system(size: 25))
                     
-                    findLeave(leaveID: leave.id, newStatuss: "rejected")
+                        Text(leave.type).foregroundColor(.gray).fontWeight(.light).font(.system(size: 20))
+                    }
+                    RoundedRectangle(cornerRadius: 20).frame(width: 90, height: 30).foregroundColor(Color(red: 0.969, green: 0.675, blue: 0.408)).opacity(0.2).overlay(
+                        Text(leave.status)).foregroundColor(Color(red: 0.969, green: 0.675, blue: 0.408))
+                    
+                    HStack {
+                        RoundedRectangle(cornerRadius: 10).frame(width: 100, height: 40).foregroundColor(.gray).opacity(0.2).overlay(
+                            Text(leave.start_date)
+                    )
+                        Image(systemName: "arrow.right").foregroundColor(Color(red: 0.173, green: 0.686, blue: 0.933))
+                        
+                        RoundedRectangle(cornerRadius: 10).frame(width: 100, height:    40).foregroundColor(.gray).opacity(0.2).overlay(
+                            Text(leave.end_date)
+                )
+                    }
+                    
+                    HStack{
+                        if (leave.notes == " " || leave.notes == "Any additional notes?") {
+                          Text("No notes attached")
+                        } else {
+                            Text(leave.notes)
+                        }
+                    }.frame(width: 300, height: 80)
+                        .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .strokeBorder(style: StrokeStyle(lineWidth: 1))
+                    )
+                    HStack{
+                        Text("No documents attached")
+                    }.frame(width: 300, height: 80)
+                        .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .strokeBorder(style: StrokeStyle(lineWidth: 1))
+                    )
+                    
 
+
+                }.padding()
+                Spacer()
+                HStack (spacing: 40){
+            RoundedRectangle(cornerRadius: 10).frame(width: 120, height:    50).foregroundColor(.gray).opacity(0.2).overlay(
+                Button("Accept") {
+                    showingAcceptAlert = true
+                }.alert("Are you sure you want to accept this leave request?", isPresented: $showingAcceptAlert) {
+                    Button("Cancel", role: .cancel) { }
+                    Button("Yes") {
+                        
+                        findLeave(leaveID: leave.id, newStatuss: "accepted")
                     }
                 }
-    
-            }
+            )
+            
+            RoundedRectangle(cornerRadius: 10).frame(width: 120, height:    50).foregroundColor(.gray).opacity(0.2).overlay(
+                Button("Reject") {
+                    showingRejectAlert = true
+                }.alert("Are you sure you want to reject this leave request?", isPresented: $showingRejectAlert) {
+                    Button("Cancel", role: .cancel) { }
+                    Button("Yes") {
+                        
+                        findLeave(leaveID: leave.id, newStatuss: "rejected")
+                    }
+                }
+            )
+                }.padding()
+            }.padding()
         } else {
             Text("This leave has already been \(leave.status)")
         }
@@ -206,7 +251,6 @@ func findLeave (leaveID: String, newStatuss: String) {
 
 func setStatus (key: String, newStatuss: String) {
     
-    print("XXXXXXXXXXXXXXXXXXXXXXXXX",key)
     Database.database().reference().root.child("Leave").child(key).updateChildValues(["status": newStatuss])
     
 }
