@@ -19,32 +19,50 @@ struct ViewLeaves: View {
         
         NavigationView {
             ScrollView {
-                VStack {
+                VStack (spacing: 30){
                     
                 
         ForEach (vm.leaves,  id: \.self) { leave in
             
             
-            HStack (spacing: 10){
-                Text(leave.type)
+            HStack {
+                
+                VStack {
+                    HStack {
+                    VStack (alignment: .leading) {
+                    Text("From \(leave.employee_name)").fontWeight(.bold)
+                    Text(leave.type).foregroundColor(.gray)
+                    }
+                        Spacer()
+                        Text(leave.status)
+                    }
+                    HStack {
+                        RoundedRectangle(cornerRadius: 10).frame(width: 100, height: 40).foregroundColor(.gray).opacity(0.2).overlay(
+                            Text(leave.start_date)
+                    )
+                        Image(systemName: "arrow.right").foregroundColor(Color(red: 0.173, green: 0.686, blue: 0.933))
+                        RoundedRectangle(cornerRadius: 10).frame(width: 100, height:    40).foregroundColor(.gray).opacity(0.2).overlay(
+                            Text(leave.end_date)
+                )
+                    }
+                }
+                Spacer()
+
+                
             }.contentShape(Rectangle())
                 .onTapGesture {
                     selectedLeave = leave
                     showingSheet.toggle()
                 }.sheet(isPresented: $showingSheet) {
                     SheetView(leave: $selectedLeave)
-            }.padding()
-                .background(Color.white)
-
-                .clipped()
-                .shadow(color: Color.gray, radius: 3, x: 1, y: 1)
+                }.padding().frame(width: 350, height: 150).background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
              
             
             }
                     
                     
         
-}
+                }.padding()
             }.navigationTitle("Leave Requests").navigationBarTitleDisplayMode(.inline)
 }
 }
