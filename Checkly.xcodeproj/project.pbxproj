@@ -37,10 +37,6 @@
 		A3027EBB27DFE1D900E305F8 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EBA27DFE1D900E305F8 /* LoadingView.swift */; };
 		A3027EBD27DFE1F800E305F8 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EBC27DFE1F800E305F8 /* TitleView.swift */; };
 		A3027EC127DFE6AA00E305F8 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EC027DFE6AA00E305F8 /* LaunchView.swift */; };
-		A3027EC327DFE6D600E305F8 /* FirstOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EC227DFE6D600E305F8 /* FirstOnboardingView.swift */; };
-		A3027EC527DFE70100E305F8 /* SecondOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EC427DFE70100E305F8 /* SecondOnboardingView.swift */; };
-		A3027EC727DFE73900E305F8 /* ThirdOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EC627DFE73900E305F8 /* ThirdOnboardingView.swift */; };
-		A3027EC927DFE79E00E305F8 /* LiquidSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EC827DFE79E00E305F8 /* LiquidSwipe.swift */; };
 		A31E8F0127E12771009AE0FA /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0027E12771009AE0FA /* LocationView.swift */; };
 		A31E8F0327E127F3009AE0FA /* GenerateMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0227E127F3009AE0FA /* GenerateMeetingView.swift */; };
 		A31E8F0727E129A3009AE0FA /* EditMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0627E129A3009AE0FA /* EditMeetingView.swift */; };
@@ -86,10 +82,6 @@
 		A3027EBA27DFE1D900E305F8 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		A3027EBC27DFE1F800E305F8 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		A3027EC027DFE6AA00E305F8 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
-		A3027EC227DFE6D600E305F8 /* FirstOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnboardingView.swift; sourceTree = "<group>"; };
-		A3027EC427DFE70100E305F8 /* SecondOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboardingView.swift; sourceTree = "<group>"; };
-		A3027EC627DFE73900E305F8 /* ThirdOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdOnboardingView.swift; sourceTree = "<group>"; };
-		A3027EC827DFE79E00E305F8 /* LiquidSwipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidSwipe.swift; sourceTree = "<group>"; };
 		A31E8F0027E12771009AE0FA /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		A31E8F0227E127F3009AE0FA /* GenerateMeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateMeetingView.swift; sourceTree = "<group>"; };
 		A31E8F0627E129A3009AE0FA /* EditMeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMeetingView.swift; sourceTree = "<group>"; };
@@ -186,9 +178,6 @@
 				A365EA4827DAE46800034F79 /* ParticipantsAttendanceView.swift */,
 				A3027EB527DFE12500E305F8 /* FaceIDView.swift */,
 				A3027EC027DFE6AA00E305F8 /* LaunchView.swift */,
-				A3027EC227DFE6D600E305F8 /* FirstOnboardingView.swift */,
-				A3027EC427DFE70100E305F8 /* SecondOnboardingView.swift */,
-				A3027EC627DFE73900E305F8 /* ThirdOnboardingView.swift */,
 				A31E8F0027E12771009AE0FA /* LocationView.swift */,
 				A31E8F0227E127F3009AE0FA /* GenerateMeetingView.swift */,
 				A31E8F0627E129A3009AE0FA /* EditMeetingView.swift */,
@@ -210,7 +199,6 @@
 				A3CE73FD27CD5593002D2517 /* AnnotatedItem.swift */,
 				A3027EB127DFE00700E305F8 /* Company.swift */,
 				A3027EB327DFE05D00E305F8 /* Session.swift */,
-				A3027EC827DFE79E00E305F8 /* LiquidSwipe.swift */,
 				A31E8F0E27E12BF2009AE0FA /* Employee.swift */,
 			);
 			path = Models;
@@ -367,7 +355,6 @@
 				A399140127D29FEC00B26628 /* MeetingDetailsView.swift in Sources */,
 				A31E8F0327E127F3009AE0FA /* GenerateMeetingView.swift in Sources */,
 				A3B8D85827B11A5600752F63 /* CalendarTimelineView.swift in Sources */,
-				A3027EC327DFE6D600E305F8 /* FirstOnboardingView.swift in Sources */,
 				A3027EC127DFE6AA00E305F8 /* LaunchView.swift in Sources */,
 				A3B8D85C27B13D9F00752F63 /* DateValue.swift in Sources */,
 				7152C6A527B6B66300E2CEAD /* NotificationManager.swift in Sources */,
@@ -376,12 +363,9 @@
 				A3027EBB27DFE1D900E305F8 /* LoadingView.swift in Sources */,
 				A365EA4727DAE43300034F79 /* ParticipantRowView.swift in Sources */,
 				A3B8D85627B11A4200752F63 /* CalendarGridView.swift in Sources */,
-				A3027EC527DFE70100E305F8 /* SecondOnboardingView.swift in Sources */,
 				A31E8F0727E129A3009AE0FA /* EditMeetingView.swift in Sources */,
 				A31E8F0127E12771009AE0FA /* LocationView.swift in Sources */,
 				A31E8F0F27E12BF2009AE0FA /* Employee.swift in Sources */,
-				A3027EC927DFE79E00E305F8 /* LiquidSwipe.swift in Sources */,
-				A3027EC727DFE73900E305F8 /* ThirdOnboardingView.swift in Sources */,
 				A31E8F0927E12A5F009AE0FA /* AttendenceListView.swift in Sources */,
 				A31E8F0B27E12AE4009AE0FA /* LocationManager.swift in Sources */,
 				A3B8D84D27B117E500752F63 /* Meeting.swift in Sources */,

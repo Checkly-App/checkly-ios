@@ -9,7 +9,6 @@ import SwiftUI
 struct LaunchView: View {
     
     //MARK: - @States
-    @State var showOnBoarding = false
     @State var showHome = false
     @AppStorage("isSignedOut") var isSignedOut = false
     
@@ -21,9 +20,7 @@ struct LaunchView: View {
                 LoginView()
             }
             else {
-                if showOnBoarding == true {
-                    FirstOnboardingView()
-                }else if showHome == true {
+                if showHome == true {
                     LoginView()
                 }else{
                     Image("launch-logo")
@@ -32,16 +29,13 @@ struct LaunchView: View {
                 }
             }
         }
+        .preferredColorScheme(.light)
         .ignoresSafeArea()
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 withAnimation {
-                    if UserDefaults.standard.bool(forKey: "KeyOnBoardingViewShown") == false {
-                        showOnBoarding.toggle()
-                        UserDefaults.standard.setValue(true, forKey: "KeyOnBoardingViewShown")
-                    }else{
                         showHome.toggle()
-                    }
+                    
                 }
             }
         }

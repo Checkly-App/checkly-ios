@@ -66,12 +66,10 @@ struct ParticipantRowView: View {
                 // this means that the member exists in selectedRows set, so we are going to remove it
                 // and the user selected and unselected the row at the same time
                 self.selectedRows.remove(attendee)
-//                print("\(attendee.id), \(attendee.status)")
                 attendeesDictionary["\(attendee.id)"] = "absent"
             } else {
                 // Get selected attendee
                 selectedRows.insert(attendee)
-//                print("\(attendee.id), \(attendee.status)")
                 // insert into attendees dictionary as 'attended'
                  attendeesDictionary["\(attendee.id)"] = "attended"
                 
@@ -94,10 +92,10 @@ struct ParticipantRowView: View {
 
 struct ParticipantRow_Previews: PreviewProvider {
     
-    @State static private var attendeesDictionary = ["8UoUAkIZvnP5KSWHydWliuZmOKt2":"accepted" ,"141A9FHDjhXJGvIE7czgFg0OFxT2":"accepted"]
+    @State static private var attendeesDictionary = ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"accepted" ,"xCITUcFuCodx9SRM4CZPSWi3o2j1":"accepted"]
     
     static var previews: some View {
-        ParticipantRowView(selectedRows: (.constant(Set<attendee>())), attendeesDictionary: $attendeesDictionary ,attendee: attendee(id: "e0a6ozh4A0QVOXY0tyiMSFyfL163", name: "Aleen AlSuhaibani", position: "Associate", imgToken: "null", status: "accepted"))
+        ParticipantRowView(selectedRows: (.constant(Set<attendee>())), attendeesDictionary: $attendeesDictionary ,attendee: attendee(id: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", name: "Aleen AlSuhaibani", position: "Associate", imgToken: "null", status: "accepted"))
     }
 }
 
