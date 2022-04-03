@@ -29,10 +29,11 @@ struct submitLeave: View {
     
     var body: some View {
         
-        NavigationView {
+       
         // Date Pickers
         VStack {
             
+            Spacer()
             
             DatePicker("From Date", selection: $fromDate, in: Date()... , displayedComponents: .date).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383)).padding().frame(width: 360, height: 45).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.954, green: 0.954, blue: 0.954), Color(red: 0.954, green: 0.954, blue: 0.954).opacity(0)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(7)
         
@@ -78,19 +79,32 @@ struct submitLeave: View {
                   print("Selected folder: \(urls.first!)")
               })
             
-            Button("Submit") {
-                vm.submitLeaveData(fromDate: fromDate, toDate: toDate, selectedType: selectedType, notes: notes, manager_id: manager_id)
-                showingAlert = true
-                self.notes = " "
-                self.toDate = Date()
-                self.fromDate = Date()
-                self.selectedType = "Sick Leave"
-            }.alert("Your request has been submitted", isPresented: $showingAlert) {
-                Button("OK", role: .cancel) { }
-            }
+            HStack{
+                Spacer()
+                Text("Submit").font(.system(size: 16, weight: .bold))
+                Spacer()
+                }.foregroundColor(.white)
+                .padding(.vertical)
+                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.345, green: 0.737, blue: 0.925), Color(red: 0.263, green: 0.624, blue: 0.953)]), startPoint: .leading, endPoint: .trailing))
+                .cornerRadius(32)
+                .padding(.horizontal)
+                .shadow(radius: 15)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    vm.submitLeaveData(fromDate: fromDate, toDate: toDate, selectedType: selectedType, notes: notes, manager_id: manager_id)
+                    showingAlert = true
+                    self.notes = " "
+                    self.toDate = Date()
+                    self.fromDate = Date()
+                    self.selectedType = "Sick Leave"
+                }.alert("Your request has been submitted", isPresented: $showingAlert) {
+                    Button("OK", role: .cancel) { }
+                }
+                
+        
             
         }.padding().navigationTitle("Submit Leave Request").navigationBarTitleDisplayMode(.inline)
-        }
+        
     }
 }
 
