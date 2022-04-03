@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseDatabase
+import FirebaseAuth
 
 struct ViewLeaves: View {
     
@@ -82,7 +83,7 @@ struct ViewLeaves: View {
 class ViewLeaveViewModel: ObservableObject {
     
     //auth
-    let manager_id = "PIfzRqUP9FdUf8cAr1UKHmxtEK12"
+    let user = Auth.auth().currentUser
     
     @Published var emp = Employee(employee_id: "", address: "", birthdate: "", department: "", email: "", id: "", gender: "", name: "", national_id: "", phone_number: "", position: "", photoURL: "")
     
@@ -117,7 +118,7 @@ class ViewLeaveViewModel: ObservableObject {
                 
                 let leave = Leave(start_date: start_date, end_date: end_date, status: status, notes: notes, document: "", id: leave_id, type: type, employee_id: emp_id, employee_name: employee_name)
                 
-                if ( manager == self.manager_id ) {
+                if ( manager == self.user!.uid ) {
                         self.leaves.append(leave)
                 }
             }
