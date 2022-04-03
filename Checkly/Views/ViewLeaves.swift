@@ -18,7 +18,7 @@ struct ViewLeaves: View {
     
     var body: some View {
         
-        NavigationView {
+       
             ScrollView {
                 VStack (spacing: 30){
                     
@@ -74,8 +74,8 @@ struct ViewLeaves: View {
                     
         
                 }.padding()
-            }.navigationTitle("Leave Requests").navigationBarTitleDisplayMode(.inline)
-}
+            }.navigationBarTitle("Leave Requests").navigationBarTitleDisplayMode(.inline)
+
 }
     
 }
