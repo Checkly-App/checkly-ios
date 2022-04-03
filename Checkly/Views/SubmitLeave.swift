@@ -10,6 +10,7 @@ import SwiftUI
 import Firebase
 import SwiftUILib_DocumentPicker
 import FirebaseDatabase
+import FirebaseAuth
 
 struct submitLeave: View {
     
@@ -88,7 +89,7 @@ struct submitLeave: View {
                 Button("OK", role: .cancel) { }
             }
             
-        }
+        }.padding().navigationTitle("Submit Leave Request").navigationBarTitleDisplayMode(.inline)
         }
     }
 }
@@ -97,35 +98,58 @@ struct submitLeave: View {
 class submitLeaveViewModel: ObservableObject {
     
     var manager = ""
+    var dep = ""
+    var name = ""
+    let user = Auth.auth().currentUser
     
     init() {
-        self.manager = fetchManager(emp_dep: "dep2")
+        getDepartment()
     }
     
+    func getDepartment() {
+    
+  
+    let ref = Database.database().reference()
+    let Queue = DispatchQueue.init(label: "Queue")
+    
+        Queue.sync {
+                
+            ref.child("Employee/\(user!.uid)").observe(.value, with: { dataSnapshot in
+
+                let obj = dataSnapshot.value as! [String:Any]
+                let department = obj["department"] as! String
+                let name = obj["name"] as! String
+              
+                self.name = name
+                self.dep = department
+                self.manager = self.fetchManager(emp_dep: self.dep)
+                    
+            }, withCancel: { error in
+                print(error.localizedDescription)
+            })
+            
+    }
+}
     
 
 func fetchManager (emp_dep: String) -> String {
     
     let ref = Database.database().reference()
     let Queue = DispatchQueue.init(label: "searchQueue")
-    var manager = ""
+    let manager = ""
     
     Queue.sync {
                 
-        ref.child("Department/dep2").observe(.value, with: { dataSnapshot in
+        ref.child("Department/\(emp_dep)").observe(.value, with: { dataSnapshot in
 
             let obj = dataSnapshot.value as! [String:Any]
 
             self.manager = obj["manager"] as! String
                     
-            print("xxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",self.manager)
-            
             }, withCancel: { error in
                 print(error.localizedDescription)
             })
     }
-    
-    print("xxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",self.manager)
     
     return manager
    
@@ -141,15 +165,15 @@ func fetchManager (emp_dep: String) -> String {
     let ref = Database.database().reference()
 
     let Leave: [String: Any] = [
-        //auth
-        "emp_id": "FJvmCdXGd7UWELDQIEJS3kisTa03",
+        
+        "emp_id": user!.uid,
         "start_date": formatter.string(from: fromDate),
         "end_date": formatter.string(from: toDate),
         "type": selectedType,
         "notes": notes,
         "status": "pending",
         "manager_id": self.manager,
-        "employee_name": "Norah AlSalem",
+        "employee_name":  self.name,
         "leave_id": UUID().uuidString
     ]
 
