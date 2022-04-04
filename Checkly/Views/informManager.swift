@@ -16,11 +16,26 @@ struct informManager: View {
     @State private var showingLateAlert = false
     @State private var showingEarlyAlert = false
     @ObservedObject var vm = informManagerViewModel()
+    @State var currentDate = Date()
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
+    
     
     var body: some View {
-    
+        
+        let time = vm.getCurrentTime()
+        let date = vm.getCurrentDate()
+        
         VStack {
             
+            //update time every second
+            Text("\(currentDate)")
+                .onReceive(timer) { input in
+                    currentDate = input
+                }.opacity(0)
+            
+            Text(time).fontWeight(.ultraLight).font(.system(size: 40))
+            Text(date).fontWeight(.light).foregroundColor(.gray)
             
             HStack{
                 Spacer()
@@ -64,7 +79,7 @@ struct informManager: View {
                 
         
             
-        }.padding().navigationTitle("").navigationBarTitleDisplayMode(.inline)
+        }.padding().navigationTitle("Notify Manager").navigationBarTitleDisplayMode(.inline)
         
     }
     
@@ -79,6 +94,25 @@ class informManagerViewModel: ObservableObject {
 
         Database.database().reference().root.child("Employee").child(self.user!.uid).updateChildValues(["status": newStatus])
     }
+    
+    func getCurrentTime() -> String {
+        
+        let formatter = DateFormatter()
+        formatter.timeStyle = .medium
+        let dateString = formatter.string(from: Date())
+        
+        return dateString
+    }
+    
+    func getCurrentDate() -> String {
+        
+        let formatter3 = DateFormatter()
+        formatter3.dateFormat = "E, d MMM y"
+        let dateString = formatter3.string(from: Date())
+        
+        return dateString
+    }
+
         
     }
 
