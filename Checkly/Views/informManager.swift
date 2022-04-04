@@ -26,7 +26,7 @@ struct informManager: View {
         let time = vm.getCurrentTime()
         let date = vm.getCurrentDate()
         
-        VStack {
+        VStack (spacing: 80) {
             
             //update time every second
             Text("\(currentDate)")
@@ -34,50 +34,62 @@ struct informManager: View {
                     currentDate = input
                 }.opacity(0)
             
+            VStack ( spacing: 0){
             Text(time).fontWeight(.ultraLight).font(.system(size: 40))
             Text(date).fontWeight(.light).foregroundColor(.gray)
+            }
             
-            HStack{
-                Spacer()
-                Text("Notify manager I'll be late").font(.system(size: 16, weight: .bold))
-                Spacer()
-                }.foregroundColor(.white)
-                .padding(.vertical)
-                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.345, green: 0.737, blue: 0.925), Color(red: 0.263, green: 0.624, blue: 0.953)]), startPoint: .leading, endPoint: .trailing))
-                .cornerRadius(32)
-                .padding(.horizontal)
-                .shadow(radius: 15)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    showingLateAlert = true
-                }.alert("Are you sure you want to inform your manager of being late?", isPresented: $showingLateAlert) {
-                    Button("Cancel", role: .cancel) { }
-                    Button("Yes") {
-                        vm.updateStatus(newStatus: "Late")
-                    }
-                }
-            
-            HStack{
-                Spacer()
-                Text("Notify manager I'll be early").font(.system(size: 16, weight: .bold))
-                Spacer()
-                }.foregroundColor(.white)
-                .padding(.vertical)
-                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.345, green: 0.737, blue: 0.925), Color(red: 0.263, green: 0.624, blue: 0.953)]), startPoint: .leading, endPoint: .trailing))
-                .cornerRadius(32)
-                .padding(.horizontal)
-                .shadow(radius: 15)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    showingEarlyAlert = true
-                }.alert("Are you sure you want to inform your manager of being early?", isPresented: $showingEarlyAlert) {
-                    Button("Cancel", role: .cancel) { }
-                    Button("Yes") {
-                        vm.updateStatus(newStatus: "Early")
-                    }
-                }
+            VStack (spacing: 20) {
+                ZStack {
+
+                    Ellipse()
+                        .fill(Color(red: 0.145, green: 0.816, blue: 0.816))
+                    .frame(width: 130, height: 130)
+                    
+                    Ellipse()
+                        .fill(Color(red: 0.145, green: 0.816, blue: 0.816).opacity(0.5))
+                    .frame(width: 165, height: 165)
+                    
+                    Ellipse()
+                        .fill(Color(red: 0.145, green: 0.816, blue: 0.816).opacity(0.3))
+                    .frame(width: 195, height: 195)
+                    Text("I'll be late").foregroundColor(.white)
+                }.contentShape(Ellipse())
+                        .onTapGesture {
+                            showingLateAlert = true
+                        }.alert("Are you sure you want to inform your manager of being late?", isPresented: $showingLateAlert) {
+                            Button("Cancel", role: .cancel) { }
+                            Button("Yes") {
+                                vm.updateStatus(newStatus: "Late")
+                            }
+                        }
                 
-        
+                ZStack {
+
+                    Ellipse()
+                        .fill(Color(red: 0.173, green: 0.686, blue: 0.933))
+                    .frame(width: 130, height: 130)
+                    
+                    Ellipse()
+                        .fill(Color(red: 0.173, green: 0.686, blue: 0.933).opacity(0.5))
+                    .frame(width: 165, height: 165)
+                    
+                    Ellipse()
+                        .fill(Color(red: 0.173, green: 0.686, blue: 0.933).opacity(0.3))
+                    .frame(width: 195, height: 195)
+                    Text("I'll be early").foregroundColor(.white)
+                }.contentShape(Ellipse())
+                    .onTapGesture {
+                        showingEarlyAlert = true
+                    }.alert("Are you sure you want to inform your manager of being early?", isPresented: $showingEarlyAlert) {
+                        Button("Cancel", role: .cancel) { }
+                        Button("Yes") {
+                            vm.updateStatus(newStatus: "Early")
+                        }
+                    }
+            }
+                
+        Spacer()
             
         }.padding().navigationTitle("Notify Manager").navigationBarTitleDisplayMode(.inline)
         
