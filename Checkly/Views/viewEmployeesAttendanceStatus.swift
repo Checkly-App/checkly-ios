@@ -16,34 +16,40 @@ struct viewEmployeesAttendanceStatus: View {
     
     
     var body: some View {
+    
         
         ScrollView{
-        ForEach(vm.employees , id: \.self) { emp in
-            VStack{
+            VStack (spacing: 8){
+                ForEach(vm.employees) { emp in
+                    
             HStack{
+                VStack (alignment: .leading) {
                 Text(emp.name)
-                Text(emp.status)
+                Text(emp.department).font(.caption).foregroundColor(.gray)
+                }
+                
+                Spacer()
+                //red
+                if ( emp.status == "Late" ) {
+                RoundedRectangle(cornerRadius: 20).frame(width: 90, height: 30).foregroundColor(Color(red: 0.902, green: 0.306, blue: 0.306)).opacity(0.2).overlay(
+                    Text(emp.status)).foregroundColor(Color(red: 0.902, green: 0.306, blue: 0.30))
+                }
+                //green
+                else if ( emp.status == "Early" )  {
+                RoundedRectangle(cornerRadius: 20).frame(width: 90, height: 30).foregroundColor(Color(red: 0.306, green: 0.902, blue: 0.604)).opacity(0.2).overlay(
+                    Text(emp.status)).foregroundColor(Color(red: 0.306, green: 0.902, blue: 0.604))
+                }
+                //yellow
+                else {
+                RoundedRectangle(cornerRadius: 20).frame(width: 90, height: 30).foregroundColor(Color(red: 0.333, green: 0.667, blue: 0.984)).opacity(0.2).overlay(
+                    Text("-")).foregroundColor(Color(red: 0.333, green: 0.667, blue: 0.984))
+                }
+            }.padding().frame(width: 350, height: 50).background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
             
-        }.padding().frame(width: 350, height: 50).background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
+        
+            }
             }.padding()
-        }
-        }.padding()
-    
-
-//                HStack {
-//                    Spacer()
-//                    if ( leave.status == "rejected" ) {
-//                    RoundedRectangle(cornerRadius: 20).frame(width: 90, height: 30).foregroundColor(Color(red: 0.902, green: 0.306, blue: 0.306)).opacity(0.2).overlay(
-//                        Text(leave.status)).foregroundColor(Color(red: 0.902, green: 0.306, blue: 0.30))
-//                    } else if ( leave.status == "accepted" )  {
-//                    RoundedRectangle(cornerRadius: 20).frame(width: 90, height: 30).foregroundColor(Color(red: 0.306, green: 0.902, blue: 0.604)).opacity(0.2).overlay(
-//                        Text(leave.status)).foregroundColor(Color(red: 0.306, green: 0.902, blue: 0.604))
-//                    } else {
-//                    RoundedRectangle(cornerRadius: 20).frame(width: 90, height: 30).foregroundColor(Color(red: 0.969, green: 0.675, blue: 0.408)).opacity(0.2).overlay(
-//                        Text(leave.status)).foregroundColor(Color(red: 0.969, green: 0.675, blue: 0.408))
-//                    }
-//                }
-            
+        }.padding().navigationBarTitle("Employees' Attendance Status").navigationBarTitleDisplayMode(.inline)
         
     }
 }
@@ -76,18 +82,19 @@ class viewEmployeesAttendanceStatusViewModel: ObservableObject {
                 }
             }
         }
-        print(self.department)
-        
     }
+
     
     func getCompanyEmployees(dep: String){
-
-        let Queue = DispatchQueue.init(label: "Queue")
         
-
-        Queue.sync {
-
+        print(self.employees.isEmpty)
+        if (!(self.employees.isEmpty)) {
+            self.employees = []
+        }
+        else if (self.employees.isEmpty) {
+            
         ref.child("Employee").observe(.value, with: { dataSnapshot in
+            self.employees = []
         for emp in dataSnapshot.children {
         let obj = emp as! DataSnapshot
 
@@ -96,12 +103,14 @@ class viewEmployeesAttendanceStatusViewModel: ObservableObject {
         let status  = obj.childSnapshot(forPath: "status").value as! String
             
             if ( department == dep) {
-            let list = list(name: name, status: status)
+                let list = list(id: UUID().uuidString , name: name, status: status, department: department)
         
             self.employees.append(list)
             }
-
-                }
+        }
+                
+            print(self.employees)
+            
             }, withCancel: { error in
             print(error.localizedDescription)
             })
@@ -110,9 +119,11 @@ class viewEmployeesAttendanceStatusViewModel: ObservableObject {
 }
 
 
-struct list: Hashable {
+struct list: Hashable, Identifiable {
+    var id: String
     var name: String
     var status: String
+    var department: String
 }
 
 struct viewEmployeesAttendanceStatus_Previews: PreviewProvider {
