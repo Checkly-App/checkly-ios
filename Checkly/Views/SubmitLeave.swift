@@ -147,8 +147,8 @@ class submitLeaveViewModel: ObservableObject {
     let Queue = DispatchQueue.init(label: "Queue")
     
         Queue.sync {
-            //\(user!.uid)
-            ref.child("Employee/FJvmCdXGd7UWELDQIEJS3kisTa03").observe(.value, with: { dataSnapshot in
+            
+            ref.child("Employee/\(user!.uid)").observe(.value, with: { dataSnapshot in
 
                 let obj = dataSnapshot.value as! [String:Any]
                 let department = obj["department"] as! String
@@ -200,7 +200,7 @@ func fetchManager (emp_dep: String) -> String {
 
     let Leave: [String: Any] = [
         
-//        "emp_id": user!.uid,
+        "emp_id": user!.uid,
         "start_date": formatter.string(from: fromDate),
         "end_date": formatter.string(from: toDate),
         "type": selectedType,

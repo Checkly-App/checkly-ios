@@ -17,6 +17,8 @@
 		7149E91827A985BC008E3553 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91727A985BC008E3553 /* Authentication.swift */; };
 		7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91927A987DD008E3553 /* LoginModel.swift */; };
 		71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */; };
+		DA9E1E8728007D660067ABB4 /* viewMyLeaves.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E1E8628007D660067ABB4 /* viewMyLeaves.swift */; };
+		DA9E1E8928007E730067ABB4 /* Leave.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E1E8828007E730067ABB4 /* Leave.swift */; };
 		DAA742F327F3A0280098CE1C /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = DAA742F227F3A0280098CE1C /* SwiftKeychainWrapper */; };
 		DAA94AEF27ECA01100B80C36 /* SubmitLeave.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA94AEE27ECA01100B80C36 /* SubmitLeave.swift */; };
 		DAA94AF227ECABCB00B80C36 /* SwiftUILib.DocumentPicker in Frameworks */ = {isa = PBXBuildFile; productRef = DAA94AF127ECABCB00B80C36 /* SwiftUILib.DocumentPicker */; };
@@ -62,6 +64,8 @@
 		7149E91727A985BC008E3553 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		7149E91927A987DD008E3553 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
+		DA9E1E8628007D660067ABB4 /* viewMyLeaves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewMyLeaves.swift; sourceTree = "<group>"; };
+		DA9E1E8828007E730067ABB4 /* Leave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leave.swift; sourceTree = "<group>"; };
 		DAA94AEE27ECA01100B80C36 /* SubmitLeave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitLeave.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,6 +155,7 @@
 				7149E91327A977D6008E3553 /* ContentView.swift */,
 				7149E8FC27A8720A008E3553 /* LoginView.swift */,
 				DAA94AEE27ECA01100B80C36 /* SubmitLeave.swift */,
+				DA9E1E8628007D660067ABB4 /* viewMyLeaves.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -160,6 +165,7 @@
 			children = (
 				7149E91127A96FCA008E3553 /* Credentials.swift */,
 				7149E91927A987DD008E3553 /* LoginModel.swift */,
+				DA9E1E8828007E730067ABB4 /* Leave.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -281,7 +287,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7149E8FD27A8720A008E3553 /* LoginView.swift in Sources */,
+				DA9E1E8928007E730067ABB4 /* Leave.swift in Sources */,
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
+				DA9E1E8728007D660067ABB4 /* viewMyLeaves.swift in Sources */,
 				7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */,
 				7149E91227A96FCA008E3553 /* Credentials.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,

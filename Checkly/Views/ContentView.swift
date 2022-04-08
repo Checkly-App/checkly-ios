@@ -33,6 +33,15 @@ struct ContentView: View {
                          Text("Open View")
                      }
                 })
+                
+                Button(action: {
+                    print("Floating Button Click")
+                }, label: {
+                    NavigationLink(destination: viewMyLeaves()) {
+                         Text("Open View")
+                     }
+                })
+
             }
         }
     }
