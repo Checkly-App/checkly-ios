@@ -19,16 +19,20 @@ struct CalendarGridView: View {
     @StateObject var viewRouter: CalendarViewRouterHelper
     // for half modal sheet
     @State private var bottomSheetPosition: BottomSheetPosition = .hidden
-    // for attendees sheet
+    // to show attendees sheet
     @State private var showingSheet = false
-    // for participants attendance (PA) sheet
+    // to show participants attendance (PA) sheet
     @State private var showingPASheet = false
     // for map view
     @State private var coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0,longitude: 0.0),span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
-    //  to navigate to generate meeting
+    // to show generate meeting view
     @State private var generateMeetingView = false
-    // to navigate to edit meeting
+    // to show edit meeting
     @State private var editMeetingView = false
+    // to show generate MoM sheet
+    @State private var showingGenerateMoMSheet = false
+    // to show send MoM sheet
+    @State private var showingSendMoMSheet = false
     
     // MARK: temp to be removed
     @Environment(\.dismiss) var dismiss
@@ -184,7 +188,7 @@ struct CalendarGridView: View {
             // MARK: Meeting Details Sheet
             .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray), .background({AnyView(Color.white)})], content: {
                     // see view under "Views" folder
-                MeetingDetailsView(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: self.meetingViewModel.filteredMeetingsArray(date: currentDate)?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable", decisions: "-"), showingPASheet: $showingPASheet, editMeetingDetails: $editMeetingView)
+                MeetingDetailsView(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: self.meetingViewModel.filteredMeetingsArray(date: currentDate)?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable", decisions: "-"), showingPASheet: $showingPASheet, editMeetingDetails: $editMeetingView, showingGenerateMoMSheet: $showingGenerateMoMSheet, showingSendMoMSheet: $showingSendMoMSheet)
             })
             
             // MARK: Attendees List Sheet
@@ -211,6 +215,15 @@ struct CalendarGridView: View {
             }) {
                 EditMeetingView(meeting: self.meetingViewModel.filteredMeetingsArray(date: currentDate)?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable", decisions: "-"))
             }
+            // MARK: Generate MoM Sheet
+            .fullScreenCover(isPresented: $showingGenerateMoMSheet, content: {
+                GenerateMoMView(meeting: self.meetingViewModel.filteredMeetingsArray(date: currentDate)?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "0", longitude: "0", decisions: "-"))
+            })
+            
+            // MARK: Send/View MoM Sheet
+            .fullScreenCover(isPresented: $showingSendMoMSheet, content: {
+                SendMoMView(meeting:  self.meetingViewModel.filteredMeetingsArray(date: currentDate)?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "0", longitude: "0", decisions: "-"))
+            })
     
             .navigationBarHidden(true)
             .navigationBarTitle(Text("Calendar"))

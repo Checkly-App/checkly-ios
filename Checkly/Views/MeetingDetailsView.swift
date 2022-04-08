@@ -14,13 +14,18 @@ struct MeetingDetailsView: View {
     
     @ObservedObject var meetingViewModel : MeetingViewModel = MeetingViewModel()
     @Binding var coordinateRegion: MKCoordinateRegion
-    // for attendees sheet
+    // to show attendees sheet
     @Binding var showingSheet: Bool
+    // get passed meeting object
     var meeting: Meeting
-    // for participants attendance (PA) sheet
+    // to show participants attendance (PA) sheet
     @Binding var showingPASheet: Bool
-    // to to navigate to edit meeting
+    // to show edit meeting view
     @Binding var editMeetingDetails: Bool
+    // to show generate MoM sheet
+    @Binding var showingGenerateMoMSheet: Bool
+    // to show send MoM sheet
+    @Binding var showingSendMoMSheet: Bool
     
     var body: some View {
         VStack(spacing: 20) {
@@ -280,26 +285,62 @@ struct MeetingDetailsView: View {
                     )
                 .padding()
             }
-            // (Only if current user is host) participants attendance have been taken
-            else if (meetingViewModel.isHost(meeting: meeting) && meetingViewModel.meetingAttendanceTaken(meeting: meeting)){
-                HStack{
-                    Image(systemName: "person.crop.circle.badge.checkmark")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 25, height: 25)
-                        .padding(.leading, 5)
-                    Text("Attendance has been taken")
-                        .fontWeight(.semibold)
-                        .multilineTextAlignment(.center)
-                        .padding([.top,.bottom, .leading],4)
-                        .padding(.trailing, 8)
+            // (Only if current user is host) & participants attendance have been taken, & the host did not generate MoM, then show generate MoM button
+            else if (meetingViewModel.isHost(meeting: meeting) && meetingViewModel.meetingAttendanceTaken(meeting: meeting) && meeting.decisions == "-"){
+                
+                Button{
+                    showingGenerateMoMSheet.toggle()
+                } label: {
+                    Text("Generate MoM")
+                       .font(.system(size: 19, weight: .semibold))
+                       .foregroundColor(.white)
+                       .frame(width: 300)
+                       .padding()
+                       .background(
+                           LinearGradient(colors: [Color(red: 0.337, green: 0.729, blue: 0.922),Color(red: 0.275, green: 0.631, blue: 0.953)], startPoint: .leading, endPoint: .trailing)
+                        )
+                       .cornerRadius(10.0)
                 }
-                .padding()
-                .foregroundColor(Color(red: 0.173, green: 0.686, blue: 0.933))
-                .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color(red: 0.173, green: 0.686, blue: 0.933))
-                    )
+                .padding(.top, 20)
+                
+            }
+            
+            // show send button only if current user is host
+            else if (meetingViewModel.isHost(meeting: meeting) && meeting.decisions != "-"){
+                
+                Button{
+                    showingSendMoMSheet.toggle()
+                } label: {
+                    Text("Send MoM")
+                       .font(.system(size: 19, weight: .semibold))
+                       .foregroundColor(.white)
+                       .frame(width: 300)
+                       .padding()
+                       .background(
+                           LinearGradient(colors: [Color(red: 0.337, green: 0.729, blue: 0.922),Color(red: 0.275, green: 0.631, blue: 0.953)], startPoint: .leading, endPoint: .trailing)
+                        )
+                       .cornerRadius(10.0)
+                }
+                .padding(.top, 20)
+            }
+            
+            // Meeting Attendee can view MoM
+            else if ( !meetingViewModel.isHost(meeting: meeting) && meeting.decisions != "-" ){
+                
+                Button{
+                    showingSendMoMSheet.toggle()
+                } label: {
+                    Text("View MoM")
+                       .font(.system(size: 19, weight: .semibold))
+                       .foregroundColor(.white)
+                       .frame(width: 300)
+                       .padding()
+                       .background(
+                           LinearGradient(colors: [Color(red: 0.337, green: 0.729, blue: 0.922),Color(red: 0.275, green: 0.631, blue: 0.953)], startPoint: .leading, endPoint: .trailing)
+                        )
+                       .cornerRadius(10.0)
+                }
+                .padding(.top, 20)
             }
             
         }
@@ -330,9 +371,11 @@ struct MeetingDetails_Previews: PreviewProvider {
     @State static private var showingSheet = false
     @State static private var showingPASheet = false
     @State static private var editMeetingDetails = false
+    @State static private var showingGenerateMoMSheet = false
+    @State static private var showingSendMoMSheet = false
 
     static var previews: some View {
-        MeetingDetailsView(coordinateRegion: $coordinateRegion, showingSheet: $showingSheet, meeting: Meeting(id: "1", host: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", title: "Cloud Security Engineers Meeting", datetime_start: .init(timeIntervalSince1970: TimeInterval(1646892000)), datetime_end: .init(timeIntervalSince1970: TimeInterval(1646893800)),type: "On-site", location: "STC HQ, IT Meeting Room", attendees: ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"attended", "SsemeSIGH6Syjkf8ctO8No1I3hB3":"attended"], agenda: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", latitude: "24.7534673", longitude: "46.6920362", decisions: "-"), showingPASheet: $showingPASheet, editMeetingDetails: $editMeetingDetails)
+        MeetingDetailsView(coordinateRegion: $coordinateRegion, showingSheet: $showingSheet, meeting: Meeting(id: "1", host: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", title: "Cloud Security Engineers Meeting", datetime_start: .init(timeIntervalSince1970: TimeInterval(1646892000)), datetime_end: .init(timeIntervalSince1970: TimeInterval(1646893800)),type: "On-site", location: "STC HQ, IT Meeting Room", attendees: ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"attended", "SsemeSIGH6Syjkf8ctO8No1I3hB3":"attended"], agenda: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", latitude: "24.7534673", longitude: "46.6920362", decisions: "-"), showingPASheet: $showingPASheet, editMeetingDetails: $editMeetingDetails, showingGenerateMoMSheet: $showingGenerateMoMSheet, showingSendMoMSheet: $showingSendMoMSheet)
     }
 }
 

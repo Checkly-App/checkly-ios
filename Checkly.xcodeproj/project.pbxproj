@@ -43,6 +43,8 @@
 		A31E8F0927E12A5F009AE0FA /* AttendenceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0827E12A5F009AE0FA /* AttendenceListView.swift */; };
 		A31E8F0B27E12AE4009AE0FA /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0A27E12AE4009AE0FA /* LocationManager.swift */; };
 		A31E8F0F27E12BF2009AE0FA /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0E27E12BF2009AE0FA /* Employee.swift */; };
+		A34CDE782800CBCF00C5F58B /* GenerateMoMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CDE772800CBCF00C5F58B /* GenerateMoMView.swift */; };
+		A34CDE7A2800CC3F00C5F58B /* SendMoMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CDE792800CC3F00C5F58B /* SendMoMView.swift */; };
 		A35A20DB27C2F54600719A01 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = A35A20DA27C2F54600719A01 /* SDWebImageSwiftUI */; };
 		A35A20DD27C2F57100719A01 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A35A20DC27C2F57100719A01 /* FirebaseStorage */; };
 		A362C15827BEE49A00BD761A /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = A362C15727BEE49A00BD761A /* BottomSheet */; };
@@ -89,6 +91,8 @@
 		A31E8F0A27E12AE4009AE0FA /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A31E8F0C27E12B22009AE0FA /* EmployeeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeViewModel.swift; sourceTree = "<group>"; };
 		A31E8F0E27E12BF2009AE0FA /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		A34CDE772800CBCF00C5F58B /* GenerateMoMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateMoMView.swift; sourceTree = "<group>"; };
+		A34CDE792800CC3F00C5F58B /* SendMoMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoMView.swift; sourceTree = "<group>"; };
 		A365EA4627DAE43300034F79 /* ParticipantRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantRowView.swift; sourceTree = "<group>"; };
 		A365EA4827DAE46800034F79 /* ParticipantsAttendanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsAttendanceView.swift; sourceTree = "<group>"; };
 		A39913FE27D29FB400B26628 /* MeetingAttendeesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingAttendeesListView.swift; sourceTree = "<group>"; };
@@ -185,6 +189,8 @@
 				7149E91327A977D6008E3553 /* ContentView.swift */,
 				7149E8FC27A8720A008E3553 /* LoginView.swift */,
 				71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */,
+				A34CDE772800CBCF00C5F58B /* GenerateMoMView.swift */,
+				A34CDE792800CC3F00C5F58B /* SendMoMView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -343,8 +349,10 @@
 				A3B8D85427B11A2B00752F63 /* CalendarView.swift in Sources */,
 				A3027EB927DFE1B700E305F8 /* InputsView.swift in Sources */,
 				A3CE73FE27CD5593002D2517 /* AnnotatedItem.swift in Sources */,
+				A34CDE782800CBCF00C5F58B /* GenerateMoMView.swift in Sources */,
 				7149E8FD27A8720A008E3553 /* LoginView.swift in Sources */,
 				A3027EB027DFDFAE00E305F8 /* ViewExtension.swift in Sources */,
+				A34CDE7A2800CC3F00C5F58B /* SendMoMView.swift in Sources */,
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
 				A3027EB627DFE12500E305F8 /* FaceIDView.swift in Sources */,
 				A3B8D84F27B1182200752F63 /* MeetingViewModel.swift in Sources */,
