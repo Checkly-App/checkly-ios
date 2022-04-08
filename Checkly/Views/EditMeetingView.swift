@@ -408,18 +408,21 @@ struct EditMeetingView: View {
                 ToolbarItem(placement: .keyboard) {
                  
               
-                    Button {
-                        isfocus = false
-                           } label: {
-                           
-                               HStack{
-                                 
-                                   Text("Done").foregroundColor(Color("Blue"))
+                    HStack {
+                        Spacer()
+                        Button {
+                            isfocus = false
+                               } label: {
                                
+                                   HStack{
+                                     
+                                       Text("Done").foregroundColor(Color("Blue"))
+                                   
+
+                               }
 
                            }
-
-                           }
+                    }
               
         }
             }

@@ -355,7 +355,7 @@ struct CalendarGridView: View {
                 // go back to
                 dismiss()
             } label: {
-                Text("Navigate to logout")
+                Text("go to logout")
             }
             Spacer()
             

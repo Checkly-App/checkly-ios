@@ -92,7 +92,8 @@ class MeetingViewModel: ObservableObject{
                     let name = obj.childSnapshot(forPath:  "name").value as! String
                     let position = obj.childSnapshot(forPath: "position").value as! String
                     let imgToken = obj.childSnapshot(forPath: "image_token").value as! String
-                    let employee = attendee(id: uID, name: name, position: position ,imgToken: imgToken, status: "")
+                    let email = obj.childSnapshot(forPath: "email").value as! String
+                    let employee = attendee(id: uID, name: name, position: position ,imgToken: imgToken, status: "", email: email)
                     self.attendeesList.append(employee)
                 }
             }
@@ -153,7 +154,7 @@ class MeetingViewModel: ObservableObject{
                 for attendant in meeting.attendees{
                     for employee in attendeesList {
                         if attendant.key == employee.id {
-                            let employee = attendee(id: employee.id, name: employee.name, position: employee.position ,imgToken: employee.imgToken, status: attendant.value)
+                            let employee = attendee(id: employee.id, name: employee.name, position: employee.position ,imgToken: employee.imgToken, status: attendant.value, email: employee.email)
                             attendeesArray.append(employee)
                         }
                     }
@@ -165,7 +166,7 @@ class MeetingViewModel: ObservableObject{
                 if attendant.value == "accepted" || attendant.value == "attended" {
                     for employee in attendeesList {
                         if attendant.key == employee.id {
-                            let employee = attendee(id: employee.id, name: employee.name, position: employee.position ,imgToken: employee.imgToken, status: attendant.value)
+                            let employee = attendee(id: employee.id, name: employee.name, position: employee.position ,imgToken: employee.imgToken, status: attendant.value, email: employee.email)
                             attendeesArray.append(employee)
                         }
                     }
@@ -213,7 +214,7 @@ class MeetingViewModel: ObservableObject{
                 if attendant.value == "attended" {
                     for employee in attendeesList {
                         if attendant.key == employee.id {
-                            let employee = attendee(id: employee.id, name: employee.name, position: employee.position ,imgToken: employee.imgToken, status: attendant.value)
+                            let employee = attendee(id: employee.id, name: employee.name, position: employee.position ,imgToken: employee.imgToken, status: attendant.value, email: employee.email)
                             attendedParticipantsArray.append(employee)
                         }
                     }
@@ -236,7 +237,7 @@ class MeetingViewModel: ObservableObject{
                 if attendant.value == "absent" {
                     for employee in attendeesList {
                         if attendant.key == employee.id {
-                            let employee = attendee(id: employee.id, name: employee.name, position: employee.position ,imgToken: employee.imgToken, status: attendant.value)
+                            let employee = attendee(id: employee.id, name: employee.name, position: employee.position ,imgToken: employee.imgToken, status: attendant.value, email: employee.email)
                             absentParticipantsArray.append(employee)
                         }
                     }
@@ -253,6 +254,73 @@ class MeetingViewModel: ObservableObject{
     func generateMoM(meeting: Meeting, decisions: String){
         
         ref.child("Meetings/\(meeting.id)").updateChildValues(["decisions":decisions])
+    }
+    
+    func getParticipantsEmails(meeting: Meeting) -> [String]{
+        
+        var emails = [String]()
+        
+        if meeting.attendees.count != 0 {
+            for attendant in meeting.attendees{
+                if attendant.value == "attended" {
+                    for employee in attendeesList {
+                        if attendant.key == employee.id {
+                            let email = employee.email
+                            emails.append(email)
+                        }
+                    }
+                }
+            }
+        } else {
+            emails = []
+        }
+        
+        return emails
+    }
+    
+    func getAttendedParticipantsNames(meeting: Meeting) -> String {
+        
+        var names = ""
+        
+        if meeting.attendees.count != 0 {
+            for attendant in meeting.attendees{
+                if attendant.value == "attended" {
+                    for employee in attendeesList {
+                        if attendant.key == employee.id {
+                            let name = employee.name
+                            names.append(" \(name),")
+                        }
+                    }
+                }
+            }
+        } else {
+            names = ""
+        }
+        
+        return names
+    }
+    
+    func getAbsentParticipantsNames(meeting: Meeting) -> String {
+        
+        var names = ""
+        
+        if meeting.attendees.count != 0 {
+            for attendant in meeting.attendees{
+                if attendant.value == "absent" {
+                    for employee in attendeesList {
+                        if attendant.key == employee.id {
+                            let name = employee.name
+                            names.append(" \(name),")
+                        }
+                    }
+                }
+            }
+        }
+        if names == "" {
+            names = "No absent participants"
+        }
+        
+        return names
     }
     
     // Fetch current week days from Sun to Sat
@@ -301,4 +369,5 @@ struct attendee: Identifiable, Hashable{
     var position: String
     var imgToken: String
     var status: String
+    var email: String
 }

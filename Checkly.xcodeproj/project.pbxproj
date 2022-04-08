@@ -45,6 +45,8 @@
 		A31E8F0F27E12BF2009AE0FA /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0E27E12BF2009AE0FA /* Employee.swift */; };
 		A34CDE782800CBCF00C5F58B /* GenerateMoMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CDE772800CBCF00C5F58B /* GenerateMoMView.swift */; };
 		A34CDE7A2800CC3F00C5F58B /* SendMoMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CDE792800CC3F00C5F58B /* SendMoMView.swift */; };
+		A34CDE802800FC6600C5F58B /* ComposeMailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CDE7F2800FC6600C5F58B /* ComposeMailData.swift */; };
+		A34CDE822800FC8700C5F58B /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CDE812800FC8700C5F58B /* MailView.swift */; };
 		A35A20DB27C2F54600719A01 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = A35A20DA27C2F54600719A01 /* SDWebImageSwiftUI */; };
 		A35A20DD27C2F57100719A01 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A35A20DC27C2F57100719A01 /* FirebaseStorage */; };
 		A362C15827BEE49A00BD761A /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = A362C15727BEE49A00BD761A /* BottomSheet */; };
@@ -93,6 +95,8 @@
 		A31E8F0E27E12BF2009AE0FA /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		A34CDE772800CBCF00C5F58B /* GenerateMoMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateMoMView.swift; sourceTree = "<group>"; };
 		A34CDE792800CC3F00C5F58B /* SendMoMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoMView.swift; sourceTree = "<group>"; };
+		A34CDE7F2800FC6600C5F58B /* ComposeMailData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeMailData.swift; sourceTree = "<group>"; };
+		A34CDE812800FC8700C5F58B /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		A365EA4627DAE43300034F79 /* ParticipantRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantRowView.swift; sourceTree = "<group>"; };
 		A365EA4827DAE46800034F79 /* ParticipantsAttendanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsAttendanceView.swift; sourceTree = "<group>"; };
 		A39913FE27D29FB400B26628 /* MeetingAttendeesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingAttendeesListView.swift; sourceTree = "<group>"; };
@@ -191,6 +195,7 @@
 				71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */,
 				A34CDE772800CBCF00C5F58B /* GenerateMoMView.swift */,
 				A34CDE792800CC3F00C5F58B /* SendMoMView.swift */,
+				A34CDE812800FC8700C5F58B /* MailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -206,6 +211,7 @@
 				A3027EB127DFE00700E305F8 /* Company.swift */,
 				A3027EB327DFE05D00E305F8 /* Session.swift */,
 				A31E8F0E27E12BF2009AE0FA /* Employee.swift */,
+				A34CDE7F2800FC6600C5F58B /* ComposeMailData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -349,6 +355,7 @@
 				A3B8D85427B11A2B00752F63 /* CalendarView.swift in Sources */,
 				A3027EB927DFE1B700E305F8 /* InputsView.swift in Sources */,
 				A3CE73FE27CD5593002D2517 /* AnnotatedItem.swift in Sources */,
+				A34CDE802800FC6600C5F58B /* ComposeMailData.swift in Sources */,
 				A34CDE782800CBCF00C5F58B /* GenerateMoMView.swift in Sources */,
 				7149E8FD27A8720A008E3553 /* LoginView.swift in Sources */,
 				A3027EB027DFDFAE00E305F8 /* ViewExtension.swift in Sources */,
@@ -378,6 +385,7 @@
 				A31E8F0B27E12AE4009AE0FA /* LocationManager.swift in Sources */,
 				A3B8D84D27B117E500752F63 /* Meeting.swift in Sources */,
 				71D09A6427A9DADD00DA2D1D /* ResetPasswordView.swift in Sources */,
+				A34CDE822800FC8700C5F58B /* MailView.swift in Sources */,
 				7152C6AB27B6CF5100E2CEAD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,7 +517,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Checkly/Preview Content\"";
-				DEVELOPMENT_TEAM = 9VU9NLXSDT;
+				DEVELOPMENT_TEAM = KLG5737U6K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Checkly/Info.plist;
@@ -526,7 +534,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dalalbinhumaid.Checkly;
+				PRODUCT_BUNDLE_IDENTIFIER = aleen.Checkly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -542,7 +550,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Checkly/Preview Content\"";
-				DEVELOPMENT_TEAM = 9VU9NLXSDT;
+				DEVELOPMENT_TEAM = KLG5737U6K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Checkly/Info.plist;
@@ -559,7 +567,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dalalbinhumaid.Checkly;
+				PRODUCT_BUNDLE_IDENTIFIER = aleen.Checkly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

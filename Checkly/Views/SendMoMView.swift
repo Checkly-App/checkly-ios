@@ -11,9 +11,13 @@ struct SendMoMView: View {
     
     @ObservedObject var meetingViewModel : MeetingViewModel = MeetingViewModel()
     @Environment(\.dismiss) var dismiss
+    @State private var showingAlert = false
+    @State private var errorMsg = ""
+    // to show mail sheet
+    @State private var showingMailSheet = false
+    @State private var mailData = ComposeMailData(subject: "", recipients: [""], message: "")
     // get passed meeting object
     var meeting: Meeting
-    @State private var showingAlert = false
     
     var body: some View {
         NavigationView{
@@ -153,8 +157,31 @@ struct SendMoMView: View {
                 // Send Button will be shown only if current user is the host of the meeting
                 if (meetingViewModel.isHost(meeting: meeting)){
                     Button{
-                       // Open Mail sheet
-                        
+                        if (!MailView.canSendMail){
+                            errorMsg = "The device is not configured to send emails"
+                            showingAlert = true
+                        }
+                        else if (meetingViewModel.getAttendedParticipants(meeting: meeting).count <= 0){
+                            errorMsg = "Cannot send email with no attended participants"
+                            showingAlert = true
+                        }
+                        else {
+                            mailData.subject = "\(meeting.title) MoM"
+                            // loop through attended participants
+                            mailData.recipients = meetingViewModel.getParticipantsEmails(meeting: meeting)
+                            mailData.message = """
+                                                Title: \(meeting.title) \n
+                                                Host: \(meetingViewModel.getHostName(hostID: meeting.host)) \n
+                                                Location: \(meeting.location) \n
+                                                Date: \(meeting.datetime_start.formatted(date: .abbreviated, time: .omitted)) \n
+                                                Time: \(meeting.datetime_start.formatted(date: .omitted, time: .shortened)) - \(meeting.datetime_end.formatted(date: .omitted, time: .shortened)) \n
+                                                Present: \(meetingViewModel.getAttendedParticipantsNames(meeting: meeting)) \n
+                                                Absent: \(meetingViewModel.getAbsentParticipantsNames(meeting: meeting)) \n
+                                                Agenda: \(meeting.agenda) \n
+                                                Decisions: \(meeting.decisions) \n
+                                               """
+                            showingMailSheet.toggle()
+                        }
                     } label: {
                         HStack{
                             Text("Send")
@@ -180,8 +207,15 @@ struct SendMoMView: View {
             .alert("Oops..!", isPresented: $showingAlert, actions: {
                 // Default Action
             }, message: {
-                Text("Cannot Sent Email")
+                Text(errorMsg)
             })
+            
+            .sheet(isPresented: $showingMailSheet) {
+                  MailView(data: $mailData) { result in
+                    print(result)
+                  }
+            }
+            .preferredColorScheme(.light)
             
             .navigationBarTitle("View MoM").toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {

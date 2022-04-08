@@ -221,10 +221,13 @@ struct GenerateMoMView: View {
                 }
             .navigationBarTitleDisplayMode(.inline).toolbar {
                 ToolbarItem(placement: .keyboard){
-                    Button{
-                        isfocus = false
-                    } label: {
-                        Text("Done").foregroundColor(Color("Blue"))
+                    HStack {
+                        Spacer()
+                        Button{
+                            isfocus = false
+                        } label: {
+                            Text("Done").foregroundColor(Color("Blue"))
+                    }
                     }
                 }
             }

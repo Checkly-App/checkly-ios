@@ -95,7 +95,7 @@ struct ParticipantRow_Previews: PreviewProvider {
     @State static private var attendeesDictionary = ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"accepted" ,"xCITUcFuCodx9SRM4CZPSWi3o2j1":"accepted"]
     
     static var previews: some View {
-        ParticipantRowView(selectedRows: (.constant(Set<attendee>())), attendeesDictionary: $attendeesDictionary ,attendee: attendee(id: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", name: "Aleen AlSuhaibani", position: "Associate", imgToken: "null", status: "accepted"))
+        ParticipantRowView(selectedRows: (.constant(Set<attendee>())), attendeesDictionary: $attendeesDictionary ,attendee: attendee(id: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", name: "Aleen AlSuhaibani", position: "Associate", imgToken: "null", status: "accepted", email: "aleenwaelss@gmail.com"))
     }
 }
 
