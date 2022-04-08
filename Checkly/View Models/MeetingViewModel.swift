@@ -52,14 +52,14 @@ class MeetingViewModel: ObservableObject{
                     
                     let obj = meetings as! DataSnapshot
                     
-                    let mt = Meeting(id: obj.key, host: obj.childSnapshot(forPath: "host").value as? String ?? "none", title: obj.childSnapshot(forPath: "title").value as? String ?? "none", datetime_start: .init(timeIntervalSince1970: TimeInterval(obj.childSnapshot(forPath: "datetime_start").value as? Int ?? 1648127220)), datetime_end: .init(timeIntervalSince1970: TimeInterval(obj.childSnapshot(forPath: "datetime_end").value as? Int ?? 1648127220)), type: obj.childSnapshot(forPath: "type").value as? String ?? "none", location: obj.childSnapshot(forPath: "location").value as? String ?? "none", attendees: obj.childSnapshot(forPath: "attendees").value as? [String:String] ?? ["olU8zzFyDhN2cn4IxJKyIuXT5hM2":"sent"], agenda: obj.childSnapshot(forPath: "agenda").value as? String ?? "none", latitude: obj.childSnapshot(forPath: "latitude").value as? String ?? "24.7537162", longitude: obj.childSnapshot(forPath: "longitude").value as? String ?? "46.6923626")
+                    let mt = Meeting(id: obj.key, host: obj.childSnapshot(forPath: "host").value as? String ?? "none", title: obj.childSnapshot(forPath: "title").value as? String ?? "none", datetime_start: .init(timeIntervalSince1970: TimeInterval(obj.childSnapshot(forPath: "datetime_start").value as? Int ?? 1648127220)), datetime_end: .init(timeIntervalSince1970: TimeInterval(obj.childSnapshot(forPath: "datetime_end").value as? Int ?? 1648127220)), type: obj.childSnapshot(forPath: "type").value as? String ?? "none", location: obj.childSnapshot(forPath: "location").value as? String ?? "none", attendees: obj.childSnapshot(forPath: "attendees").value as? [String:String] ?? ["olU8zzFyDhN2cn4IxJKyIuXT5hM2":"sent"], agenda: obj.childSnapshot(forPath: "agenda").value as? String ?? "none", latitude: obj.childSnapshot(forPath: "latitude").value as? String ?? "24.7537162", longitude: obj.childSnapshot(forPath: "longitude").value as? String ?? "46.6923626", decisions: obj.childSnapshot(forPath: "decisions").value as? String ?? "-")
 
                     if(mt.host == self.userID){
                         self.meetings.append(mt)
                     }
                     for attendant in mt.attendees {
                         if self.userID == attendant.key {
-                            if "accepted" == attendant.value{
+                            if "accepted" == attendant.value || "attended" == attendant.value {
                                 self.meetings.append(mt)
                             }
                         }
@@ -162,7 +162,7 @@ class MeetingViewModel: ObservableObject{
         }
         else if meeting.attendees.count != 0 {
             for attendant in meeting.attendees{
-                if attendant.value == "accepted" {
+                if attendant.value == "accepted" || attendant.value == "attended" {
                     for employee in attendeesList {
                         if attendant.key == employee.id {
                             let employee = attendee(id: employee.id, name: employee.name, position: employee.position ,imgToken: employee.imgToken, status: attendant.value)
@@ -201,6 +201,58 @@ class MeetingViewModel: ObservableObject{
             }
         }
         return false
+    }
+    
+    // Get Attended participants array
+    func getAttendedParticipants(meeting: Meeting) -> [attendee] {
+        
+        var attendedParticipantsArray = [attendee]()
+        
+        if meeting.attendees.count != 0 {
+            for attendant in meeting.attendees{
+                if attendant.value == "attended" {
+                    for employee in attendeesList {
+                        if attendant.key == employee.id {
+                            let employee = attendee(id: employee.id, name: employee.name, position: employee.position ,imgToken: employee.imgToken, status: attendant.value)
+                            attendedParticipantsArray.append(employee)
+                        }
+                    }
+                }
+            }
+        } else {
+            attendedParticipantsArray = []
+        }
+        
+        return attendedParticipantsArray
+    }
+    
+    // Get Absent participants array
+    func getAbsentParticipants(meeting: Meeting) -> [attendee]{
+        
+        var absentParticipantsArray = [attendee]()
+        
+        if meeting.attendees.count != 0 {
+            for attendant in meeting.attendees{
+                if attendant.value == "absent" {
+                    for employee in attendeesList {
+                        if attendant.key == employee.id {
+                            let employee = attendee(id: employee.id, name: employee.name, position: employee.position ,imgToken: employee.imgToken, status: attendant.value)
+                            absentParticipantsArray.append(employee)
+                        }
+                    }
+                }
+            }
+        } else {
+            absentParticipantsArray = []
+        }
+        
+        return absentParticipantsArray
+    }
+    
+    // generate MoM
+    func generateMoM(meeting: Meeting, decisions: String){
+        
+        ref.child("Meetings/\(meeting.id)").updateChildValues(["decisions":decisions])
     }
     
     // Fetch current week days from Sun to Sat

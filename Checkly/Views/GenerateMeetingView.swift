@@ -442,8 +442,9 @@ struct GenerateMeetingView: View {
          print(intervalEndtime)
         
 
-        ref.child("Meetings").childByAutoId().setValue(["title": title,"agenda": text,"host":userid,"location":location,"type":type,"datetime_start":interval,"datetime_end":intervalEndtime,"attendees":attendenceID,"latitude":lang,"longitude":long
-                                                            ])
+        ref.child("Meetings").childByAutoId().setValue(["title": title,"agenda": text,"host":userid,"location":location,"type":type,"datetime_start":interval,"datetime_end":intervalEndtime,"attendees":attendenceID,
+            "latitude":lang,"longitude":long, "decisions":"-"
+            ])
 
     }
     

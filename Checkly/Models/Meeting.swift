@@ -19,4 +19,5 @@ struct Meeting: Identifiable {
     var agenda: String
     var latitude: String
     var longitude: String
+    var decisions: String
 }

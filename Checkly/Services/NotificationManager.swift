@@ -38,6 +38,7 @@ class NotificationManager {
                 let attendees = meetingNode["attendees"] as! [String: String]
                 let datetime_start = meetingNode["datetime_start"] as! Int
                 let datetime_end = meetingNode["datetime_end"] as! Int
+                let decisions = meetingNode["decisions"] as! String
                 let host = meetingNode["host"] as! String
                 let latitude = meetingNode["latitude"] as! String
                 let location = meetingNode["location"] as! String
@@ -46,7 +47,7 @@ class NotificationManager {
                 let type = meetingNode["type"] as! String
                 let meeting_id = snapshot.key
                 
-                let meeting = Meeting(id: meeting_id, host: host, title: title, datetime_start: .init(timeIntervalSince1970: TimeInterval(datetime_start)), datetime_end: .init(timeIntervalSince1970: TimeInterval(datetime_end)), type: type, location: location, attendees: attendees, agenda: agenda, latitude: latitude, longitude: longitude)
+                let meeting = Meeting(id: meeting_id, host: host, title: title, datetime_start: .init(timeIntervalSince1970: TimeInterval(datetime_start)), datetime_end: .init(timeIntervalSince1970: TimeInterval(datetime_end)), type: type, location: location, attendees: attendees, agenda: agenda, latitude: latitude, longitude: longitude, decisions: decisions)
                 
                 for attendee in attendees {
                     /// trigger a notification only if the current user was invited. i.e.,  is in the attendees list

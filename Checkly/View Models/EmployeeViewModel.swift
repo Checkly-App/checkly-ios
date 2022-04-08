@@ -51,7 +51,7 @@ class EmployeeViewModel: ObservableObject {
     @Published var attendeneslist0: [Employee] = []
     @Published var attendetry: [String] = []
     @Published var MeetingObjattendeneess : [String: String] = [:]
-    @Published var MeetingObj = Meeting(id: "", host: "", title: "", datetime_start: Date(), datetime_end: Date(), type: "", location: "", attendees: ["":""], agenda: "",  latitude: "", longitude: "")
+    @Published var MeetingObj = Meeting(id: "", host: "", title: "", datetime_start: Date(), datetime_end: Date(), type: "", location: "", attendees: ["":""], agenda: "",  latitude: "", longitude: "", decisions: "")
 
     private var ref = Database.database().reference()
     
@@ -289,6 +289,7 @@ class EmployeeViewModel: ObservableObject {
                     let attendees =  obj.childSnapshot(forPath: "attendees").value as? [String:String]
                     let date =   obj.childSnapshot(forPath: "datetime_start").value as? Int
                     let end_time =  obj.childSnapshot(forPath: "datetime_end").value as? Int
+                    let decisions = obj.childSnapshot(forPath: "decisions").value as? String
                     let host =  obj.childSnapshot(forPath: "host").value as? String
                     let latitude =  obj.childSnapshot(forPath: "latitude").value as? String
                     let location =  obj.childSnapshot(forPath: "location").value as? String
@@ -299,7 +300,7 @@ class EmployeeViewModel: ObservableObject {
                         for mt in attendees! {
                             self.MeetingObjattendeneess[mt.key] = mt.value
                         }
-                        let mt = Meeting(id: meeting_id, host: host!, title: title!, datetime_start: .init(timeIntervalSince1970: TimeInterval(date!)), datetime_end: .init(timeIntervalSince1970: TimeInterval(end_time!)), type: type!, location: location!, attendees: attendees!, agenda: agenda!, latitude: latitude!, longitude: longitude!)
+                        let mt = Meeting(id: meeting_id, host: host!, title: title!, datetime_start: .init(timeIntervalSince1970: TimeInterval(date!)), datetime_end: .init(timeIntervalSince1970: TimeInterval(end_time!)), type: type!, location: location!, attendees: attendees!, agenda: agenda!, latitude: latitude!, longitude: longitude!, decisions: decisions!)
                         self.MeetingObj = mt
 
                         if mt.type == "On-site"{

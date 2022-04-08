@@ -733,6 +733,6 @@ struct CustomTextEditor0: View {
 struct EditMeetingView_Previews: PreviewProvider {
     
     static var previews: some View {
-        EditMeetingView(meeting: Meeting(id: "1", host: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", title: "Cloud Security Engineers Meeting", datetime_start: .init(timeIntervalSince1970: TimeInterval(1646892000)), datetime_end: .init(timeIntervalSince1970: TimeInterval(1646893800)),type: "On-site", location: "STC HQ, IT Meeting Room", attendees: ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"attended", "SsemeSIGH6Syjkf8ctO8No1I3hB3":"attended"], agenda: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", latitude: "24.7534673", longitude: "46.6920362"))
+        EditMeetingView(meeting: Meeting(id: "1", host: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", title: "Cloud Security Engineers Meeting", datetime_start: .init(timeIntervalSince1970: TimeInterval(1646892000)), datetime_end: .init(timeIntervalSince1970: TimeInterval(1646893800)),type: "On-site", location: "STC HQ, IT Meeting Room", attendees: ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"attended", "SsemeSIGH6Syjkf8ctO8No1I3hB3":"attended"], agenda: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", latitude: "24.7534673", longitude: "46.6920362", decisions: "-"))
     }
 }

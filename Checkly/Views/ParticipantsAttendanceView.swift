@@ -129,7 +129,7 @@ struct ParticipantsAttendanceView: View {
 
 struct ParticipantsAttendance_Previews: PreviewProvider {
     static var previews: some View {
-        ParticipantsAttendanceView(meeting: Meeting(id: "1", host: "e0a6ozh4A0QVOXY0tyiMSFyfL163", title: "Cloud Security Engineers Meeting", datetime_start: Date(), datetime_end: Date() ,type: "On-site", location: "STC HQ, IT Meeting Room", attendees: ["VsWRopBPLQYNMXlL5u5mkcGETze2" : "accepted"], agenda: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", latitude: "24.7534673", longitude: "46.6920362"))
+        ParticipantsAttendanceView(meeting: Meeting(id: "1", host: "e0a6ozh4A0QVOXY0tyiMSFyfL163", title: "Cloud Security Engineers Meeting", datetime_start: Date(), datetime_end: Date() ,type: "On-site", location: "STC HQ, IT Meeting Room", attendees: ["VsWRopBPLQYNMXlL5u5mkcGETze2" : "accepted"], agenda: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua", latitude: "24.7534673", longitude: "46.6920362", decisions: "-"))
        
     }
 }

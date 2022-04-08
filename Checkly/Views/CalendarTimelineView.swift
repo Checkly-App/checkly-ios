@@ -112,19 +112,19 @@ struct CalendarTimelineView: View {
          // MARK: Meeting Details Sheet
              .bottomSheet(bottomSheetPosition: $bottomSheetPosition, options: [.allowContentDrag,.tapToDismiss, .swipeToDismiss, .backgroundBlur(effect: .dark), .animation(.linear), .cornerRadius(12), .dragIndicatorColor(.gray), .background({AnyView(Color.white)})], content: {
              // see view under "Views" folder
-             MeetingDetailsView(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: self.meetingViewModel.filteredMeetings?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"), showingPASheet: $showingPASheet, editMeetingDetails: $editMeetingView)
+                 MeetingDetailsView(coordinateRegion: $coordinateRegion,showingSheet: $showingSheet, meeting: self.meetingViewModel.filteredMeetings?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable", decisions: "-"), showingPASheet: $showingPASheet, editMeetingDetails: $editMeetingView)
 
          })
          // MARK: Attendees List Sheet
          .sheet(isPresented: $showingSheet) {
              // see view under "Views" folder
-             MeetingAttendeesListView(meeting: self.meetingViewModel.filteredMeetings?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
+             MeetingAttendeesListView(meeting: self.meetingViewModel.filteredMeetings?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable", decisions: "-"))
          }
          // MARK: Take Participants Attendance Sheet
          .sheet(isPresented: $showingPASheet, content: {
              
              // display Participants Attendance view
-             ParticipantsAttendanceView(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
+             ParticipantsAttendanceView(meeting: meetingViewModel.selectedMeeting ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable", decisions: "-"))
              
          })
          
@@ -137,7 +137,7 @@ struct CalendarTimelineView: View {
          .fullScreenCover(isPresented: $editMeetingView, onDismiss: {
              bottomSheetPosition = .hidden
          }) {
-             EditMeetingView(meeting: self.meetingViewModel.filteredMeetings?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable"))
+             EditMeetingView(meeting: self.meetingViewModel.filteredMeetings?.filter{$0.id == meetingViewModel.selectedMeeting?.id}.first ?? Meeting(id: "1", host: "none", title: "none", datetime_start: Date(), datetime_end: Date(),type: "none", location: "none", attendees: ["11" : "none"], agenda: "none", latitude: "unavailable", longitude: "unavailable", decisions: "-"))
          }
          
          .background(
