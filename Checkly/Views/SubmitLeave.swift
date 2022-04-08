@@ -25,6 +25,8 @@ struct submitLeave: View {
     let emp_dep = "dep2"
     var manager_id = ""
     @ObservedObject var vm = submitLeaveViewModel()
+    @State private var didTapSickLeave:Bool = true
+    @State private var didTapVacation:Bool = false
     
     
     var body: some View {
@@ -41,15 +43,32 @@ struct submitLeave: View {
             
             
         // leave type picker
-            VStack {
-                Picker(" ", selection: $selectedType) {
-                    ForEach(types, id: \.self) {
-                        Text($0)
-                    }
-                }
-                .pickerStyle(.segmented)
-            }.padding()
+//            VStack {
+//                Picker(" ", selection: $selectedType) {
+//                    ForEach(types, id: \.self) {
+//                        Text($0)
+//                    }
+//                }
+//                .pickerStyle(.segmented)
+//            }.padding()
             
+            HStack (alignment: .center){
+            RoundedRectangle(cornerRadius: 25, style: .continuous)
+                    .fill(didTapSickLeave ? Color(red: 0.173, green: 0.694, blue: 0.937) : Color.gray ).opacity(0.2)
+                .frame(width: 120, height: 35).overlay(Text("Sick Leave").foregroundColor(didTapSickLeave ? Color(red: 0.173, green: 0.694, blue: 0.937) : Color.gray)).onTapGesture {
+                    self.didTapSickLeave = true
+                    self.didTapVacation = false
+                    self.selectedType = "Sick Leave"
+                }
+            RoundedRectangle(cornerRadius: 25, style: .continuous)
+                    .fill(didTapVacation ? Color(red: 0.173, green: 0.694, blue: 0.937) : Color.gray ).opacity(0.2)
+                .frame(width: 120, height: 35).overlay(Text("Vacation").foregroundColor(didTapVacation ? Color(red: 0.173, green: 0.694, blue: 0.937) : Color.gray)).onTapGesture {
+                        self.didTapSickLeave = false
+                        self.didTapVacation = true
+                    self.selectedType = "Vacation"
+                    }
+            }.padding()
+        
             TextEditor(text: $notes).foregroundColor(self.notes == placeholderString ? .gray : .primary)
                 .onTapGesture {
                   if self.notes == placeholderString {
@@ -97,6 +116,7 @@ struct submitLeave: View {
                     self.toDate = Date()
                     self.fromDate = Date()
                     self.selectedType = "Sick Leave"
+                    self.didTapSickLeave = true
                 }.alert("Your request has been submitted", isPresented: $showingAlert) {
                     Button("OK", role: .cancel) { }
                 }
@@ -127,8 +147,8 @@ class submitLeaveViewModel: ObservableObject {
     let Queue = DispatchQueue.init(label: "Queue")
     
         Queue.sync {
-                
-            ref.child("Employee/\(user!.uid)").observe(.value, with: { dataSnapshot in
+            //\(user!.uid)
+            ref.child("Employee/FJvmCdXGd7UWELDQIEJS3kisTa03").observe(.value, with: { dataSnapshot in
 
                 let obj = dataSnapshot.value as! [String:Any]
                 let department = obj["department"] as! String
@@ -180,7 +200,7 @@ func fetchManager (emp_dep: String) -> String {
 
     let Leave: [String: Any] = [
         
-        "emp_id": user!.uid,
+//        "emp_id": user!.uid,
         "start_date": formatter.string(from: fromDate),
         "end_date": formatter.string(from: toDate),
         "type": selectedType,
