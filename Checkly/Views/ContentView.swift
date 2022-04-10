@@ -16,6 +16,7 @@ struct ContentView: View {
     @State var isCompany = false
     @StateObject var viewRouter = CalendarViewRouterHelper()
     @State var calendarView = false
+    @State var profileView = false
     
     var uid = Auth.auth().currentUser?.uid ?? "hj"
     
@@ -26,12 +27,12 @@ struct ContentView: View {
     
     
     var body: some View {
-        NavigationView{
+        NavigationView {
             if isCompany {
                 //                ScannerView()
             }
             else{
-                VStack{
+                VStack(spacing: 10){
                     
                     Text("Logged in as \(email)")
                     
@@ -54,8 +55,20 @@ struct ContentView: View {
                         CalendarView(viewRouter: viewRouter)
                     }
                     
+                    // navigate to profile view
+                    Button{
+                        profileView.toggle()
+                    } label: {
+                        Text("Profile")
+                    }
+                    .fullScreenCover(isPresented: $profileView) {
+                        UserProfileView()
+                    }
+                    
                 }
+                .preferredColorScheme(.light)
             }
+                
         }
         .onAppear {
             session.isCompanyEmail(currentEmail: email) { success in

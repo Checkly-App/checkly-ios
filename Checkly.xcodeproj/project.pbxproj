@@ -43,6 +43,9 @@
 		A31E8F0927E12A5F009AE0FA /* AttendenceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0827E12A5F009AE0FA /* AttendenceListView.swift */; };
 		A31E8F0B27E12AE4009AE0FA /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0A27E12AE4009AE0FA /* LocationManager.swift */; };
 		A31E8F0F27E12BF2009AE0FA /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0E27E12BF2009AE0FA /* Employee.swift */; };
+		A34260CF28039029008BAA76 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34260CE28039029008BAA76 /* ImagePickerView.swift */; };
+		A34260D128039061008BAA76 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34260D028039061008BAA76 /* UserProfileView.swift */; };
+		A34260D328039107008BAA76 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34260D228039107008BAA76 /* EditProfileView.swift */; };
 		A34CDE782800CBCF00C5F58B /* GenerateMoMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CDE772800CBCF00C5F58B /* GenerateMoMView.swift */; };
 		A34CDE7A2800CC3F00C5F58B /* SendMoMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CDE792800CC3F00C5F58B /* SendMoMView.swift */; };
 		A34CDE802800FC6600C5F58B /* ComposeMailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34CDE7F2800FC6600C5F58B /* ComposeMailData.swift */; };
@@ -93,6 +96,9 @@
 		A31E8F0A27E12AE4009AE0FA /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A31E8F0C27E12B22009AE0FA /* EmployeeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeViewModel.swift; sourceTree = "<group>"; };
 		A31E8F0E27E12BF2009AE0FA /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		A34260CE28039029008BAA76 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		A34260D028039061008BAA76 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		A34260D228039107008BAA76 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		A34CDE772800CBCF00C5F58B /* GenerateMoMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateMoMView.swift; sourceTree = "<group>"; };
 		A34CDE792800CC3F00C5F58B /* SendMoMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoMView.swift; sourceTree = "<group>"; };
 		A34CDE7F2800FC6600C5F58B /* ComposeMailData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeMailData.swift; sourceTree = "<group>"; };
@@ -196,6 +202,9 @@
 				A34CDE772800CBCF00C5F58B /* GenerateMoMView.swift */,
 				A34CDE792800CC3F00C5F58B /* SendMoMView.swift */,
 				A34CDE812800FC8700C5F58B /* MailView.swift */,
+				A34260CE28039029008BAA76 /* ImagePickerView.swift */,
+				A34260D028039061008BAA76 /* UserProfileView.swift */,
+				A34260D228039107008BAA76 /* EditProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -348,10 +357,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A34260D328039107008BAA76 /* EditProfileView.swift in Sources */,
 				714E7E3027E3974700235308 /* Credentials.swift in Sources */,
 				714E7E2F27E3957F00235308 /* Session.swift in Sources */,
 				714E7E2D27E3916A00235308 /* EmployeeViewModel.swift in Sources */,
 				714E7E2A27E38F8A00235308 /* Authentication.swift in Sources */,
+				A34260CF28039029008BAA76 /* ImagePickerView.swift in Sources */,
 				A3B8D85427B11A2B00752F63 /* CalendarView.swift in Sources */,
 				A3027EB927DFE1B700E305F8 /* InputsView.swift in Sources */,
 				A3CE73FE27CD5593002D2517 /* AnnotatedItem.swift in Sources */,
@@ -379,6 +390,7 @@
 				A365EA4727DAE43300034F79 /* ParticipantRowView.swift in Sources */,
 				A3B8D85627B11A4200752F63 /* CalendarGridView.swift in Sources */,
 				A31E8F0727E129A3009AE0FA /* EditMeetingView.swift in Sources */,
+				A34260D128039061008BAA76 /* UserProfileView.swift in Sources */,
 				A31E8F0127E12771009AE0FA /* LocationView.swift in Sources */,
 				A31E8F0F27E12BF2009AE0FA /* Employee.swift in Sources */,
 				A31E8F0927E12A5F009AE0FA /* AttendenceListView.swift in Sources */,
