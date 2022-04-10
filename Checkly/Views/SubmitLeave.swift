@@ -42,16 +42,6 @@ struct submitLeave: View {
             DatePicker("To Date", selection: $toDate, in: Date()... , displayedComponents: .date).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383)).padding().frame(width: 360, height: 45).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.954, green: 0.954, blue: 0.954), Color(red: 0.954, green: 0.954, blue: 0.954).opacity(0)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(7)
             
             
-        // leave type picker
-//            VStack {
-//                Picker(" ", selection: $selectedType) {
-//                    ForEach(types, id: \.self) {
-//                        Text($0)
-//                    }
-//                }
-//                .pickerStyle(.segmented)
-//            }.padding()
-            
             HStack (alignment: .center){
             RoundedRectangle(cornerRadius: 25, style: .continuous)
                     .fill(didTapSickLeave ? Color(red: 0.173, green: 0.694, blue: 0.937) : Color.gray ).opacity(0.2)

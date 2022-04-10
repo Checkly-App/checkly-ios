@@ -23,10 +23,16 @@ struct viewMyLeaves: View {
             VStack (spacing: 8){
                 ForEach(vm.leaves) { leave in
                     
+                    
             HStack{
-                VStack (alignment: .leading) {
-                Text(leave.type)
-                    Text(leave.status).font(.caption).foregroundColor(.gray)
+                VStack (alignment: .leading){
+            Text("Your \(leave.type) Request")
+                    HStack{
+            HStack {
+                Text(leave.start_date)
+                Image(systemName: "arrow.right").foregroundColor(Color(red: 0.173, green: 0.686, blue: 0.933))
+                Text(leave.end_date)
+                    
                 }
                 
                 Spacer()
@@ -42,12 +48,13 @@ struct viewMyLeaves: View {
                 }
                 //yellow
                 else {
-                RoundedRectangle(cornerRadius: 20).frame(width: 90, height: 30).foregroundColor(Color(red: 0.333, green: 0.667, blue: 0.984)).opacity(0.2).overlay(
-                    Text(leave.status)).foregroundColor(Color(red: 0.333, green: 0.667, blue: 0.984))
+                RoundedRectangle(cornerRadius: 20).frame(width: 90, height: 30).foregroundColor(Color(red: 0.969, green: 0.675, blue: 0.408)).opacity(0.2).overlay(
+                    Text(leave.status)).foregroundColor(Color(red: 0.969, green: 0.675, blue: 0.408))
                 }
-            }.padding().frame(width: 350, height: 50).background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
+                    }
+            }.padding().frame(width: 350, height: 100).background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
             
-        
+            }
             }
             }.padding()
         }.padding().navigationBarTitle("My Leaves Status").navigationBarTitleDisplayMode(.inline)
@@ -80,7 +87,7 @@ class viewMyLeavesViewModel: ObservableObject {
         let type = obj.childSnapshot(forPath: "type").value as! String
         let employee_id = obj.childSnapshot(forPath: "emp_id").value as! String
             
-            if ( employee_id == "FJvmCdXGd7UWELDQIEJS3kisTa03") {
+            if ( employee_id == self.user!.uid) {
                 let leave = Leave(start_date: start_date, end_date: end_date, status: status, notes: notes, document: "", id: UUID().uuidString, type: type, employee_id: "", employee_name: "")
         
                 self.leaves.append(leave)
