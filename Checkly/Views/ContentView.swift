@@ -25,6 +25,13 @@ struct ContentView: View {
                 } label: {
                     Text("sign out")
                 }
+                Button(action: {
+                    print("Floating Button Click")
+                }, label: {
+                    NavigationLink(destination: servicesView()) {
+                         Text("Open View")
+                     }
+                })
             }
         }
     }
