@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseDatabase
 
 struct servicesView: View {
     var body: some View {
@@ -20,8 +22,10 @@ struct servicesView: View {
                     NavigationLink(destination: ContentView()) {
                     box(title: "Submit Request", image: "paperplane.fill")
                     }
+                    if ( isManager() ) {
                     NavigationLink(destination: ContentView()) {
                     box(title: "Approve/Reject", image: "checkmark.circle.fill")
+                    }
                     }
                 }.padding()
             }
@@ -31,8 +35,10 @@ struct servicesView: View {
                     NavigationLink(destination: ContentView()) {
                     box(title: "Notify Manager", image: "bell.fill")
                     }
+                    if ( isManager() ) {
                     NavigationLink(destination: ContentView()) {
                     box(title: "View Statuses", image: "bell.badge.fill")
+                    }
                     }
                 }.padding()
             }
@@ -52,6 +58,24 @@ struct servicesView: View {
         }.padding().navigationTitle("Services").navigationBarTitleDisplayMode(.inline)
         }
     }
+}
+
+func isManager () -> Bool {
+    
+    let ref = Database.database().reference()
+    let user = Auth.auth().currentUser
+    var isManager = false
+   
+        ref.child("Department").observe(.childAdded) { snapshot in
+            
+            let obj = snapshot.value as! [String: Any]
+            let manager_id = obj["manager"] as! String
+            
+            if ( manager_id == user!.uid ) {
+                isManager = true
+            }
+        }
+    return isManager
 }
 
 struct servicesView_Previews: PreviewProvider {
