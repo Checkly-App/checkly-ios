@@ -12,28 +12,10 @@ struct ContentView: View {
     @EnvironmentObject var authentication: Authentication
     
     var body: some View {
-        NavigationView{
-            VStack{
-                Text("Logged in")
-                Button{
-                    do {
-                        try Auth.auth().signOut()
-                        authentication.updateValidation(success: false)
-                    } catch let signOutError as NSError {
-                        print("Error signing out: %@", signOutError)
-                    }
-                } label: {
-                    Text("sign out")
-                }
-                Button(action: {
-                    print("Floating Button Click")
-                }, label: {
-                    NavigationLink(destination: servicesView()) {
-                         Text("Open View")
-                     }
-                })
-            }
-        }
+        
+       
+            servicesView()
+        
     }
 }
 
