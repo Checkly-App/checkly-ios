@@ -10,6 +10,9 @@ import Firebase
 import FirebaseDatabase
 
 struct servicesView: View {
+    
+    @ObservedObject var vm = servicesViewModel()
+    
     var body: some View {
         NavigationView{
         VStack (alignment: .leading) {
@@ -22,11 +25,10 @@ struct servicesView: View {
                     NavigationLink(destination: ContentView()) {
                     box(title: "Submit Request", image: "paperplane.fill")
                     }
-                    if ( isManager() ) {
                     NavigationLink(destination: ContentView()) {
                     box(title: "Approve/Reject", image: "checkmark.circle.fill")
-                    }
-                    }
+                    }.opacity( vm.isUserManager == true ? 1 : 0)
+                    
                 }.padding()
             }
             Text("Notifications").bold()
@@ -35,11 +37,10 @@ struct servicesView: View {
                     NavigationLink(destination: ContentView()) {
                     box(title: "Notify Manager", image: "bell.fill")
                     }
-                    if ( isManager() ) {
+                    
                     NavigationLink(destination: ContentView()) {
                     box(title: "View Statuses", image: "bell.badge.fill")
-                    }
-                    }
+                    }.opacity( vm.isUserManager == true ? 1 : 0)
                 }.padding()
             }
 
@@ -60,7 +61,16 @@ struct servicesView: View {
     }
 }
 
-func isManager () -> Bool {
+
+class servicesViewModel: ObservableObject {
+ 
+    @Published var isUserManager = false
+    
+    init() {
+        isManager()
+    }
+    
+func isManager () {
     
     let ref = Database.database().reference()
     let user = Auth.auth().currentUser
@@ -71,11 +81,14 @@ func isManager () -> Bool {
             let obj = snapshot.value as! [String: Any]
             let manager_id = obj["manager"] as! String
             
+            print(manager_id)
             if ( manager_id == user!.uid ) {
-                isManager = true
+                self.isUserManager = true
             }
         }
-    return isManager
+    print("XXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+    print(isUserManager)
+}
 }
 
 struct servicesView_Previews: PreviewProvider {
