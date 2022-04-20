@@ -18,23 +18,30 @@ struct announcementsView: View {
     
         
         ScrollView{
-            VStack (spacing: 8){
+            VStack (alignment: .leading, spacing: 8){
                 ForEach(vm.announcements) { announcement in
                     
             HStack{
-                VStack (alignment: .leading) {
-                Text(announcement.title)
-                Text(announcement.department).font(.caption).foregroundColor(.gray)
-                }
                 
+                VStack (alignment: .leading, spacing: 10) {
+                    HStack{
+                        Text(announcement.title).foregroundColor(Color(red: 0.235, green: 0.706, blue: 1)).font(.title3)
+                        Spacer()
+                        Text("12/10/2020").font(.caption).foregroundColor(.gray)
+                    }
+                    
+                    Text(announcement.body).font(.system(size: 16)).foregroundColor(.black)
                 Spacer()
+                }
+                Spacer()
+                
 
-            }.padding().frame(width: 350, height: 50).background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
+            }.padding().frame(width: 350, height: 150).background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
             
-        
+      
             }
             }.padding()
-        }.padding().navigationBarTitle("Employees' Attendance Status").navigationBarTitleDisplayMode(.inline)
+        }.padding().navigationBarTitle("Announcements").navigationBarTitleDisplayMode(.inline)
         
     }
 }
@@ -101,8 +108,7 @@ class announcementsViewViewModel: ObservableObject {
             self.announcements.append(announcement)
             }
         }
-             print("XXXXXXXXXXXXXXXXXXX")
-            print(self.announcements)
+            
             
             }, withCancel: { error in
             print(error.localizedDescription)
