@@ -27,7 +27,7 @@ struct announcementsView: View {
                     HStack{
                         Text(announcement.title).foregroundColor(Color(red: 0.235, green: 0.706, blue: 1)).font(.title3)
                         Spacer()
-                        Text("12/10/2020").font(.caption).foregroundColor(.gray)
+                        Text(announcement.date).font(.caption).foregroundColor(.gray)
                     }
                     
                     Text(announcement.body).font(.system(size: 16)).foregroundColor(.black)
@@ -73,15 +73,15 @@ class announcementsViewViewModel: ObservableObject {
             let employee_id = obj.childSnapshot(forPath: "employee_id").value as! String
 
                 
-                if ( employee_id == "FJvmCdXGd7UWELDQIEJS3kisTa03") {
+                if ( employee_id == self.user!.uid) {
                     self.getDepartmentAnnouncements(dep: department)
                 }
             
             }
                 
-            }
-                                          )}
-                                          }
+        }
+    )}
+}
     
 
     
@@ -100,10 +100,11 @@ class announcementsViewViewModel: ObservableObject {
         let title = obj.childSnapshot(forPath: "title").value as! String
         let body = obj.childSnapshot(forPath: "body").value as! String
         let department = obj.childSnapshot(forPath: "department").value as! String
+        let date = obj.childSnapshot(forPath: "date").value as! String
 //        let timestamp = Date()
             
             if ( department == "dep_5") {
-                let announcement = Announcement(id: UUID().uuidString, body: body, title: title, department: department, date: "Date()")
+                let announcement = Announcement(id: UUID().uuidString, body: body, title: title, department: department, date: date)
         
             self.announcements.append(announcement)
             }
