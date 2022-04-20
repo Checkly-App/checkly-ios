@@ -46,29 +46,36 @@ class announcementsViewViewModel: ObservableObject {
     @Published var announcements = [Announcement]()
     
     init () {
-        fetchDepartment()
+        getDepartmentAnnouncements(dep: "String")
+//        fetchDepartment()
     }
     
     func fetchDepartment() {
-        
-        
+
+
         let searchQueue = DispatchQueue.init(label: "searchQueue")
-        
+
         searchQueue.sync {
-            
-            ref.child("Employee").observe(.childAdded) { snapshot in
+
+            ref.child("Employee").observe(.value, with: { dataSnapshot in
                 
-                let obj = snapshot.value as! [String: Any]
-                let department = obj["department"] as! String
-                let emp_id = obj["employee_id"] as! String
+            for emp in dataSnapshot.children {
+            let obj = emp as! DataSnapshot
+
+            let department = obj.childSnapshot(forPath: "departmennt").value as! String
+            let employee_id = obj.childSnapshot(forPath: "employee_id").value as! String
+
                 
-                //self.user!.uid
-                if ( emp_id == "FJvmCdXGd7UWELDQIEJS3kisTa03" ) {
+                if ( employee_id == "FJvmCdXGd7UWELDQIEJS3kisTa03") {
                     self.getDepartmentAnnouncements(dep: department)
                 }
+            
             }
-        }
-    }
+                
+            }
+                                          )}
+                                          }
+    
 
     
     func getDepartmentAnnouncements(dep: String){
