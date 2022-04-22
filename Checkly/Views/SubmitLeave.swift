@@ -102,7 +102,8 @@ struct submitLeave: View {
                 .contentShape(Rectangle())
                 .onTapGesture {
                     if let image = self.image {
-                        vm.submitLeaveData(fromDate: fromDate, toDate: toDate, selectedType: selectedType, notes: notes, manager_id: manager_id, image: image)
+                        vm.persistImageToStorage(image: image, leave_id: "000", fromDate: fromDate, toDate: toDate, selectedType: selectedType, notes: notes, manager_id: manager_id)
+
                     showingAlert = true
                     self.notes = " "
                     self.toDate = Date()
@@ -192,7 +193,7 @@ func fetchManager (emp_dep: String) -> String {
    
 }
     
-    func persistImageToStorage(image: UIImage, leave_id: String) {
+    func persistImageToStorage(image: UIImage, leave_id: String, fromDate: Date, toDate: Date, selectedType: String, notes: String, manager_id: String){
         
         var Message:String = " "
         
@@ -211,14 +212,19 @@ func fetchManager (emp_dep: String) -> String {
                     }
 
                     Message = "Successfully stored image with url: \(url?.absoluteString ?? "")"
-                    print(url?.absoluteString)
+                    print("XXXXXXXXXXXXXXXXxxxxxxxxxxxx")
+                    print(url!.absoluteString)
+                    var photoURL = url!.absoluteString
+                    self.submitLeaveData(fromDate: fromDate, toDate: toDate, selectedType: selectedType, notes: notes, manager_id: manager_id, phptoURL: photoURL)
+                    print("xxxxxxxxxxxxxxxxxxxxxxxxx")
                 }
             }
+       
         }
     
 
 
-    func submitLeaveData (fromDate: Date, toDate: Date, selectedType: String, notes: String, manager_id: String, image: UIImage) {
+    func submitLeaveData (fromDate: Date, toDate: Date, selectedType: String, notes: String, manager_id: String, phptoURL:String) {
     
     let formatter = DateFormatter()
     formatter.dateStyle = .short
@@ -235,12 +241,13 @@ func fetchManager (emp_dep: String) -> String {
         "status": "pending",
         "manager_id": self.manager,
         "employee_name":  self.name,
-        "leave_id": leave_id
+        "leave_id": leave_id,
+        "image_token": phptoURL
     ]
 
     ref.child("Leave").childByAutoId().setValue(Leave)
         
-        persistImageToStorage(image: image, leave_id: leave_id)
+        //persistImageToStorage(image: image, leave_id: leave_id)
 }
     
 }
