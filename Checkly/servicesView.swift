@@ -19,7 +19,7 @@ struct servicesView: View {
             Text("Sick Leaves/Vacations").bold()
             ScrollView (.horizontal, showsIndicators: false) {
                 HStack{
-                    NavigationLink(destination: ContentView()) {
+                    NavigationLink(destination: viewMyLeaves()) {
                     box(title: "My Requests", image: "doc.on.doc.fill")
                     }
                     NavigationLink(destination: ContentView()) {
@@ -38,7 +38,7 @@ struct servicesView: View {
                     box(title: "Notify Manager", image: "bell.fill")
                     }
                     
-                    NavigationLink(destination: ContentView()) {
+                    NavigationLink(destination: viewEmployeesAttendanceStatus()) {
                     box(title: "View Statuses", image: "bell.badge.fill")
                     }.opacity( vm.isUserManager == true ? 1 : 0)
                 }.padding()
@@ -74,7 +74,7 @@ func isManager () {
     
     let ref = Database.database().reference()
     let user = Auth.auth().currentUser
-    var isManager = false
+   
    
         ref.child("Department").observe(.childAdded) { snapshot in
             
