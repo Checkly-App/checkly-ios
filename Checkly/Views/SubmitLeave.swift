@@ -11,6 +11,7 @@ import Firebase
 import SwiftUILib_DocumentPicker
 import FirebaseDatabase
 import FirebaseAuth
+import FirebaseStorage
 
 struct submitLeave: View {
     
@@ -27,6 +28,8 @@ struct submitLeave: View {
     @ObservedObject var vm = submitLeaveViewModel()
     @State private var didTapSickLeave:Bool = true
     @State private var didTapVacation:Bool = false
+    @State var shouldShowImagePicker = false
+    @State var image: UIImage?
     
     
     var body: some View {
@@ -73,20 +76,31 @@ struct submitLeave: View {
                 )
                 .padding()
                 
-            
             Button("Select Supporting Document") {
-              self.showDocPicker.toggle()
+                shouldShowImagePicker.toggle()
             }.foregroundColor(.gray)
                 .padding()
                 .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [10]))
             )
-            .documentPicker(
-              isPresented: $showDocPicker,
-              documentTypes: ["public.folder"], onDocumentsPicked:  { urls in
-                  print("Selected folder: \(urls.first!)")
-              })
+            if let image = self.image {
+            Text("Document Selected!")
+            }
+            
+//            Button("Select Supporting Document") {
+//              self.showDocPicker.toggle()
+//            }.foregroundColor(.gray)
+//                .padding()
+//                .overlay(
+//                RoundedRectangle(cornerRadius: 16)
+//                    .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [10]))
+//            )
+//            .documentPicker(
+//              isPresented: $showDocPicker,
+//              documentTypes: ["public.folder"], onDocumentsPicked:  { urls in
+//                  print("Selected folder: \(urls.first!)")
+//              })
             
             HStack{
                 Spacer()
@@ -100,7 +114,7 @@ struct submitLeave: View {
                 .shadow(radius: 15)
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    vm.submitLeaveData(fromDate: fromDate, toDate: toDate, selectedType: selectedType, notes: notes, manager_id: manager_id)
+                    vm.submitLeaveData(fromDate: fromDate, toDate: toDate, selectedType: selectedType, notes: notes, manager_id: manager_id, image: image!)
                     showingAlert = true
                     self.notes = " "
                     self.toDate = Date()
@@ -113,7 +127,10 @@ struct submitLeave: View {
                 
         
             
-        }.padding().navigationTitle("Submit Leave Request").navigationBarTitleDisplayMode(.inline)
+        }.padding().navigationTitle("Submit Leave Request").navigationBarTitleDisplayMode(.inline).fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil) {
+            ImagePicker(image: $image)
+                .ignoresSafeArea()
+        }
         
     }
 }
@@ -179,15 +196,39 @@ func fetchManager (emp_dep: String) -> String {
    
 }
     
+    func persistImageToStorage(image: UIImage, leave_id: String) {
+        
+        var Message:String = " "
+        
+        let ref = Storage.storage().reference().child("Leaves/\(leave_id)")
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
+            ref.putData(imageData, metadata: nil) { metadata, err in
+                if let err = err {
+                    Message = "Failed to push image to Storage: \(err)"
+                    return
+                }
+
+                ref.downloadURL { url, err in
+                    if let err = err {
+                        Message = "Failed to retrieve downloadURL: \(err)"
+                        return
+                    }
+
+                    Message = "Successfully stored image with url: \(url?.absoluteString ?? "")"
+                    print(url?.absoluteString)
+                }
+            }
+        }
+    
 
 
-    func submitLeaveData (fromDate: Date, toDate: Date, selectedType: String, notes: String, manager_id: String) {
+    func submitLeaveData (fromDate: Date, toDate: Date, selectedType: String, notes: String, manager_id: String, image: UIImage) {
     
     let formatter = DateFormatter()
     formatter.dateStyle = .short
     
     let ref = Database.database().reference()
-
+    let leave_id =  UUID().uuidString
     let Leave: [String: Any] = [
         
         "emp_id": user!.uid,
@@ -198,10 +239,12 @@ func fetchManager (emp_dep: String) -> String {
         "status": "pending",
         "manager_id": self.manager,
         "employee_name":  self.name,
-        "leave_id": UUID().uuidString
+        "leave_id": leave_id
     ]
 
     ref.child("Leave").childByAutoId().setValue(Leave)
+
+        persistImageToStorage(image: image, leave_id: leave_id)
 }
     
 }

@@ -17,6 +17,7 @@
 		7149E91827A985BC008E3553 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91727A985BC008E3553 /* Authentication.swift */; };
 		7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91927A987DD008E3553 /* LoginModel.swift */; };
 		71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */; };
+		DA5C64E72812ED6F007F39C4 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5C64E62812ED6F007F39C4 /* ImagePicker.swift */; };
 		DA9E1E8728007D660067ABB4 /* viewMyLeaves.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E1E8628007D660067ABB4 /* viewMyLeaves.swift */; };
 		DA9E1E8928007E730067ABB4 /* Leave.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E1E8828007E730067ABB4 /* Leave.swift */; };
 		DAA742F327F3A0280098CE1C /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = DAA742F227F3A0280098CE1C /* SwiftKeychainWrapper */; };
@@ -64,6 +65,7 @@
 		7149E91727A985BC008E3553 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		7149E91927A987DD008E3553 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
+		DA5C64E62812ED6F007F39C4 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		DA9E1E8628007D660067ABB4 /* viewMyLeaves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewMyLeaves.swift; sourceTree = "<group>"; };
 		DA9E1E8828007E730067ABB4 /* Leave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leave.swift; sourceTree = "<group>"; };
 		DAA94AEE27ECA01100B80C36 /* SubmitLeave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitLeave.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				7149E90F27A96F71008E3553 /* Views */,
 				7149E8FA27A8720A008E3553 /* ChecklyApp.swift */,
 				7149E91727A985BC008E3553 /* Authentication.swift */,
+				DA5C64E62812ED6F007F39C4 /* ImagePicker.swift */,
 				7149E90D27A8747B008E3553 /* GoogleService-Info.plist */,
 				7149E8FE27A87213008E3553 /* Assets.xcassets */,
 				7149E90027A87213008E3553 /* Preview Content */,
@@ -293,6 +296,7 @@
 				7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */,
 				7149E91227A96FCA008E3553 /* Credentials.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
+				DA5C64E72812ED6F007F39C4 /* ImagePicker.swift in Sources */,
 				DAA94AEF27ECA01100B80C36 /* SubmitLeave.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,
