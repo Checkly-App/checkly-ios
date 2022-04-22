@@ -23,6 +23,7 @@ struct submitLeave: View {
     @State private var notes: String = "Any additional notes?"
     var placeholderString: String = "Any additional notes?"
     @State private var showingAlert = false
+    @State private var showingError = false
     let emp_dep = "dep2"
     var manager_id = ""
     @ObservedObject var vm = submitLeaveViewModel()
@@ -37,8 +38,7 @@ struct submitLeave: View {
        
         // Date Pickers
         VStack {
-            
-            Spacer()
+
             
             DatePicker("From Date", selection: $fromDate, in: Date()... , displayedComponents: .date).foregroundColor(Color(red: 0.383, green: 0.383, blue: 0.383)).padding().frame(width: 360, height: 45).background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.954, green: 0.954, blue: 0.954), Color(red: 0.954, green: 0.954, blue: 0.954).opacity(0)]), startPoint: .leading, endPoint: .trailing)).cornerRadius(7)
         
@@ -68,6 +68,7 @@ struct submitLeave: View {
                     self.notes = ""
                   }
                 }
+                .frame(width: 300, height: 100)
                 .foregroundColor(.black)
                 .padding()
                 .overlay(
@@ -85,23 +86,9 @@ struct submitLeave: View {
                     .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [10]))
             )
             if let image = self.image {
-            Text("Document Selected!")
+                Text("Document Selected!").font(.caption).foregroundColor(.gray)
             }
-            
-//            Button("Select Supporting Document") {
-//              self.showDocPicker.toggle()
-//            }.foregroundColor(.gray)
-//                .padding()
-//                .overlay(
-//                RoundedRectangle(cornerRadius: 16)
-//                    .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [10]))
-//            )
-//            .documentPicker(
-//              isPresented: $showDocPicker,
-//              documentTypes: ["public.folder"], onDocumentsPicked:  { urls in
-//                  print("Selected folder: \(urls.first!)")
-//              })
-            
+            Spacer()
             HStack{
                 Spacer()
                 Text("Submit").font(.system(size: 16, weight: .bold))
@@ -114,14 +101,23 @@ struct submitLeave: View {
                 .shadow(radius: 15)
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    vm.submitLeaveData(fromDate: fromDate, toDate: toDate, selectedType: selectedType, notes: notes, manager_id: manager_id, image: image!)
+                    if let image = self.image {
+                        vm.submitLeaveData(fromDate: fromDate, toDate: toDate, selectedType: selectedType, notes: notes, manager_id: manager_id, image: image)
                     showingAlert = true
                     self.notes = " "
                     self.toDate = Date()
                     self.fromDate = Date()
                     self.selectedType = "Sick Leave"
                     self.didTapSickLeave = true
+                    self.image = nil
+                    } else {
+                        showingError = true
+                    }
+                    
                 }.alert("Your request has been submitted", isPresented: $showingAlert) {
+                    Button("OK", role: .cancel) { }
+                }
+                .alert("Please select a supporting document", isPresented: $showingError) {
                     Button("OK", role: .cancel) { }
                 }
                 
@@ -243,7 +239,7 @@ func fetchManager (emp_dep: String) -> String {
     ]
 
     ref.child("Leave").childByAutoId().setValue(Leave)
-
+        
         persistImageToStorage(image: image, leave_id: leave_id)
 }
     
