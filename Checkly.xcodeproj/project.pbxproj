@@ -18,6 +18,7 @@
 		7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E91927A987DD008E3553 /* LoginModel.swift */; };
 		71D09A5C27A9A02A00DA2D1D /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 71D09A5B27A9A02A00DA2D1D /* SwiftKeychainWrapper */; };
 		71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */; };
+		DA5C64EA28133CB6007F39C4 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = DA5C64E928133CB6007F39C4 /* SDWebImageSwiftUI */; };
 		DA60AB5627EDCF58001532FC /* ViewLeaves.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60AB5527EDCF58001532FC /* ViewLeaves.swift */; };
 		DA60AB5827EDCFD9001532FC /* Leave.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60AB5727EDCFD9001532FC /* Leave.swift */; };
 		DA60AB5B27EDD26A001532FC /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DA60AB5A27EDD26A001532FC /* FirebaseAnalytics */; };
@@ -73,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA5C64EA28133CB6007F39C4 /* SDWebImageSwiftUI in Frameworks */,
 				DA60AB6B27EDD26A001532FC /* FirebaseDatabase in Frameworks */,
 				DA60AB7B27EDD26A001532FC /* FirebaseFunctionsSwift-Beta in Frameworks */,
 				DA60AB7F27EDD26A001532FC /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
@@ -222,6 +224,7 @@
 				DA60AB8C27EDD26A001532FC /* FirebaseStorage */,
 				DA60AB8E27EDD26A001532FC /* FirebaseStorageCombine-Community */,
 				DA60AB9027EDD26A001532FC /* FirebaseStorageSwift-Beta */,
+				DA5C64E928133CB6007F39C4 /* SDWebImageSwiftUI */,
 			);
 			productName = Checkly;
 			productReference = 7149E8F727A8720A008E3553 /* Checkly.app */;
@@ -254,6 +257,7 @@
 			packageReferences = (
 				71D09A5A27A9A02900DA2D1D /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				DA60AB5927EDD26A001532FC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				DA5C64E828133CB6007F39C4 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 7149E8F827A8720A008E3553 /* Products */;
 			projectDirPath = "";
@@ -506,6 +510,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		DA5C64E828133CB6007F39C4 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		DA60AB5927EDD26A001532FC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -521,6 +533,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 71D09A5A27A9A02900DA2D1D /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
 			productName = SwiftKeychainWrapper;
+		};
+		DA5C64E928133CB6007F39C4 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA5C64E828133CB6007F39C4 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 		DA60AB5A27EDD26A001532FC /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
