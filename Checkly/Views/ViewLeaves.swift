@@ -140,7 +140,9 @@ struct SheetView: View {
     @Environment(\.dismiss) var dismiss
     @State private var showingAcceptAlert = false
     @State private var showingRejectAlert = false
+    @State private var showingPhoto = false
     let ref = Database.database().reference()
+    @State var selectedLeave = Leave(start_date: "" , end_date: "", status: "", notes: "", document: "", id: "", type: "", employee_id: "", employee_name: "", photoURL: " ")
 
     var body: some View {
         
@@ -181,13 +183,18 @@ struct SheetView: View {
                             .strokeBorder(style: StrokeStyle(lineWidth: 1))
                     )
                     HStack{
-                        ScrollView{
-                        WebImage(url: URL(string: leave.photoURL)).resizable().scaledToFit().frame(width: 349, height: 349).clipped()
-                        }
-                    }.frame(width: 350, height: 350)
+                        Text("Click to view supporting document")
+                    }.frame(width: 300, height: 80)
                         .overlay(
                         RoundedRectangle(cornerRadius: 16)
                             .strokeBorder(style: StrokeStyle(lineWidth: 1))
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                selectedLeave = leave
+                                showingPhoto = true
+                            }.sheet(isPresented: $showingPhoto) {
+                                PhotoView(leave: $selectedLeave)
+                            }
                     )
                     
 
@@ -261,5 +268,18 @@ func setStatus (key: String, newStatuss: String) {
     
     Database.database().reference().root.child("Leave").child(key).updateChildValues(["status": newStatuss])
     
+}
+
+struct PhotoView: View {
+    @Environment(\.dismiss) var dismiss
+    @Binding var leave: Leave
+    var body: some View {
+        ZStack {
+        ProgressView()
+        ScrollView{
+            WebImage(url: URL(string: leave.photoURL)).resizable().scaledToFit().frame(width: 350, height: 600)
+        }.padding()
+        }
+    }
 }
 
