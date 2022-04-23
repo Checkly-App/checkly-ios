@@ -9,12 +9,13 @@ import SwiftUI
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+import SDWebImageSwiftUI
 
 struct ViewLeaves: View {
     
     @ObservedObject var vm = ViewLeaveViewModel()
     @State private var showingSheet = false
-    @State var selectedLeave = Leave(start_date: "" , end_date: "", status: "", notes: "", document: "", id: "", type: "", employee_id: "", employee_name: "")
+    @State var selectedLeave = Leave(start_date: "" , end_date: "", status: "", notes: "", document: "", id: "", type: "", employee_id: "", employee_name: "", photoURL: " ")
     
     var body: some View {
         
@@ -115,8 +116,9 @@ class ViewLeaveViewModel: ObservableObject {
                 let manager = obj["manager_id"] as! String
                 let employee_name = obj["employee_name"] as! String
                 let leave_id = obj["leave_id"] as! String
+                let photoURL = obj["image_token"] as! String
                 
-                let leave = Leave(start_date: start_date, end_date: end_date, status: status, notes: notes, document: "", id: leave_id, type: type, employee_id: emp_id, employee_name: employee_name)
+                let leave = Leave(start_date: start_date, end_date: end_date, status: status, notes: notes, document: "", id: leave_id, type: type, employee_id: emp_id, employee_name: employee_name, photoURL: photoURL)
                 
                 if ( manager == self.user!.uid ) {
                         self.leaves.append(leave)
@@ -143,7 +145,7 @@ struct SheetView: View {
     var body: some View {
         
         if ( leave.status == "pending") {
-        
+            ScrollView{
             VStack {
                 
                 VStack (alignment: .center, spacing: 30) {
@@ -179,8 +181,10 @@ struct SheetView: View {
                             .strokeBorder(style: StrokeStyle(lineWidth: 1))
                     )
                     HStack{
-                        Text("No documents attached")
-                    }.frame(width: 300, height: 80)
+                        ScrollView{
+                        WebImage(url: URL(string: leave.photoURL)).resizable().scaledToFit().frame(width: 349, height: 349).clipped()
+                        }
+                    }.frame(width: 350, height: 350)
                         .overlay(
                         RoundedRectangle(cornerRadius: 16)
                             .strokeBorder(style: StrokeStyle(lineWidth: 1))
@@ -216,6 +220,8 @@ struct SheetView: View {
             )
                 }.padding()
             }.padding()
+                
+            }
         } else {
             Text("This leave has already been \(leave.status)")
         }
@@ -240,8 +246,9 @@ func findLeave (leaveID: String, newStatuss: String) {
             let emp_id = obj["emp_id"] as! String
             let employee_name = obj["employee_name"] as! String
             let leave_id = obj["leave_id"] as! String
+            let photoURL = obj["image_token"] as! String
             
-            let leave = Leave(start_date: start_date, end_date: end_date, status: status, notes: notes, document: "", id: leave_id, type: type, employee_id: emp_id, employee_name: employee_name)
+            let leave = Leave(start_date: start_date, end_date: end_date, status: status, notes: notes, document: "", id: leave_id, type: type, employee_id: emp_id, employee_name: employee_name, photoURL: photoURL)
             
             if ( leave.id == leaveID ) {
                 setStatus(key: snapshot.key, newStatuss: newStatuss)

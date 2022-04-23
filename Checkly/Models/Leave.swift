@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SceneKit
 
 
 struct Leave: Identifiable, Hashable, Equatable {
@@ -18,4 +19,5 @@ struct Leave: Identifiable, Hashable, Equatable {
     var type: String
     var employee_id: String
     var employee_name: String
+    var photoURL: String
 }
