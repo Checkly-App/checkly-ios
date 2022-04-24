@@ -22,7 +22,7 @@ struct servicesView: View {
                     NavigationLink(destination: viewMyLeaves()) {
                     box(title: "My Requests", image: "doc.on.doc.fill")
                     }
-                    NavigationLink(destination: ContentView()) {
+                    NavigationLink(destination: submitLeave()) {
                     box(title: "Submit Request", image: "paperplane.fill")
                     }
                     NavigationLink(destination: ContentView()) {
@@ -51,7 +51,10 @@ struct servicesView: View {
                     box(title: "Generate Meeting", image: "plus.circle.fill")
                     }
                     NavigationLink(destination: ContentView()) {
-                    box(title: "public Statements", image: "speaker.fill")
+                    box(title: "Public Statements", image: "speaker.fill")
+                    }
+                    NavigationLink(destination: ContentView()) {
+                    box(title: "Attendance History", image: "magnifyingglass")
                     }
                 }.padding()
             }

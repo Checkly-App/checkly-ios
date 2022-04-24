@@ -47,6 +47,8 @@
 		DA47724228030A590071EB8B /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = DA47724128030A590071EB8B /* FirebaseStorageCombine-Community */; };
 		DA47724428030A590071EB8B /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = DA47724328030A590071EB8B /* FirebaseStorageSwift-Beta */; };
 		DA47724628030AD70071EB8B /* servicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA47724528030AD60071EB8B /* servicesView.swift */; };
+		DA541D6B2814C20B00C351BC /* SubmitLeave.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA541D6A2814C20A00C351BC /* SubmitLeave.swift */; };
+		DA541D6D2814C25300C351BC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA541D6C2814C25300C351BC /* ImagePicker.swift */; };
 		DA5C64E12812E030007F39C4 /* viewMyleaves.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5C64E02812E030007F39C4 /* viewMyleaves.swift */; };
 		DA5C64E32812E06F007F39C4 /* Leave.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5C64E22812E06F007F39C4 /* Leave.swift */; };
 		DA5C64E52812E22C007F39C4 /* viewEmployeesAttendanceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5C64E42812E22C007F39C4 /* viewEmployeesAttendanceStatus.swift */; };
@@ -65,6 +67,8 @@
 		7149E91927A987DD008E3553 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
 		DA47724528030AD60071EB8B /* servicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = servicesView.swift; sourceTree = "<group>"; };
+		DA541D6A2814C20A00C351BC /* SubmitLeave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitLeave.swift; sourceTree = "<group>"; };
+		DA541D6C2814C25300C351BC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		DA5C64E02812E030007F39C4 /* viewMyleaves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewMyleaves.swift; sourceTree = "<group>"; };
 		DA5C64E22812E06F007F39C4 /* Leave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leave.swift; sourceTree = "<group>"; };
 		DA5C64E42812E22C007F39C4 /* viewEmployeesAttendanceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewEmployeesAttendanceStatus.swift; sourceTree = "<group>"; };
@@ -133,6 +137,8 @@
 				7149E91027A96F92008E3553 /* Models */,
 				7149E90F27A96F71008E3553 /* Views */,
 				7149E8FA27A8720A008E3553 /* ChecklyApp.swift */,
+				DA541D6A2814C20A00C351BC /* SubmitLeave.swift */,
+				DA541D6C2814C25300C351BC /* ImagePicker.swift */,
 				DA47724528030AD60071EB8B /* servicesView.swift */,
 				DA5C64E02812E030007F39C4 /* viewMyleaves.swift */,
 				DA5C64E42812E22C007F39C4 /* viewEmployeesAttendanceStatus.swift */,
@@ -285,7 +291,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA541D6D2814C25300C351BC /* ImagePicker.swift in Sources */,
 				DA5C64E12812E030007F39C4 /* viewMyleaves.swift in Sources */,
+				DA541D6B2814C20B00C351BC /* SubmitLeave.swift in Sources */,
 				DA5C64E32812E06F007F39C4 /* Leave.swift in Sources */,
 				7149E8FD27A8720A008E3553 /* LoginView.swift in Sources */,
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
