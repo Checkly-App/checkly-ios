@@ -52,6 +52,10 @@
 		DA5C64E12812E030007F39C4 /* viewMyleaves.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5C64E02812E030007F39C4 /* viewMyleaves.swift */; };
 		DA5C64E32812E06F007F39C4 /* Leave.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5C64E22812E06F007F39C4 /* Leave.swift */; };
 		DA5C64E52812E22C007F39C4 /* viewEmployeesAttendanceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5C64E42812E22C007F39C4 /* viewEmployeesAttendanceStatus.swift */; };
+		DA5FA0A32815B3F100362E64 /* ViewLeaves.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FA0A22815B3F000362E64 /* ViewLeaves.swift */; };
+		DA5FA0A62815B43100362E64 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = DA5FA0A52815B43100362E64 /* SDWebImageSwiftUI */; };
+		DA5FA0A82815B55D00362E64 /* Empolyee.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FA0A72815B55D00362E64 /* Empolyee.swift */; };
+		DA5FA0AA2815B73200362E64 /* informManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FA0A92815B73200362E64 /* informManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +76,9 @@
 		DA5C64E02812E030007F39C4 /* viewMyleaves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewMyleaves.swift; sourceTree = "<group>"; };
 		DA5C64E22812E06F007F39C4 /* Leave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leave.swift; sourceTree = "<group>"; };
 		DA5C64E42812E22C007F39C4 /* viewEmployeesAttendanceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewEmployeesAttendanceStatus.swift; sourceTree = "<group>"; };
+		DA5FA0A22815B3F000362E64 /* ViewLeaves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLeaves.swift; sourceTree = "<group>"; };
+		DA5FA0A72815B55D00362E64 /* Empolyee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empolyee.swift; sourceTree = "<group>"; };
+		DA5FA0A92815B73200362E64 /* informManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = informManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA5FA0A62815B43100362E64 /* SDWebImageSwiftUI in Frameworks */,
 				DA47721E28030A580071EB8B /* FirebaseDatabase in Frameworks */,
 				DA47722E28030A580071EB8B /* FirebaseFunctionsSwift-Beta in Frameworks */,
 				DA47723228030A580071EB8B /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
@@ -138,8 +146,10 @@
 				7149E90F27A96F71008E3553 /* Views */,
 				7149E8FA27A8720A008E3553 /* ChecklyApp.swift */,
 				DA541D6A2814C20A00C351BC /* SubmitLeave.swift */,
+				DA5FA0A92815B73200362E64 /* informManager.swift */,
 				DA541D6C2814C25300C351BC /* ImagePicker.swift */,
 				DA47724528030AD60071EB8B /* servicesView.swift */,
+				DA5FA0A22815B3F000362E64 /* ViewLeaves.swift */,
 				DA5C64E02812E030007F39C4 /* viewMyleaves.swift */,
 				DA5C64E42812E22C007F39C4 /* viewEmployeesAttendanceStatus.swift */,
 				7149E91727A985BC008E3553 /* Authentication.swift */,
@@ -171,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				7149E91127A96FCA008E3553 /* Credentials.swift */,
+				DA5FA0A72815B55D00362E64 /* Empolyee.swift */,
 				DA5C64E22812E06F007F39C4 /* Leave.swift */,
 				7149E91927A987DD008E3553 /* LoginModel.swift */,
 			);
@@ -231,6 +242,7 @@
 				DA47723F28030A590071EB8B /* FirebaseStorage */,
 				DA47724128030A590071EB8B /* FirebaseStorageCombine-Community */,
 				DA47724328030A590071EB8B /* FirebaseStorageSwift-Beta */,
+				DA5FA0A52815B43100362E64 /* SDWebImageSwiftUI */,
 			);
 			productName = Checkly;
 			productReference = 7149E8F727A8720A008E3553 /* Checkly.app */;
@@ -263,6 +275,7 @@
 			packageReferences = (
 				71D09A5A27A9A02900DA2D1D /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				DA47720C28030A580071EB8B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				DA5FA0A42815B43100362E64 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 7149E8F827A8720A008E3553 /* Products */;
 			projectDirPath = "";
@@ -295,6 +308,9 @@
 				DA5C64E12812E030007F39C4 /* viewMyleaves.swift in Sources */,
 				DA541D6B2814C20B00C351BC /* SubmitLeave.swift in Sources */,
 				DA5C64E32812E06F007F39C4 /* Leave.swift in Sources */,
+				DA5FA0AA2815B73200362E64 /* informManager.swift in Sources */,
+				DA5FA0A32815B3F100362E64 /* ViewLeaves.swift in Sources */,
+				DA5FA0A82815B55D00362E64 /* Empolyee.swift in Sources */,
 				7149E8FD27A8720A008E3553 /* LoginView.swift in Sources */,
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
 				DA5C64E52812E22C007F39C4 /* viewEmployeesAttendanceStatus.swift in Sources */,
@@ -526,6 +542,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		DA5FA0A42815B43100362E64 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -673,6 +697,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DA47720C28030A580071EB8B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageSwift-Beta";
+		};
+		DA5FA0A52815B43100362E64 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA5FA0A42815B43100362E64 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

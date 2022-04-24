@@ -87,7 +87,7 @@ class viewMyLeavesViewModel: ObservableObject {
         let employee_id = obj.childSnapshot(forPath: "emp_id").value as! String
             
             if ( employee_id == self.user!.uid) {
-                let leave = Leave(start_date: start_date, end_date: end_date, status: status, notes: notes, document: "", id: UUID().uuidString, type: type, employee_id: "", employee_name: "")
+                let leave = Leave(start_date: start_date, end_date: end_date, status: status, notes: notes, document: "", id: UUID().uuidString, type: type, employee_id: "", employee_name: "", photoURL: "")
         
                 self.leaves.append(leave)
             }

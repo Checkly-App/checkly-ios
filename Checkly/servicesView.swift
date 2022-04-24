@@ -25,7 +25,7 @@ struct servicesView: View {
                     NavigationLink(destination: submitLeave()) {
                     box(title: "Submit Request", image: "paperplane.fill")
                     }
-                    NavigationLink(destination: ContentView()) {
+                    NavigationLink(destination: ViewLeaves()) {
                     box(title: "Approve/Reject", image: "checkmark.circle.fill")
                     }.opacity( vm.isUserManager == true ? 1 : 0)
                     
@@ -34,7 +34,7 @@ struct servicesView: View {
             Text("Notifications").bold()
             ScrollView (.horizontal, showsIndicators: false) {
                 HStack{
-                    NavigationLink(destination: ContentView()) {
+                    NavigationLink(destination: informManager()) {
                     box(title: "Notify Manager", image: "bell.fill")
                     }
                     
