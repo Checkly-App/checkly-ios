@@ -50,10 +50,10 @@ struct servicesView: View {
                     NavigationLink(destination: ContentView()) {
                     box(title: "Generate Meeting", image: "plus.circle.fill")
                     }
-                    NavigationLink(destination: ContentView()) {
+                    NavigationLink(destination: announcementsView()) {
                     box(title: "Public Statements", image: "speaker.fill")
                     }
-                    NavigationLink(destination: ContentView()) {
+                    NavigationLink(destination: attendanceHistoryView()) {
                     box(title: "Attendance History", image: "magnifyingglass")
                     }
                 }.padding()

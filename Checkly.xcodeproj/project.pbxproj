@@ -56,6 +56,10 @@
 		DA5FA0A62815B43100362E64 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = DA5FA0A52815B43100362E64 /* SDWebImageSwiftUI */; };
 		DA5FA0A82815B55D00362E64 /* Empolyee.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FA0A72815B55D00362E64 /* Empolyee.swift */; };
 		DA5FA0AA2815B73200362E64 /* informManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FA0A92815B73200362E64 /* informManager.swift */; };
+		DA5FA0AC2815E2FB00362E64 /* announcementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FA0AB2815E2FB00362E64 /* announcementsView.swift */; };
+		DA5FA0AE2815E34F00362E64 /* announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FA0AD2815E34F00362E64 /* announcement.swift */; };
+		DA5FA0B02815E42600362E64 /* attendanceHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FA0AF2815E42600362E64 /* attendanceHistoryView.swift */; };
+		DA5FA0B228161DFD00362E64 /* attendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FA0B128161DFD00362E64 /* attendance.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +83,10 @@
 		DA5FA0A22815B3F000362E64 /* ViewLeaves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLeaves.swift; sourceTree = "<group>"; };
 		DA5FA0A72815B55D00362E64 /* Empolyee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empolyee.swift; sourceTree = "<group>"; };
 		DA5FA0A92815B73200362E64 /* informManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = informManager.swift; sourceTree = "<group>"; };
+		DA5FA0AB2815E2FB00362E64 /* announcementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = announcementsView.swift; sourceTree = "<group>"; };
+		DA5FA0AD2815E34F00362E64 /* announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = announcement.swift; sourceTree = "<group>"; };
+		DA5FA0AF2815E42600362E64 /* attendanceHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = attendanceHistoryView.swift; sourceTree = "<group>"; };
+		DA5FA0B128161DFD00362E64 /* attendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = attendance.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +157,8 @@
 				DA5FA0A92815B73200362E64 /* informManager.swift */,
 				DA541D6C2814C25300C351BC /* ImagePicker.swift */,
 				DA47724528030AD60071EB8B /* servicesView.swift */,
+				DA5FA0AF2815E42600362E64 /* attendanceHistoryView.swift */,
+				DA5FA0AB2815E2FB00362E64 /* announcementsView.swift */,
 				DA5FA0A22815B3F000362E64 /* ViewLeaves.swift */,
 				DA5C64E02812E030007F39C4 /* viewMyleaves.swift */,
 				DA5C64E42812E22C007F39C4 /* viewEmployeesAttendanceStatus.swift */,
@@ -182,6 +192,8 @@
 			children = (
 				7149E91127A96FCA008E3553 /* Credentials.swift */,
 				DA5FA0A72815B55D00362E64 /* Empolyee.swift */,
+				DA5FA0B128161DFD00362E64 /* attendance.swift */,
+				DA5FA0AD2815E34F00362E64 /* announcement.swift */,
 				DA5C64E22812E06F007F39C4 /* Leave.swift */,
 				7149E91927A987DD008E3553 /* LoginModel.swift */,
 			);
@@ -317,8 +329,12 @@
 				7149E91A27A987DE008E3553 /* LoginModel.swift in Sources */,
 				7149E91227A96FCA008E3553 /* Credentials.swift in Sources */,
 				DA47724628030AD70071EB8B /* servicesView.swift in Sources */,
+				DA5FA0B02815E42600362E64 /* attendanceHistoryView.swift in Sources */,
+				DA5FA0B228161DFD00362E64 /* attendance.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
+				DA5FA0AC2815E2FB00362E64 /* announcementsView.swift in Sources */,
+				DA5FA0AE2815E34F00362E64 /* announcement.swift in Sources */,
 				7149E91827A985BC008E3553 /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
