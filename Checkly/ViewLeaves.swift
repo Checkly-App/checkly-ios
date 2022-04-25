@@ -75,6 +75,11 @@ struct ViewLeaves: View {
                     
         
                 }.padding()
+                VStack (alignment: .center) {
+                    Text("You Don't").font(.system(size: 20, weight: .heavy)).foregroundColor(Color(.gray))
+                    Text("have any assigned leave requests").font(.system(size: 17)).foregroundColor(.gray)
+                }.offset(y: 120)
+                    .opacity(vm.leaves.count == 0 ? 1 : 0 )
             }.navigationBarTitle("Leave Requests").navigationBarTitleDisplayMode(.inline)
 
 }

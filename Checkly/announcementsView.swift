@@ -42,6 +42,11 @@ struct announcementsView: View {
       
             }
             }.padding()
+            VStack (alignment: .center) {
+                Text("No").font(.system(size: 20, weight: .heavy)).foregroundColor(Color(.gray))
+                Text("Announcements are available").font(.system(size: 17)).foregroundColor(.gray)
+            }.offset(y: 120)
+                .opacity(vm.announcements.count == 0 ? 1 : 0 )
         }.padding().navigationBarTitle("Announcements").navigationBarTitleDisplayMode(.inline)
         
     }

@@ -232,13 +232,14 @@ class attendanceHistoryViewModel: ObservableObject {
     
     let ref = Database.database().reference()
     let searchQueue = DispatchQueue.init(label: "searchQueue")
-    let empID = "8UoUAkIZvnP5KSWHydWliuZmOKt2" //change to auth
+    let user = Auth.auth().currentUser
         
     searchQueue.sync {
         
-        ref.child("LocationAttendance/emp\(empID)-Attendance").observe(.value, with: { dataSnapshot in
+        ref.child("LocationAttendance/emp\(user!.uid)-Attendance").observe(.value, with: { dataSnapshot in
 
             for child in dataSnapshot.children {
+                self.attendances = []
                 let snap = child as! DataSnapshot
                 let obj = snap.value as! [String: Any]
                 let checkIn = obj["check-in"] as! String
@@ -247,7 +248,7 @@ class attendanceHistoryViewModel: ObservableObject {
                 let workingHours = obj["working-hours"] as! String
                 let date = snap.key
             
-                let attendance = attendance(id: empID, date: date, checkIn: checkIn, checkOut: checkOut, status: status, workingHours: workingHours)
+                let attendance = attendance(id: user!.uid, date: date, checkIn: checkIn, checkOut: checkOut, status: status, workingHours: workingHours)
                 
                     self.attendances.append(attendance)
             }
@@ -261,16 +262,17 @@ class attendanceHistoryViewModel: ObservableObject {
         
     let ref = Database.database().reference()
     let searchQueue = DispatchQueue.init(label: "searchQueue")
-    let empID = "8UoUAkIZvnP5KSWHydWliuZmOKt2" //change
+    let user = Auth.auth().currentUser
     let range = fromDate...toDate
      
         // did not choose a status filter case
         if ( selectedStatus == "Not selected" || selectedStatus == "All" ) {
         searchQueue.sync {
             
-            ref.child("LocationAttendance/emp\(empID)-Attendance").observe(.value, with: { dataSnapshot in
+            ref.child("LocationAttendance/emp\(user!.uid)-Attendance").observe(.value, with: { dataSnapshot in
 
                 for child in dataSnapshot.children {
+                    self.filteredAttendancesDates = []
                     let snap = child as! DataSnapshot
                     let obj = snap.value as! [String: Any]
                     let checkIn = obj["check-in"] as! String
@@ -279,7 +281,7 @@ class attendanceHistoryViewModel: ObservableObject {
                     let workingHours = obj["working-hours"] as! String
                     let date = snap.key
                 
-                    let attendance = attendance(id: empID, date: date, checkIn: checkIn, checkOut: checkOut, status: status, workingHours: workingHours)
+                    let attendance = attendance(id: user!.uid, date: date, checkIn: checkIn, checkOut: checkOut, status: status, workingHours: workingHours)
                         let formattedDate = convertDateToObject(Date: attendance.date)
                     
                     if ( range.contains(formattedDate) ){
@@ -292,9 +294,10 @@ class attendanceHistoryViewModel: ObservableObject {
         
         else { searchQueue.sync {
         
-        ref.child("LocationAttendance/emp\(empID)-Attendance").observe(.value, with: { dataSnapshot in
+        ref.child("LocationAttendance/emp\(user!.uid)-Attendance").observe(.value, with: { dataSnapshot in
 
             for child in dataSnapshot.children {
+                self.filteredAttendancesDates = []
                 let snap = child as! DataSnapshot
                 let obj = snap.value as! [String: Any]
                 let checkIn = obj["check-in"] as! String
@@ -303,7 +306,7 @@ class attendanceHistoryViewModel: ObservableObject {
                 let workingHours = obj["working-hours"] as! String
                 let date = snap.key
             
-                let attendance = attendance(id: empID, date: date, checkIn: checkIn, checkOut: checkOut, status: status, workingHours: workingHours)
+                let attendance = attendance(id: user!.uid, date: date, checkIn: checkIn, checkOut: checkOut, status: status, workingHours: workingHours)
                     let formattedDate = convertDateToObject(Date: attendance.date)
                 
                 if ( range.contains(formattedDate) && attendance.status == selectedStatus ) {

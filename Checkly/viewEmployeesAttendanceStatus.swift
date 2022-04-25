@@ -102,8 +102,9 @@ class viewEmployeesAttendanceStatusViewModel: ObservableObject {
         let name = obj.childSnapshot(forPath: "name").value as! String
         let department = obj.childSnapshot(forPath: "department").value as! String
         let status  = obj.childSnapshot(forPath: "status").value as! String
+        let deleted  = obj.childSnapshot(forPath: "deleted").value as! String
             
-            if ( department == dep) {
+            if ( department == dep && deleted == "false") {
                 let list = list(id: UUID().uuidString , name: name, status: status, department: department)
         
             self.employees.append(list)
