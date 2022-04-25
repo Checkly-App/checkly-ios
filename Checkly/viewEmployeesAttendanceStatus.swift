@@ -61,6 +61,7 @@ class viewEmployeesAttendanceStatusViewModel: ObservableObject {
     var department = ""
     @Published var employees = [list]()
     
+    
     init () {
         fetchDepartment()
     }

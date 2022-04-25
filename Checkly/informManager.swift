@@ -100,11 +100,24 @@ struct informManager: View {
 class informManagerViewModel: ObservableObject {
     
     let user = Auth.auth().currentUser
+    let timer = Timer.publish(every: 84400, on: .main, in: .common).autoconnect()
+    
+    init() {
+        reset()
+    }
 
+    func reset () {
 
+        Database.database().reference().root.child("Employee").child(self.user!.uid).updateChildValues(["status": "-"])
+    }
+    
     func updateStatus (newStatus: String) {
-
-        Database.database().reference().root.child("Employee").child(self.user!.uid).updateChildValues(["status": newStatus])
+        
+        Text("")
+        .onReceive(timer) { time in
+            Database.database().reference().root.child("Employee").child(self.user!.uid).updateChildValues(["status": newStatus])
+            }
+        
     }
     
     func getCurrentTime() -> String {
