@@ -59,8 +59,8 @@ class announcementsViewViewModel: ObservableObject {
     @Published var announcements = [Announcement]()
     
     init () {
-        getDepartmentAnnouncements(dep: "String")
-//        fetchDepartment()
+//        getDepartmentAnnouncements(dep: "String")
+        fetchDepartment()
     }
     
     func fetchDepartment() {
@@ -70,20 +70,16 @@ class announcementsViewViewModel: ObservableObject {
 
         searchQueue.sync {
 
-            ref.child("Employee").observe(.value, with: { dataSnapshot in
+            ref.child("Employee/\(user!.uid)").observe(.value, with: { dataSnapshot in
                 
-            for emp in dataSnapshot.children {
-            let obj = emp as! DataSnapshot
-
-            let department = obj.childSnapshot(forPath: "departmennt").value as! String
-            let employee_id = obj.childSnapshot(forPath: "employee_id").value as! String
-
+            let obj = dataSnapshot.value as! [String:Any]
                 
-                if ( employee_id == self.user!.uid) {
-                    self.getDepartmentAnnouncements(dep: department)
-                }
+            let department = obj["department"] as! String
+
+            self.getDepartmentAnnouncements(dep: department)
+                
             
-            }
+            
                 
         }
     )}
@@ -107,9 +103,8 @@ class announcementsViewViewModel: ObservableObject {
         let body = obj.childSnapshot(forPath: "body").value as! String
         let department = obj.childSnapshot(forPath: "department").value as! String
         let date = obj.childSnapshot(forPath: "date").value as! String
-//        let timestamp = Date()
             
-            if ( department == "dep_5") {
+            if ( department == dep) {
                 let announcement = Announcement(id: UUID().uuidString, body: body, title: title, department: department, date: date)
         
             self.announcements.append(announcement)
