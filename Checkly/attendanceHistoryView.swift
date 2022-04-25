@@ -136,7 +136,7 @@ struct attendanceHistoryView: View {
                                 Text(attendance.checkOut).foregroundColor(.gray).fontWeight(.thin)
                             }.padding()
                             
-                            Image(uiImage: UIImage(named:"arrow")!).resizable().frame(width: 13, height: 20)
+//                            Image(uiImage: UIImage(named:"arrow")!).resizable().frame(width: 13, height: 20)
                         }.padding().frame(width: 350, height: 100).background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
                     }
 //                    .sheet(isPresented: $showingSheet) {
@@ -184,7 +184,7 @@ struct attendanceHistoryView: View {
                         Text(attendance.checkOut).foregroundColor(.gray).fontWeight(.thin)
                     }.padding()
                     
-                    Image(uiImage: UIImage(named:"arrow")!).resizable().frame(width: 13, height: 20)
+//                    Image(uiImage: UIImage(named:"arrow")!).resizable().frame(width: 13, height: 20)
                 }.padding().frame(width: 350, height: 100).background(RoundedRectangle(cornerRadius: 20).fill(Color.white).shadow(color: .gray, radius: 0.5, x: 0.5, y: 0.5))
                 }
 //                .sheet(isPresented: $showingSheet) {
