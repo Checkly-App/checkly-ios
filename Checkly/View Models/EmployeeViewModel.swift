@@ -159,8 +159,6 @@ class EmployeeViewModel: ObservableObject {
             var depid: String!
             var dep: String!
             var userid: String!
-
-
             var email: String!
             var phone: String!
             var position: String!
@@ -195,7 +193,8 @@ class EmployeeViewModel: ObservableObject {
                         phone = obj.childSnapshot(forPath: "phone_number").value as? String
                         position = obj.childSnapshot(forPath: "position").value as? String
                             
-                        let employee = Employee( id:userid,name:nameem,position: position,department:depid,birthdate: dateb ,tokens:toke,address:add,phone: phone,NationalID:natid ,EmplyeeId: empid ,gender: gender0,emaill:email,comid:self.comid0)
+//                        let employee = Employee( id:userid,name:nameem,position: position,department:depid,birthdate: dateb ,tokens:toke,address:add,phone: phone,NationalID:natid ,EmplyeeId: empid ,gender: gender0,emaill:email,comid:self.comid0)
+                        let employee = Employee(employee_id: empid, address: add, birthdate: dateb, department: depid, email: email, id: userid, gender: gender0, name: nameem, national_id: natid, phone_number: phone, position: position, photoURL: toke, comid: self.comid0)
                         self.finddep(Empl: employee)
                         
                     }}

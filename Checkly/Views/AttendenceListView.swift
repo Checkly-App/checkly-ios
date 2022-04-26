@@ -29,10 +29,10 @@ struct AttendenceListView: View {
     }
     var body: some View {
         HStack{
-            if emp.tokens == "null"{
+            if emp.photoURL == "null"{
                 Image(systemName: "person.crop.circle.fill").resizable() .foregroundColor(Color("LightGray")).frame(width: 70,height: 70)}
             else{
-                WebImage(url:URL(string: emp.tokens)).resizable().frame(width: 70,height: 70).clipShape(Circle())
+                WebImage(url:URL(string: emp.photoURL)).resizable().frame(width: 70,height: 70).clipShape(Circle())
             }
             VStack(alignment:.leading){
                 Text(emp.name)

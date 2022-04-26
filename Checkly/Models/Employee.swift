@@ -2,19 +2,18 @@
 
 import Foundation
 
-struct Employee: Identifiable ,Hashable{
-    var id: String
-    var name: String
-    var position: String
-    var department: String
-    var birthdate: String
-    var tokens: String
+struct Employee: Identifiable, Hashable{
+    var employee_id: String
     var address: String
-    var phone: String
-    var NationalID: String
-    var EmplyeeId: String
+    var birthdate: String
+    var department: String
+    var email: String
+    var id: String
     var gender: String
-    var emaill: String
+    var name: String
+    var national_id: String
+    var phone_number: String
+    var position: String
+    var photoURL: String
     var comid: String
 }
-

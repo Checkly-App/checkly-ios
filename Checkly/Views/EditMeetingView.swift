@@ -261,10 +261,10 @@ struct EditMeetingView: View {
                     if emp1 == emp.id {
                         
                         //attendeneslist.append(emp)
-                if emp.tokens == "null"{
+                if emp.photoURL == "null"{
                     Image(systemName: "person.crop.circle.fill").resizable() .foregroundColor(Color("LightGray")).frame(width: 50,height: 50)}
                 else {
-                    WebImage(url:URL(string: emp.tokens)).resizable().frame(width: 50,height: 50).clipShape(Circle())
+                    WebImage(url:URL(string: emp.photoURL)).resizable().frame(width: 50,height: 50).clipShape(Circle())
                 }
                 }
                 }
@@ -275,12 +275,13 @@ struct EditMeetingView: View {
         }
                             
                     
-                            if (attendeneslist.count > 4) {         ForEach(1...4, id: \.self) { row in
+                            if (attendeneslist.count > 4) {
+                                ForEach(1...4, id: \.self){ row in
 
-                                if attendeneslist[row].tokens == "null"{
+                                if attendeneslist[row].photoURL == "null"{
                                         Image(systemName: "person.crop.circle.fill").resizable() .foregroundColor(Color("LightGray")).frame(width: 50,height: 50)}
                                     else {
-                                        WebImage(url:URL(string: attendeneslist[row].tokens)).resizable().frame(width: 50,height: 50).clipShape(Circle())
+                                        WebImage(url:URL(string: attendeneslist[row].photoURL)).resizable().frame(width: 50,height: 50).clipShape(Circle())
                                     }
 
 
@@ -290,10 +291,10 @@ struct EditMeetingView: View {
                             }
                             else {
                                 ForEach(attendeneslist, id: \.self) { emp in
-                            if emp.tokens == "null"{
+                            if emp.photoURL == "null"{
                                 Image(systemName: "person.circle.fill").resizable() .foregroundColor(Color("LightGray")).frame(width: 50,height: 50)}
                             else {
-                                WebImage(url:URL(string: emp.tokens)).resizable().frame(width: 50,height: 50).clipShape(Circle())
+                                WebImage(url:URL(string: emp.photoURL)).resizable().frame(width: 50,height: 50).clipShape(Circle())
                             }
                         }
 

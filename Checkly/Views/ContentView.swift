@@ -17,6 +17,7 @@ struct ContentView: View {
     @StateObject var viewRouter = CalendarViewRouterHelper()
     @State var calendarView = false
     @State var profileView = false
+    @State var servicesView = false
     
     var uid = Auth.auth().currentUser?.uid ?? "hj"
     
@@ -63,6 +64,15 @@ struct ContentView: View {
                     }
                     .fullScreenCover(isPresented: $profileView) {
                         UserProfileView()
+                    }
+                    // navigate to services view
+                    Button{
+                        servicesView.toggle()
+                    } label: {
+                        Text("Services")
+                    }
+                    .fullScreenCover(isPresented: $servicesView) {
+                        ServicesView()
                     }
                     
                 }

@@ -43,6 +43,18 @@
 		A31E8F0927E12A5F009AE0FA /* AttendenceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0827E12A5F009AE0FA /* AttendenceListView.swift */; };
 		A31E8F0B27E12AE4009AE0FA /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0A27E12AE4009AE0FA /* LocationManager.swift */; };
 		A31E8F0F27E12BF2009AE0FA /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0E27E12BF2009AE0FA /* Employee.swift */; };
+		A3243506281866BB00339654 /* ServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3243505281866BB00339654 /* ServicesView.swift */; };
+		A32435082818677C00339654 /* Attendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32435072818677C00339654 /* Attendance.swift */; };
+		A324350A2818679800339654 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32435092818679800339654 /* Announcement.swift */; };
+		A324350C281867B900339654 /* Leave.swift in Sources */ = {isa = PBXBuildFile; fileRef = A324350B281867B900339654 /* Leave.swift */; };
+		A32435102818691F00339654 /* MyLeavesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A324350F2818691F00339654 /* MyLeavesView.swift */; };
+		A32435122818697B00339654 /* EmployeesAttendanceStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32435112818697B00339654 /* EmployeesAttendanceStatusView.swift */; };
+		A3243514281869B300339654 /* InformManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3243513281869B300339654 /* InformManagerView.swift */; };
+		A3243516281869DE00339654 /* AttendanceHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3243515281869DE00339654 /* AttendanceHistoryView.swift */; };
+		A324351828186A1300339654 /* AnnouncementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A324351728186A1300339654 /* AnnouncementsView.swift */; };
+		A324351A28186A3F00339654 /* LeavesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A324351928186A3F00339654 /* LeavesView.swift */; };
+		A324351C28186AA600339654 /* SubmitLeaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A324351B28186AA600339654 /* SubmitLeaveView.swift */; };
+		A324351E28186B1900339654 /* ImageSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A324351D28186B1900339654 /* ImageSelectorView.swift */; };
 		A34260CF28039029008BAA76 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34260CE28039029008BAA76 /* ImagePickerView.swift */; };
 		A34260D128039061008BAA76 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34260D028039061008BAA76 /* UserProfileView.swift */; };
 		A34260D328039107008BAA76 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34260D228039107008BAA76 /* EditProfileView.swift */; };
@@ -96,6 +108,18 @@
 		A31E8F0A27E12AE4009AE0FA /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A31E8F0C27E12B22009AE0FA /* EmployeeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeViewModel.swift; sourceTree = "<group>"; };
 		A31E8F0E27E12BF2009AE0FA /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		A3243505281866BB00339654 /* ServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesView.swift; sourceTree = "<group>"; };
+		A32435072818677C00339654 /* Attendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attendance.swift; sourceTree = "<group>"; };
+		A32435092818679800339654 /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
+		A324350B281867B900339654 /* Leave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leave.swift; sourceTree = "<group>"; };
+		A324350F2818691F00339654 /* MyLeavesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLeavesView.swift; sourceTree = "<group>"; };
+		A32435112818697B00339654 /* EmployeesAttendanceStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesAttendanceStatusView.swift; sourceTree = "<group>"; };
+		A3243513281869B300339654 /* InformManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformManagerView.swift; sourceTree = "<group>"; };
+		A3243515281869DE00339654 /* AttendanceHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceHistoryView.swift; sourceTree = "<group>"; };
+		A324351728186A1300339654 /* AnnouncementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementsView.swift; sourceTree = "<group>"; };
+		A324351928186A3F00339654 /* LeavesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeavesView.swift; sourceTree = "<group>"; };
+		A324351B28186AA600339654 /* SubmitLeaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitLeaveView.swift; sourceTree = "<group>"; };
+		A324351D28186B1900339654 /* ImageSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectorView.swift; sourceTree = "<group>"; };
 		A34260CE28039029008BAA76 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		A34260D028039061008BAA76 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		A34260D228039107008BAA76 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
@@ -205,6 +229,15 @@
 				A34260CE28039029008BAA76 /* ImagePickerView.swift */,
 				A34260D028039061008BAA76 /* UserProfileView.swift */,
 				A34260D228039107008BAA76 /* EditProfileView.swift */,
+				A3243505281866BB00339654 /* ServicesView.swift */,
+				A324350F2818691F00339654 /* MyLeavesView.swift */,
+				A32435112818697B00339654 /* EmployeesAttendanceStatusView.swift */,
+				A3243513281869B300339654 /* InformManagerView.swift */,
+				A3243515281869DE00339654 /* AttendanceHistoryView.swift */,
+				A324351728186A1300339654 /* AnnouncementsView.swift */,
+				A324351928186A3F00339654 /* LeavesView.swift */,
+				A324351B28186AA600339654 /* SubmitLeaveView.swift */,
+				A324351D28186B1900339654 /* ImageSelectorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -221,6 +254,9 @@
 				A3027EB327DFE05D00E305F8 /* Session.swift */,
 				A31E8F0E27E12BF2009AE0FA /* Employee.swift */,
 				A34CDE7F2800FC6600C5F58B /* ComposeMailData.swift */,
+				A32435072818677C00339654 /* Attendance.swift */,
+				A32435092818679800339654 /* Announcement.swift */,
+				A324350B281867B900339654 /* Leave.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -357,10 +393,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3243516281869DE00339654 /* AttendanceHistoryView.swift in Sources */,
 				A34260D328039107008BAA76 /* EditProfileView.swift in Sources */,
 				714E7E3027E3974700235308 /* Credentials.swift in Sources */,
+				A324351C28186AA600339654 /* SubmitLeaveView.swift in Sources */,
 				714E7E2F27E3957F00235308 /* Session.swift in Sources */,
+				A324350A2818679800339654 /* Announcement.swift in Sources */,
 				714E7E2D27E3916A00235308 /* EmployeeViewModel.swift in Sources */,
+				A3243506281866BB00339654 /* ServicesView.swift in Sources */,
 				714E7E2A27E38F8A00235308 /* Authentication.swift in Sources */,
 				A34260CF28039029008BAA76 /* ImagePickerView.swift in Sources */,
 				A3B8D85427B11A2B00752F63 /* CalendarView.swift in Sources */,
@@ -370,6 +410,7 @@
 				A34CDE782800CBCF00C5F58B /* GenerateMoMView.swift in Sources */,
 				7149E8FD27A8720A008E3553 /* LoginView.swift in Sources */,
 				A3027EB027DFDFAE00E305F8 /* ViewExtension.swift in Sources */,
+				A324350C281867B900339654 /* Leave.swift in Sources */,
 				A34CDE7A2800CC3F00C5F58B /* SendMoMView.swift in Sources */,
 				71D09A5E27A9A0AA00DA2D1D /* KeychainStorage.swift in Sources */,
 				A3027EB627DFE12500E305F8 /* FaceIDView.swift in Sources */,
@@ -378,18 +419,25 @@
 				A3027EB227DFE00700E305F8 /* Company.swift in Sources */,
 				A3027EBD27DFE1F800E305F8 /* TitleView.swift in Sources */,
 				A365EA4927DAE46800034F79 /* ParticipantsAttendanceView.swift in Sources */,
+				A32435082818677C00339654 /* Attendance.swift in Sources */,
 				A399140127D29FEC00B26628 /* MeetingDetailsView.swift in Sources */,
+				A32435102818691F00339654 /* MyLeavesView.swift in Sources */,
 				A31E8F0327E127F3009AE0FA /* GenerateMeetingView.swift in Sources */,
 				A3B8D85827B11A5600752F63 /* CalendarTimelineView.swift in Sources */,
 				A3027EC127DFE6AA00E305F8 /* LaunchView.swift in Sources */,
 				A3B8D85C27B13D9F00752F63 /* DateValue.swift in Sources */,
+				A32435122818697B00339654 /* EmployeesAttendanceStatusView.swift in Sources */,
 				7152C6A527B6B66300E2CEAD /* NotificationManager.swift in Sources */,
+				A3243514281869B300339654 /* InformManagerView.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
 				A3027EBB27DFE1D900E305F8 /* LoadingView.swift in Sources */,
 				A365EA4727DAE43300034F79 /* ParticipantRowView.swift in Sources */,
 				A3B8D85627B11A4200752F63 /* CalendarGridView.swift in Sources */,
+				A324351E28186B1900339654 /* ImageSelectorView.swift in Sources */,
+				A324351828186A1300339654 /* AnnouncementsView.swift in Sources */,
 				A31E8F0727E129A3009AE0FA /* EditMeetingView.swift in Sources */,
+				A324351A28186A3F00339654 /* LeavesView.swift in Sources */,
 				A34260D128039061008BAA76 /* UserProfileView.swift in Sources */,
 				A31E8F0127E12771009AE0FA /* LocationView.swift in Sources */,
 				A31E8F0F27E12BF2009AE0FA /* Employee.swift in Sources */,
