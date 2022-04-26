@@ -23,7 +23,7 @@ struct LaunchView: View {
                 if showHome == true {
                     LoginView()
                 }else{
-                    Image("launch-logo")
+                    Image("Checkly-logo")
                         .resizable()
                         .frame(width: 300, height: 230, alignment: .center)
                 }
