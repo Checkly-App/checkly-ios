@@ -84,7 +84,10 @@ struct SubmitLeaveView: View {
                     .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [10]))
             )
             if let image = self.image {
-                Text("Document Selected!").font(.caption).foregroundColor(.gray)
+                HStack{
+                    Image(systemName: "checkmark").foregroundColor(.green)
+                    Text("Document Selected!").font(.title3).foregroundColor(.green)
+                }
             }
             Spacer()
             HStack{
