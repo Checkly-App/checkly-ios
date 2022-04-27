@@ -134,6 +134,7 @@ struct AttendenceListViewselect: View {
         }.background(.white).task{
           //  viewModel.fetchDatalist()
             for attend in attendeneslist {
+                
                 attendeneslist1.append(attend)
             }
             for selectrow in selectrow {

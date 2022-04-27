@@ -169,6 +169,8 @@ class EmployeeViewModel: ObservableObject {
             var add: String!
             var toke: String!
             var comID: String!
+        var deleted: String!
+
 
 
 
@@ -192,11 +194,12 @@ class EmployeeViewModel: ObservableObject {
                         natid = obj.childSnapshot(forPath: "national_id").value as? String
                         phone = obj.childSnapshot(forPath: "phone_number").value as? String
                         position = obj.childSnapshot(forPath: "position").value as? String
-                            
+                         deleted = obj.childSnapshot(forPath: "deleted").value as? String
 //                        let employee = Employee( id:userid,name:nameem,position: position,department:depid,birthdate: dateb ,tokens:toke,address:add,phone: phone,NationalID:natid ,EmplyeeId: empid ,gender: gender0,emaill:email,comid:self.comid0)
                         let employee = Employee(employee_id: empid, address: add, birthdate: dateb, department: depid, email: email, id: userid, gender: gender0, name: nameem, national_id: natid, phone_number: phone, position: position, photoURL: toke, comid: self.comid0)
+                        if deleted == "false"{
                         self.finddep(Empl: employee)
-                        
+                        }
                     }}
             }
         
@@ -255,7 +258,7 @@ class EmployeeViewModel: ObservableObject {
                                           emp.comid = comID
   
 //
-                                          if emp.comid == comIDuser  && emp.id != self.userid {
+                                          if emp.comid == comIDuser  && emp.id != self.userid  {
                                       self.emplyeelist.append(emp)
                                           }
 
