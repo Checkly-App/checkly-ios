@@ -100,45 +100,33 @@ class informManagerViewModel: ObservableObject {
     
     let user = Auth.auth().currentUser
     let timer = Timer.publish(every: 84400, on: .main, in: .common).autoconnect()
-    
-    init() {
-        reset()
-    }
-
-    func reset () {
-
-        Database.database().reference().root.child("Employee").child(self.user!.uid).updateChildValues(["status": "-"])
-    }
-    
-    func updateStatus (newStatus: String) {
         
-        Text("")
-        .onReceive(timer) { time in
-            Database.database().reference().root.child("Employee").child(self.user!.uid).updateChildValues(["status": newStatus])
-            }
+        func updateStatus (newStatus: String) {
         
-    }
-    
-    func getCurrentTime() -> String {
+                Database.database().reference().root.child("Employee").child(self.user!.uid).updateChildValues(["status": newStatus])
+            
+        }
         
-        let formatter = DateFormatter()
-        formatter.timeStyle = .medium
-        let dateString = formatter.string(from: Date())
+        func getCurrentTime() -> String {
+            
+            let formatter = DateFormatter()
+            formatter.timeStyle = .medium
+            let dateString = formatter.string(from: Date())
+            
+            return dateString
+        }
         
-        return dateString
-    }
-    
-    func getCurrentDate() -> String {
-        
-        let formatter3 = DateFormatter()
-        formatter3.dateFormat = "E, d MMM y"
-        let dateString = formatter3.string(from: Date())
-        
-        return dateString
-    }
+        func getCurrentDate() -> String {
+            
+            let formatter3 = DateFormatter()
+            formatter3.dateFormat = "E, d MMM y"
+            let dateString = formatter3.string(from: Date())
+            
+            return dateString
+        }
 
         
-    }
+}
 
 struct informManager_Previews: PreviewProvider {
     static var previews: some View {
