@@ -32,7 +32,6 @@ class Checkly_UITests: XCTestCase {
 
         app.secureTextFields["type your password"].tap()
         app.secureTextFields["type your password"].typeText("123456")
-        app.keyboards.buttons["return"].tap()
 
         app.buttons["Login"].tap()
         
