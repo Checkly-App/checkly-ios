@@ -18,13 +18,75 @@ class meetings_tests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func test_empty_meetings_array(){
+        
+        let vm = MeetingViewModel()
+        
+        XCTAssertTrue(vm.meetings.isEmpty)
+    }
+    
+    func test_successful_fetch_of_todays_meetings(){
+        
+        // TODAY's date is Thursday, April 28
+        let viewModel = MeetingViewModel()
+        
+        // DATE Thursday, April 28, 2022 10:00:00 AM
+        viewModel.meetings.append(Meeting(id: "-MwZ8B9T3hQBSMS0WeXh", host: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", title: "Meeting TEST 1", datetime_start: .init(timeIntervalSince1970: TimeInterval(1651129200)), datetime_end: .init(timeIntervalSince1970: TimeInterval(1651131000)), type: "Online", location: "zoom.com", attendees: ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"accepted", "sgWvHYIJswbVA113jWIBqcaLmgY2":"rejected"], agenda: "We will be discussing the project stakeholders", latitude: "0", longitude: "0", decisions: "-"))
+        
+        // DATE Wednesday, April 27, 2022 9:00:00 AM
+        viewModel.meetings.append(Meeting(id: "-MyDjP9iyxma88ErQ__E", host: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", title: "Meeting TEST 2", datetime_start: .init(timeIntervalSince1970: TimeInterval(1651039200)), datetime_end: .init(timeIntervalSince1970: TimeInterval(1651041000)), type: "Online", location: "zoom.com", attendees: ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"accepted", "sgWvHYIJswbVA113jWIBqcaLmgY2":"rejected"], agenda: "We will be discussing the project stakeholders", latitude: "0", longitude: "0", decisions: "-"))
+        
+        // should return today's meeting that is on Thursday, April 28
+        let ExpectedMeeting = [Meeting(id: "-MwZ8B9T3hQBSMS0WeXh", host: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", title: "Meeting TEST 1", datetime_start: .init(timeIntervalSince1970: TimeInterval(1651129200)), datetime_end: .init(timeIntervalSince1970: TimeInterval(1651131000)), type: "Online", location: "zoom.com", attendees: ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"accepted", "sgWvHYIJswbVA113jWIBqcaLmgY2":"rejected"], agenda: "We will be discussing the project stakeholders", latitude: "0", longitude: "0", decisions: "-")]
+        
+        let TodaysMeetings = viewModel.filteredMeetingsArray(date: .init(timeIntervalSince1970: TimeInterval(1651129200)))
+        
+        XCTAssertEqual(TodaysMeetings, ExpectedMeeting)
+        
+    }
+    
+    func test_no_meetings_for_today(){
+        
+        // TODAY's date is Thursday, April 29
+        let viewModel = MeetingViewModel()
+        
+        // Meetings array does not contain any meetings for today
+        
+        // DATE Thursday, April 28, 2022 10:00:00 AM
+        viewModel.meetings.append(Meeting(id: "-MwZ8B9T3hQBSMS0WeXh", host: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", title: "Meeting TEST 1", datetime_start: .init(timeIntervalSince1970: TimeInterval(1651129200)), datetime_end: .init(timeIntervalSince1970: TimeInterval(1651131000)), type: "Online", location: "zoom.com", attendees: ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"accepted", "sgWvHYIJswbVA113jWIBqcaLmgY2":"rejected"], agenda: "We will be discussing the project stakeholders", latitude: "0", longitude: "0", decisions: "-"))
+        
+        // DATE Wednesday, April 27, 2022 9:00:00 AM
+        viewModel.meetings.append(Meeting(id: "-MyDjP9iyxma88ErQ__E", host: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", title: "Meeting TEST 2", datetime_start: .init(timeIntervalSince1970: TimeInterval(1651039200)), datetime_end: .init(timeIntervalSince1970: TimeInterval(1651041000)), type: "Online", location: "zoom.com", attendees: ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"accepted", "sgWvHYIJswbVA113jWIBqcaLmgY2":"rejected"], agenda: "We will be discussing the project stakeholders", latitude: "0", longitude: "0", decisions: "-"))
+        
+        // expects empty meeting array
+        let ExpectedMeeting = [Meeting]()
+        
+        let TodaysMeetings = viewModel.filteredMeetingsArray(date: .init(timeIntervalSince1970: TimeInterval(1651212000)))
+        
+        XCTAssertEqual(TodaysMeetings, ExpectedMeeting)
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    }
+    
+    func test_taken_meeting_attendance(){
+        
+        let viewModel = MeetingViewModel()
+        
+        // The meeting attendees status have been changed to attended and absent, thus the meeting attendane has been taken
+        let result = viewModel.meetingAttendanceTaken(meeting: Meeting(id: "-MwZ8B9T3hQBSMS0WeXh", host: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", title: "Meeting TEST 1", datetime_start: .init(timeIntervalSince1970: TimeInterval(1651129200)), datetime_end: .init(timeIntervalSince1970: TimeInterval(1651131000)), type: "Online", location: "zoom.com", attendees: ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"attended", "sgWvHYIJswbVA113jWIBqcaLmgY2":"absent"], agenda: "We will be discussing the project stakeholders", latitude: "0", longitude: "0", decisions: "-"))
+        
+        XCTAssertTrue(result)
+        
+    }
+    
+    func test_untaken_meeting_attendance(){
+        
+        let viewModel = MeetingViewModel()
+        
+        // The meeting attendees status have not been changed to attended and absent, thus the meeting attendane has not been taken
+        let result = viewModel.meetingAttendanceTaken(meeting: Meeting(id: "-MwZ8B9T3hQBSMS0WeXh", host: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", title: "Meeting TEST 1", datetime_start: .init(timeIntervalSince1970: TimeInterval(1651129200)), datetime_end: .init(timeIntervalSince1970: TimeInterval(1651131000)), type: "Online", location: "zoom.com", attendees: ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"accepted", "sgWvHYIJswbVA113jWIBqcaLmgY2":"rejected"], agenda: "We will be discussing the project stakeholders", latitude: "0", longitude: "0", decisions: "-"))
+        
+        XCTAssertFalse(result)
     }
 
 }

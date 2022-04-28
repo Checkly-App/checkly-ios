@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Meeting: Identifiable {
+struct Meeting: Identifiable, Equatable {
     var id: String
     var host: String
     var title: String
