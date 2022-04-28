@@ -104,7 +104,7 @@ class announcementsViewViewModel: ObservableObject {
         let department = obj.childSnapshot(forPath: "department").value as! String
         let date = obj.childSnapshot(forPath: "date").value as! String
             
-            if ( department == dep) {
+            if ( department == "dep\(dep)") {
                 let announcement = Announcement(id: UUID().uuidString, body: body, title: title, department: department, date: date)
         
             self.announcements.append(announcement)
