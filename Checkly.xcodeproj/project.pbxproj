@@ -57,6 +57,8 @@
 		A324351E28186B1900339654 /* ImageSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A324351D28186B1900339654 /* ImageSelectorView.swift */; };
 		A32435262819F04100339654 /* Checkly_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32435252819F04100339654 /* Checkly_Tests.swift */; };
 		A324352D2819F1E000339654 /* meetings_tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A324352C2819F1E000339654 /* meetings_tests.swift */; };
+		A3243535281A385400339654 /* Checkly_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3243534281A385400339654 /* Checkly_UITests.swift */; };
+		A3243537281A385400339654 /* Checkly_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3243536281A385400339654 /* Checkly_UITestsLaunchTests.swift */; };
 		A34260CF28039029008BAA76 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34260CE28039029008BAA76 /* ImagePickerView.swift */; };
 		A34260D128039061008BAA76 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34260D028039061008BAA76 /* UserProfileView.swift */; };
 		A34260D328039107008BAA76 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34260D228039107008BAA76 /* EditProfileView.swift */; };
@@ -82,6 +84,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		A32435272819F04100339654 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7149E8EF27A8720A008E3553 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7149E8F627A8720A008E3553;
+			remoteInfo = Checkly;
+		};
+		A3243538281A385400339654 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7149E8EF27A8720A008E3553 /* Project object */;
 			proxyType = 1;
@@ -135,6 +144,9 @@
 		A32435232819F04100339654 /* Checkly_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Checkly_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A32435252819F04100339654 /* Checkly_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkly_Tests.swift; sourceTree = "<group>"; };
 		A324352C2819F1E000339654 /* meetings_tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = meetings_tests.swift; sourceTree = "<group>"; };
+		A3243532281A385400339654 /* Checkly_UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Checkly_UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3243534281A385400339654 /* Checkly_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkly_UITests.swift; sourceTree = "<group>"; };
+		A3243536281A385400339654 /* Checkly_UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkly_UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A34260CE28039029008BAA76 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		A34260D028039061008BAA76 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		A34260D228039107008BAA76 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
@@ -182,6 +194,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A324352F281A385400339654 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -190,6 +209,7 @@
 			children = (
 				7149E8F927A8720A008E3553 /* Checkly */,
 				A32435242819F04100339654 /* Checkly_Tests */,
+				A3243533281A385400339654 /* Checkly_UITests */,
 				7149E8F827A8720A008E3553 /* Products */,
 				A3B8D84827B1171A00752F63 /* Frameworks */,
 			);
@@ -200,6 +220,7 @@
 			children = (
 				7149E8F727A8720A008E3553 /* Checkly.app */,
 				A32435232819F04100339654 /* Checkly_Tests.xctest */,
+				A3243532281A385400339654 /* Checkly_UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -317,6 +338,15 @@
 			path = Checkly_Tests;
 			sourceTree = "<group>";
 		};
+		A3243533281A385400339654 /* Checkly_UITests */ = {
+			isa = PBXGroup;
+			children = (
+				A3243534281A385400339654 /* Checkly_UITests.swift */,
+				A3243536281A385400339654 /* Checkly_UITestsLaunchTests.swift */,
+			);
+			path = Checkly_UITests;
+			sourceTree = "<group>";
+		};
 		A3B8D84827B1171A00752F63 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,6 +416,24 @@
 			productReference = A32435232819F04100339654 /* Checkly_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		A3243531281A385400339654 /* Checkly_UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A324353A281A385400339654 /* Build configuration list for PBXNativeTarget "Checkly_UITests" */;
+			buildPhases = (
+				A324352E281A385400339654 /* Sources */,
+				A324352F281A385400339654 /* Frameworks */,
+				A3243530281A385400339654 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A3243539281A385400339654 /* PBXTargetDependency */,
+			);
+			name = Checkly_UITests;
+			productName = Checkly_UITests;
+			productReference = A3243532281A385400339654 /* Checkly_UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -400,6 +448,10 @@
 						CreatedOnToolsVersion = 13.1;
 					};
 					A32435222819F04100339654 = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = 7149E8F627A8720A008E3553;
+					};
+					A3243531281A385400339654 = {
 						CreatedOnToolsVersion = 13.3.1;
 						TestTargetID = 7149E8F627A8720A008E3553;
 					};
@@ -427,6 +479,7 @@
 			targets = (
 				7149E8F627A8720A008E3553 /* Checkly */,
 				A32435222819F04100339654 /* Checkly_Tests */,
+				A3243531281A385400339654 /* Checkly_UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -443,6 +496,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A32435212819F04100339654 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3243530281A385400339654 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -522,6 +582,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A324352E281A385400339654 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3243537281A385400339654 /* Checkly_UITestsLaunchTests.swift in Sources */,
+				A3243535281A385400339654 /* Checkly_UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -529,6 +598,11 @@
 			isa = PBXTargetDependency;
 			target = 7149E8F627A8720A008E3553 /* Checkly */;
 			targetProxy = A32435272819F04100339654 /* PBXContainerItemProxy */;
+		};
+		A3243539281A385400339654 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7149E8F627A8720A008E3553 /* Checkly */;
+			targetProxy = A3243538281A385400339654 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -753,6 +827,42 @@
 			};
 			name = Release;
 		};
+		A324353B281A385400339654 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KLG5737U6K;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.meetingsTest.Checkly-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Checkly;
+			};
+			name = Debug;
+		};
+		A324353C281A385400339654 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KLG5737U6K;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.meetingsTest.Checkly-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Checkly;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -779,6 +889,15 @@
 			buildConfigurations = (
 				A32435292819F04100339654 /* Debug */,
 				A324352A2819F04100339654 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A324353A281A385400339654 /* Build configuration list for PBXNativeTarget "Checkly_UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A324353B281A385400339654 /* Debug */,
+				A324353C281A385400339654 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
