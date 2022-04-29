@@ -46,14 +46,14 @@ struct SubmitLeaveView: View {
             HStack (alignment: .center){
             RoundedRectangle(cornerRadius: 25, style: .continuous)
                     .fill(didTapSickLeave ? Color(red: 0.173, green: 0.694, blue: 0.937) : Color.gray ).opacity(0.2)
-                .frame(width: 120, height: 35).overlay(Text("Sick Leave").foregroundColor(didTapSickLeave ? Color(red: 0.173, green: 0.694, blue: 0.937) : Color.gray)).onTapGesture {
+                    .frame(width: 120, height: 35).overlay(Text("Sick Leave").bold().foregroundColor(didTapSickLeave ? Color(red: 0.173, green: 0.694, blue: 0.937) : Color.gray)).onTapGesture {
                     self.didTapSickLeave = true
                     self.didTapVacation = false
                     self.selectedType = "Sick Leave"
                 }
             RoundedRectangle(cornerRadius: 25, style: .continuous)
                     .fill(didTapVacation ? Color(red: 0.173, green: 0.694, blue: 0.937) : Color.gray ).opacity(0.2)
-                .frame(width: 120, height: 35).overlay(Text("Vacation").foregroundColor(didTapVacation ? Color(red: 0.173, green: 0.694, blue: 0.937) : Color.gray)).onTapGesture {
+                .frame(width: 120, height: 35).overlay(Text("Vacation").bold().foregroundColor(didTapVacation ? Color(red: 0.173, green: 0.694, blue: 0.937) : Color.gray)).onTapGesture {
                         self.didTapSickLeave = false
                         self.didTapVacation = true
                     self.selectedType = "Vacation"
