@@ -60,7 +60,7 @@ struct UserProfileView: View {
                         showingSheet = true
 
                     }
-                Text(viewModel.department)
+                Text("\(viewModel.department) Department")
                     .font(.subheadline)
                     .fontWeight(.semibold)
                

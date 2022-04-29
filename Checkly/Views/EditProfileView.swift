@@ -73,8 +73,8 @@ struct EditProfileView: View {
                             Text("Employee Name")
                                 .font(.system(size: 14, weight: .medium))
                                 .foregroundColor(Color(UIColor(named: "LightGray")!))
-                            TextField("type your email", text: $viewModel.Employeeinfolist1)
-                                .keyboardType(.emailAddress)
+                            TextField("type your name", text: $viewModel.Employeeinfolist1)
+                                
                                 .autocapitalization(.none)
                                 .padding(10)
                                 .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
@@ -187,15 +187,15 @@ struct EditProfileView: View {
                         .padding(.horizontal)
                         .animation(.default)
                         VStack(alignment: .leading) {
-                            Text("Confirme Password")
+                            Text("Confirm Password")
                                 .font(.system(size: 14, weight: .medium))
                                 .foregroundColor(Color(UIColor(named: "LightGray")!))
                             HStack{
                                 if !isVisible0 {
-                                    SecureField("type the confirme password", text: $passwordAgain)
+                                    SecureField("type the confirm password", text: $passwordAgain)
                                 }
                                 else {
-                                    TextField("type the confirme password", text: $passwordAgain)
+                                    TextField("type the confirm password", text: $passwordAgain)
                                 }
                                 Button {
                                     withAnimation{
@@ -308,9 +308,9 @@ struct EditProfileView: View {
                              Text("Date of Birth")
                                  .font(.system(size: 14, weight: .medium))
                                  .foregroundColor(Color(UIColor(named: "LightGray")!))
-                             TextField("type your email", text: $viewModel.birth)
+                             TextField("Select your date of birth", text: $viewModel.birth)
                                  .disabled(true)
-                                     .keyboardType(.emailAddress)
+                                     
                                      .autocapitalization(.none)
                                      .padding(10).background(.gray.opacity(0.25))
                                      .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
@@ -493,7 +493,7 @@ struct EditProfileView: View {
                            }
                 }
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        Button("Update") {
+                        Button("Save") {
 //                            if !Validation(){
 //                        presentAlert = true
 //
@@ -635,42 +635,42 @@ struct EditProfileView: View {
            let test = true
             //var leangth = viewModel.phonemum.
             if  viewModel.phonemum == "" {
-                error0 = "All feilds are requierd"
+                error0 = "All fields are required"
                 return false}
             if  viewModel.Employeeinfolist1 == "" {
-                error0 = "All feilds are requierd"
+                error0 = "All fields are required"
                 return false}
                 if !viewModel.phonemum.hasPrefix("05"){
-                    error0 = "The phone number must be start with 05"
+                    error0 = "The phone number must start with 05"
 
                     return false}
             if (viewModel.phonemum.count != 10){
                 error0 = "The phone number must be numbers"
                         return false }
             if (viewModel.Employeeinfolist1.count <= 2 || viewModel.Employeeinfolist1.count >= 20){
-                error0 = "The name must be from 3-20 charchtrts "
+                error0 = "The name must be from 3-20 characters "
                         return false }
             /// validation of name
             //var str = viewModel.Employeeinfolist1
             for str in viewModel.Employeeinfolist1 {
                 if (!(str >= "a" && str <= "z") && !(str >= "A" && str <= "Z") && str != " " ) {
-                    error0 = "The name must contain charchters only"
+                    error0 = "The name must contain characters only"
 
                    return false
                 }
              }
         if password != passwordAgain{
-                    error0 = "The paswwords and the confirme password must be same"
+                    error0 = "The new password and the confirm password must be the same"
                     return false
                 }
               
                 if (password.count != 0 && password.count <= 6)  {
-                    error0 = "the leangth of password musr be at least 7 "
+                    error0 = "the length of password must be at least 7 "
 
                     return false
                 }
                 if (passwordAgain.count != 0 && passwordAgain.count <= 6) {
-                    error0 = "the leangth of password musr be at least 7 "
+                    error0 = "the length of password must be at least 7 "
                     return false
                 }
           
