@@ -367,6 +367,7 @@ struct CalendarGridView: View {
                     .foregroundColor(Color(.gray))
                     .frame(width: 20, height: 20)
             })
+            .accessibilityIdentifier("Generate Meeting")
                 .padding([.trailing], 6)
                       
         }

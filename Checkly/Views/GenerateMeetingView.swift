@@ -292,7 +292,7 @@ struct GenerateMeetingView: View {
                             sendattendeneslist = viewModel.emplyeelist
                             viewlist = true
                         // Isselectattendense = false
-                }) {
+                        }){
                             HStack {
                                 Image(systemName: "plus")
 
@@ -303,6 +303,7 @@ struct GenerateMeetingView: View {
                             .background(.white)
                             .border(.gray.opacity(0.7),width: 2)
                             .cornerRadius(25)
+                            .accessibilityIdentifier("Add Participants")
                         }
                     }
                 }
