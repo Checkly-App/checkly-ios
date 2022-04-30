@@ -165,6 +165,7 @@ struct CalendarGridView: View {
                                 } label: {
                                     MeetingCardView(meeting: meeting)
                                 }.foregroundColor(.black)
+                                    .accessibilityIdentifier("meeting card")
                             }
                         } else {
                             Text("No Tasks Found!")

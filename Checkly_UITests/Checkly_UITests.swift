@@ -63,7 +63,7 @@ class Checkly_UITests: XCTestCase {
         app.textFields["type your email"].typeText("aleenwaelss@gmail.com")
 
         app.secureTextFields["type your password"].tap()
-        app.secureTextFields["type your password"].typeText("123456")
+        app.secureTextFields["type your password"].typeText("12345678")
 
         app.buttons["Login"].tap()
         
@@ -194,7 +194,7 @@ class Checkly_UITests: XCTestCase {
         app.keyboards.buttons["return"].tap()
         // set up meeting date
         app.datePickers["Start Date"].tap()
-        app.datePickers.collectionViews.buttons["Today, Friday, April 29"].tap()
+        app.datePickers.collectionViews.buttons["Today, Saturday, April 30"].tap()
         app.datePickers["Start Date"].tap()
         // set up start time to 7:00 PM
         app.datePickers["Start time"].tap()
@@ -477,6 +477,149 @@ class Checkly_UITests: XCTestCase {
         XCTAssert(app.alerts.element.staticTexts["Please add at least one attendee"].waitForExistence(timeout: 2))
     }
     
+    func test_notify_manager_of_attending_late_alert(){
+        app.buttons["Services"].tap()
+        app.buttons["Notify Manager"].tap()
+        app.staticTexts["I'll be late"].tap()
+        XCTAssert(app.alerts.element.staticTexts["Are you sure you want to inform your manager of being late?"].waitForExistence(timeout: 2))
+    }
+    
+    func test_notify_manager_of_attending_early_alert(){
+        app.buttons["Services"].tap()
+        app.buttons["Notify Manager"].tap()
+        app.staticTexts["I'll be early"].tap()
+        XCTAssert(app.alerts.element.staticTexts["Are you sure you want to inform your manager of being early?"].waitForExistence(timeout: 2))
+    }
+    
+    func test_request_leave_with_valid_data(){
+
+        app.buttons["Services"].tap()
+        app.buttons["Submit Request"].waitForExistence(timeout: 10)
+        app.buttons["Submit Request"].tap()
+        // select leave start date
+        app.datePickers["from date"].tap()
+        app.datePickers.collectionViews.buttons["Today, Saturday, April 30"].tap()
+        app.datePickers["from date"].tap()
+        // select leave end date
+        app.datePickers["to date"].tap()
+        app.datePickers.collectionViews.buttons["Today, Saturday, April 30"].tap()
+        app.datePickers["to date"].tap()
+        // select leave type
+        app.staticTexts["Sick Leave"].tap()
+        // add notes
+        app.textViews["notes"].tap()
+        app.textViews["notes"].typeText("Sick Leaves Notes")
+        // select supporting document
+        app.buttons["Select Supporting Document"].tap()
+        app/*@START_MENU_TOKEN@*/.scrollViews.otherElements.images["Photo, August 09, 2012, 12:55 AM"]/*[[".otherElements[\"Photos\"].scrollViews.otherElements",".otherElements[\"Photo, March 30, 2018, 10:14 PM, Photo, August 09, 2012, 12:55 AM, Photo, August 09, 2012, 12:29 AM, Photo, August 08, 2012, 9:52 PM, Photo, October 10, 2009, 12:09 AM, Photo, March 13, 2011, 3:17 AM\"].images[\"Photo, August 09, 2012, 12:55 AM\"]",".images[\"Photo, August 09, 2012, 12:55 AM\"]",".scrollViews.otherElements"],[[[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/.tap()
+        app.staticTexts["submit"].tap()
+        XCTAssert(app.alerts.element.staticTexts["Your request has been submitted"].waitForExistence(timeout: 2))
+    }
+    
+    func test_request_leave_with_no_supporting_documents(){
+        app.buttons["Services"].tap()
+        app.buttons["Submit Request"].tap()
+        // select leave start date
+        app.datePickers["from date"].tap()
+        app.datePickers.collectionViews.buttons["Today, Saturday, April 30"].tap()
+        app.datePickers["from date"].tap()
+        // select leave end date
+        app.datePickers["to date"].tap()
+        app.datePickers.collectionViews.buttons["Today, Saturday, April 30"].tap()
+        app.datePickers["to date"].tap()
+        // select leave type
+        app.staticTexts["Sick Leave"].tap()
+        // add notes
+        app.textViews["notes"].tap()
+        app.textViews["notes"].typeText("Sick Leaves Notes")
+        app.staticTexts["submit"].tap()
+        XCTAssert(app.alerts.element.staticTexts["Please select a supporting document"].waitForExistence(timeout: 2))
+    }
+    
+    func test_reset_password_with_valid_email(){
+        app.buttons["Forgot password?"].tap()
+        app.textFields["type your email"].tap()
+        app.textFields["type your email"].typeText("aleenwaelss@gmail.com")
+        app.buttons["Reset"].tap()
+        XCTAssert(app.alerts.element.staticTexts["Check your inbox for a reset message"].waitForExistence(timeout: 2))
+    }
+    
+    func test_reset_password_with_invalid_email(){
+        app.buttons["Forgot password?"].tap()
+        app.textFields["type your email"].tap()
+        app.textFields["type your email"].typeText("Aleen")
+        app.buttons["Reset"].tap()
+        XCTAssert(app.alerts.element.staticTexts["Your email does not match our records. Please try again or contact your organization."].waitForExistence(timeout: 2))
+    }
+    
+    
+    func test_take_participants_attendance_alert(){
+        app.buttons["Calendar"].tap()
+        let scrollViewsQuery = app.scrollViews
+        app.buttons["meeting card"].waitForExistence(timeout: 10)
+        let meeting = scrollViewsQuery.otherElements.buttons["meeting card"]
+        meeting.tap()
+        app.windows.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 0).tap()
+        app.windows.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 0).swipeUp(velocity: .fast)
+        app.buttons["Take Attendance"].waitForExistence(timeout: 10)
+        app.buttons["Take Attendance"].tap()
+        let tablesQuery = app.tables
+        app.buttons["Save"].tap()
+        XCTAssert(app.alerts.element.staticTexts["You did not select any participant, this will mark all participants as \"Absent\", Do you want to proceed?"].waitForExistence(timeout: 2))
+    }
+    
+    func test_take_participants_attendance(){
+        app.buttons["Calendar"].tap()
+        let scrollViewsQuery = app.scrollViews
+        app.buttons["meeting card"].waitForExistence(timeout: 10)
+        let meeting = scrollViewsQuery.otherElements.buttons["meeting card"]
+        meeting.tap()
+        app.windows.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 0).tap()
+        app.windows.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 0).swipeUp(velocity: .fast)
+        app.buttons["Take Attendance"].waitForExistence(timeout: 10)
+        app.buttons["Take Attendance"].tap()
+        let tablesQuery = app.tables
+        tablesQuery.cells["Shahad Saeed, circle, Database Engineer"].children(matching: .other).element(boundBy: 0).tap()
+        tablesQuery.cells["Account, Mary Jane, circle, Software Engineer"].children(matching: .other).element(boundBy: 0).tap()
+        app.buttons["Save"].tap()
+        app.staticTexts["Take attendance test"].waitForExistence(timeout: 10)
+        XCTAssert(app.staticTexts["Take attendance test"].waitForExistence(timeout: 10))
+    }
+    
+    func test_generate_meeting_MoM_with_empty_decisions(){
+        app.buttons["Calendar"].tap()
+        let scrollViewsQuery = app.scrollViews
+        app.buttons["meeting card"].waitForExistence(timeout: 10)
+        let meeting = scrollViewsQuery.otherElements.buttons["meeting card"]
+        meeting.tap()
+        app.windows.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 0).tap()
+        app.windows.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 0).tap()
+        app.buttons["Generate MoM"].waitForExistence(timeout: 10)
+        app.buttons["Generate MoM"].tap()
+        app.buttons["Save"].tap()
+        XCTAssert(app.alerts.element.staticTexts["Decisions field cannot be empty"].waitForExistence(timeout: 2))
+    }
+    
+    func test_generate_meeting_MoM_with_valid_data(){
+        app.buttons["Calendar"].tap()
+        let scrollViewsQuery = app.scrollViews
+        app.buttons["meeting card"].waitForExistence(timeout: 10)
+        let meeting = scrollViewsQuery.otherElements.buttons["meeting card"]
+        meeting.tap()
+        app.windows.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 0).tap()
+        app.windows.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 0).tap()
+        app.windows.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 0).swipeUp(velocity: .fast)
+        app.buttons["Generate MoM"].waitForExistence(timeout: 10)
+        app.buttons["Generate MoM"].tap()
+        let elementsQuery = app.scrollViews.otherElements
+        elementsQuery.staticTexts["Enter Decisions"].tap()
+        app.scrollViews.otherElements.containing(.staticText, identifier:"Title").children(matching: .textView).element.tap()
+        app.scrollViews.otherElements.containing(.staticText, identifier:"Title").children(matching: .textView).element.typeText("Test Generate MoM")
+        app.toolbars["Toolbar"].buttons["Done"].tap()
+        app.buttons["Save"].tap()
+        XCTAssert(app.staticTexts["Take attendance test"].waitForExistence(timeout: 10))
+    }
+    
 }
 
 extension XCUIElement {
@@ -496,33 +639,5 @@ extension XCUIElement {
 
         self.typeText(deleteString)
         self.typeText(text)
-    }
-}
-extension XCUIElement {
-    
-    func forceTap() {
-        // {{20.0, 162.0}, {374.0, 124.3}}
-        let point1 = CGPoint(x: 20.0, y: 162.0)
-        let point2 = CGPoint(x: 374.0, y: 124.3)
-//        let points12 = CGPoint(x: point2.x - point1.x, y: point2.y - point1.y)
-        coordinate(withNormalizedOffset: CGVector(dx:point2.x - point1.x, dy:point2.y - point1.y)).tap()
-    }
-    func forceTap1() {
-        // {{20.0, 162.0}, {374.0, 124.3}}
-        coordinate(withNormalizedOffset: CGVector(dx:20.0, dy:374.0)).tap()
-    }
-//    func tapCoordinate(at xCoordinate: Double, and yCoordinate: Double) {
-//        let normalized = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
-//        let coordinate = normalized.withOffset(CGVector(dx: xCoordinate, dy: yCoordinate))
-//        coordinate.tap()
-//    }
-    
-}
-extension XCUIElement {
-    func tapCoordinate(at point: CGPoint) {
-        let normalized = coordinate(withNormalizedOffset: .zero)
-        let offset = CGVector(dx: point.x, dy: point.y)
-        let coordinate = normalized.withOffset(offset)
-        coordinate.tap()
     }
 }

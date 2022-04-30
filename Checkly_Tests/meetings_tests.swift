@@ -26,9 +26,9 @@ class meetings_tests: XCTestCase {
         XCTAssertTrue(vm.meetings.isEmpty)
     }
     
-    func test_successful_fetch_of_todays_meetings(){
+    func test_fetch_meetings_based_on_selected_date(){
         
-        // TODAY's date is Thursday, April 28
+        // Selected date is Thursday, April 28
         let viewModel = MeetingViewModel()
         
         // DATE Thursday, April 28, 2022 10:00:00 AM
@@ -40,18 +40,18 @@ class meetings_tests: XCTestCase {
         // should return today's meeting that is on Thursday, April 28
         let ExpectedMeeting = [Meeting(id: "-MwZ8B9T3hQBSMS0WeXh", host: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", title: "Meeting TEST 1", datetime_start: .init(timeIntervalSince1970: TimeInterval(1651129200)), datetime_end: .init(timeIntervalSince1970: TimeInterval(1651131000)), type: "Online", location: "zoom.com", attendees: ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"accepted", "sgWvHYIJswbVA113jWIBqcaLmgY2":"rejected"], agenda: "We will be discussing the project stakeholders", latitude: "0", longitude: "0", decisions: "-")]
         
-        let TodaysMeetings = viewModel.filteredMeetingsArray(date: .init(timeIntervalSince1970: TimeInterval(1651129200)))
+        let ReturnedMeetings = viewModel.filteredMeetingsArray(date: .init(timeIntervalSince1970: TimeInterval(1651129200)))
         
-        XCTAssertEqual(TodaysMeetings, ExpectedMeeting)
+        XCTAssertEqual(ReturnedMeetings, ExpectedMeeting)
         
     }
     
-    func test_no_meetings_for_today(){
+    func test_selected_date_does_not_match_any_meeting(){
         
-        // TODAY's date is Thursday, April 29
+        // Selected date is Thursday, April 28
         let viewModel = MeetingViewModel()
         
-        // Meetings array does not contain any meetings for today
+        // Meetings array does not contain any meetings based on selected date
         
         // DATE Thursday, April 28, 2022 10:00:00 AM
         viewModel.meetings.append(Meeting(id: "-MwZ8B9T3hQBSMS0WeXh", host: "olU8zzFyDhN2cn4IxJKyIuXT5hM2", title: "Meeting TEST 1", datetime_start: .init(timeIntervalSince1970: TimeInterval(1651129200)), datetime_end: .init(timeIntervalSince1970: TimeInterval(1651131000)), type: "Online", location: "zoom.com", attendees: ["kFfNyEYHLiONsrv7DmfmSafx7hZ2":"accepted", "sgWvHYIJswbVA113jWIBqcaLmgY2":"rejected"], agenda: "We will be discussing the project stakeholders", latitude: "0", longitude: "0", decisions: "-"))
@@ -62,9 +62,9 @@ class meetings_tests: XCTestCase {
         // expects empty meeting array
         let ExpectedMeeting = [Meeting]()
         
-        let TodaysMeetings = viewModel.filteredMeetingsArray(date: .init(timeIntervalSince1970: TimeInterval(1651212000)))
+        let ReturnedMeetings = viewModel.filteredMeetingsArray(date: .init(timeIntervalSince1970: TimeInterval(1651212000)))
         
-        XCTAssertEqual(TodaysMeetings, ExpectedMeeting)
+        XCTAssertEqual(ReturnedMeetings, ExpectedMeeting)
 
     }
     
@@ -88,5 +88,5 @@ class meetings_tests: XCTestCase {
         
         XCTAssertFalse(result)
     }
-
+    
 }
