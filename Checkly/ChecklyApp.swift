@@ -10,21 +10,21 @@ import Firebase
 
 @main
 struct ChecklyApp: App {
-    @StateObject var authentication = Authentication()
-
+    @AppStorage("isLoggedIn") var isLoggedIn = false
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     init() {
         FirebaseApp.configure()
     }
     
     var body: some Scene {
         WindowGroup {
-            if authentication.isValidated {
+            if isLoggedIn {
                 ContentView()
-                    .environmentObject(authentication)
             } else {
-                LoginView()
-                    .environmentObject(authentication)
+                LaunchView()
             }
         }
     }
 }
+
