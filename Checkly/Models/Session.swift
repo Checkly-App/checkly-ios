@@ -121,17 +121,4 @@ class Session: ObservableObject {
         }
     }
     
-    func isCompanyEmail(currentEmail: String, completion: @escaping (Bool) -> Void) {
-        let ref = Database.database().reference()
-        ref.child("Company").observeSingleEvent(of: .value) { snapshot in
-            for child in snapshot.children{
-                let company = child as! DataSnapshot
-                let email = company.childSnapshot(forPath: "email").value as! String
-                if( currentEmail == email){
-                    completion(true)
-                }
-            }
-        }
-        completion(false)
-    }
 }

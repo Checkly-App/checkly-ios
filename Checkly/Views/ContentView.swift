@@ -19,20 +19,16 @@ struct ContentView: View {
     @State var profileView = false
     @State var servicesView = false
     
-    var uid = Auth.auth().currentUser?.uid ?? "hj"
+    var uid = Auth.auth().currentUser?.uid ?? "null"
     
     init(){
         NotificationManager.instance.requestAuthorization()
         NotificationManager.instance.meetingNotificationListener(uid: uid)
     }
     
-    
     var body: some View {
         NavigationView {
-            if isCompany {
-                //                ScannerView()
-            }
-            else{
+         
                 VStack(spacing: 10){
                     
                     Text("Logged in as \(email)")
@@ -79,12 +75,5 @@ struct ContentView: View {
                 .preferredColorScheme(.light)
             }
                 
-        }
-        .onAppear {
-            session.isCompanyEmail(currentEmail: email) { success in
-                isCompany = success
-                print("logged in as \(email)")
-            }
-        }
     }
 }

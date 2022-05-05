@@ -14,7 +14,6 @@ struct LoginView: View {
     @State private var isVisible: Bool = false
     @State private var navigateToReset: Bool = false
     @AppStorage("isLoggedIn") var isLoggedIn = false
-    @AppStorage("isCompany") var isCompany = false
     
     var body: some View {
         NavigationView {
@@ -90,9 +89,6 @@ struct LoginView: View {
                     LoadingView()
                 }
                 
-            }.onDisappear {
-                session.showProgressView = false
-                print("is Company \(isCompany)")
             }
             .onTapGesture {
                 self.hideKeyboard()

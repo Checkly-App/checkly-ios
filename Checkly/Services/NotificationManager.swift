@@ -56,10 +56,6 @@ class NotificationManager {
                         ref.child("Meetings").child("\(meeting.id)").child("attendees").updateChildValues(["\(uid)":"notified"])
                         createMeetingNotification(meeting: meeting, attendee_id: uid, date: datetime_start)
                     }
-                    /// trigger a notification when they accept the invitation
-                    if uid == attendee.key && attendee.value == "accepted"{
-//                        scheduleMeetingReminder(title: meeting.title, date: date)
-                    }
                 }
             })
         }
@@ -115,7 +111,6 @@ class NotificationManager {
         
         /// convert to the correct timzone then to a date component  - this could be a simulator problem though!
         let calendar = Calendar.current
-//        calendar.timeZone = TimeZone(abbreviation: "GMT+3")!
         let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
         let uuid = UUID().uuidString
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false) /// trigger based on a specific date
