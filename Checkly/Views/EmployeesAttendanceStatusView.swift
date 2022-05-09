@@ -25,7 +25,7 @@ struct EmployeesAttendanceStatusView: View {
             HStack{
                 VStack (alignment: .leading) {
                 Text(emp.name)
-                Text(emp.department).font(.caption).foregroundColor(.gray)
+//                Text(emp.department).font(.caption).foregroundColor(.gray)
                 }
                 
                 Spacer()
