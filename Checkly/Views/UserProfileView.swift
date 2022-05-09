@@ -39,7 +39,8 @@ struct UserProfileView: View {
     var body: some View {
         NavigationView{
             ScrollView{
-               
+                Spacer()
+              
         VStack{
             //first section
             VStack(spacing:8){
@@ -75,7 +76,8 @@ struct UserProfileView: View {
             VStack{
                
         // section 2
-                    
+                Spacer()
+                Spacer()
                 HStack{
                     Button {
                        ispresent1 = true
@@ -90,6 +92,7 @@ Spacer()
                     
                     }   }.padding().fullScreenCover(isPresented: $ispresent1) {
                         EditProfileView()
+                        // Change with Terms And Conditions noura
                     }
                 HStack{
                     Button {
@@ -105,6 +108,7 @@ Spacer()
                     
                     }   }.padding().fullScreenCover(isPresented: $ispresent2) {
                         EditProfileView()
+                        // Change with Privacy Policy noura
                     }
                 HStack{
                     Button {
@@ -122,39 +126,8 @@ Spacer()
                         EditProfileView()
                     }
                 
-                    
-                
-                Divider().padding()
-               
-                HStack{
-                    
-                    // section 3
-                   
-                        
-                    Image("notification")
-                    
-                        
-                           
-                    Text("Notification")
-                        .font(.callout)
-                        .fontWeight(.medium)
-                       
-                    Toggle(isOn: $toggleNotification) {
-                        
-                    }.tint(.cyan)
-                }.padding()
-                HStack{
-                  
-                               Image("location").foregroundColor(.gray)
-                           
-                    Text("Location")
-                        .font(.body)
-                        .fontWeight(.medium)
-Spacer()
-                    Toggle(isOn: $toggleLocation) {
-                        
-                    }.tint(.cyan)
-               }.padding()
+              
+                Spacer()
                 Spacer()
 
             }.background(.white).cornerRadius(20).shadow(radius: 9).padding()
