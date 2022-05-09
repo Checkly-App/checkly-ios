@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>353673577648-s7d1a7uftccs2qq3bnfdif5hdt8c66cu.apps.googleusercontent.com</string>
+	<string>353673577648-tjshgis1vv0e826g0c0nvll4mbdkh8e7.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.353673577648-s7d1a7uftccs2qq3bnfdif5hdt8c66cu</string>
+	<string>com.googleusercontent.apps.353673577648-tjshgis1vv0e826g0c0nvll4mbdkh8e7</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDo1tpIIcXyoMWrWCurRBVQ_bRmtMnyc7k</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>dalalbinhumaid.Checkly</string>
+	<string>com.checkly.alsulayfih</string>
 	<key>PROJECT_ID</key>
 	<string>checkly-292d2</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:353673577648:ios:fdfbb4fc6f2a7b59d22775</string>
+	<string>1:353673577648:ios:b79e1b8642769029d22775</string>
+	<key>DATABASE_URL</key>
+	<string>https://checkly-292d2-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

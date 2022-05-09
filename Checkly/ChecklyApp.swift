@@ -7,24 +7,26 @@
 
 import SwiftUI
 import Firebase
+import UserNotifications
 
 @main
 struct ChecklyApp: App {
     @StateObject var authentication = Authentication()
-
-    init() {
-        FirebaseApp.configure()
-    }
+    
+    //MARK: - AppDelegate Connection
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    //MARK: - @Observed Object
+    @ObservedObject var locationManager = LocationManager.shared
     
     var body: some Scene {
         WindowGroup {
-            if authentication.isValidated {
-                ContentView()
-                    .environmentObject(authentication)
-            } else {
-                LoginView()
-                    .environmentObject(authentication)
+            if UserDefaults.standard.bool(forKey: "location") == false {
+                LocationRequestView()
+            }else{
+                MainView()
             }
         }
     }
 }
+
