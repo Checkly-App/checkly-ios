@@ -76,6 +76,8 @@
 		A3B8D85827B11A5600752F63 /* CalendarTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85727B11A5600752F63 /* CalendarTimelineView.swift */; };
 		A3B8D85C27B13D9F00752F63 /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B8D85B27B13D9F00752F63 /* DateValue.swift */; };
 		A3CE73FE27CD5593002D2517 /* AnnotatedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CE73FD27CD5593002D2517 /* AnnotatedItem.swift */; };
+		F50B59F3282A176100964B61 /* PrivacyAndPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50B59F2282A176100964B61 /* PrivacyAndPolicyView.swift */; };
+		F50B59F5282A1A8C00964B61 /* TermsAndConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50B59F4282A1A8C00964B61 /* TermsAndConditionsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,6 +140,8 @@
 		A3B8D85727B11A5600752F63 /* CalendarTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTimelineView.swift; sourceTree = "<group>"; };
 		A3B8D85B27B13D9F00752F63 /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
 		A3CE73FD27CD5593002D2517 /* AnnotatedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedItem.swift; sourceTree = "<group>"; };
+		F50B59F2282A176100964B61 /* PrivacyAndPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyAndPolicyView.swift; sourceTree = "<group>"; };
+		F50B59F4282A1A8C00964B61 /* TermsAndConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +232,8 @@
 				A34CDE812800FC8700C5F58B /* MailView.swift */,
 				A34260CE28039029008BAA76 /* ImagePickerView.swift */,
 				A34260D028039061008BAA76 /* UserProfileView.swift */,
+				F50B59F2282A176100964B61 /* PrivacyAndPolicyView.swift */,
+				F50B59F4282A1A8C00964B61 /* TermsAndConditionsView.swift */,
 				A34260D228039107008BAA76 /* EditProfileView.swift */,
 				A3243505281866BB00339654 /* ServicesView.swift */,
 				A324350F2818691F00339654 /* MyLeavesView.swift */,
@@ -394,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3243516281869DE00339654 /* AttendanceHistoryView.swift in Sources */,
+				F50B59F3282A176100964B61 /* PrivacyAndPolicyView.swift in Sources */,
 				A34260D328039107008BAA76 /* EditProfileView.swift in Sources */,
 				714E7E3027E3974700235308 /* Credentials.swift in Sources */,
 				A324351C28186AA600339654 /* SubmitLeaveView.swift in Sources */,
@@ -402,6 +409,7 @@
 				714E7E2D27E3916A00235308 /* EmployeeViewModel.swift in Sources */,
 				A3243506281866BB00339654 /* ServicesView.swift in Sources */,
 				714E7E2A27E38F8A00235308 /* Authentication.swift in Sources */,
+				F50B59F5282A1A8C00964B61 /* TermsAndConditionsView.swift in Sources */,
 				A34260CF28039029008BAA76 /* ImagePickerView.swift in Sources */,
 				A3B8D85427B11A2B00752F63 /* CalendarView.swift in Sources */,
 				A3027EB927DFE1B700E305F8 /* InputsView.swift in Sources */,

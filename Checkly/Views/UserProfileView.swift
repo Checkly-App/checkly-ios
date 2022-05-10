@@ -91,7 +91,7 @@ Spacer()
                                Image(systemName: "chevron.right").foregroundColor(.black)
                     
                     }   }.padding().fullScreenCover(isPresented: $ispresent1) {
-                        EditProfileView()
+                        TermsAndConditionsView()
                         // Change with Terms And Conditions noura
                     }
                 HStack{
@@ -107,7 +107,7 @@ Spacer()
                                Image(systemName: "chevron.right").foregroundColor(.black)
                     
                     }   }.padding().fullScreenCover(isPresented: $ispresent2) {
-                        EditProfileView()
+                        PrivacyAndPolicyView()
                         // Change with Privacy Policy noura
                     }
                 HStack{
