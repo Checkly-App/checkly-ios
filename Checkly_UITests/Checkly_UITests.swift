@@ -71,6 +71,19 @@ class Checkly_UITests: XCTestCase {
         
     }
     
+    func test_login_session(){
+        app.staticTexts["Sign in"].waitForExistence(timeout: 5)
+        app.textFields["type your email"].tap()
+        app.textFields["type your email"].typeText("aleenwaelss@gmail.com")
+
+        app.secureTextFields["type your password"].tap()
+        app.secureTextFields["type your password"].typeText("12345678")
+
+        app.buttons["Login"].tap()
+        
+        XCTAssert(app.alerts.element.staticTexts["Unable to login, make sure to sign out of any other device."].waitForExistence(timeout: 5))
+    }
+    
     func login() {
         app.textFields["type your email"].tap()
         app.textFields["type your email"].typeText("aleenwaelss@gmail.com")
