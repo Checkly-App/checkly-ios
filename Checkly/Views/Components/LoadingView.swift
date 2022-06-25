@@ -13,7 +13,7 @@ struct LoadingView: View {
                 .frame(width: 100, height: 100)
                 .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
             ProgressView()
-                .progressViewStyle(CircularProgressViewStyle(tint: Color(UIColor(named: "Green")!)))
+                .progressViewStyle(CircularProgressViewStyle(tint: .accentColor))
                 .scaleEffect(2)
         }
     }
@@ -26,12 +26,7 @@ struct VisualEffect: UIViewRepresentable{
     }
     func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) {
         uiView.effect = effect
-        uiView.backgroundColor = UIColor(named: "LightBlue")!.withAlphaComponent(0.5)
+        uiView.backgroundColor = UIColor(named: "sky-blue")!.withAlphaComponent(0.5)
     }
 }
 
-struct Loading_Previews: PreviewProvider {
-    static var previews: some View {
-        LoadingView()
-    }
-}

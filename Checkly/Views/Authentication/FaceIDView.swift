@@ -17,6 +17,7 @@ struct FaceIDView: View {
     // MARK: - Variables and Constants
     @Environment(\.dismiss) var dismiss
     @AppStorage("isLoggedIn") var isLoggedIn = false
+    
     let timer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
     var invalidPasswordError = "Your credentials have been changed recently. Would you like to save them?"
     
@@ -39,21 +40,22 @@ struct FaceIDView: View {
     
     var body: some View {
         ZStack(alignment: .top){
-            //MARK: - Background
-            LinearGradient(gradient: Gradient(colors: [Color(UIColor(named: "Blue")!),
-                                                       Color(UIColor(named: "LightTeal")!)]),
+            /// Background gradient
+            LinearGradient(gradient: Gradient(colors: [Color("gradient-light-blue"),
+                                                       Color("gradient-deep-blue")]),
                            startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
-            //MARK: - Main Title
-            VStack(spacing: 15){
+            /// Main title
+            VStack(alignment: .center, spacing: 8){
                 Text("Login Via Face ID")
-                    .font(.largeTitle)
+                    .font(.title)
                     .fontWeight(.bold)
-                Text("login to checkly with your Face ID, for a quick and secure login")
+                Text("login  with your Face ID, for a quick and secure login")
                     .multilineTextAlignment(.center)
+                    .padding()
             }
-            .padding(.top, 56)
-            //MARK: - Content
+            .padding(EdgeInsets(top: 48, leading:16, bottom:0, trailing:16))
+            /// Content
             VStack{
                 Spacer()
                 if session.error != nil {
@@ -62,13 +64,13 @@ struct FaceIDView: View {
                                        startPoint: .top, endPoint: .bottom)
                             .cornerRadius(15)
                         VStack(spacing: 10) {
-                            // MARK: - Title
+                            /// Title
                             Text(session.error == .invalidPassword ? "Credentials Changed" : (session.error == .credentialsNotSaved ? "Credentials Not Saved" : "Authentication Failed"))
-                                .font(.title2)
+                                .font(.title3)
                                 .fontWeight(.semibold)
                             Text(session.error == .invalidPassword ?  invalidPasswordError : session.error!.localizedDescription)
                                 .multilineTextAlignment(.center)
-                            //MARK: - Buttons
+                            /// Buttons
                             if session.error == .credentialsNotSaved || session.error == .invalidPassword {
                                 Divider()
                                     .background(Color(UIColor(named: "Blue")!))
@@ -123,7 +125,7 @@ struct FaceIDView: View {
                         Text("\(progressCounter)%")
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                        Text("Verifying your face")
+                        Text("Verifying your face...")
                     }
                 }
             }
@@ -133,7 +135,7 @@ struct FaceIDView: View {
                 loginWithBiometrics()
             }
         }
-        .navigationBarTitle("", displayMode: .inline)
+        
         .onReceive(timer) { time in
             if (session.error != nil) {
                 progressCounter=0
@@ -142,6 +144,7 @@ struct FaceIDView: View {
                 progressCounter+=1
             }
         }
+        .navigationBarTitle("", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .toolbar(){
             ToolbarItem(placement: .navigationBarLeading){
@@ -149,13 +152,16 @@ struct FaceIDView: View {
                     dismiss()
                 } label: {
                     HStack(spacing: 2){
-                        Image(systemName: "chevron.backward")
-                            .font(.system(size: 18, weight: .semibold))
-                        Text("Back")
+                        Image(systemName: "arrow.backward")
+                            .font(.body)
+                        Text("")
                     }
                 }
             }
         }
         .foregroundColor(.white)
+        .preferredColorScheme(.dark)
+        
     }
 }
+

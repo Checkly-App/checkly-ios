@@ -16,10 +16,10 @@ struct TitleView: View {
                 Text(title)
                     .font(.largeTitle)
                     .fontWeight(.semibold)
-                    .foregroundColor(Color(UIColor(named: "Navy")!))
+                    .foregroundColor(Color("coal"))
                 Text(description)
                     .font(.body)
-                    .foregroundColor(Color(UIColor(named: "Navy")!))
+                    .foregroundColor(Color("coal"))
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
             }

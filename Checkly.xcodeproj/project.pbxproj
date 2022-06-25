@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7126F95D285B83F300F0743F /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7126F95C285B83F300F0743F /* CircularProgressView.swift */; };
 		7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E8FA27A8720A008E3553 /* ChecklyApp.swift */; };
 		7149E8FD27A8720A008E3553 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149E8FC27A8720A008E3553 /* LoginView.swift */; };
 		7149E8FF27A87213008E3553 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7149E8FE27A87213008E3553 /* Assets.xcassets */; };
@@ -20,6 +21,11 @@
 		7152C6A527B6B66300E2CEAD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6A427B6B66300E2CEAD /* NotificationManager.swift */; };
 		7152C6AB27B6CF5100E2CEAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152C6AA27B6CF5100E2CEAD /* AppDelegate.swift */; };
 		7152C6AE27B82FCE00E2CEAD /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 7152C6AD27B82FCE00E2CEAD /* PopupView */; };
+		715EFCF2285904CE0048F650 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715EFCF1285904CE0048F650 /* HomeView.swift */; };
+		715EFCF42859061E0048F650 /* TabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715EFCF32859061D0048F650 /* TabNavigationView.swift */; };
+		7194F02C285790AF009494C3 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7194F02B285790AE009494C3 /* OnboardingView.swift */; };
+		7194F02E2858D31A009494C3 /* PaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7194F02D2858D319009494C3 /* PaginationView.swift */; };
+		7194F0312858DFBE009494C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7194F0302858DFBD009494C3 /* LaunchScreen.storyboard */; };
 		71C62C7227AC286900C573E7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71C62C7127AC286900C573E7 /* FirebaseAuth */; };
 		71C62C7427AC286900C573E7 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 71C62C7327AC286900C573E7 /* FirebaseAuthCombine-Community */; };
 		71C62C7627AC286900C573E7 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 71C62C7527AC286900C573E7 /* FirebaseDatabase */; };
@@ -36,7 +42,6 @@
 		A3027EB927DFE1B700E305F8 /* InputsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EB827DFE1B700E305F8 /* InputsView.swift */; };
 		A3027EBB27DFE1D900E305F8 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EBA27DFE1D900E305F8 /* LoadingView.swift */; };
 		A3027EBD27DFE1F800E305F8 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EBC27DFE1F800E305F8 /* TitleView.swift */; };
-		A3027EC127DFE6AA00E305F8 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3027EC027DFE6AA00E305F8 /* LaunchView.swift */; };
 		A31E8F0127E12771009AE0FA /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0027E12771009AE0FA /* LocationView.swift */; };
 		A31E8F0327E127F3009AE0FA /* GenerateMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0227E127F3009AE0FA /* GenerateMeetingView.swift */; };
 		A31E8F0727E129A3009AE0FA /* EditMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E8F0627E129A3009AE0FA /* EditMeetingView.swift */; };
@@ -79,6 +84,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7126F95C285B83F300F0743F /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		7149E8F727A8720A008E3553 /* Checkly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checkly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7149E8FA27A8720A008E3553 /* ChecklyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklyApp.swift; sourceTree = "<group>"; };
 		7149E8FC27A8720A008E3553 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -90,6 +96,11 @@
 		7149E91727A985BC008E3553 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		7152C6A427B6B66300E2CEAD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		7152C6AA27B6CF5100E2CEAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		715EFCF1285904CE0048F650 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		715EFCF32859061D0048F650 /* TabNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavigationView.swift; sourceTree = "<group>"; };
+		7194F02B285790AE009494C3 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		7194F02D2858D319009494C3 /* PaginationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationView.swift; sourceTree = "<group>"; };
+		7194F0302858DFBD009494C3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		71D09A5D27A9A0A900DA2D1D /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
 		71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		71FE1D2927C2B6810067166D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -100,7 +111,6 @@
 		A3027EB827DFE1B700E305F8 /* InputsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsView.swift; sourceTree = "<group>"; };
 		A3027EBA27DFE1D900E305F8 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		A3027EBC27DFE1F800E305F8 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
-		A3027EC027DFE6AA00E305F8 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		A31E8F0027E12771009AE0FA /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		A31E8F0227E127F3009AE0FA /* GenerateMeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateMeetingView.swift; sourceTree = "<group>"; };
 		A31E8F0627E129A3009AE0FA /* EditMeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMeetingView.swift; sourceTree = "<group>"; };
@@ -185,11 +195,13 @@
 			children = (
 				71D09A5F27A9A0CC00DA2D1D /* Services */,
 				7149E91027A96F92008E3553 /* Models */,
+				A3027EB727DFE19700E305F8 /* Components */,
 				7149E90F27A96F71008E3553 /* Views */,
 				7149E90027A87213008E3553 /* Preview Content */,
 				71FE1D2927C2B6810067166D /* Info.plist */,
 				7149E90D27A8747B008E3553 /* GoogleService-Info.plist */,
 				7149E8FE27A87213008E3553 /* Assets.xcassets */,
+				7194F0302858DFBD009494C3 /* LaunchScreen.storyboard */,
 				7149E8FA27A8720A008E3553 /* ChecklyApp.swift */,
 				7152C6AA27B6CF5100E2CEAD /* AppDelegate.swift */,
 			);
@@ -207,31 +219,15 @@
 		7149E90F27A96F71008E3553 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A3027EB727DFE19700E305F8 /* Components */,
-				A3B8D85327B11A2B00752F63 /* CalendarView.swift */,
-				A3B8D85527B11A4200752F63 /* CalendarGridView.swift */,
-				A3B8D85727B11A5600752F63 /* CalendarTimelineView.swift */,
-				A39913FE27D29FB400B26628 /* MeetingAttendeesListView.swift */,
-				A399140027D29FEC00B26628 /* MeetingDetailsView.swift */,
-				A365EA4827DAE46800034F79 /* ParticipantsAttendanceView.swift */,
-				A3027EB527DFE12500E305F8 /* FaceIDView.swift */,
-				A3027EC027DFE6AA00E305F8 /* LaunchView.swift */,
+				7194F02B285790AE009494C3 /* OnboardingView.swift */,
+				7194F02A28577F0C009494C3 /* Authentication */,
+				7194F032285901EE009494C3 /* Home */,
+				7194F02F2858D44A009494C3 /* Meetings */,
+				715EFCF52859092A0048F650 /* Settings */,
 				A31E8F0027E12771009AE0FA /* LocationView.swift */,
-				A31E8F0227E127F3009AE0FA /* GenerateMeetingView.swift */,
-				A31E8F0627E129A3009AE0FA /* EditMeetingView.swift */,
-				A31E8F0827E12A5F009AE0FA /* AttendenceListView.swift */,
 				7149E91327A977D6008E3553 /* ContentView.swift */,
-				7149E8FC27A8720A008E3553 /* LoginView.swift */,
-				71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */,
-				A34CDE772800CBCF00C5F58B /* GenerateMoMView.swift */,
-				A34CDE792800CC3F00C5F58B /* SendMoMView.swift */,
-				A34CDE812800FC8700C5F58B /* MailView.swift */,
-				A34260CE28039029008BAA76 /* ImagePickerView.swift */,
-				A34260D028039061008BAA76 /* UserProfileView.swift */,
-				A34260D228039107008BAA76 /* EditProfileView.swift */,
 				A3243505281866BB00339654 /* ServicesView.swift */,
 				A324350F2818691F00339654 /* MyLeavesView.swift */,
-				A32435112818697B00339654 /* EmployeesAttendanceStatusView.swift */,
 				A3243513281869B300339654 /* InformManagerView.swift */,
 				A3243515281869DE00339654 /* AttendanceHistoryView.swift */,
 				A324351728186A1300339654 /* AnnouncementsView.swift */,
@@ -261,6 +257,55 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		715EFCF52859092A0048F650 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A34260D228039107008BAA76 /* EditProfileView.swift */,
+				A34260D028039061008BAA76 /* UserProfileView.swift */,
+				A34260CE28039029008BAA76 /* ImagePickerView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		7194F02A28577F0C009494C3 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				A3027EB527DFE12500E305F8 /* FaceIDView.swift */,
+				71D09A6327A9DADA00DA2D1D /* ResetPasswordView.swift */,
+				7149E8FC27A8720A008E3553 /* LoginView.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		7194F02F2858D44A009494C3 /* Meetings */ = {
+			isa = PBXGroup;
+			children = (
+				A3B8D85327B11A2B00752F63 /* CalendarView.swift */,
+				A3B8D85527B11A4200752F63 /* CalendarGridView.swift */,
+				A3B8D85727B11A5600752F63 /* CalendarTimelineView.swift */,
+				A39913FE27D29FB400B26628 /* MeetingAttendeesListView.swift */,
+				A399140027D29FEC00B26628 /* MeetingDetailsView.swift */,
+				A365EA4827DAE46800034F79 /* ParticipantsAttendanceView.swift */,
+				A31E8F0227E127F3009AE0FA /* GenerateMeetingView.swift */,
+				A31E8F0627E129A3009AE0FA /* EditMeetingView.swift */,
+				A31E8F0827E12A5F009AE0FA /* AttendenceListView.swift */,
+				A34CDE772800CBCF00C5F58B /* GenerateMoMView.swift */,
+				A32435112818697B00339654 /* EmployeesAttendanceStatusView.swift */,
+				A34CDE792800CC3F00C5F58B /* SendMoMView.swift */,
+				A34CDE812800FC8700C5F58B /* MailView.swift */,
+			);
+			path = Meetings;
+			sourceTree = "<group>";
+		};
+		7194F032285901EE009494C3 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				715EFCF1285904CE0048F650 /* HomeView.swift */,
+				715EFCF32859061D0048F650 /* TabNavigationView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		71D09A5F27A9A0CC00DA2D1D /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,8 +325,11 @@
 				A3027EB827DFE1B700E305F8 /* InputsView.swift */,
 				A3027EBA27DFE1D900E305F8 /* LoadingView.swift */,
 				A3027EBC27DFE1F800E305F8 /* TitleView.swift */,
+				7194F02D2858D319009494C3 /* PaginationView.swift */,
+				7126F95C285B83F300F0743F /* CircularProgressView.swift */,
 			);
-			path = Components;
+			name = Components;
+			path = Views/Components;
 			sourceTree = "<group>";
 		};
 		A3B8D84827B1171A00752F63 /* Frameworks */ = {
@@ -381,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7149E90227A87213008E3553 /* Preview Assets.xcassets in Resources */,
+				7194F0312858DFBE009494C3 /* LaunchScreen.storyboard in Resources */,
 				7149E8FF27A87213008E3553 /* Assets.xcassets in Resources */,
 				7149E90E27A8747B008E3553 /* GoogleService-Info.plist in Resources */,
 			);
@@ -422,20 +471,23 @@
 				A32435082818677C00339654 /* Attendance.swift in Sources */,
 				A399140127D29FEC00B26628 /* MeetingDetailsView.swift in Sources */,
 				A32435102818691F00339654 /* MyLeavesView.swift in Sources */,
+				715EFCF2285904CE0048F650 /* HomeView.swift in Sources */,
 				A31E8F0327E127F3009AE0FA /* GenerateMeetingView.swift in Sources */,
 				A3B8D85827B11A5600752F63 /* CalendarTimelineView.swift in Sources */,
-				A3027EC127DFE6AA00E305F8 /* LaunchView.swift in Sources */,
 				A3B8D85C27B13D9F00752F63 /* DateValue.swift in Sources */,
 				A32435122818697B00339654 /* EmployeesAttendanceStatusView.swift in Sources */,
 				7152C6A527B6B66300E2CEAD /* NotificationManager.swift in Sources */,
+				7126F95D285B83F300F0743F /* CircularProgressView.swift in Sources */,
 				A3243514281869B300339654 /* InformManagerView.swift in Sources */,
 				7149E91427A977D7008E3553 /* ContentView.swift in Sources */,
+				715EFCF42859061E0048F650 /* TabNavigationView.swift in Sources */,
 				7149E8FB27A8720A008E3553 /* ChecklyApp.swift in Sources */,
 				A3027EBB27DFE1D900E305F8 /* LoadingView.swift in Sources */,
 				A365EA4727DAE43300034F79 /* ParticipantRowView.swift in Sources */,
 				A3B8D85627B11A4200752F63 /* CalendarGridView.swift in Sources */,
 				A324351E28186B1900339654 /* ImageSelectorView.swift in Sources */,
 				A324351828186A1300339654 /* AnnouncementsView.swift in Sources */,
+				7194F02C285790AF009494C3 /* OnboardingView.swift in Sources */,
 				A31E8F0727E129A3009AE0FA /* EditMeetingView.swift in Sources */,
 				A324351A28186A3F00339654 /* LeavesView.swift in Sources */,
 				A34260D128039061008BAA76 /* UserProfileView.swift in Sources */,
@@ -444,6 +496,7 @@
 				A31E8F0927E12A5F009AE0FA /* AttendenceListView.swift in Sources */,
 				A31E8F0B27E12AE4009AE0FA /* LocationManager.swift in Sources */,
 				A3B8D84D27B117E500752F63 /* Meeting.swift in Sources */,
+				7194F02E2858D31A009494C3 /* PaginationView.swift in Sources */,
 				71D09A6427A9DADD00DA2D1D /* ResetPasswordView.swift in Sources */,
 				A34CDE822800FC8700C5F58B /* MailView.swift in Sources */,
 				7152C6AB27B6CF5100E2CEAD /* AppDelegate.swift in Sources */,
@@ -585,7 +638,7 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Enable location fetching to select meeting location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -618,7 +671,7 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Enable location fetching to select meeting location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;

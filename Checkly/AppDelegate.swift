@@ -10,7 +10,7 @@ import FirebaseDatabase
 import UserNotifications
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication!, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         UNUserNotificationCenter.current().delegate = self /// allows the notification to be in foreground as well
         return true
     }

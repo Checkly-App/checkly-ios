@@ -20,9 +20,9 @@ struct ChecklyApp: App {
     var body: some Scene {
         WindowGroup {
             if isLoggedIn {
-                ContentView()
+                TabNavigationView()
             } else {
-                LaunchView()
+                LoginView()
             }
         }
     }

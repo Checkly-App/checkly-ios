@@ -6,6 +6,7 @@
 //
 import SwiftUI
 
+
 // MARK: - Email Input View
 struct EmailInputView: View {
     @Binding var email: String
@@ -13,22 +14,43 @@ struct EmailInputView: View {
         VStack(alignment: .leading) {
             Text("Email")
                 .font(.system(size: 16, weight: .medium))
-                .foregroundColor(Color(UIColor(named: "LightGray")!))
+                .foregroundColor(Color("light-gray"))
             TextField("type your email", text: $email)
                 .modifier(ClearButton(text: $email))
                 .keyboardType(.emailAddress)
                 .autocapitalization(.none)
+                .disableAutocorrection(true)
                 .padding(10)
                 .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
-                            .stroke(email.isEmpty ?
-                                    Color(UIColor(named: "LightGray")!) :
-                                        Color(UIColor(named: "Blue")!) , lineWidth: 0.5))
-                .foregroundColor(email.isEmpty ?
-                                 Color(UIColor(named: "LightGray")!) :
-                                    Color(UIColor(named: "Blue")!))
+                            .stroke(email.isEmpty ? Color("light-gray") : .accentColor , lineWidth: 0.5))
+                .foregroundColor(email.isEmpty ? Color("light-gray") : .accentColor)
         }
         .animation(.default, value: email)
-        
+    }
+}
+
+// MARK: - Text Input View
+struct TextInputView: View {
+    @Binding var text: String
+    
+    var title: String
+    var placeHolder: String
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(title)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(Color("light-gray"))
+            TextField(placeHolder, text: $text)
+                .modifier(ClearButton(text: $text))
+                .autocapitalization(.none)
+                .keyboardType(title == "Phone Number" ? .phonePad: .alphabet)
+                .padding(10)
+                .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
+                            .stroke(text.isEmpty ? Color("light-gray") : .accentColor , lineWidth: 0.5))
+                .foregroundColor(text.isEmpty ? Color("light-gray") : .accentColor)
+        }
+        .animation(.default, value: text)
     }
 }
 
@@ -36,17 +58,21 @@ struct EmailInputView: View {
 struct PasswordInputView: View {
     @Binding var password: String
     @Binding var isVisible: Bool
+    
+    var title: String!
+    var placeHolder: String!
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Password")
+            Text(title ?? "Password")
                 .font(.system(size: 16, weight: .medium))
-                .foregroundColor(Color(UIColor(named: "LightGray")!))
+                .foregroundColor(Color("light-gray"))
             HStack{
-                if !isVisible {
-                    SecureField("type your password", text: $password)
+                if !isVisible  {
+                    SecureField(placeHolder ?? "type your password", text: $password)
                 }
                 else {
-                    TextField("type your password", text: $password)
+                    TextField(placeHolder ?? "type your password", text: $password)
                 }
                 
                 Button {
@@ -62,11 +88,8 @@ struct PasswordInputView: View {
             .padding(10)
             .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
                         .stroke(password.isEmpty ?
-                                Color(UIColor(named: "LightGray")!) :
-                                    Color(UIColor(named: "Blue")!) , lineWidth: 0.5))
-            .foregroundColor(password.isEmpty ?
-                             Color(UIColor(named: "LightGray")!) :
-                                Color(UIColor(named: "Blue")!))
+                                Color("light-gray") : .accentColor , lineWidth: 0.5))
+            .foregroundColor(password.isEmpty ? Color("light-gray") : .accentColor)
         }
         .animation(.default, value: password)
     }
@@ -84,7 +107,7 @@ public struct ClearButton: ViewModifier {
             content
             Spacer()
             Image(systemName: "multiply.circle.fill")
-                .foregroundColor(Color(UIColor(named: "LightGray")!))
+                .foregroundColor(Color("light-gray"))
                 .opacity(text == "" ? 0 : 1)
                 .onTapGesture { self.text = "" }
         }

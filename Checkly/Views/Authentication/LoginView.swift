@@ -8,11 +8,18 @@ import SwiftUI
 import FirebaseAuth
 
 struct LoginView: View {
-    // MARK: - Variables
+    // MARK: - @StateObject Variables
     @StateObject var authentication = Authentication()
     @StateObject private var session: Session = Session()
+    
+    // MARK: - @State Variables
     @State private var isVisible: Bool = false
     @State private var navigateToReset: Bool = false
+    
+    // MARK: - @AppStorage Variables
+    @AppStorage("showOnBoarding") var showOnboarding = true
+    //    @State var showOnboarding = true
+    
     @AppStorage("isLoggedIn") var isLoggedIn = false
     
     var body: some View {
@@ -27,15 +34,14 @@ struct LoginView: View {
                             PasswordInputView(password: $session.credentials.password, isVisible: $isVisible)
                             NavigationLink(destination: ResetPasswordView()){
                                 Text("Forgot password?")
-                                    .fontWeight(.bold)
+                                    .fontWeight(.medium)
                                     .font(.caption)
-                                    .foregroundColor(Color(UIColor(named: "Blue")!))
+                                    .foregroundColor(.accentColor)
                                     .padding(.vertical, 2)
                             }
                         }
                     }
-                    
-                    // MARK: - Login Button
+                    /// Login Button
                     Button {
                         session.loginUser { success in
                             isLoggedIn = success
@@ -48,14 +54,13 @@ struct LoginView: View {
                             .padding(10)
                             .background(
                                 LinearGradient(gradient: Gradient(colors: [
-                                    Color(UIColor(named: "Blue")!),
-                                    Color(UIColor(named: "LightTeal")!)]),
+                                    Color("gradient-light-blue"),
+                                    Color("gradient-deep-blue")]),
                                                startPoint: .leading, endPoint: .trailing))
                             .cornerRadius(10.0)
                     }
                     .padding(.top, 20.0)
-                    
-                    // MARK: - FaceID Button
+                    /// FaceID Button
                     // Check if the user's phone supports face or touch id
                     if authentication.biometricType() != .none{
                         DividerView()
@@ -90,10 +95,12 @@ struct LoginView: View {
                 }
                 
             }
+            .fullScreenCover(isPresented: $showOnboarding){
+                OnboardingView(showBoarding: $showOnboarding)
+            }
             .onTapGesture {
                 self.hideKeyboard()
             }
-            .background(Color(UIColor(.white)))
             .navigationBarHidden(true)
         }
         .preferredColorScheme(.light)
@@ -106,13 +113,13 @@ struct DividerView: View{
     var body: some View {
         ZStack{
             Divider()
-                .background(Color(UIColor(named: "LightGray")!))
+                .background(Color("light-gray"))
                 .padding(.horizontal, 25.0)
             Text("or sign in with")
                 .font(.system(size: 14))
-                .foregroundColor(Color(UIColor(named: "LightGray")!))
+                .foregroundColor(Color("light-gray"))
                 .padding(.horizontal, 15.0)
-                .background(Color(UIColor(.white)))
+                .background(.white)
         }
     }
 }

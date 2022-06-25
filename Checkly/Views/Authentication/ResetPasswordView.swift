@@ -13,9 +13,9 @@ struct ResetPasswordView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        ZStack{
+        ZStack(alignment: .top){
             VStack(spacing: 40.0){
-                TitleView(title: "Reset ", description: "your password by entering your organization's associated email address")
+                TitleView(title: "Reset ", description: " your password by entering your work's email address")
                     .padding(.vertical, 20.0)
                 EmailInputView(email: $session.credentials.email)
                     .alert(isPresented: $success) {
@@ -34,8 +34,8 @@ struct ResetPasswordView: View {
                         .padding(10)
                         .background(
                             LinearGradient(gradient: Gradient(colors: [
-                                Color(UIColor(named: "Blue")!),
-                                Color(UIColor(named: "LightTeal")!)]),
+                                Color("gradient-light-blue"),
+                                Color("gradient-deep-blue")]),
                                            startPoint: .leading, endPoint: .trailing))
                         .cornerRadius(10.0)
                 }
@@ -48,7 +48,6 @@ struct ResetPasswordView: View {
             .disabled(session.showProgressView)
             .padding()
             .padding()
-            
             if session.showProgressView {
                 LoadingView()
             }
@@ -63,14 +62,14 @@ struct ResetPasswordView: View {
                     dismiss()
                 } label: {
                     HStack(spacing: 2){
-                        Image(systemName: "chevron.backward")
-                            .font(.system(size: 18, weight: .semibold))
-                        Text("Back")
+                        Image(systemName: "arrow.backward")
+                            .font(.body)
+                        Text("")
                     }
                 }
             }
         }
         .foregroundColor(.accentColor)
-        .background(Color(UIColor(.white)))
+        .preferredColorScheme(.light)
     }
 }
